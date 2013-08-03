@@ -1,0 +1,21 @@
+/* Localizable.strings
+  AnywhereFriends
+
+  Created by Alexander Kolov on 8/4/13.
+  Copyright (c) 2013 Anywherefriends. All rights reserved. */
+
+/* Title of the email form field on the login screen */
+"AWF_LOGIN_FORM_EMAIL_TITLE" = "Email";
+
+/* Title of the password form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_TITLE" = "Пароль";
+
+/* Title of connect with login section */
+"AWF_LOGIN_FORM_CONNECT_WITH_TITLE" = "Войти через";
+
+/* Title of the login button */
+"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Войти";
+
+/* Title of the sign up label in the login form */
+"AWF_LOGIN_FORM_SIGN_UP_LABEL" = "Нет аккаунта? <strong>Зарегистрируйтесь!</strong>";
+
