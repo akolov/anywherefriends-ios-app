@@ -1,0 +1,451 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
+		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
+		FADBF66117ADB68E00325DD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF66017ADB68E00325DD1 /* UIKit.framework */; };
+		FADBF66717ADB68E00325DD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FADBF66517ADB68E00325DD1 /* InfoPlist.strings */; };
+		FADBF66917ADB68E00325DD1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF66817ADB68E00325DD1 /* main.m */; };
+		FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */; };
+		FADBF66F17ADB68E00325DD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FADBF66E17ADB68E00325DD1 /* Images.xcassets */; };
+		FADBF67617ADB68E00325DD1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF67517ADB68E00325DD1 /* XCTest.framework */; };
+		FADBF67717ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
+		FADBF67817ADB68E00325DD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF66017ADB68E00325DD1 /* UIKit.framework */; };
+		FADBF68017ADB68E00325DD1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FADBF67E17ADB68E00325DD1 /* InfoPlist.strings */; };
+		FADBF68217ADB68E00325DD1 /* AnywhereFriendsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF68117ADB68E00325DD1 /* AnywhereFriendsTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FADBF67917ADB68E00325DD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FADBF65117ADB68E00325DD1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FADBF65817ADB68E00325DD1;
+			remoteInfo = AnywhereFriends;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FADBF65C17ADB68E00325DD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FADBF66017ADB68E00325DD1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FADBF66417ADB68E00325DD1 /* AnywhereFriends-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnywhereFriends-Info.plist"; sourceTree = "<group>"; };
+		FADBF66617ADB68E00325DD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FADBF66817ADB68E00325DD1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FADBF66A17ADB68E00325DD1 /* AnywhereFriends-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AnywhereFriends-Prefix.pch"; sourceTree = "<group>"; };
+		FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFAppDelegate.h; sourceTree = "<group>"; };
+		FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWFAppDelegate.m; sourceTree = "<group>"; };
+		FADBF66E17ADB68E00325DD1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FADBF67417ADB68E00325DD1 /* AnywhereFriendsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnywhereFriendsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FADBF67517ADB68E00325DD1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FADBF67D17ADB68E00325DD1 /* AnywhereFriendsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnywhereFriendsTests-Info.plist"; sourceTree = "<group>"; };
+		FADBF67F17ADB68E00325DD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FADBF68117ADB68E00325DD1 /* AnywhereFriendsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnywhereFriendsTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FADBF65617ADB68E00325DD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */,
+				FADBF66117ADB68E00325DD1 /* UIKit.framework in Frameworks */,
+				FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FADBF67117ADB68E00325DD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADBF67617ADB68E00325DD1 /* XCTest.framework in Frameworks */,
+				FADBF67817ADB68E00325DD1 /* UIKit.framework in Frameworks */,
+				FADBF67717ADB68E00325DD1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FADBF65017ADB68E00325DD1 = {
+			isa = PBXGroup;
+			children = (
+				FADBF66217ADB68E00325DD1 /* AnywhereFriends */,
+				FADBF67B17ADB68E00325DD1 /* AnywhereFriendsTests */,
+				FADBF65B17ADB68E00325DD1 /* Frameworks */,
+				FADBF65A17ADB68E00325DD1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FADBF65A17ADB68E00325DD1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */,
+				FADBF67417ADB68E00325DD1 /* AnywhereFriendsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FADBF65B17ADB68E00325DD1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FADBF65C17ADB68E00325DD1 /* Foundation.framework */,
+				FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */,
+				FADBF66017ADB68E00325DD1 /* UIKit.framework */,
+				FADBF67517ADB68E00325DD1 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FADBF66217ADB68E00325DD1 /* AnywhereFriends */ = {
+			isa = PBXGroup;
+			children = (
+				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
+				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
+				FADBF66E17ADB68E00325DD1 /* Images.xcassets */,
+				FADBF66317ADB68E00325DD1 /* Supporting Files */,
+			);
+			path = AnywhereFriends;
+			sourceTree = "<group>";
+		};
+		FADBF66317ADB68E00325DD1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FADBF66417ADB68E00325DD1 /* AnywhereFriends-Info.plist */,
+				FADBF66517ADB68E00325DD1 /* InfoPlist.strings */,
+				FADBF66817ADB68E00325DD1 /* main.m */,
+				FADBF66A17ADB68E00325DD1 /* AnywhereFriends-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FADBF67B17ADB68E00325DD1 /* AnywhereFriendsTests */ = {
+			isa = PBXGroup;
+			children = (
+				FADBF68117ADB68E00325DD1 /* AnywhereFriendsTests.m */,
+				FADBF67C17ADB68E00325DD1 /* Supporting Files */,
+			);
+			path = AnywhereFriendsTests;
+			sourceTree = "<group>";
+		};
+		FADBF67C17ADB68E00325DD1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FADBF67D17ADB68E00325DD1 /* AnywhereFriendsTests-Info.plist */,
+				FADBF67E17ADB68E00325DD1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FADBF65817ADB68E00325DD1 /* AnywhereFriends */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FADBF68517ADB68E00325DD1 /* Build configuration list for PBXNativeTarget "AnywhereFriends" */;
+			buildPhases = (
+				FADBF65517ADB68E00325DD1 /* Sources */,
+				FADBF65617ADB68E00325DD1 /* Frameworks */,
+				FADBF65717ADB68E00325DD1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AnywhereFriends;
+			productName = AnywhereFriends;
+			productReference = FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FADBF67317ADB68E00325DD1 /* AnywhereFriendsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FADBF68817ADB68E00325DD1 /* Build configuration list for PBXNativeTarget "AnywhereFriendsTests" */;
+			buildPhases = (
+				FADBF67017ADB68E00325DD1 /* Sources */,
+				FADBF67117ADB68E00325DD1 /* Frameworks */,
+				FADBF67217ADB68E00325DD1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FADBF67A17ADB68E00325DD1 /* PBXTargetDependency */,
+			);
+			name = AnywhereFriendsTests;
+			productName = AnywhereFriendsTests;
+			productReference = FADBF67417ADB68E00325DD1 /* AnywhereFriendsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FADBF65117ADB68E00325DD1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AWF;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Anywherefriends;
+				TargetAttributes = {
+					FADBF67317ADB68E00325DD1 = {
+						TestTargetID = FADBF65817ADB68E00325DD1;
+					};
+				};
+			};
+			buildConfigurationList = FADBF65417ADB68E00325DD1 /* Build configuration list for PBXProject "AnywhereFriends" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FADBF65017ADB68E00325DD1;
+			productRefGroup = FADBF65A17ADB68E00325DD1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FADBF65817ADB68E00325DD1 /* AnywhereFriends */,
+				FADBF67317ADB68E00325DD1 /* AnywhereFriendsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FADBF65717ADB68E00325DD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADBF66717ADB68E00325DD1 /* InfoPlist.strings in Resources */,
+				FADBF66F17ADB68E00325DD1 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FADBF67217ADB68E00325DD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADBF68017ADB68E00325DD1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FADBF65517ADB68E00325DD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
+				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FADBF67017ADB68E00325DD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADBF68217ADB68E00325DD1 /* AnywhereFriendsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FADBF67A17ADB68E00325DD1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FADBF65817ADB68E00325DD1 /* AnywhereFriends */;
+			targetProxy = FADBF67917ADB68E00325DD1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FADBF66517ADB68E00325DD1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FADBF66617ADB68E00325DD1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FADBF67E17ADB68E00325DD1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FADBF67F17ADB68E00325DD1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FADBF68317ADB68E00325DD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FADBF68417ADB68E00325DD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FADBF68617ADB68E00325DD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AnywhereFriends/AnywhereFriends-Prefix.pch";
+				INFOPLIST_FILE = "AnywhereFriends/AnywhereFriends-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FADBF68717ADB68E00325DD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AnywhereFriends/AnywhereFriends-Prefix.pch";
+				INFOPLIST_FILE = "AnywhereFriends/AnywhereFriends-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FADBF68917ADB68E00325DD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AnywhereFriends.app/AnywhereFriends";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AnywhereFriends/AnywhereFriends-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AnywhereFriendsTests/AnywhereFriendsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FADBF68A17ADB68E00325DD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AnywhereFriends.app/AnywhereFriends";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AnywhereFriends/AnywhereFriends-Prefix.pch";
+				INFOPLIST_FILE = "AnywhereFriendsTests/AnywhereFriendsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FADBF65417ADB68E00325DD1 /* Build configuration list for PBXProject "AnywhereFriends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FADBF68317ADB68E00325DD1 /* Debug */,
+				FADBF68417ADB68E00325DD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FADBF68517ADB68E00325DD1 /* Build configuration list for PBXNativeTarget "AnywhereFriends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FADBF68617ADB68E00325DD1 /* Debug */,
+				FADBF68717ADB68E00325DD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FADBF68817ADB68E00325DD1 /* Build configuration list for PBXNativeTarget "AnywhereFriendsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FADBF68917ADB68E00325DD1 /* Debug */,
+				FADBF68A17ADB68E00325DD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FADBF65117ADB68E00325DD1 /* Project object */;
+}
