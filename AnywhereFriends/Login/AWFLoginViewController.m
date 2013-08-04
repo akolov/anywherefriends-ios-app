@@ -11,6 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Slash/Slash.h>
 
+#import "UIImage+CustomBackgrounds.h"
+
 #import "AWFNavigationTitleView.h"
 
 
@@ -95,7 +97,11 @@
     loginButton.layer.cornerRadius = 2.0f;
 
     [loginButton setTitle:NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE", @"Title of the login button") forState:UIControlStateNormal];
-    [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+    UIImage *normalImage = [UIImage normalPushImageWithSize:CGSizeMake(5.0f, 45.0f) gradient:@[[UIColor whiteColor], [UIColor colorWithWhite:0.95f alpha:1.0f]] backgroundColor:[UIColor defaultBackgroundColor] cornerRadius:3.0f];
+
+    [loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
 
     NSDictionary *const views = NSDictionaryOfVariableBindings(loginButton);
 
