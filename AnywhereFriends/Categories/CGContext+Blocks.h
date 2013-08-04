@@ -1,0 +1,19 @@
+//
+//  CGContext+Blocks.h
+//  Stylight
+//
+//  Created by Alexander Kolov on 5/24/13.
+//  Copyright (c) 2013 Stylight. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+
+typedef void(^CGStateBlock)();
+typedef void(^CGContextBlock)(CGRect rect, CGContextRef context);
+
+void UIGraphicsPushedContext(CGContextRef context, CGStateBlock actions);
+UIImage * UIGraphicsContextWithOptions(CGSize size, BOOL opaque, CGFloat scale, CGContextBlock actions);
+
+void CGContextState(CGContextRef context, CGStateBlock actions);
+void CGContextTransparencyLayer(CGContextRef context, CGStateBlock actions);
