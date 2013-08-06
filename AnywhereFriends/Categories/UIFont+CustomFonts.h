@@ -12,6 +12,7 @@
 
 + (UIFont *)avenirNextCondensedFontOfSize:(CGFloat)size;
 + (UIFont *)demiBoldAvenirNextCondensedFontOfSize:(CGFloat)size;
++ (UIFont *)ultraLightAvenirNextCondensedFontOfSize:(CGFloat)size;
 
 + (UIFont *)magnetoBoldFontOfSize:(CGFloat)size;
 
