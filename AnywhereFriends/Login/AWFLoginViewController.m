@@ -107,7 +107,7 @@
 
   if (section == 0) {
     UIButton *loginButton = [UIButton autolayoutButton];
-    loginButton.backgroundColor = [UIColor blackColor];
+    loginButton.backgroundColor = nil;
     loginButton.frame = CGRectMake(10.0f, 0, 300.0f, 44.0f);
     loginButton.layer.cornerRadius = 2.0f;
     loginButton.titleLabel.font = [UIFont demiBoldAvenirNextCondensedFontOfSize:20.0f];
@@ -115,8 +115,13 @@
     [loginButton setTitle:NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE", @"Title of the login button") forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor colorWithDecimalRed:9.0f green:124.0f blue:194.0f alpha:1.0f] forState:UIControlStateNormal];
 
+    NSDictionary *const options = @{UIImageGradientColors: @[[UIColor colorWithDecimalWhite:231.0f alpha:1.0f], [UIColor whiteColor]],
+                                    UIImageBottomStrokeColor: [UIColor whiteColor],
+                                    UIImageStrokeColor: [UIColor colorWithDecimalWhite:190.0f alpha:1.0f],
+                                    UIImageStrokeWidth: @(1.2f)};
+
     UIImage *normalImage = [UIImage normalPushImageWithSize:CGSizeMake(10.0f, 45.0f) gradient:@[[UIColor whiteColor], [UIColor colorWithWhite:0.95f alpha:1.0f]] backgroundColor:[UIColor defaultBackgroundColor] cornerRadius:3.0f];
-    UIImage *highlightedImage = [UIImage pushedPushImageWithSize:CGSizeMake(10.0f, 45.0f) gradient:@[[UIColor colorWithWhite:0.95f alpha:1.0f], [UIColor whiteColor]] backgroundColor:[UIColor defaultBackgroundColor] cornerRadius:3.0f];
+    UIImage *highlightedImage = [UIImage buttonImageWithSize:CGSizeMake(10.0f, 45.0f) options:options cornerRadius:3.0f];
 
     [loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
     [loginButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
