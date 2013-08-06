@@ -13,6 +13,7 @@
 + (instancetype)navigationTitleView {
   AWFNavigationTitleView *view = [[AWFNavigationTitleView alloc] initWithFrame:CGRectZero];
   [view sizeToFit];
+  [view setFrameHeight:22.0f];
   return view;
 }
 

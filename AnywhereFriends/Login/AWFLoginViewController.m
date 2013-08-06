@@ -79,6 +79,15 @@
 
 #pragma mark - UITableView delegates
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.section == 0) {
+    return 44.0f;
+  }
+  else {
+    return 60.0f;
+  }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   return 36.0f;
 }
@@ -87,8 +96,8 @@
   if (section == 1) {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
 
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 13.0f, 0, 0)];
-    title.font = [UIFont avenirNextCondensedFontOfSize:14.0f];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 17.0f, 0, 0)];
+    title.font = [UIFont helveticaNeueCondensedLightFontOfSize:14.0f];
     title.text = NSLocalizedString(@"AWF_LOGIN_FORM_CONNECT_WITH_TITLE", @"Title of connect with login section");
     title.textColor = [UIColor darkGrayTextColor];
 
@@ -114,7 +123,11 @@
     loginButton.backgroundColor = nil;
     loginButton.frame = CGRectMake(10.0f, 0, 300.0f, 44.0f);
     loginButton.layer.cornerRadius = 2.0f;
-    loginButton.titleLabel.font = [UIFont demiBoldAvenirNextCondensedFontOfSize:20.0f];
+    loginButton.titleLabel.font = [UIFont avenirNextCondensedDemiBoldFontOfSize:16.0f];
+    loginButton.titleLabel.layer.shadowColor = [UIColor whiteColor].CGColor;
+    loginButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1.0f);
+    loginButton.titleLabel.layer.shadowOpacity = 1.0f;
+    loginButton.titleLabel.layer.shadowRadius = 0;
 
     [loginButton setTitle:NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE", @"Title of the login button") forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor colorWithDecimalRed:9.0f green:124.0f blue:194.0f alpha:1.0f] forState:UIControlStateNormal];
@@ -138,10 +151,10 @@
   }
   else {
     NSDictionary *const style = @{@"$default": @{
-                                      NSFontAttributeName            : [UIFont avenirNextCondensedFontOfSize:18.0f],
+                                      NSFontAttributeName            : [UIFont helveticaNeueCondensedLightFontOfSize:18.0f],
                                       NSForegroundColorAttributeName : [UIColor blackColor]},
                                   @"strong": @{
-                                      NSFontAttributeName            : [UIFont demiBoldAvenirNextCondensedFontOfSize:18.0f]}
+                                      NSFontAttributeName            : [UIFont helveticaNeueCondensedMediumFontOfSize:18.0f]}
                                   };
 
     NSString *markup = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_LABEL", @"Title of the sign up label in the login form");

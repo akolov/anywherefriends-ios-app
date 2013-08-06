@@ -20,6 +20,8 @@
 		FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACC617B1389400028A55 /* AWFLabelButton.m */; };
 		FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACCF17B138D000028A55 /* AWFIconLabelView.m */; };
 		FA11ACD317B138D100028A55 /* AWFShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACD117B138D100028A55 /* AWFShapeView.m */; };
+		FA11ACD517B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD417B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf */; };
+		FA11ACD717B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
 		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
 		FADBF66117ADB68E00325DD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF66017ADB68E00325DD1 /* UIKit.framework */; };
@@ -84,6 +86,8 @@
 		FA11ACCF17B138D000028A55 /* AWFIconLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFIconLabelView.m; sourceTree = "<group>"; };
 		FA11ACD017B138D100028A55 /* AWFShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFShapeView.h; sourceTree = "<group>"; };
 		FA11ACD117B138D100028A55 /* AWFShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFShapeView.m; sourceTree = "<group>"; };
+		FA11ACD417B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLTCom-LtCn.ttf"; sourceTree = "<group>"; };
+		FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLTCom-MdCn.ttf"; sourceTree = "<group>"; };
 		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADBF65C17ADB68E00325DD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -313,6 +317,8 @@
 		FADBF69717ADBADC00325DD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FA11ACD417B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf */,
+				FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */,
 				FADBF69817ADBADC00325DD1 /* MAGNETOB.TTF */,
 				FADBF6A417ADC23600325DD1 /* Localizable.strings */,
 			);
@@ -401,7 +407,9 @@
 				FADBF69917ADBADC00325DD1 /* MAGNETOB.TTF in Resources */,
 				FADBF6A217ADC23600325DD1 /* Localizable.strings in Resources */,
 				FADBF66717ADB68E00325DD1 /* InfoPlist.strings in Resources */,
+				FA11ACD517B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf in Resources */,
 				FADBF66F17ADB68E00325DD1 /* Images.xcassets in Resources */,
+				FA11ACD717B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

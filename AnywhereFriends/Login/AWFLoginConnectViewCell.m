@@ -12,7 +12,7 @@
 #import "UIBezierPath+TwitterGlyph.h"
 
 
-static CGFloat const kButtonSize = 40.0f;
+static CGFloat const kButtonSize = 45.0f;
 
 
 @interface AWFLoginConnectViewCell ()
@@ -34,7 +34,7 @@ static CGFloat const kButtonSize = 40.0f;
     // Facebook button
 
     UIImage *facebookBackground = UIGraphicsContextWithOptions(CGSizeMake(kButtonSize, kButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
-      UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:10.0f];
+      UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12.0f];
       [path addClip];
 
       NSArray *components = @[(__bridge id)[UIColor colorWithDecimalRed:67.0f green:228.0f blue:252.0f alpha:1.0f].CGColor,
@@ -58,7 +58,7 @@ static CGFloat const kButtonSize = 40.0f;
     // Twitter button
 
     UIImage *twitterBackground = UIGraphicsContextWithOptions(CGSizeMake(kButtonSize, kButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
-      UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:10.0f];
+      UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12.0f];
       [path addClip];
 
       NSArray *components = @[(__bridge id)[UIColor colorWithDecimalRed:157.0f green:253.0f blue:248.0f alpha:1.0f].CGColor,
@@ -82,7 +82,7 @@ static CGFloat const kButtonSize = 40.0f;
     // VKontakte button
 
     UIImage *vkontakteBackground = UIGraphicsContextWithOptions(CGSizeMake(kButtonSize, kButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
-      UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:10.0f];
+      UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12.0f];
       [path addClip];
 
       NSArray *components = @[(__bridge id)[UIColor colorWithDecimalRed:177.0f green:216.0f blue:239.0f alpha:1.0f].CGColor,

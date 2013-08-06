@@ -37,6 +37,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>MAGNETOB.TTF</string>
+		<string>HelveticaNeueLTCom-LtCn.ttf</string>
+		<string>HelveticaNeueLTCom-MdCn.ttf</string>
 	</array>
 </dict>
 </plist>

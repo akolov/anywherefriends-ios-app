@@ -13,16 +13,28 @@
 
 #pragma mark - AvenirNext Condensed
 
-+ (UIFont *)avenirNextCondensedFontOfSize:(CGFloat)size {
-  return [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:size];
++ (UIFont *)helveticaNeueFontOfSize:(CGFloat)size {
+  return [UIFont fontWithName:@"HelveticaNeue" size:size];
 }
 
-+ (UIFont *)demiBoldAvenirNextCondensedFontOfSize:(CGFloat)size {
++ (UIFont *)helveticaNeueLightFontOfSize:(CGFloat)size {
+  return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
+}
+
+#pragma mark - AvenirNext Condensed
+
++ (UIFont *)helveticaNeueCondensedLightFontOfSize:(CGFloat)size {
+  return [UIFont fontWithName:@"HelveticaNeueLTCom-LtCn" size:size];
+}
+
++ (UIFont *)helveticaNeueCondensedMediumFontOfSize:(CGFloat)size {
+  return [UIFont fontWithName:@"HelveticaNeueLTCom-MdCn" size:size];
+}
+
+#pragma mark - AvenirNext Condensed
+
++ (UIFont *)avenirNextCondensedDemiBoldFontOfSize:(CGFloat)size {
   return [UIFont fontWithName:@"AvenirNextCondensed-DemiBold" size:size];
-}
-
-+ (UIFont *)ultraLightAvenirNextCondensedFontOfSize:(CGFloat)size {
-  return [UIFont fontWithName:@"AvenirNextCondensed-UltraLight" size:size];
 }
 
 #pragma mark - Magneto

@@ -10,9 +10,13 @@
 
 @interface UIFont (CustomFonts)
 
-+ (UIFont *)avenirNextCondensedFontOfSize:(CGFloat)size;
-+ (UIFont *)demiBoldAvenirNextCondensedFontOfSize:(CGFloat)size;
-+ (UIFont *)ultraLightAvenirNextCondensedFontOfSize:(CGFloat)size;
++ (UIFont *)helveticaNeueFontOfSize:(CGFloat)size;
++ (UIFont *)helveticaNeueLightFontOfSize:(CGFloat)size;
+
++ (UIFont *)helveticaNeueCondensedLightFontOfSize:(CGFloat)size;
++ (UIFont *)helveticaNeueCondensedMediumFontOfSize:(CGFloat)size;
+
++ (UIFont *)avenirNextCondensedDemiBoldFontOfSize:(CGFloat)size;
 
 + (UIFont *)magnetoBoldFontOfSize:(CGFloat)size;
 
