@@ -18,5 +18,7 @@
   #import "UIColor+ColorTools.h"
   #import "UIColor+CustomColors.h"
   #import "UIFont+CustomFonts.h"
+  #import "UITableViewCell+ReuseIdentifier.h"
   #import "UIView+Autolayout.h"
+  #import "UIView+Frame.h"
 #endif

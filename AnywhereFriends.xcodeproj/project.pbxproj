@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		06DC33336B9B492586CCB402 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE6E10FA69445AA854D1E68 /* libPods.a */; };
+		FA11ACA117B11A5900028A55 /* UIBezierPath+FacebookGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AC9E17B11A5900028A55 /* UIBezierPath+FacebookGlyph.m */; };
+		FA11ACA217B11A5900028A55 /* UIBezierPath+TwitterGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA017B11A5900028A55 /* UIBezierPath+TwitterGlyph.m */; };
+		FA11ACA517B11A7500028A55 /* AWFLoginViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA417B11A7500028A55 /* AWFLoginViewCell.m */; };
+		FA11ACA817B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA717B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m */; };
+		FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACAA17B11DB600028A55 /* UIView+Frame.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
 		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
 		FADBF66117ADB68E00325DD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF66017ADB68E00325DD1 /* UIKit.framework */; };
@@ -47,6 +52,17 @@
 /* Begin PBXFileReference section */
 		0F2C3DEB3B93444CA8AA2F6A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		8FE6E10FA69445AA854D1E68 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA11AC9D17B11A5900028A55 /* UIBezierPath+FacebookGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+FacebookGlyph.h"; sourceTree = "<group>"; };
+		FA11AC9E17B11A5900028A55 /* UIBezierPath+FacebookGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+FacebookGlyph.m"; sourceTree = "<group>"; };
+		FA11AC9F17B11A5900028A55 /* UIBezierPath+TwitterGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TwitterGlyph.h"; sourceTree = "<group>"; };
+		FA11ACA017B11A5900028A55 /* UIBezierPath+TwitterGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TwitterGlyph.m"; sourceTree = "<group>"; };
+		FA11ACA317B11A7500028A55 /* AWFLoginViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLoginViewCell.h; sourceTree = "<group>"; };
+		FA11ACA417B11A7500028A55 /* AWFLoginViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLoginViewCell.m; sourceTree = "<group>"; };
+		FA11ACA617B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+ReuseIdentifier.h"; sourceTree = "<group>"; };
+		FA11ACA717B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+ReuseIdentifier.m"; sourceTree = "<group>"; };
+		FA11ACA917B11DB600028A55 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		FA11ACAA17B11DB600028A55 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		FA11ACAD17B1286500028A55 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADBF65C17ADB68E00325DD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,6 +131,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA11AC9C17B11A5900028A55 /* Glyphs */ = {
+			isa = PBXGroup;
+			children = (
+				FA11AC9D17B11A5900028A55 /* UIBezierPath+FacebookGlyph.h */,
+				FA11AC9E17B11A5900028A55 /* UIBezierPath+FacebookGlyph.m */,
+				FA11AC9F17B11A5900028A55 /* UIBezierPath+TwitterGlyph.h */,
+				FA11ACA017B11A5900028A55 /* UIBezierPath+TwitterGlyph.m */,
+			);
+			name = Glyphs;
+			path = Elements/Glyphs;
+			sourceTree = "<group>";
+		};
 		FADBF65017ADB68E00325DD1 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +182,7 @@
 			children = (
 				FADBF69317ADB7DE00325DD1 /* Categories */,
 				FADBF68F17ADB79300325DD1 /* Elements */,
+				FA11AC9C17B11A5900028A55 /* Glyphs */,
 				FADBF68B17ADB73500325DD1 /* Login */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
@@ -166,6 +195,7 @@
 		FADBF66317ADB68E00325DD1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA11ACAD17B1286500028A55 /* Podfile */,
 				FADBF66417ADB68E00325DD1 /* AnywhereFriends-Info.plist */,
 				FADBF66517ADB68E00325DD1 /* InfoPlist.strings */,
 				FADBF66817ADB68E00325DD1 /* main.m */,
@@ -195,6 +225,8 @@
 		FADBF68B17ADB73500325DD1 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				FA11ACA317B11A7500028A55 /* AWFLoginViewCell.h */,
+				FA11ACA417B11A7500028A55 /* AWFLoginViewCell.m */,
 				FADBF68C17ADB74400325DD1 /* AWFLoginViewController.h */,
 				FADBF68D17ADB74400325DD1 /* AWFLoginViewController.m */,
 			);
@@ -225,8 +257,12 @@
 				FADBF69517ADB7EC00325DD1 /* UIFont+CustomFonts.m */,
 				FADBF6B117ADCE5400325DD1 /* UIImage+CustomBackgrounds.h */,
 				FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */,
+				FA11ACA617B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.h */,
+				FA11ACA717B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m */,
 				FADBF6AB17ADC78B00325DD1 /* UIView+Autolayout.h */,
 				FADBF6AC17ADC78B00325DD1 /* UIView+Autolayout.m */,
+				FA11ACA917B11DB600028A55 /* UIView+Frame.h */,
+				FA11ACAA17B11DB600028A55 /* UIView+Frame.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -374,11 +410,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA11ACA117B11A5900028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
+				FA11ACA517B11A7500028A55 /* AWFLoginViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */,
+				FA11ACA217B11A5900028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
 				FADBF68E17ADB74400325DD1 /* AWFLoginViewController.m in Sources */,
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
+				FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */,
+				FA11ACA817B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,

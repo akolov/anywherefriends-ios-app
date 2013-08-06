@@ -14,4 +14,12 @@
   return [self colorWithWhite:0.9f alpha:1.0f];
 }
 
++ (UIColor *)grayTextColor {
+  return [self colorWithDecimalRed:135.0f green:129.0f blue:141.0f alpha:1.0f];
+}
+
++ (UIColor *)darkGrayTextColor {
+  return [self colorWithDecimalRed:98.0f green:98.0f blue:102.0f alpha:1.0f];
+}
+
 @end

@@ -20,7 +20,7 @@
   self = [super initWithFrame:frame];
   if (self) {
     self.backgroundColor = nil;
-    self.font = [UIFont magnetoBoldFondOfSize:20.0f];
+    self.font = [UIFont magnetoBoldFontOfSize:20.0f];
     self.opaque = NO;
     self.text = @"AnywhereFriends";
     self.textColor = [UIColor whiteColor];

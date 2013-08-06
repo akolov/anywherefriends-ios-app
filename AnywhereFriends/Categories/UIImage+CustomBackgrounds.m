@@ -16,53 +16,56 @@ NSString *const UIImageGradientColors = @"UIImageGradientColors";
 NSString *const UIImageTopStrokeColor = @"UIImageTopStrokeColor";
 NSString *const UIImageBottomStrokeColor = @"UIImageBottomStrokeColor";
 NSString *const UIImageStrokeColor = @"UIImageStrokeColor";
+NSString *const UIImageStrokeWidth = @"UIImageStrokeWidth";
 
 
 @implementation UIImage (CustomBackgrounds)
 
 + (UIImage *)normalResizeablePushImageWithColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor cornerRadius:(CGFloat)radius {
-  NSDictionary *const colors = @{UIImageForegroundColor: color,
-                                 UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
-                                 UIImageTopStrokeColor: [UIColor colorWithWhite:1.0f alpha:0.5f]};
-  return [[self buttonImageWithSize:CGSizeMake(radius * 2.0f + 1.0f, radius * 2.0f + 1.0f) colors:colors cornerRadius:radius] resizableImageWithCapInsets:UIEdgeInsetsMake(radius, radius, radius, radius)];
+  NSDictionary *const options = @{UIImageForegroundColor: color,
+                                  UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
+                                  UIImageTopStrokeColor: [UIColor colorWithWhite:1.0f alpha:0.5f]};
+  return [[self buttonImageWithSize:CGSizeMake(radius * 2.0f + 1.0f, radius * 2.0f + 1.0f) options:options cornerRadius:radius] resizableImageWithCapInsets:UIEdgeInsetsMake(radius, radius, radius, radius)];
 }
 
 + (UIImage *)pushedResizeablePushImageWithColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor cornerRadius:(CGFloat)radius {
-  NSDictionary *const colors = @{UIImageForegroundColor: color,
-                                 UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
-                                 UIImageTopStrokeColor: [UIColor colorWithWhite:0 alpha:0.5f],
-                                 UIImageBottomStrokeColor: [UIColor whiteColor]};
-  return [[self buttonImageWithSize:CGSizeMake(radius * 2.0f + 1.0f, radius * 2.0f + 1.0f) colors:colors cornerRadius:radius] resizableImageWithCapInsets:UIEdgeInsetsMake(radius, radius, radius, radius)];
+  NSDictionary *const options = @{UIImageForegroundColor: color,
+                                  UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
+                                  UIImageTopStrokeColor: [UIColor colorWithWhite:0 alpha:0.5f],
+                                  UIImageBottomStrokeColor: [UIColor whiteColor]};
+  return [[self buttonImageWithSize:CGSizeMake(radius * 2.0f + 1.0f, radius * 2.0f + 1.0f) options:options cornerRadius:radius] resizableImageWithCapInsets:UIEdgeInsetsMake(radius, radius, radius, radius)];
 }
 
 + (UIImage *)normalPushImageWithSize:(CGSize)size gradient:(NSArray *)gradient backgroundColor:(UIColor *)backgroundColor cornerRadius:(CGFloat)radius {
-  NSDictionary *const colors = @{UIImageGradientColors: gradient,
-                                 UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
-                                 UIImageTopStrokeColor: [UIColor colorWithWhite:1.0f alpha:0.5f]};
-  return [self buttonImageWithSize:size colors:colors cornerRadius:radius];
+  NSDictionary *const options = @{UIImageGradientColors: gradient,
+                                  UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
+                                  UIImageStrokeColor: [UIColor colorWithWhite:0.78f alpha:1.0f],
+                                  UIImageStrokeWidth: @(1.2f)};
+  return [self buttonImageWithSize:size options:options cornerRadius:radius];
 }
 
 + (UIImage *)pushedPushImageWithSize:(CGSize)size gradient:(NSArray *)gradient backgroundColor:(UIColor *)backgroundColor cornerRadius:(CGFloat)radius {
-  NSDictionary *const colors = @{UIImageGradientColors: gradient,
-                                 UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
-                                 UIImageTopStrokeColor: [UIColor colorWithWhite:0 alpha:0.5f],
-                                 UIImageBottomStrokeColor: [UIColor whiteColor]};
-  return [self buttonImageWithSize:size colors:colors cornerRadius:radius];
+  NSDictionary *const options = @{UIImageGradientColors: gradient,
+                                  UIImageBackgroundColor: backgroundColor ?: [UIColor clearColor],
+                                  UIImageTopStrokeColor: [UIColor colorWithWhite:0 alpha:0.5f],
+                                  UIImageBottomStrokeColor: [UIColor whiteColor]};
+  return [self buttonImageWithSize:size options:options cornerRadius:radius];
 }
 
-+ (UIImage *)buttonImageWithSize:(CGSize)size colors:(NSDictionary *)colors cornerRadius:(CGFloat)radius {
++ (UIImage *)buttonImageWithSize:(CGSize)size options:(NSDictionary *)options cornerRadius:(CGFloat)radius {
   return [UIGraphicsContextWithOptions(size, NO, 0, ^(CGRect rect, CGContextRef context) {
-
+    
     CGFloat const maxx = CGRectGetMaxX(rect);
     CGFloat const maxy = CGRectGetMaxY(rect);
     CGFloat const bevel = 1.0f;
+    CGFloat const strokeWidth = [options[UIImageStrokeWidth] floatValue] ?: 2.0f;
 
-    UIColor *const backgroundColor = colors[UIImageBackgroundColor];
-    UIColor *const foregroundColor = colors[UIImageForegroundColor];
-    NSArray *const gradientColors = colors[UIImageGradientColors];
-    UIColor *const topStrokeColor = colors[UIImageTopStrokeColor];
-    UIColor *const bottomStrokeColor = colors[UIImageBottomStrokeColor];
-    UIColor *const strokeColor = colors[UIImageStrokeColor];
+    UIColor *const backgroundColor = options[UIImageBackgroundColor];
+    UIColor *const foregroundColor = options[UIImageForegroundColor];
+    NSArray *const gradientColors = options[UIImageGradientColors];
+    UIColor *const topStrokeColor = options[UIImageTopStrokeColor];
+    UIColor *const bottomStrokeColor = options[UIImageBottomStrokeColor];
+    UIColor *const strokeColor = options[UIImageStrokeColor];
 
     if (backgroundColor && backgroundColor.alpha != 0) {
       [backgroundColor setFill];
@@ -99,12 +102,12 @@ NSString *const UIImageStrokeColor = @"UIImageStrokeColor";
       [strokeColor setStroke];
 
       UIBezierPath *strokePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, maxx, maxy - bevel) cornerRadius:radius];
-      [strokePath setLineWidth:2.0f];
+      [strokePath setLineWidth:strokeWidth];
       [strokePath stroke];
     }
     else if (strokeColor) {
       [strokeColor setStroke];
-      [path setLineWidth:2.0f];
+      [path setLineWidth:strokeWidth];
       [path stroke];
     }
 

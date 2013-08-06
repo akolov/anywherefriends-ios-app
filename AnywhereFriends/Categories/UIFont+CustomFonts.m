@@ -10,7 +10,15 @@
 
 @implementation UIFont (CustomFonts)
 
-+ (UIFont *)magnetoBoldFondOfSize:(CGFloat)size {
++ (UIFont *)avenirNextCondensedFontOfSize:(CGFloat)size {
+  return [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:size];
+}
+
++ (UIFont *)demiBoldAvenirNextCondensedFontOfSize:(CGFloat)size {
+  return [UIFont fontWithName:@"AvenirNextCondensed-DemiBold" size:size];
+}
+
++ (UIFont *)magnetoBoldFontOfSize:(CGFloat)size {
   return [self fontWithName:@"Magneto-Bold" size:size];
 }
 

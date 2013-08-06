@@ -10,6 +10,9 @@
 
 @interface UIFont (CustomFonts)
 
-+ (UIFont *)magnetoBoldFondOfSize:(CGFloat)size;
++ (UIFont *)avenirNextCondensedFontOfSize:(CGFloat)size;
++ (UIFont *)demiBoldAvenirNextCondensedFontOfSize:(CGFloat)size;
+
++ (UIFont *)magnetoBoldFontOfSize:(CGFloat)size;
 
 @end

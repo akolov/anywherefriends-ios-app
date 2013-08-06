@@ -11,5 +11,7 @@
 @interface UIColor (CustomColors)
 
 + (UIColor *)defaultBackgroundColor;
++ (UIColor *)grayTextColor;
++ (UIColor *)darkGrayTextColor;
 
 @end

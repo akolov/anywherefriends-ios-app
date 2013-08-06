@@ -11,7 +11,7 @@
 "AWF_LOGIN_FORM_PASSWORD_TITLE" = "Пароль";
 
 /* Title of connect with login section */
-"AWF_LOGIN_FORM_CONNECT_WITH_TITLE" = "Войти через";
+"AWF_LOGIN_FORM_CONNECT_WITH_TITLE" = "ВОЙТИ ЧЕРЕЗ";
 
 /* Title of the login button */
 "AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Войти";
