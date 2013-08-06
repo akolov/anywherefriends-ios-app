@@ -1,5 +1,5 @@
 //
-//  AWFLoginViewCell.h
+//  AWFLoginFormViewCell.h
 //  AnywhereFriends
 //
 //  Created by Alexander Kolov on 8/6/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AWFLoginViewCell : UITableViewCell
+@interface AWFLoginFormViewCell : UITableViewCell
 
 @property (nonatomic, strong) UITextField *textField;
 

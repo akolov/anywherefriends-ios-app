@@ -1,15 +1,15 @@
 //
-//  AWFLoginViewCell.m
+//  AWFLoginFormViewCell.m
 //  AnywhereFriends
 //
 //  Created by Alexander Kolov on 8/6/13.
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
-#import "AWFLoginViewCell.h"
+#import "AWFLoginFormViewCell.h"
 
 
-@implementation AWFLoginViewCell
+@implementation AWFLoginFormViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

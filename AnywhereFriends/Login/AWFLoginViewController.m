@@ -13,7 +13,7 @@
 
 #import "UIImage+CustomBackgrounds.h"
 
-#import "AWFLoginViewCell.h"
+#import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
 
 
@@ -32,7 +32,7 @@
 
   self.view.backgroundColor = [UIColor defaultBackgroundColor];
 
-  [self.tableView registerClass:[AWFLoginViewCell class] forCellReuseIdentifier:[AWFLoginViewCell reuseIdentifier]];
+  [self.tableView registerClass:[AWFLoginFormViewCell class] forCellReuseIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,7 +56,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginViewCell reuseIdentifier]];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
 
   if (indexPath.section == 0) {
     if (indexPath.row == 0) {

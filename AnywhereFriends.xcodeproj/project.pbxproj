@@ -10,7 +10,7 @@
 		06DC33336B9B492586CCB402 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE6E10FA69445AA854D1E68 /* libPods.a */; };
 		FA11ACA117B11A5900028A55 /* UIBezierPath+FacebookGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AC9E17B11A5900028A55 /* UIBezierPath+FacebookGlyph.m */; };
 		FA11ACA217B11A5900028A55 /* UIBezierPath+TwitterGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA017B11A5900028A55 /* UIBezierPath+TwitterGlyph.m */; };
-		FA11ACA517B11A7500028A55 /* AWFLoginViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA417B11A7500028A55 /* AWFLoginViewCell.m */; };
+		FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA417B11A7500028A55 /* AWFLoginFormViewCell.m */; };
 		FA11ACA817B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA717B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m */; };
 		FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACAA17B11DB600028A55 /* UIView+Frame.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
@@ -56,8 +56,8 @@
 		FA11AC9E17B11A5900028A55 /* UIBezierPath+FacebookGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+FacebookGlyph.m"; sourceTree = "<group>"; };
 		FA11AC9F17B11A5900028A55 /* UIBezierPath+TwitterGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TwitterGlyph.h"; sourceTree = "<group>"; };
 		FA11ACA017B11A5900028A55 /* UIBezierPath+TwitterGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TwitterGlyph.m"; sourceTree = "<group>"; };
-		FA11ACA317B11A7500028A55 /* AWFLoginViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLoginViewCell.h; sourceTree = "<group>"; };
-		FA11ACA417B11A7500028A55 /* AWFLoginViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLoginViewCell.m; sourceTree = "<group>"; };
+		FA11ACA317B11A7500028A55 /* AWFLoginFormViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLoginFormViewCell.h; sourceTree = "<group>"; };
+		FA11ACA417B11A7500028A55 /* AWFLoginFormViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLoginFormViewCell.m; sourceTree = "<group>"; };
 		FA11ACA617B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+ReuseIdentifier.h"; sourceTree = "<group>"; };
 		FA11ACA717B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+ReuseIdentifier.m"; sourceTree = "<group>"; };
 		FA11ACA917B11DB600028A55 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -225,8 +225,8 @@
 		FADBF68B17ADB73500325DD1 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				FA11ACA317B11A7500028A55 /* AWFLoginViewCell.h */,
-				FA11ACA417B11A7500028A55 /* AWFLoginViewCell.m */,
+				FA11ACA317B11A7500028A55 /* AWFLoginFormViewCell.h */,
+				FA11ACA417B11A7500028A55 /* AWFLoginFormViewCell.m */,
 				FADBF68C17ADB74400325DD1 /* AWFLoginViewController.h */,
 				FADBF68D17ADB74400325DD1 /* AWFLoginViewController.m */,
 			);
@@ -411,7 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA11ACA117B11A5900028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
-				FA11ACA517B11A7500028A55 /* AWFLoginViewCell.m in Sources */,
+				FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */,
