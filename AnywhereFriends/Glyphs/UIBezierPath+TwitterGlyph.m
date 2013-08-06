@@ -1,9 +1,9 @@
 //
 //  UIBezierPath+TwitterGlyph.m
-//  Stylight
+//  AnywhereFriends
 //
 //  Created by Alexander Kolov on 5/24/13.
-//  Copyright (c) 2013 Stylight. All rights reserved.
+//  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
 #import "UIBezierPath+TwitterGlyph.h"

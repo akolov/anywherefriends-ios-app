@@ -9,6 +9,13 @@
 #import "AWFLoginFormViewCell.h"
 
 
+@interface AWFLoginFormViewCell ()
+
+@property (nonatomic, strong) UITextField *textField;
+
+@end
+
+
 @implementation AWFLoginFormViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

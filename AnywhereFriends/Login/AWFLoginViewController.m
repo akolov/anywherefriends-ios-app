@@ -13,6 +13,7 @@
 
 #import "UIImage+CustomBackgrounds.h"
 
+#import "AWFLoginConnectViewCell.h"
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
 
@@ -32,6 +33,7 @@
 
   self.view.backgroundColor = [UIColor defaultBackgroundColor];
 
+  [self.tableView registerClass:[AWFLoginConnectViewCell class] forCellReuseIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
   [self.tableView registerClass:[AWFLoginFormViewCell class] forCellReuseIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
 }
 
@@ -56,9 +58,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
+  UITableViewCell *cell;
 
   if (indexPath.section == 0) {
+    cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
+
     if (indexPath.row == 0) {
       cell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_TITLE", @"Title of the email form field on the login screen");
     }
@@ -67,7 +71,7 @@
     }
   }
   else {
-
+    cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
   }
 
   return cell;

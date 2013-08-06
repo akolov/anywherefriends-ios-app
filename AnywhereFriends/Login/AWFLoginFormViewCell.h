@@ -10,6 +10,6 @@
 
 @interface AWFLoginFormViewCell : UITableViewCell
 
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong, readonly) UITextField *textField;
 
 @end

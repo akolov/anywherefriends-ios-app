@@ -1,9 +1,9 @@
 //
 //  UIImage+CustomBackgrounds.m
-//  Stylight
+//  AnywhereFriends
 //
 //  Created by Alexander Kolov on 7/29/13.
-//  Copyright (c) 2013 Stylight. All rights reserved.
+//  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
 #import "UIImage+CustomBackgrounds.h"
