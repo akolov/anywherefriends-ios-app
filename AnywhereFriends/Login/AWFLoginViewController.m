@@ -118,7 +118,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-  return 65.0f;
+  return 64.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -154,7 +154,7 @@
 
     [view addSubview:loginButton];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[loginButton]-|" options:0 metrics:nil views:views]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20.0-[loginButton]-4.0-|" options:0 metrics:nil views:views]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17.0-[loginButton(40.0)]" options:0 metrics:nil views:views]];
   }
   else {
     NSDictionary *const style = @{@"$default": @{

@@ -8,11 +8,15 @@
 
 #import "AWFSignupViewController.h"
 
+#import "UIImage+CustomBackgrounds.h"
+
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
 
 
 @interface AWFSignupViewController ()
+
+- (UIView *)tableFooterView;
 
 @end
 
@@ -25,6 +29,7 @@
   self.navigationController.navigationBarHidden = NO;
   self.title = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_TITLE", @"Title of the sign up form");
 
+  self.tableView.tableFooterView = [self tableFooterView];
   self.view.backgroundColor = [UIColor awfDefaultBackgroundColor];
 
   [self.tableView registerClass:[AWFLoginFormViewCell class] forCellReuseIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
@@ -72,6 +77,44 @@
   }
 
   return cell;
+}
+
+#pragma mark - UITableView
+
+- (UIView *)tableFooterView {
+  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 50.0f)];
+
+  UIButton *loginButton = [UIButton autolayoutButton];
+  loginButton.backgroundColor = nil;
+  loginButton.frame = CGRectMake(10.0f, 0, 300.0f, 44.0f);
+  loginButton.layer.cornerRadius = 2.0f;
+  loginButton.titleLabel.font = [UIFont helveticaNeueCondensedMediumFontOfSize:16.0f];
+  loginButton.titleLabel.layer.shadowColor = [UIColor whiteColor].CGColor;
+  loginButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1.0f);
+  loginButton.titleLabel.layer.shadowOpacity = 1.0f;
+  loginButton.titleLabel.layer.shadowRadius = 0;
+
+  [loginButton setTitle:NSLocalizedString(@"AWF_LOGIN_FORM_SIGNUP_BUTTON_TITLE", @"Title of the signup button") forState:UIControlStateNormal];
+  [loginButton setTitleColor:[UIColor awfBlueTextColor] forState:UIControlStateNormal];
+
+  NSDictionary *const options = @{UIImageGradientColors: @[[UIColor colorWithDecimalWhite:231.0f alpha:1.0f], [UIColor whiteColor]],
+                                  UIImageBottomStrokeColor: [UIColor whiteColor],
+                                  UIImageStrokeColor: [UIColor colorWithDecimalWhite:190.0f alpha:1.0f],
+                                  UIImageStrokeWidth: @(1.2f)};
+
+  UIImage *normalImage = [UIImage normalPushImageWithSize:CGSizeMake(10.0f, 45.0f) gradient:@[[UIColor whiteColor], [UIColor colorWithWhite:0.95f alpha:1.0f]] backgroundColor:[UIColor awfDefaultBackgroundColor] cornerRadius:3.0f];
+  UIImage *highlightedImage = [UIImage buttonImageWithSize:CGSizeMake(10.0f, 45.0f) options:options cornerRadius:3.0f];
+
+  [loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+  [loginButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+
+  NSDictionary *const views = NSDictionaryOfVariableBindings(loginButton);
+
+  [view addSubview:loginButton];
+  [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[loginButton]-|" options:0 metrics:nil views:views]];
+  [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[loginButton(40.0)]" options:0 metrics:nil views:views]];
+
+  return view;
 }
 
 @end

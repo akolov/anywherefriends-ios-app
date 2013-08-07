@@ -46,3 +46,6 @@
 /* Title of the sign up form */
 "AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Регистрация";
 
+/* Title of the signup button */
+"AWF_LOGIN_FORM_SIGNUP_BUTTON_TITLE" = "Создать аккаунт";
+
