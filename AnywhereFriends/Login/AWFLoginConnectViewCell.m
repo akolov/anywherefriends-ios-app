@@ -10,6 +10,7 @@
 
 #import "UIBezierPath+FacebookGlyph.h"
 #import "UIBezierPath+TwitterGlyph.h"
+#import "UIBezierPath+VKontakteGlyph.h"
 
 
 static CGFloat const kButtonSize = 45.0f;
@@ -97,7 +98,7 @@ static CGFloat const kButtonSize = 45.0f;
 
     self.vkontakteButton = [AWFIconButton autolayoutView];
     self.vkontakteButton.backgroundColor = [UIColor whiteColor];
-    self.vkontakteButton.icon.path = [UIBezierPath facebookGlyph];
+    self.vkontakteButton.icon.path = [UIBezierPath vkontakteGlyph];
 
     [self.vkontakteButton setBackgroundImage:vkontakteBackground forState:UIControlStateNormal];
     [self.vkontakteButton setIconColor:[UIColor whiteColor] forState:UIControlStateNormal];

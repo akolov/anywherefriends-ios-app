@@ -23,6 +23,7 @@
 		FA11ACD517B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD417B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf */; };
 		FA11ACD717B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */; };
 		FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */; };
+		FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
 		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
 		FADBF66117ADB68E00325DD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF66017ADB68E00325DD1 /* UIKit.framework */; };
@@ -91,6 +92,8 @@
 		FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLTCom-MdCn.ttf"; sourceTree = "<group>"; };
 		FA1EEC6317B266A500668A40 /* AWFSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFSignupViewController.h; sourceTree = "<group>"; };
 		FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFSignupViewController.m; sourceTree = "<group>"; };
+		FA1EEC6617B2824B00668A40 /* UIBezierPath+VKontakteGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+VKontakteGlyph.h"; sourceTree = "<group>"; };
+		FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+VKontakteGlyph.m"; sourceTree = "<group>"; };
 		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADBF65C17ADB68E00325DD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -166,6 +169,8 @@
 				FA11ACB317B1385E00028A55 /* UIBezierPath+FacebookGlyph.m */,
 				FA11ACB417B1385E00028A55 /* UIBezierPath+TwitterGlyph.h */,
 				FA11ACB517B1385E00028A55 /* UIBezierPath+TwitterGlyph.m */,
+				FA1EEC6617B2824B00668A40 /* UIBezierPath+VKontakteGlyph.h */,
+				FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */,
 			);
 			name = Glyphs;
 			path = AnywhereFriends/Glyphs;
@@ -478,6 +483,7 @@
 				FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */,
 				FA11ACA817B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
+				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
 				FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
