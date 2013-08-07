@@ -10,8 +10,10 @@
 
 @interface UIColor (CustomColors)
 
-+ (UIColor *)defaultBackgroundColor;
-+ (UIColor *)grayTextColor;
-+ (UIColor *)darkGrayTextColor;
++ (UIColor *)awfDefaultBackgroundColor;
+
++ (UIColor *)awfBlueTextColor;
++ (UIColor *)awfDarkGrayTextColor;
++ (UIColor *)awfGrayTextColor;
 
 @end

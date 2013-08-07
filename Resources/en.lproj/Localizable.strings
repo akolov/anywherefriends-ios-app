@@ -19,3 +19,30 @@
 /* Title of the sign up label in the login form */
 "AWF_LOGIN_FORM_SIGN_UP_LABEL" = "Don't have an account? <strong>Sign Up!</strong>";
 
+/* Placeholder text of the email form field on the login screen */
+"AWF_LOGIN_FORM_EMAIL_PLACEHOLDER" = "Enter your email";
+
+/* Placeholder text of the password form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER" = "Enter your password";
+
+/* Placeholder text of the first field form field on the login screen */
+"AWF_LOGIN_FORM_FIRST_NAME_PLACEHOLDER" = "Enter your first name";
+
+/* Title of the first field form field on the login screen */
+"AWF_LOGIN_FORM_FIRST_NAME_TITLE" = "First name";
+
+/* Placeholder text of the last name form field on the login screen */
+"AWF_LOGIN_FORM_LAST_NAME_PLACEHOLDER" = "Enter your last name";
+
+/* Title of the last name form field on the login screen */
+"AWF_LOGIN_FORM_LAST_NAME_TITLE" = "Last name";
+
+/* Placeholder text of the password confirmation form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_PLACEHOLDER" = "Verify your password";
+
+/* Title of the password confirmation form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_TITLE" = "Password";
+
+/* Title of the sign up form */
+"AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Please sign up";
+

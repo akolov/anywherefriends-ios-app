@@ -19,3 +19,30 @@
 /* Title of the sign up label in the login form */
 "AWF_LOGIN_FORM_SIGN_UP_LABEL" = "Нет аккаунта? <strong>Зарегистрируйтесь!</strong>";
 
+/* Placeholder text of the email form field on the login screen */
+"AWF_LOGIN_FORM_EMAIL_PLACEHOLDER" = "Введите ваш email";
+
+/* Placeholder text of the password form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER" = "Введите ваш пароль";
+
+/* Placeholder text of the first field form field on the login screen */
+"AWF_LOGIN_FORM_FIRST_NAME_PLACEHOLDER" = "Введите ваше имя";
+
+/* Title of the first field form field on the login screen */
+"AWF_LOGIN_FORM_FIRST_NAME_TITLE" = "Имя";
+
+/* Placeholder text of the last name form field on the login screen */
+"AWF_LOGIN_FORM_LAST_NAME_PLACEHOLDER" = "Введите вашу фамилию";
+
+/* Title of the last name form field on the login screen */
+"AWF_LOGIN_FORM_LAST_NAME_TITLE" = "Фамилия";
+
+/* Placeholder text of the password confirmation form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_PLACEHOLDER" = "Подтвердите ваш пароль";
+
+/* Title of the password confirmation form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_TITLE" = "Пароль";
+
+/* Title of the sign up form */
+"AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Регистрация";
+

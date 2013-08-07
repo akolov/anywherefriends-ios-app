@@ -16,9 +16,12 @@
 #import "AWFLoginConnectViewCell.h"
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
+#import "AWFSignupViewController.h"
 
 
 @interface AWFLoginViewController ()
+
+- (void)onSignupButtonTouchUpInside:(id)sender;
 
 @end
 
@@ -31,7 +34,7 @@
   self.navigationController.navigationBarHidden = NO;
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
 
-  self.view.backgroundColor = [UIColor defaultBackgroundColor];
+  self.view.backgroundColor = [UIColor awfDefaultBackgroundColor];
 
   [self.tableView registerClass:[AWFLoginConnectViewCell class] forCellReuseIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
   [self.tableView registerClass:[AWFLoginFormViewCell class] forCellReuseIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
@@ -61,14 +64,18 @@
   UITableViewCell *cell;
 
   if (indexPath.section == 0) {
-    cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
+    AWFLoginFormViewCell *fieldCell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier] forIndexPath:indexPath];
 
     if (indexPath.row == 0) {
-      cell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_TITLE", @"Title of the email form field on the login screen");
+      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_TITLE", @"Title of the email form field on the login screen");
+      fieldCell.textField.placeholder = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_PLACEHOLDER", @"Placeholder text of the email form field on the login screen");
     }
     else if (indexPath.row == 1) {
-      cell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_TITLE", @"Title of the password form field on the login screen");
+      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_TITLE", @"Title of the password form field on the login screen");
+      fieldCell.textField.placeholder = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER", @"Placeholder text of the password form field on the login screen");
     }
+
+    cell = fieldCell;
   }
   else {
     cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
@@ -99,7 +106,7 @@
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 17.0f, 0, 0)];
     title.font = [UIFont helveticaNeueCondensedLightFontOfSize:14.0f];
     title.text = NSLocalizedString(@"AWF_LOGIN_FORM_CONNECT_WITH_TITLE", @"Title of connect with login section");
-    title.textColor = [UIColor darkGrayTextColor];
+    title.textColor = [UIColor awfDarkGrayTextColor];
 
     [title sizeToFit];
     [view addSubview:title];
@@ -123,21 +130,21 @@
     loginButton.backgroundColor = nil;
     loginButton.frame = CGRectMake(10.0f, 0, 300.0f, 44.0f);
     loginButton.layer.cornerRadius = 2.0f;
-    loginButton.titleLabel.font = [UIFont avenirNextCondensedDemiBoldFontOfSize:16.0f];
+    loginButton.titleLabel.font = [UIFont helveticaNeueCondensedMediumFontOfSize:16.0f];
     loginButton.titleLabel.layer.shadowColor = [UIColor whiteColor].CGColor;
     loginButton.titleLabel.layer.shadowOffset = CGSizeMake(0, 1.0f);
     loginButton.titleLabel.layer.shadowOpacity = 1.0f;
     loginButton.titleLabel.layer.shadowRadius = 0;
 
     [loginButton setTitle:NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE", @"Title of the login button") forState:UIControlStateNormal];
-    [loginButton setTitleColor:[UIColor colorWithDecimalRed:9.0f green:124.0f blue:194.0f alpha:1.0f] forState:UIControlStateNormal];
+    [loginButton setTitleColor:[UIColor awfBlueTextColor] forState:UIControlStateNormal];
 
     NSDictionary *const options = @{UIImageGradientColors: @[[UIColor colorWithDecimalWhite:231.0f alpha:1.0f], [UIColor whiteColor]],
                                     UIImageBottomStrokeColor: [UIColor whiteColor],
                                     UIImageStrokeColor: [UIColor colorWithDecimalWhite:190.0f alpha:1.0f],
                                     UIImageStrokeWidth: @(1.2f)};
 
-    UIImage *normalImage = [UIImage normalPushImageWithSize:CGSizeMake(10.0f, 45.0f) gradient:@[[UIColor whiteColor], [UIColor colorWithWhite:0.95f alpha:1.0f]] backgroundColor:[UIColor defaultBackgroundColor] cornerRadius:3.0f];
+    UIImage *normalImage = [UIImage normalPushImageWithSize:CGSizeMake(10.0f, 45.0f) gradient:@[[UIColor whiteColor], [UIColor colorWithWhite:0.95f alpha:1.0f]] backgroundColor:[UIColor awfDefaultBackgroundColor] cornerRadius:3.0f];
     UIImage *highlightedImage = [UIImage buttonImageWithSize:CGSizeMake(10.0f, 45.0f) options:options cornerRadius:3.0f];
 
     [loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
@@ -160,21 +167,30 @@
     NSString *markup = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_LABEL", @"Title of the sign up label in the login form");
     NSAttributedString *attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
 
-    UILabel *signupLabel = [UILabel autolayoutView];
-    signupLabel.adjustsFontSizeToFitWidth = YES;
-    signupLabel.attributedText = attributedText;
-    signupLabel.textColor = [UIColor blackColor];
-    signupLabel.minimumScaleFactor = 0.8f;
-    signupLabel.numberOfLines = 1;
+    UIButton *signupButton = [UIButton autolayoutButton];
+    signupButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    signupButton.titleLabel.minimumScaleFactor = 0.8f;
+    signupButton.titleLabel.numberOfLines = 1;
 
-    NSDictionary *const views = NSDictionaryOfVariableBindings(signupLabel);
+    [signupButton addTarget:self action:@selector(onSignupButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [signupButton setAttributedTitle:attributedText forState:UIControlStateNormal];
+    [signupButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
-    [view addSubview:signupLabel];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[signupLabel]-|" options:0 metrics:nil views:views]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20.0-[signupLabel]" options:0 metrics:nil views:views]];
+    NSDictionary *const views = NSDictionaryOfVariableBindings(signupButton);
+
+    [view addSubview:signupButton];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[signupButton]-|" options:0 metrics:nil views:views]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20.0-[signupButton]" options:0 metrics:nil views:views]];
   }
 
   return view;
+}
+
+#pragma mark - Actions
+
+- (void)onSignupButtonTouchUpInside:(id)sender {
+  AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

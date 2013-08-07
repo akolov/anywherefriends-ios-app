@@ -24,10 +24,10 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     self.textField = [[UITextField alloc] initWithFrame:CGRectMake(100.0f, 11.0f, CGRectGetWidth(self.bounds) - 100.0f - 20.0f, 22.0f)];
-    self.textField.font = [UIFont avenirNextCondensedDemiBoldFontOfSize:16.0f];
+    self.textField.font = [UIFont helveticaNeueCondensedLightFontOfSize:16.0f];
     [self.contentView addSubview:self.textField];
 
-    self.textLabel.font = [UIFont avenirNextCondensedDemiBoldFontOfSize:16.0f];
+    self.textLabel.font = [UIFont helveticaNeueCondensedMediumFontOfSize:16.0f];
   }
   return self;
 }

@@ -14,6 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
   [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
+  [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
   AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
   UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:login];
