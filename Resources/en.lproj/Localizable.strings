@@ -10,14 +10,14 @@
 /* Title of the password form field on the login screen */
 "AWF_LOGIN_FORM_PASSWORD_TITLE" = "Password";
 
-/* Title of connect with login section */
-"AWF_LOGIN_FORM_CONNECT_WITH_TITLE" = "CONNECT WITH";
+/* Title of the connect with login section */
+"AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE" = "CONNECT WITH";
 
 /* Title of the login button */
 "AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Login";
 
-/* Title of the sign up label in the login form */
-"AWF_LOGIN_FORM_SIGN_UP_LABEL" = "Don't have an account? <strong>Sign Up!</strong>";
+/* Title of the sign up button on the login form */
+"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE" = "Don't have an account? <strong>Sign Up!</strong>";
 
 /* Placeholder text of the email form field on the login screen */
 "AWF_LOGIN_FORM_EMAIL_PLACEHOLDER" = "Enter your email";
@@ -48,4 +48,10 @@
 
 /* Title of the signup button */
 "AWF_LOGIN_FORM_SIGNUP_BUTTON_TITLE" = "Create your account";
+
+/* Title of the forgot password button on the login form */
+"AWF_LOGIN_FORM_FORGOT_PASSWORD_TITLE" = "Forgot your password?";
+
+/* Title of the login login section */
+"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "LOGIN WITH EMAIL";
 

@@ -29,6 +29,8 @@
   self.navigationController.navigationBarHidden = NO;
   self.title = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_TITLE", @"Title of the sign up form");
 
+  self.tableView.showsHorizontalScrollIndicator = NO;
+  self.tableView.showsVerticalScrollIndicator = NO;
   self.tableView.tableFooterView = [self tableFooterView];
   self.view.backgroundColor = [UIColor awfDefaultBackgroundColor];
 

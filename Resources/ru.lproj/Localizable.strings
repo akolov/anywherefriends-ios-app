@@ -10,14 +10,14 @@
 /* Title of the password form field on the login screen */
 "AWF_LOGIN_FORM_PASSWORD_TITLE" = "Пароль";
 
-/* Title of connect with login section */
-"AWF_LOGIN_FORM_CONNECT_WITH_TITLE" = "ВОЙТИ ЧЕРЕЗ";
+/* Title of the connect with login section */
+"AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE" = "ВОЙТИ ЧЕРЕЗ";
 
 /* Title of the login button */
 "AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Войти";
 
-/* Title of the sign up label in the login form */
-"AWF_LOGIN_FORM_SIGN_UP_LABEL" = "Нет аккаунта? <strong>Зарегистрируйтесь!</strong>";
+/* Title of the sign up button on the login form */
+"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE" = "Нет аккаунта? <strong>Зарегистрируйтесь!</strong>";
 
 /* Placeholder text of the email form field on the login screen */
 "AWF_LOGIN_FORM_EMAIL_PLACEHOLDER" = "Введите ваш email";
@@ -48,4 +48,10 @@
 
 /* Title of the signup button */
 "AWF_LOGIN_FORM_SIGNUP_BUTTON_TITLE" = "Создать аккаунт";
+
+/* Title of the forgot password button on the login form */
+"AWF_LOGIN_FORM_FORGOT_PASSWORD_TITLE" = "Забыли пароль?";
+
+/* Title of the login login section */
+"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "ВОЙТИ С ПОМОЩЬЮ EMAIL";
 

@@ -21,6 +21,7 @@
 
 @interface AWFLoginViewController ()
 
+- (void)onForgotPasswordButtonTouchUpInside:(id)sender;
 - (void)onSignupButtonTouchUpInside:(id)sender;
 
 @end
@@ -34,6 +35,8 @@
   self.navigationController.navigationBarHidden = NO;
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
 
+  self.tableView.showsHorizontalScrollIndicator = NO;
+  self.tableView.showsVerticalScrollIndicator = NO;
   self.view.backgroundColor = [UIColor awfDefaultBackgroundColor];
 
   [self.tableView registerClass:[AWFLoginConnectViewCell class] forCellReuseIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
@@ -100,25 +103,33 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-  if (section == 1) {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+  UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
 
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 17.0f, 0, 0)];
-    title.font = [UIFont helveticaNeueCondensedLightFontOfSize:14.0f];
-    title.text = NSLocalizedString(@"AWF_LOGIN_FORM_CONNECT_WITH_TITLE", @"Title of connect with login section");
-    title.textColor = [UIColor awfDarkGrayTextColor];
+  UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 17.0f, 0, 0)];
+  title.font = [UIFont helveticaNeueCondensedLightFontOfSize:14.0f];
 
-    [title sizeToFit];
-    [view addSubview:title];
-    
-    return view;
+  if (section == 0) {
+    title.text = NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE", @"Title of the login login section");
+  }
+  else {
+    title.text = NSLocalizedString(@"AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE", @"Title of the connect with login section");
   }
 
-  return nil;
+  title.textColor = [UIColor awfDarkGrayTextColor];
+
+  [title sizeToFit];
+  [view addSubview:title];
+
+  return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-  return 64.0f;
+  if (section == 0) {
+    return 90.0f;
+  }
+  else {
+    return 64.0f;
+  }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -126,6 +137,9 @@
   UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
 
   if (section == 0) {
+
+    // Login button
+
     UIButton *loginButton = [UIButton autolayoutButton];
     loginButton.backgroundColor = nil;
     loginButton.frame = CGRectMake(10.0f, 0, 300.0f, 44.0f);
@@ -150,11 +164,28 @@
     [loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
     [loginButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
 
-    NSDictionary *const views = NSDictionaryOfVariableBindings(loginButton);
+    // Forgot password button
+
+    UIButton *forgotButton = [UIButton autolayoutButton];
+    forgotButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    forgotButton.titleLabel.font = [UIFont helveticaNeueCondensedLightFontOfSize:14.0f];
+    forgotButton.titleLabel.minimumScaleFactor = 0.5f;
+    forgotButton.titleLabel.numberOfLines = 1;
+
+    [forgotButton addTarget:self action:@selector(onForgotPasswordButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [forgotButton setTitle:NSLocalizedString(@"AWF_LOGIN_FORM_FORGOT_PASSWORD_TITLE", @"Title of the forgot password button on the login form") forState:UIControlStateNormal];
+    [forgotButton setTitleColor:[UIColor awfDarkGrayTextColor] forState:UIControlStateNormal];
+
+    [view addSubview:forgotButton];
+
+    // Layout
+
+    NSDictionary *const views = NSDictionaryOfVariableBindings(loginButton, forgotButton);
 
     [view addSubview:loginButton];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[loginButton]-|" options:0 metrics:nil views:views]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17.0-[loginButton(40.0)]" options:0 metrics:nil views:views]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[forgotButton]-|" options:0 metrics:nil views:views]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17.0-[loginButton(40.0)]-[forgotButton]" options:0 metrics:nil views:views]];
   }
   else {
     NSDictionary *const style = @{@"$default": @{
@@ -164,12 +195,12 @@
                                       NSFontAttributeName            : [UIFont helveticaNeueCondensedMediumFontOfSize:18.0f]}
                                   };
 
-    NSString *markup = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_LABEL", @"Title of the sign up label in the login form");
+    NSString *markup = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE", @"Title of the sign up button on the login form");
     NSAttributedString *attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
 
     UIButton *signupButton = [UIButton autolayoutButton];
     signupButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    signupButton.titleLabel.minimumScaleFactor = 0.8f;
+    signupButton.titleLabel.minimumScaleFactor = 0.5f;
     signupButton.titleLabel.numberOfLines = 1;
 
     [signupButton addTarget:self action:@selector(onSignupButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,6 +218,10 @@
 }
 
 #pragma mark - Actions
+
+- (void)onForgotPasswordButtonTouchUpInside:(id)sender {
+
+}
 
 - (void)onSignupButtonTouchUpInside:(id)sender {
   AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
