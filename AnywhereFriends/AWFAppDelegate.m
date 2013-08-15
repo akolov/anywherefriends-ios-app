@@ -9,22 +9,20 @@
 #import "AWFAppDelegate.h"
 #import "AWFLoginViewController.h"
 
+
 @implementation AWFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-  [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
-  [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-
   AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
   UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:login];
+  navigation.navigationBarHidden = NO;
   navigation.navigationBar.barStyle = UIBarStyleBlack;
   navigation.navigationBar.translucent = NO;
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
   self.window.rootViewController = navigation;
-
   [self.window makeKeyAndVisible];
 
   return YES;

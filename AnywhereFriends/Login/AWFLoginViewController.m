@@ -16,12 +16,14 @@
 #import "AWFLoginConnectViewCell.h"
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
+#import "AWFNearbyViewController.h"
 #import "AWFSignupViewController.h"
 
 
 @interface AWFLoginViewController ()
 
 - (void)onForgotPasswordButtonTouchUpInside:(id)sender;
+- (void)onLoginButtonTouchUpInside:(id)sender;
 - (void)onSignupButtonTouchUpInside:(id)sender;
 
 @end
@@ -32,7 +34,6 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.navigationController.navigationBarHidden = NO;
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
 
   self.tableView.showsHorizontalScrollIndicator = NO;
@@ -150,6 +151,7 @@
     loginButton.titleLabel.layer.shadowOpacity = 1.0f;
     loginButton.titleLabel.layer.shadowRadius = 0;
 
+    [loginButton addTarget:self action:@selector(onLoginButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [loginButton setTitle:NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE", @"Title of the login button") forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor awfBlueTextColor] forState:UIControlStateNormal];
 
@@ -221,6 +223,11 @@
 
 - (void)onForgotPasswordButtonTouchUpInside:(id)sender {
 
+}
+
+- (void)onLoginButtonTouchUpInside:(id)sender {
+  AWFNearbyViewController *vc = [[AWFNearbyViewController alloc] init];
+  [self.navigationController setViewControllers:@[vc] animated:YES];
 }
 
 - (void)onSignupButtonTouchUpInside:(id)sender {
