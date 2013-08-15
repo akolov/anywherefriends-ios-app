@@ -14,6 +14,10 @@
   return [self colorWithWhite:0.9f alpha:1.0f];
 }
 
++ (UIColor *)awfPinkColor {
+  return [UIColor colorWithRed:0.9f green:0 blue:0.6f alpha:1.0f];
+}
+
 #pragma mark - Text colors
 
 + (UIColor *)awfBlueTextColor {

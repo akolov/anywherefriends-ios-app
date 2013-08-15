@@ -16,4 +16,7 @@
 - (UIColor *)titleColorForState:(UIControlState)state;
 - (void)setTitleColor:(UIColor *)color forState:(UIControlState)state;
 
+- (UIEdgeInsets)contentEdgeInsetsForState:(UIControlState)state;
+- (void)setContentEdgeInsets:(UIEdgeInsets)inset forState:(UIControlState)state;
+
 @end

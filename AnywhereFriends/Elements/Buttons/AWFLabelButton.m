@@ -12,7 +12,10 @@
 @interface AWFLabelButton ()
 
 @property (nonatomic, strong) NSMutableDictionary *titleColors;
+@property (nonatomic, strong) NSMutableDictionary *insets;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, weak) NSLayoutConstraint *horizontalConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *verticalConstraint;
 
 @end
 
@@ -28,6 +31,10 @@
   if (color) {
     self.titleLabel.textColor = color;
   }
+
+  UIEdgeInsets inset = [self contentEdgeInsetsForState:self.state];
+  self.horizontalConstraint.constant = inset.left - inset.right;
+  self.verticalConstraint.constant = inset.top - inset.bottom;
 }
 
 - (void)setEnabled:(BOOL)enabled {
@@ -37,6 +44,10 @@
   if (color) {
     self.titleLabel.textColor = color;
   }
+
+  UIEdgeInsets inset = [self contentEdgeInsetsForState:self.state];
+  self.horizontalConstraint.constant = inset.left - inset.right;
+  self.verticalConstraint.constant = inset.top - inset.bottom;
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -46,6 +57,10 @@
   if (color) {
     self.titleLabel.textColor = color;
   }
+
+  UIEdgeInsets inset = [self contentEdgeInsetsForState:self.state];
+  self.horizontalConstraint.constant = inset.left - inset.right;
+  self.verticalConstraint.constant = inset.top - inset.bottom;
 }
 
 #pragma mark - Private methods
@@ -56,8 +71,16 @@
     _titleLabel.backgroundColor = nil;
     _titleLabel.opaque = NO;
     [self addSubview:_titleLabel];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
+
+    UIEdgeInsets inset = [self contentEdgeInsetsForState:self.state];
+    NSLayoutConstraint *horizontal = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:(inset.left - inset.right)];
+    NSLayoutConstraint *vertical = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:(inset.top - inset.bottom)];
+
+    [self addConstraint:horizontal];
+    [self addConstraint:vertical];
+
+    self.horizontalConstraint = horizontal;
+    self.verticalConstraint = vertical;
   }
   return _titleLabel;
 }
@@ -80,6 +103,23 @@
 
   if (state == self.state) {
     self.titleLabel.textColor = [self titleColorForState:self.state];
+  }
+}
+
+- (UIEdgeInsets)contentEdgeInsetsForState:(UIControlState)state {
+  return [self.insets[@(state)] UIEdgeInsetsValue];
+}
+
+- (void)setContentEdgeInsets:(UIEdgeInsets)inset forState:(UIControlState)state {
+  if (!self.insets) {
+    self.insets = [NSMutableDictionary dictionary];
+  }
+
+  self.insets[@(state)] = [NSValue valueWithUIEdgeInsets:inset];
+
+  if (state == self.state) {
+    self.horizontalConstraint.constant = inset.left - inset.right;
+    self.verticalConstraint.constant = inset.top - inset.bottom;
   }
 }
 

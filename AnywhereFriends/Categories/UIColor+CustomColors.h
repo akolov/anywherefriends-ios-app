@@ -15,5 +15,6 @@
 + (UIColor *)awfBlueTextColor;
 + (UIColor *)awfDarkGrayTextColor;
 + (UIColor *)awfGrayTextColor;
++ (UIColor *)awfPinkColor;
 
 @end

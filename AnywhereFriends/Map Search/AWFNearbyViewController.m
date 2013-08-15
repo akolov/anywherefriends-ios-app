@@ -11,6 +11,7 @@
 #import <iOS-blur/AMBlurView.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+#import "AWFLabelButton.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFPersonCollectionViewCell.h"
 
@@ -43,6 +44,13 @@ static CGFloat const kButtonBarHeight = 44.0f;
   self.navigationController.navigationBar.translucent = YES;
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
 
+  // Set up collection view
+
+  self.collectionView.backgroundColor = nil;
+  self.collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight + kButtonBarHeight, 0, 0, 0);
+  self.collectionView.opaque = NO;
+  [self.collectionView registerClass:[AWFPersonCollectionViewCell class] forCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier]];
+
   // Set up map view
 
   CGRect mapFrame = self.view.bounds;
@@ -58,14 +66,48 @@ static CGFloat const kButtonBarHeight = 44.0f;
 
   UIToolbar *buttonBar = [UIToolbar autolayoutView];
   buttonBar.barStyle = UIBarStyleBlackTranslucent;
-  [self.view insertSubview:buttonBar aboveSubview:mapView];
+  [self.view insertSubview:buttonBar aboveSubview:self.collectionView];
 
-  // Set up collection view
+  // Set up buttons
 
-  self.collectionView.backgroundColor = nil;
-  self.collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight + kButtonBarHeight, 0, 0, 0);
-  self.collectionView.opaque = NO;
-  [self.collectionView registerClass:[AWFPersonCollectionViewCell class] forCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier]];
+  UIImage *selectedBackground = [UIGraphicsContextWithOptions(CGSizeMake(3.0f, 5.0f), NO, 0, ^(CGRect rect, CGContextRef context) {
+    [[UIColor awfPinkColor] setFill];
+    CGContextFillRect(context, CGRectMake(0, 0, 3.0f, 4.0f));
+  }) resizableImageWithCapInsets:UIEdgeInsetsMake(4.0f, 1.0f, 0, 1.0f)];
+
+  AWFLabelButton *nearbyButton = [AWFLabelButton autolayoutView];
+  nearbyButton.selected = YES;
+  nearbyButton.titleLabel.font = [UIFont helveticaNeueLightFontOfSize:18.0f];
+  nearbyButton.titleLabel.text = NSLocalizedString(@"AWF_HOME_BUTTON_BAR_NEARBY_TITLE", @"Title for the Nearby button on the home view button bar");
+  [nearbyButton setBackgroundImage:selectedBackground forState:UIControlStateSelected];
+  [nearbyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.6f] forState:UIControlStateNormal];
+  [nearbyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+  [nearbyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+
+  AWFLabelButton *friendsButton = [AWFLabelButton autolayoutView];
+  friendsButton.titleLabel.font = [UIFont helveticaNeueLightFontOfSize:18.0f];
+  friendsButton.titleLabel.text = NSLocalizedString(@"AWF_HOME_BUTTON_BAR_FRIENDS_TITLE", @"Title for the Friends button on the home view button bar");
+  [friendsButton setBackgroundImage:selectedBackground forState:UIControlStateSelected];
+  [friendsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.6f] forState:UIControlStateNormal];
+  [friendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+  [friendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+
+  AWFLabelButton *searchesButton = [AWFLabelButton autolayoutView];
+  searchesButton.titleLabel.font = [UIFont helveticaNeueLightFontOfSize:18.0f];
+  searchesButton.titleLabel.text = NSLocalizedString(@"AWF_HOME_BUTTON_BAR_SEARCHES_TITLE", @"Title for the Searches button on the home view button bar");
+  searchesButton.titleLabel.textColor = [UIColor whiteColor];
+  [searchesButton setBackgroundImage:selectedBackground forState:UIControlStateSelected];
+  [searchesButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.6f] forState:UIControlStateNormal];
+  [searchesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+  [searchesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+
+  buttonBar.items = @[[[UIBarButtonItem alloc] initWithCustomView:nearbyButton],
+                      [[UIBarButtonItem alloc] initWithCustomView:friendsButton],
+                      [[UIBarButtonItem alloc] initWithCustomView:searchesButton]];
+
+  NSDictionary *const buttonBarViews = NSDictionaryOfVariableBindings(nearbyButton, friendsButton, searchesButton);
+  [buttonBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[nearbyButton][friendsButton(==nearbyButton)][searchesButton(==nearbyButton)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:buttonBarViews]];
+  [buttonBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[nearbyButton]|" options:0 metrics:nil views:buttonBarViews]];
 
   // Set up layout
 

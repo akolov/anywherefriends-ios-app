@@ -55,3 +55,12 @@
 /* Title of the login login section */
 "AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "LOGIN WITH EMAIL";
 
+/* Title for the Friends button on the home view button bar */
+"AWF_HOME_BUTTON_BAR_FRIENDS_TITLE" = "Friends";
+
+/* Title for the Nearby button on the home view button bar */
+"AWF_HOME_BUTTON_BAR_NEARBY_TITLE" = "Near me";
+
+/* Title for the Searches button on the home view button bar */
+"AWF_HOME_BUTTON_BAR_SEARCHES_TITLE" = "Discover";
+
