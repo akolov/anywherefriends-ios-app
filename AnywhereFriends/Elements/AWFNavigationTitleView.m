@@ -20,12 +20,16 @@
   self = [super initWithFrame:frame];
   if (self) {
     self.backgroundColor = nil;
-    self.font = [UIFont magnetoBoldFontOfSize:20.0f];
+    self.font = [UIFont magnetoBoldFontOfSize:19.0f];
     self.opaque = NO;
     self.text = @"AnywhereFriends";
     self.textColor = [UIColor whiteColor];
   }
   return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+  [self.text drawInRect:CGRectOffset(rect, 2.0f, 0) withAttributes:@{NSFontAttributeName: self.font, NSForegroundColorAttributeName: self.textColor}];
 }
 
 @end
