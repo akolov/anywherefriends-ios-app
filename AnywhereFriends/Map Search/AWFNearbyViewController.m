@@ -11,6 +11,10 @@
 #import <iOS-blur/AMBlurView.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+#import "UIBezierPath+MenuGlyph.h"
+#import "UIBezierPath+MessagesGlyph.h"
+
+#import "AWFIconButton.h"
 #import "AWFLabelButton.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFPersonCollectionViewCell.h"
@@ -43,6 +47,25 @@ static CGFloat const kButtonBarHeight = 44.0f;
 
   self.navigationController.navigationBar.translucent = YES;
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
+
+  UIBezierPath *menuIcon = [UIBezierPath menuGlyph];
+
+  AWFIconButton *menuButton = [[AWFIconButton alloc] initWithFrame:CGRectMake(0, 0, menuIcon.bounds.size.width, menuIcon.bounds.size.height)];
+  menuButton.icon.path = menuIcon;
+  [menuButton setIconColor:[UIColor colorWithWhite:1.0f alpha:0.7f] forState:UIControlStateNormal];
+
+  UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+  self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+
+  UIBezierPath *messagesIcon = [UIBezierPath messagesGlyph];
+  [messagesIcon applyTransform:CGAffineTransformMakeScale(1.3f, 1.3f)];
+
+  AWFIconButton *messagesButton = [[AWFIconButton alloc] initWithFrame:CGRectMake(0, 0, messagesIcon.bounds.size.width, messagesIcon.bounds.size.height)];
+  messagesButton.icon.path = messagesIcon;
+  [messagesButton setIconColor:[UIColor colorWithWhite:1.0f alpha:0.7f] forState:UIControlStateNormal];
+
+  UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:messagesButton];
+  self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 
   // Set up collection view
 

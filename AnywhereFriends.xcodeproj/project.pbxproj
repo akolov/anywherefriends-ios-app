@@ -75,6 +75,8 @@
 		FADE219317BCF58700D3A62B /* Sebastian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217B17BCF58700D3A62B /* Sebastian.jpg */; };
 		FADE219417BCF58700D3A62B /* Veronica.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217C17BCF58700D3A62B /* Veronica.jpg */; };
 		FADE219517BCF58700D3A62B /* Victoria.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217D17BCF58700D3A62B /* Victoria.jpg */; };
+		FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FADE219A17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m */; };
+		FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FADE219D17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +193,10 @@
 		FADE217B17BCF58700D3A62B /* Sebastian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sebastian.jpg; sourceTree = "<group>"; };
 		FADE217C17BCF58700D3A62B /* Veronica.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Veronica.jpg; sourceTree = "<group>"; };
 		FADE217D17BCF58700D3A62B /* Victoria.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Victoria.jpg; sourceTree = "<group>"; };
+		FADE219917BD132400D3A62B /* UIBezierPath+MessagesGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+MessagesGlyph.h"; sourceTree = "<group>"; };
+		FADE219A17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+MessagesGlyph.m"; sourceTree = "<group>"; };
+		FADE219C17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+MenuGlyph.h"; sourceTree = "<group>"; };
+		FADE219D17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+MenuGlyph.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +231,10 @@
 			children = (
 				FA11ACB217B1385E00028A55 /* UIBezierPath+FacebookGlyph.h */,
 				FA11ACB317B1385E00028A55 /* UIBezierPath+FacebookGlyph.m */,
+				FADE219C17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.h */,
+				FADE219D17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m */,
+				FADE219917BD132400D3A62B /* UIBezierPath+MessagesGlyph.h */,
+				FADE219A17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m */,
 				FA11ACB417B1385E00028A55 /* UIBezierPath+TwitterGlyph.h */,
 				FA11ACB517B1385E00028A55 /* UIBezierPath+TwitterGlyph.m */,
 				FA1EEC6617B2824B00668A40 /* UIBezierPath+VKontakteGlyph.h */,
@@ -609,6 +619,7 @@
 				FA11ACD317B138D100028A55 /* AWFShapeView.m in Sources */,
 				FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
+				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */,
 				FA11ACC717B1389400028A55 /* AWFButton.m in Sources */,
@@ -634,6 +645,7 @@
 				FADBF6A817ADC4E200325DD1 /* UIButton+Autolayout.m in Sources */,
 				FA11ACCC17B1389400028A55 /* AWFIconLabelButton.m in Sources */,
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
+				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
