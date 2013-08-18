@@ -11,11 +11,14 @@
 
 @interface AWFLabelButton ()
 
+@property (nonatomic, strong) NSMutableDictionary *titles;
 @property (nonatomic, strong) NSMutableDictionary *titleColors;
 @property (nonatomic, strong) NSMutableDictionary *insets;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, weak) NSLayoutConstraint *horizontalConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *verticalConstraint;
+
+- (void)updateButtonForState:(UIControlState)state;
 
 @end
 
@@ -26,32 +29,26 @@
 
 - (void)setSelected:(BOOL)selected {
   [super setSelected:selected];
-
-  UIColor *color = [self titleColorForState:self.state];
-  if (color) {
-    self.titleLabel.textColor = color;
-  }
-
-  UIEdgeInsets inset = [self contentEdgeInsetsForState:self.state];
-  self.horizontalConstraint.constant = inset.left - inset.right;
-  self.verticalConstraint.constant = inset.top - inset.bottom;
+  [self updateButtonForState:self.state];
 }
 
 - (void)setEnabled:(BOOL)enabled {
   [super setEnabled:enabled];
-
-  UIColor *color = [self titleColorForState:self.state];
-  if (color) {
-    self.titleLabel.textColor = color;
-  }
-
-  UIEdgeInsets inset = [self contentEdgeInsetsForState:self.state];
-  self.horizontalConstraint.constant = inset.left - inset.right;
-  self.verticalConstraint.constant = inset.top - inset.bottom;
+  [self updateButtonForState:self.state];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
   [super setHighlighted:highlighted];
+  [self updateButtonForState:self.state];
+}
+
+#pragma mark - Private methods
+
+- (void)updateButtonForState:(UIControlState)state {
+  NSString *text = [self titleTextForState:self.state];
+  if (text) {
+    self.titleLabel.text = text;
+  }
 
   UIColor *color = [self titleColorForState:self.state];
   if (color) {
@@ -63,7 +60,7 @@
   self.verticalConstraint.constant = inset.top - inset.bottom;
 }
 
-#pragma mark - Private methods
+#pragma mark - Public methods
 
 - (UILabel *)titleLabel {
   if (!_titleLabel) {
@@ -83,6 +80,27 @@
     self.verticalConstraint = vertical;
   }
   return _titleLabel;
+}
+
+- (NSString *)titleTextForState:(UIControlState)state {
+  return self.titles[@(state)] ?: self.titleLabel.text;
+}
+
+- (void)setTitleText:(NSString *)text forState:(UIControlState)state {
+  if (!self.titles) {
+    self.titles = [NSMutableDictionary dictionary];
+  }
+
+  if (text) {
+    self.titles[@(state)] = text;
+  }
+  else {
+    [self.titles removeObjectForKey:@(state)];
+  }
+
+  if (state == self.state) {
+    self.titleLabel.text = [self titleTextForState:self.state];
+  }
 }
 
 - (UIColor *)titleColorForState:(UIControlState)state {

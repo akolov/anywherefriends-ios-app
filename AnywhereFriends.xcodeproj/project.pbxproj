@@ -70,13 +70,26 @@
 		FADE218E17BCF58700D3A62B /* Matze.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217617BCF58700D3A62B /* Matze.jpg */; };
 		FADE218F17BCF58700D3A62B /* Max.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217717BCF58700D3A62B /* Max.jpg */; };
 		FADE219017BCF58700D3A62B /* Michael.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217817BCF58700D3A62B /* Michael.jpg */; };
-		FADE219117BCF58700D3A62B /* Olga.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217917BCF58700D3A62B /* Olga.jpg */; };
 		FADE219217BCF58700D3A62B /* Olivia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217A17BCF58700D3A62B /* Olivia.jpg */; };
-		FADE219317BCF58700D3A62B /* Sebastian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217B17BCF58700D3A62B /* Sebastian.jpg */; };
 		FADE219417BCF58700D3A62B /* Veronica.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217C17BCF58700D3A62B /* Veronica.jpg */; };
 		FADE219517BCF58700D3A62B /* Victoria.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FADE217D17BCF58700D3A62B /* Victoria.jpg */; };
 		FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FADE219A17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m */; };
 		FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FADE219D17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m */; };
+		FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE475DD17C0EAF0006B2C65 /* AWFProfileViewController.m */; };
+		FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE475E017C0EC15006B2C65 /* AWFProfileHeaderView.m */; };
+		FAE475E417C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE475E317C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m */; };
+		FAE475F717C0FAEE006B2C65 /* Jasmin_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475F217C0FAEE006B2C65 /* Jasmin_0.jpg */; };
+		FAE475F817C0FAEE006B2C65 /* Jasmin_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475F317C0FAEE006B2C65 /* Jasmin_1.jpg */; };
+		FAE475F917C0FAEE006B2C65 /* Jasmin_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475F417C0FAEE006B2C65 /* Jasmin_2.jpg */; };
+		FAE475FA17C0FAEE006B2C65 /* Jasmin_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475F517C0FAEE006B2C65 /* Jasmin_3.jpg */; };
+		FAE475FB17C0FAEE006B2C65 /* Jasmin_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475F617C0FAEE006B2C65 /* Jasmin_4.jpg */; };
+		FAE4760117C0FDDA006B2C65 /* Jasmin_t0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475FC17C0FDDA006B2C65 /* Jasmin_t0.jpg */; };
+		FAE4760217C0FDDA006B2C65 /* Jasmin_t1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475FD17C0FDDA006B2C65 /* Jasmin_t1.jpg */; };
+		FAE4760317C0FDDA006B2C65 /* Jasmin_t2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475FE17C0FDDA006B2C65 /* Jasmin_t2.jpg */; };
+		FAE4760417C0FDDA006B2C65 /* Jasmin_t3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE475FF17C0FDDA006B2C65 /* Jasmin_t3.jpg */; };
+		FAE4760517C0FDDA006B2C65 /* Jasmin_t4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE4760017C0FDDA006B2C65 /* Jasmin_t4.jpg */; };
+		FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE4760717C112FF006B2C65 /* AWFProfileTableViewCell.m */; };
+		FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE4760A17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,15 +201,33 @@
 		FADE217617BCF58700D3A62B /* Matze.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Matze.jpg; sourceTree = "<group>"; };
 		FADE217717BCF58700D3A62B /* Max.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Max.jpg; sourceTree = "<group>"; };
 		FADE217817BCF58700D3A62B /* Michael.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Michael.jpg; sourceTree = "<group>"; };
-		FADE217917BCF58700D3A62B /* Olga.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Olga.jpg; sourceTree = "<group>"; };
 		FADE217A17BCF58700D3A62B /* Olivia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Olivia.jpg; sourceTree = "<group>"; };
-		FADE217B17BCF58700D3A62B /* Sebastian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sebastian.jpg; sourceTree = "<group>"; };
 		FADE217C17BCF58700D3A62B /* Veronica.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Veronica.jpg; sourceTree = "<group>"; };
 		FADE217D17BCF58700D3A62B /* Victoria.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Victoria.jpg; sourceTree = "<group>"; };
 		FADE219917BD132400D3A62B /* UIBezierPath+MessagesGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+MessagesGlyph.h"; sourceTree = "<group>"; };
 		FADE219A17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+MessagesGlyph.m"; sourceTree = "<group>"; };
 		FADE219C17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+MenuGlyph.h"; sourceTree = "<group>"; };
 		FADE219D17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+MenuGlyph.m"; sourceTree = "<group>"; };
+		FAE475DC17C0EAF0006B2C65 /* AWFProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileViewController.h; sourceTree = "<group>"; };
+		FAE475DD17C0EAF0006B2C65 /* AWFProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileViewController.m; sourceTree = "<group>"; };
+		FAE475DF17C0EC15006B2C65 /* AWFProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileHeaderView.h; sourceTree = "<group>"; };
+		FAE475E017C0EC15006B2C65 /* AWFProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileHeaderView.m; sourceTree = "<group>"; };
+		FAE475E217C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		FAE475E317C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		FAE475F217C0FAEE006B2C65 /* Jasmin_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_0.jpg; sourceTree = "<group>"; };
+		FAE475F317C0FAEE006B2C65 /* Jasmin_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_1.jpg; sourceTree = "<group>"; };
+		FAE475F417C0FAEE006B2C65 /* Jasmin_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_2.jpg; sourceTree = "<group>"; };
+		FAE475F517C0FAEE006B2C65 /* Jasmin_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_3.jpg; sourceTree = "<group>"; };
+		FAE475F617C0FAEE006B2C65 /* Jasmin_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_4.jpg; sourceTree = "<group>"; };
+		FAE475FC17C0FDDA006B2C65 /* Jasmin_t0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_t0.jpg; sourceTree = "<group>"; };
+		FAE475FD17C0FDDA006B2C65 /* Jasmin_t1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_t1.jpg; sourceTree = "<group>"; };
+		FAE475FE17C0FDDA006B2C65 /* Jasmin_t2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_t2.jpg; sourceTree = "<group>"; };
+		FAE475FF17C0FDDA006B2C65 /* Jasmin_t3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_t3.jpg; sourceTree = "<group>"; };
+		FAE4760017C0FDDA006B2C65 /* Jasmin_t4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmin_t4.jpg; sourceTree = "<group>"; };
+		FAE4760617C112FF006B2C65 /* AWFProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileTableViewCell.h; sourceTree = "<group>"; };
+		FAE4760717C112FF006B2C65 /* AWFProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileTableViewCell.m; sourceTree = "<group>"; };
+		FAE4760917C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+AccessoryArrowGlyph.h"; sourceTree = "<group>"; };
+		FAE4760A17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+AccessoryArrowGlyph.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +260,8 @@
 		FA11ACB117B1385E00028A55 /* Glyphs */ = {
 			isa = PBXGroup;
 			children = (
+				FAE4760917C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.h */,
+				FAE4760A17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m */,
 				FA11ACB217B1385E00028A55 /* UIBezierPath+FacebookGlyph.h */,
 				FA11ACB317B1385E00028A55 /* UIBezierPath+FacebookGlyph.m */,
 				FADE219C17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.h */,
@@ -302,6 +335,7 @@
 				FA11ACB117B1385E00028A55 /* Glyphs */,
 				FADBF68B17ADB73500325DD1 /* Login */,
 				FADE215517BCD30800D3A62B /* Map Search */,
+				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
 				FADBF66E17ADB68E00325DD1 /* Images.xcassets */,
@@ -423,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				FADE216517BCF58700D3A62B /* Avatars */,
+				FAE475E517C0F9D7006B2C65 /* Profile */,
 			);
 			path = Temporary;
 			sourceTree = "<group>";
@@ -448,13 +483,43 @@
 				FADE217617BCF58700D3A62B /* Matze.jpg */,
 				FADE217717BCF58700D3A62B /* Max.jpg */,
 				FADE217817BCF58700D3A62B /* Michael.jpg */,
-				FADE217917BCF58700D3A62B /* Olga.jpg */,
 				FADE217A17BCF58700D3A62B /* Olivia.jpg */,
-				FADE217B17BCF58700D3A62B /* Sebastian.jpg */,
 				FADE217C17BCF58700D3A62B /* Veronica.jpg */,
 				FADE217D17BCF58700D3A62B /* Victoria.jpg */,
 			);
 			path = Avatars;
+			sourceTree = "<group>";
+		};
+		FAE475DB17C0EAE6006B2C65 /* Profile View */ = {
+			isa = PBXGroup;
+			children = (
+				FAE475E217C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.h */,
+				FAE475E317C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m */,
+				FAE4760617C112FF006B2C65 /* AWFProfileTableViewCell.h */,
+				FAE4760717C112FF006B2C65 /* AWFProfileTableViewCell.m */,
+				FAE475DF17C0EC15006B2C65 /* AWFProfileHeaderView.h */,
+				FAE475E017C0EC15006B2C65 /* AWFProfileHeaderView.m */,
+				FAE475DC17C0EAF0006B2C65 /* AWFProfileViewController.h */,
+				FAE475DD17C0EAF0006B2C65 /* AWFProfileViewController.m */,
+			);
+			path = "Profile View";
+			sourceTree = "<group>";
+		};
+		FAE475E517C0F9D7006B2C65 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FAE475F217C0FAEE006B2C65 /* Jasmin_0.jpg */,
+				FAE475F317C0FAEE006B2C65 /* Jasmin_1.jpg */,
+				FAE475F417C0FAEE006B2C65 /* Jasmin_2.jpg */,
+				FAE475F517C0FAEE006B2C65 /* Jasmin_3.jpg */,
+				FAE475F617C0FAEE006B2C65 /* Jasmin_4.jpg */,
+				FAE475FC17C0FDDA006B2C65 /* Jasmin_t0.jpg */,
+				FAE475FD17C0FDDA006B2C65 /* Jasmin_t1.jpg */,
+				FAE475FE17C0FDDA006B2C65 /* Jasmin_t2.jpg */,
+				FAE475FF17C0FDDA006B2C65 /* Jasmin_t3.jpg */,
+				FAE4760017C0FDDA006B2C65 /* Jasmin_t4.jpg */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -536,14 +601,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE4760217C0FDDA006B2C65 /* Jasmin_t1.jpg in Resources */,
 				FADE218117BCF58700D3A62B /* Andrea.jpg in Resources */,
 				FADE219017BCF58700D3A62B /* Michael.jpg in Resources */,
 				FADE219517BCF58700D3A62B /* Victoria.jpg in Resources */,
+				FAE4760117C0FDDA006B2C65 /* Jasmin_t0.jpg in Resources */,
 				FADE218717BCF58700D3A62B /* Kenza.jpg in Resources */,
+				FAE475F917C0FAEE006B2C65 /* Jasmin_2.jpg in Resources */,
 				FADBF69917ADBADC00325DD1 /* MAGNETOB.TTF in Resources */,
 				FADBF6A217ADC23600325DD1 /* Localizable.strings in Resources */,
-				FADE219317BCF58700D3A62B /* Sebastian.jpg in Resources */,
-				FADE219117BCF58700D3A62B /* Olga.jpg in Resources */,
 				FADE219417BCF58700D3A62B /* Veronica.jpg in Resources */,
 				FADE218E17BCF58700D3A62B /* Matze.jpg in Resources */,
 				FADE218817BCF58700D3A62B /* Kristina.jpg in Resources */,
@@ -553,13 +619,20 @@
 				FADE217F17BCF58700D3A62B /* Alessio.jpg in Resources */,
 				FADBF66717ADB68E00325DD1 /* InfoPlist.strings in Resources */,
 				FADE218417BCF58700D3A62B /* Ebba.jpg in Resources */,
+				FAE475FB17C0FAEE006B2C65 /* Jasmin_4.jpg in Resources */,
 				FADE218F17BCF58700D3A62B /* Max.jpg in Resources */,
 				FADE217E17BCF58700D3A62B /* Ajda.jpg in Resources */,
+				FAE4760517C0FDDA006B2C65 /* Jasmin_t4.jpg in Resources */,
+				FAE475FA17C0FAEE006B2C65 /* Jasmin_3.jpg in Resources */,
 				FADE218217BCF58700D3A62B /* Carrie.jpg in Resources */,
+				FAE475F817C0FAEE006B2C65 /* Jasmin_1.jpg in Resources */,
+				FAE4760417C0FDDA006B2C65 /* Jasmin_t3.jpg in Resources */,
 				FA11ACD517B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf in Resources */,
 				FADE218B17BCF58700D3A62B /* Marie.jpg in Resources */,
+				FAE475F717C0FAEE006B2C65 /* Jasmin_0.jpg in Resources */,
 				FADE218617BCF58700D3A62B /* Jacky.jpg in Resources */,
 				FADBF66F17ADB68E00325DD1 /* Images.xcassets in Resources */,
+				FAE4760317C0FDDA006B2C65 /* Jasmin_t2.jpg in Resources */,
 				FADE218C17BCF58700D3A62B /* Marine.jpg in Resources */,
 				FA11ACD717B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf in Resources */,
 				FADE218917BCF58700D3A62B /* Lauren.jpg in Resources */,
@@ -620,8 +693,10 @@
 				FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
 				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,
+				FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */,
+				FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */,
 				FA11ACC717B1389400028A55 /* AWFButton.m in Sources */,
 				FADBF68E17ADB74400325DD1 /* AWFLoginViewController.m in Sources */,
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
@@ -632,9 +707,11 @@
 				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
+				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,
 				FADE216017BCDB6800D3A62B /* AWFPersonCollectionViewCell.m in Sources */,
 				FADE216317BCDDAC00D3A62B /* UICollectionViewCell+ReuseIdentifier.m in Sources */,
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
+				FAE475E417C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m in Sources */,
 				FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
@@ -645,6 +722,7 @@
 				FADBF6A817ADC4E200325DD1 /* UIButton+Autolayout.m in Sources */,
 				FA11ACCC17B1389400028A55 /* AWFIconLabelButton.m in Sources */,
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
+				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,
 				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

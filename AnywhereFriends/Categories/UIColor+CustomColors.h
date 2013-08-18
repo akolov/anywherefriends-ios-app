@@ -12,9 +12,11 @@
 
 + (UIColor *)awfDefaultBackgroundColor;
 
++ (UIColor *)awfGreenColor;
++ (UIColor *)awfPinkColor;
+
 + (UIColor *)awfBlueTextColor;
 + (UIColor *)awfDarkGrayTextColor;
 + (UIColor *)awfGrayTextColor;
-+ (UIColor *)awfPinkColor;
 
 @end

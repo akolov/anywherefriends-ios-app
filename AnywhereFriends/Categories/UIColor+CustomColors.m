@@ -14,6 +14,10 @@
   return [self colorWithWhite:0.9f alpha:1.0f];
 }
 
++ (UIColor *)awfGreenColor {
+  return [UIColor colorWithRed:0.105 green:0.757 blue:0.294 alpha:1.000];
+}
+
 + (UIColor *)awfPinkColor {
   return [UIColor colorWithRed:0.9f green:0 blue:0.6f alpha:1.0f];
 }

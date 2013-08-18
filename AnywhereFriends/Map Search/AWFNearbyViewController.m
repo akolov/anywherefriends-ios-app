@@ -8,7 +8,6 @@
 
 #import "AWFNearbyViewController.h"
 
-#import <iOS-blur/AMBlurView.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "UIBezierPath+MenuGlyph.h"
@@ -18,6 +17,7 @@
 #import "AWFLabelButton.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFPersonCollectionViewCell.h"
+#import "AWFProfileViewController.h"
 
 
 static CGFloat const kHeaderHeight = 164.0f;
@@ -182,6 +182,13 @@ static CGFloat const kButtonBarHeight = 44.0f;
   return cell;
 }
 
+#pragma mark - UICollectionView delegate methods
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+  AWFProfileViewController *vc = [[AWFProfileViewController alloc] init];
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - Private methods
 
 - (NSArray *)temporaryData {
@@ -207,9 +214,7 @@ static CGFloat const kButtonBarHeight = 44.0f;
                        @"Marie",     // 18
                        @"Max",       // 19
                        @"Michael",   // 20
-                       @"Olga",      // 21
-                       @"Olivia",    // 22
-                       @"Sebastian", // 23
+                       @"Olivia",    // 21
                        ];
   }
   return _temporaryData;

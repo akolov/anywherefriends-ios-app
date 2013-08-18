@@ -64,3 +64,21 @@
 /* Title for the Searches button on the home view button bar */
 "AWF_HOME_BUTTON_BAR_SEARCHES_TITLE" = "Discover";
 
+/* Title of the follow button of the profile view */
+"AWF_PROFILE_FOLLOW_BUTTON_TITLE" = "Follow";
+
+/* Title of the following button of the profile view */
+"AWF_PROFILE_FOLLOWING_BUTTON_TITLE" = "Following";
+
+/* Title of the offline button of the profile view */
+"AWF_PROFILE_OFFLINE_BUTTON_TITLE" = "Offline";
+
+/* Title of the online button of the profile view */
+"AWF_PROFILE_ONLINE_BUTTON_TITLE" = "Online";
+
+/* Appearance section header title of the profile view */
+"AWF_PROFILE_SECTION_HEADER_APPEARANCE" = "Appearance";
+
+/* Basic info section header title of the profile view */
+"AWF_PROFILE_SECTION_HEADER_BASIC_INFO" = "Basic Info";
+

@@ -13,6 +13,9 @@
 
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 
+- (NSString *)titleTextForState:(UIControlState)state;
+- (void)setTitleText:(NSString *)text forState:(UIControlState)state;
+
 - (UIColor *)titleColorForState:(UIControlState)state;
 - (void)setTitleColor:(UIColor *)color forState:(UIControlState)state;
 
