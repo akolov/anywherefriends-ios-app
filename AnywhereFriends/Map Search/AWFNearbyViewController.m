@@ -24,7 +24,7 @@ static CGFloat const kHeaderHeight = 164.0f;
 static CGFloat const kButtonBarHeight = 44.0f;
 
 
-@interface AWFNearbyViewController ()
+@interface AWFNearbyViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray *temporaryData;
 
@@ -33,19 +33,9 @@ static CGFloat const kButtonBarHeight = 44.0f;
 
 @implementation AWFNearbyViewController
 
-- (id)init {
-  UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-  layout.itemSize = CGSizeMake(104.0f, 104.0f);
-  layout.minimumInteritemSpacing = 2.0f;
-  layout.minimumLineSpacing = 2.0f;
-  layout.sectionInset = UIEdgeInsetsMake(2.0f, 2.0f, 2.0f, 2.0f);
-  return [super initWithCollectionViewLayout:layout];
-}
-
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.navigationController.navigationBar.translucent = YES;
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
 
   UIBezierPath *menuIcon = [UIBezierPath menuGlyph];
@@ -67,12 +57,26 @@ static CGFloat const kButtonBarHeight = 44.0f;
   UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:messagesButton];
   self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 
+  // Set up view
+
+  self.view.backgroundColor = [UIColor blackColor];
+
   // Set up collection view
 
+  UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+  layout.itemSize = CGSizeMake(106.0f, 106.0f);
+  layout.minimumInteritemSpacing = 1.0f;
+  layout.minimumLineSpacing = 1.0f;
+
+  self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
   self.collectionView.backgroundColor = nil;
   self.collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight + kButtonBarHeight, 0, 0, 0);
+  self.collectionView.dataSource = self;
+  self.collectionView.delegate = self;
   self.collectionView.opaque = NO;
-  [self.collectionView registerClass:[AWFPersonCollectionViewCell class] forCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier]];
+  [self.collectionView registerClass:[AWFPersonCollectionViewCell class]
+          forCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier]];
+  [self.view addSubview:self.collectionView];
 
   // Set up map view
 
@@ -85,61 +89,26 @@ static CGFloat const kButtonBarHeight = 44.0f;
   [self.view insertSubview:mapView atIndex:0];
   self.mapView = mapView;
 
-  // Set up button bar
+  // Set up search and scope bar
 
-  UIToolbar *buttonBar = [UIToolbar autolayoutView];
-  buttonBar.barStyle = UIBarStyleBlackTranslucent;
-  [self.view insertSubview:buttonBar aboveSubview:self.collectionView];
+  UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
+  searchBar.barTintColor = [UIColor blackColor];
+  searchBar.tintColor = [UIColor whiteColor];
+  searchBar.showsCancelButton = YES;
+  searchBar.showsScopeBar = YES;
+  searchBar.scopeButtonTitles = @[NSLocalizedString(@"AWF_SEARCH_SCOPE_NEARBY_TITLE", @"Title for the Nearby search scope"),
+                                  NSLocalizedString(@"AWF_SEARCH_SCOPE_FRIENDS_TITLE", @"Title for the Friends search scope"),
+                                  NSLocalizedString(@"AWF_SEARCH_SCOPE_SEARCHES_TITLE", @"Title for the Searches search scope")];
+  [searchBar sizeToFit];
+  [searchBar setFrameOriginY:-kHeaderHeight - searchBar.frame.size.height / 2.0f - 0.5f];
 
-  // Set up buttons
-
-  UIImage *selectedBackground = [UIGraphicsContextWithOptions(CGSizeMake(3.0f, 5.0f), NO, 0, ^(CGRect rect, CGContextRef context) {
-    [[UIColor awfPinkColor] setFill];
-    CGContextFillRect(context, CGRectMake(0, 0, 3.0f, 4.0f));
-  }) resizableImageWithCapInsets:UIEdgeInsetsMake(4.0f, 1.0f, 0, 1.0f)];
-
-  AWFLabelButton *nearbyButton = [AWFLabelButton autolayoutView];
-  nearbyButton.selected = YES;
-  nearbyButton.titleLabel.font = [UIFont helveticaNeueLightFontOfSize:18.0f];
-  nearbyButton.titleLabel.text = NSLocalizedString(@"AWF_HOME_BUTTON_BAR_NEARBY_TITLE", @"Title for the Nearby button on the home view button bar");
-  [nearbyButton setBackgroundImage:selectedBackground forState:UIControlStateSelected];
-  [nearbyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.6f] forState:UIControlStateNormal];
-  [nearbyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-  [nearbyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-
-  AWFLabelButton *friendsButton = [AWFLabelButton autolayoutView];
-  friendsButton.titleLabel.font = [UIFont helveticaNeueLightFontOfSize:18.0f];
-  friendsButton.titleLabel.text = NSLocalizedString(@"AWF_HOME_BUTTON_BAR_FRIENDS_TITLE", @"Title for the Friends button on the home view button bar");
-  [friendsButton setBackgroundImage:selectedBackground forState:UIControlStateSelected];
-  [friendsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.6f] forState:UIControlStateNormal];
-  [friendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-  [friendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-
-  AWFLabelButton *searchesButton = [AWFLabelButton autolayoutView];
-  searchesButton.titleLabel.font = [UIFont helveticaNeueLightFontOfSize:18.0f];
-  searchesButton.titleLabel.text = NSLocalizedString(@"AWF_HOME_BUTTON_BAR_SEARCHES_TITLE", @"Title for the Searches button on the home view button bar");
-  searchesButton.titleLabel.textColor = [UIColor whiteColor];
-  [searchesButton setBackgroundImage:selectedBackground forState:UIControlStateSelected];
-  [searchesButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.6f] forState:UIControlStateNormal];
-  [searchesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-  [searchesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-
-  buttonBar.items = @[[[UIBarButtonItem alloc] initWithCustomView:nearbyButton],
-                      [[UIBarButtonItem alloc] initWithCustomView:friendsButton],
-                      [[UIBarButtonItem alloc] initWithCustomView:searchesButton]];
-
-  NSDictionary *const buttonBarViews = NSDictionaryOfVariableBindings(nearbyButton, friendsButton, searchesButton);
-  [buttonBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[nearbyButton][friendsButton(==nearbyButton)][searchesButton(==nearbyButton)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:buttonBarViews]];
-  [buttonBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[nearbyButton]|" options:0 metrics:nil views:buttonBarViews]];
+  [self.collectionView addSubview:searchBar];
 
   // Set up layout
 
-  NSDictionary *const views = NSDictionaryOfVariableBindings(buttonBar, mapView);
+  NSDictionary *const views = NSDictionaryOfVariableBindings(mapView);
   [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[mapView]|" options:0 metrics:nil views:views]];
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[buttonBar]|" options:0 metrics:nil views:views]];
   [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mapView]" options:0 metrics:nil views:views]];
-  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:buttonBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:kButtonBarHeight]];
-  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:buttonBar attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:mapView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
 
   NSLayoutConstraint *headerHeightConstraint = [NSLayoutConstraint constraintWithItem:mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:kHeaderHeight];
   [self.view addConstraint:headerHeightConstraint];
@@ -151,6 +120,12 @@ static CGFloat const kButtonBarHeight = 44.0f;
                                            map:^id(id value) {
                                              return @(-[value CGPointValue].y);
                                            }];
+  RAC(searchBar, frame) = [RACAble(self.collectionView.contentOffset)
+                           map:^id(id value) {
+                             CGRect frame = searchBar.frame;
+                             frame.origin.y = self.collectionView.contentOffset.y - 0.5f;
+                             return [NSValue valueWithCGRect:frame];
+                           }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -161,6 +136,7 @@ static CGFloat const kButtonBarHeight = 44.0f;
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
+  [self.collectionView setContentOffset:CGPointMake(0, -self.collectionView.contentInset.top + 44.0f)];
 }
 
 #pragma mark - UICollectionView data source
@@ -178,7 +154,7 @@ static CGFloat const kButtonBarHeight = 44.0f;
 
   NSString *name = self.temporaryData[indexPath.row];
   cell.imageView.image = [UIImage imageNamed:[name stringByAppendingString:@".jpg"]];
-  cell.label.text = name;
+  cell.nameLabel.text = name;
   return cell;
 }
 

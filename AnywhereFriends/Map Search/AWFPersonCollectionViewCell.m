@@ -12,7 +12,8 @@
 @interface AWFPersonCollectionViewCell ()
 
 @property (nonatomic, weak) UIImageView *imageView;
-@property (nonatomic, weak) UILabel *label;
+@property (nonatomic, weak) UILabel *nameLabel;
+@property (nonatomic, weak) UILabel *distanceLabel;
 
 @end
 
@@ -28,17 +29,23 @@
     [self.contentView addSubview:imageView];
     self.imageView = imageView;
 
-    CGRect labelBackgroundFrame = CGRectMake(2.0f, frame.size.height - 22.0f, frame.size.width - 4.0f, 20.0f);
+    CGRect labelBackgroundFrame = CGRectMake(0, frame.size.height - 20.0f, frame.size.width, 20.0f);
     UIView *labelBackground = [[UIView alloc] initWithFrame:labelBackgroundFrame];
     labelBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    labelBackground.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7f];
+    labelBackground.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5f];
     [self.contentView addSubview:labelBackground];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectInset(labelBackgroundFrame, 4.0f, 2.0f)];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont helveticaNeueFontOfSize:12.0f];
-    [self.contentView addSubview:label];
-    self.label = label;
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectInset(labelBackgroundFrame, 4.0f, 2.0f)];
+    nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.font = [UIFont helveticaNeueLightFontOfSize:11.0f];
+    [self.contentView addSubview:nameLabel];
+    self.nameLabel = nameLabel;
+
+//    UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectInset(labelBackgroundFrame, 4.0f, 2.0f)];
+//    nameLabel.textColor = [UIColor whiteColor];
+//    nameLabel.font = [UIFont helveticaNeueLightFontOfSize:11.0f];
+//    [self.contentView addSubview:nameLabel];
+//    self.nameLabel = nameLabel;
   }
   return self;
 }

@@ -10,8 +10,9 @@
 #import <MapKit/MapKit.h>
 
 
-@interface AWFNearbyViewController : UICollectionViewController
+@interface AWFNearbyViewController : UIViewController
 
-@property (nonatomic, weak) MKMapView *mapView;
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) MKMapView *mapView;
 
 @end

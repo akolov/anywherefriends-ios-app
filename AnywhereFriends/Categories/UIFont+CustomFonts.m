@@ -21,6 +21,10 @@
   return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
 }
 
++ (UIFont *)helveticaNeueUltraLightFontOfSize:(CGFloat)size {
+  return [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:size];
+}
+
 #pragma mark - AvenirNext Condensed
 
 + (UIFont *)helveticaNeueCondensedLightFontOfSize:(CGFloat)size {

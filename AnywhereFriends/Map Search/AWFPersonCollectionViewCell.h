@@ -11,6 +11,7 @@
 @interface AWFPersonCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak, readonly) UIImageView *imageView;
-@property (nonatomic, weak, readonly) UILabel *label;
+@property (nonatomic, weak, readonly) UILabel *nameLabel;
+@property (nonatomic, weak, readonly) UILabel *distanceLabel;
 
 @end

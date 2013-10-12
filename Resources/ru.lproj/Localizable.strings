@@ -55,14 +55,14 @@
 /* Title of the login login section */
 "AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "ВОЙТИ С ПОМОЩЬЮ EMAIL";
 
-/* Title for the Friends button on the home view button bar */
-"AWF_HOME_BUTTON_BAR_FRIENDS_TITLE" = "Друзья";
+/* Title for the Friends search scope */
+"AWF_SEARCH_SCOPE_FRIENDS_TITLE" = "Друзья";
 
-/* Title for the Nearby button on the home view button bar */
-"AWF_HOME_BUTTON_BAR_NEARBY_TITLE" = "Рядом";
+/* Title for the Nearby search scope */
+"AWF_SEARCH_SCOPE_NEARBY_TITLE" = "Рядом";
 
-/* Title for the Searches button on the home view button bar */
-"AWF_HOME_BUTTON_BAR_SEARCHES_TITLE" = "Поиск";
+/* Title for the Searches search scope */
+"AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Поиск";
 
 /* Title of the follow button of the profile view */
 "AWF_PROFILE_FOLLOW_BUTTON_TITLE" = "В друзья";

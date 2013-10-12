@@ -14,11 +14,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+  [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
   [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
   AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
   UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:login];
-  navigation.view.backgroundColor = [UIColor blackColor];
+//  navigation.view.backgroundColor = [UIColor blackColor];
   navigation.navigationBarHidden = NO;
   navigation.navigationBar.barStyle = UIBarStyleBlack;
   navigation.navigationBar.translucent = NO;
