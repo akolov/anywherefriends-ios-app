@@ -24,6 +24,8 @@
 		FA11ACD717B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */; };
 		FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */; };
 		FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */; };
+		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
+		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
 		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
 		FADBF66117ADB68E00325DD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF66017ADB68E00325DD1 /* UIKit.framework */; };
@@ -136,6 +138,10 @@
 		FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFSignupViewController.m; sourceTree = "<group>"; };
 		FA1EEC6617B2824B00668A40 /* UIBezierPath+VKontakteGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+VKontakteGlyph.h"; sourceTree = "<group>"; };
 		FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+VKontakteGlyph.m"; sourceTree = "<group>"; };
+		FA3092F418098A3D001F25F2 /* AWFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationController.h; sourceTree = "<group>"; };
+		FA3092F518098A3D001F25F2 /* AWFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationController.m; sourceTree = "<group>"; };
+		FA3092F718098A64001F25F2 /* AWFNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationBar.h; sourceTree = "<group>"; };
+		FA3092F818098A64001F25F2 /* AWFNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationBar.m; sourceTree = "<group>"; };
 		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADBF65C17ADB68E00325DD1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -292,6 +298,17 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		FA3092F318098A1F001F25F2 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				FA3092F718098A64001F25F2 /* AWFNavigationBar.h */,
+				FA3092F818098A64001F25F2 /* AWFNavigationBar.m */,
+				FA3092F418098A3D001F25F2 /* AWFNavigationController.h */,
+				FA3092F518098A3D001F25F2 /* AWFNavigationController.m */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		FADBF65017ADB68E00325DD1 = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +352,7 @@
 				FA11ACB117B1385E00028A55 /* Glyphs */,
 				FADBF68B17ADB73500325DD1 /* Login */,
 				FADE215517BCD30800D3A62B /* Map Search */,
+				FA3092F318098A1F001F25F2 /* Navigation */,
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
@@ -706,6 +724,7 @@
 				FA11ACCB17B1389400028A55 /* AWFIconButton.m in Sources */,
 				FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */,
 				FA11ACA817B11C8D00028A55 /* UITableViewCell+ReuseIdentifier.m in Sources */,
+				FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
 				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
@@ -727,6 +746,7 @@
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,
 				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
+				FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

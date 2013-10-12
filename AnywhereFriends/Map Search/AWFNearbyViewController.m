@@ -15,18 +15,23 @@
 
 #import "AWFIconButton.h"
 #import "AWFLabelButton.h"
+#import "AWFNavigationBar.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFPersonCollectionViewCell.h"
 #import "AWFProfileViewController.h"
 
 
-static CGFloat const kHeaderHeight = 164.0f;
+static CGFloat const kHeaderHeight = 224.0f;
 static CGFloat const kButtonBarHeight = 44.0f;
 
 
 @interface AWFNearbyViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) NSArray *temporaryData;
+
+- (void)showSegmentedControl;
+- (void)hideSegmentedControl;
 
 @end
 
@@ -36,6 +41,7 @@ static CGFloat const kButtonBarHeight = 44.0f;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.title = NSLocalizedString(@"AWF_PEOPLE_VIEW_CONTROLLER_TITLE", nil);
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
 
   UIBezierPath *menuIcon = [UIBezierPath menuGlyph];
@@ -62,21 +68,22 @@ static CGFloat const kButtonBarHeight = 44.0f;
   self.view.backgroundColor = [UIColor blackColor];
 
   // Set up collection view
+  {
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(106.0f, 106.0f);
+    layout.minimumInteritemSpacing = 1.0f;
+    layout.minimumLineSpacing = 1.0f;
 
-  UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-  layout.itemSize = CGSizeMake(106.0f, 106.0f);
-  layout.minimumInteritemSpacing = 1.0f;
-  layout.minimumLineSpacing = 1.0f;
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.opaque = NO;
 
-  self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-  self.collectionView.backgroundColor = nil;
-  self.collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight + kButtonBarHeight, 0, 0, 0);
-  self.collectionView.dataSource = self;
-  self.collectionView.delegate = self;
-  self.collectionView.opaque = NO;
-  [self.collectionView registerClass:[AWFPersonCollectionViewCell class]
-          forCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier]];
-  [self.view addSubview:self.collectionView];
+    [self.collectionView registerClass:[AWFPersonCollectionViewCell class]
+            forCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier]];
+    [self.view addSubview:self.collectionView];
+  }
 
   // Set up map view
 
@@ -88,21 +95,6 @@ static CGFloat const kButtonBarHeight = 44.0f;
 
   [self.view insertSubview:mapView atIndex:0];
   self.mapView = mapView;
-
-  // Set up search and scope bar
-
-  UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
-  searchBar.barTintColor = [UIColor blackColor];
-  searchBar.tintColor = [UIColor whiteColor];
-  searchBar.showsCancelButton = YES;
-  searchBar.showsScopeBar = YES;
-  searchBar.scopeButtonTitles = @[NSLocalizedString(@"AWF_SEARCH_SCOPE_NEARBY_TITLE", @"Title for the Nearby search scope"),
-                                  NSLocalizedString(@"AWF_SEARCH_SCOPE_FRIENDS_TITLE", @"Title for the Friends search scope"),
-                                  NSLocalizedString(@"AWF_SEARCH_SCOPE_SEARCHES_TITLE", @"Title for the Searches search scope")];
-  [searchBar sizeToFit];
-  [searchBar setFrameOriginY:-kHeaderHeight - searchBar.frame.size.height / 2.0f - 0.5f];
-
-  [self.collectionView addSubview:searchBar];
 
   // Set up layout
 
@@ -120,12 +112,6 @@ static CGFloat const kButtonBarHeight = 44.0f;
                                            map:^id(id value) {
                                              return @(-[value CGPointValue].y);
                                            }];
-  RAC(searchBar, frame) = [RACAble(self.collectionView.contentOffset)
-                           map:^id(id value) {
-                             CGRect frame = searchBar.frame;
-                             frame.origin.y = self.collectionView.contentOffset.y - 0.5f;
-                             return [NSValue valueWithCGRect:frame];
-                           }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -136,7 +122,21 @@ static CGFloat const kButtonBarHeight = 44.0f;
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
-  [self.collectionView setContentOffset:CGPointMake(0, -self.collectionView.contentInset.top + 44.0f)];
+  [self showSegmentedControl];
+
+  CGFloat bottomInset = self.tabBarController.tabBar.bounds.size.height;
+  CGFloat topIndicatorInset = [(AWFNavigationBar *)self.navigationController.navigationBar backgroundView].bounds.size.height;
+  self.collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight + kButtonBarHeight, 0, bottomInset, 0);
+  self.collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(topIndicatorInset, 0, bottomInset, 0);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [self hideSegmentedControl];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UICollectionView data source
@@ -163,6 +163,36 @@ static CGFloat const kButtonBarHeight = 44.0f;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   AWFProfileViewController *vc = [[AWFProfileViewController alloc] init];
   [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - Segmented control
+
+- (void)showSegmentedControl {
+  AWFNavigationBar *navigationBar = (AWFNavigationBar *)self.navigationController.navigationBar;
+  navigationBar.extended = YES;
+
+  NSArray *segments = @[NSLocalizedString(@"AWF_SEARCH_SCOPE_NEARBY_TITLE", @"Title for the Nearby search scope"),
+                        NSLocalizedString(@"AWF_SEARCH_SCOPE_FRIENDS_TITLE", @"Title for the Friends search scope"),
+                        NSLocalizedString(@"AWF_SEARCH_SCOPE_SEARCHES_TITLE", @"Title for the Searches search scope")];
+  UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segments];
+
+  CGRect frame = segmentedControl.frame;
+  frame.origin.x = 8.0f;
+  frame.origin.y += navigationBar.bounds.size.height;
+  frame.size.width = navigationBar.bounds.size.width - 16.0f;
+  frame.size.height = 27.0f;
+
+  segmentedControl.frame = frame;
+  segmentedControl.selectedSegmentIndex = 0;
+
+  [self.navigationController.navigationBar addSubview:segmentedControl];
+  self.segmentedControl = segmentedControl;
+}
+
+- (void)hideSegmentedControl {
+  AWFNavigationBar *navigationBar = (AWFNavigationBar *)self.navigationController.navigationBar;
+  navigationBar.extended = NO;
+  [self.segmentedControl removeFromSuperview];
 }
 
 #pragma mark - Private methods

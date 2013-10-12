@@ -49,6 +49,10 @@
   // Dispose of any resources that can be recreated.
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - UITableView data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -226,8 +230,7 @@
 }
 
 - (void)onLoginButtonTouchUpInside:(id)sender {
-  AWFNearbyViewController *vc = [[AWFNearbyViewController alloc] init];
-  [self.navigationController setViewControllers:@[vc] animated:YES];
+  [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)onSignupButtonTouchUpInside:(id)sender {

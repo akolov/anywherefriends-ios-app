@@ -82,3 +82,6 @@
 /* Basic info section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_BASIC_INFO" = "Basic Info";
 
+/* Title of the People view controller */
+"AWF_PEOPLE_VIEW_CONTROLLER_TITLE" = "People";
+

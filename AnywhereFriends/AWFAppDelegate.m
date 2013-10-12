@@ -8,6 +8,8 @@
 
 #import "AWFAppDelegate.h"
 #import "AWFLoginViewController.h"
+#import "AWFNearbyViewController.h"
+#import "AWFNavigationController.h"
 
 
 @implementation AWFAppDelegate
@@ -16,18 +18,23 @@
 
   [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
   [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+  [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
+  [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
 
   AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
-  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:login];
-//  navigation.view.backgroundColor = [UIColor blackColor];
-  navigation.navigationBarHidden = NO;
-  navigation.navigationBar.barStyle = UIBarStyleBlack;
-  navigation.navigationBar.translucent = NO;
+  AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
+
+  AWFNearbyViewController *nearby = [[AWFNearbyViewController alloc] init];
+  AWFNavigationController *nearbyNavigation = [[AWFNavigationController alloc] initWithRootViewController:nearby];
+  UITabBarController *tabs = [[UITabBarController alloc] init];
+  tabs.viewControllers = @[nearbyNavigation];
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
-  self.window.rootViewController = navigation;
+  self.window.rootViewController = tabs;
+
   [self.window makeKeyAndVisible];
+  [tabs presentViewController:loginNavigation animated:NO completion:NULL];
 
   return YES;
 }
