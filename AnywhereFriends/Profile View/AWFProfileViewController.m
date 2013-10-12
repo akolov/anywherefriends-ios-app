@@ -34,7 +34,7 @@
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   [self.tableView registerClass:[AWFProfileTableViewCell class] forCellReuseIdentifier:[AWFProfileTableViewCell reuseIdentifier]];
 
-  AWFProfileHeaderView *headerView = [[AWFProfileHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0)];
+  AWFProfileHeaderView *headerView = [[AWFProfileHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 360.0f)];
   headerView.nameLabel.text = @"Jasmin Fatschild";
   headerView.descriptionLabel.text = @"Hi, I’m Jasmin. Follow me while discovering the huge world of fashion. I take you on my travels, events and share my thoughts and experiences with you.";
   headerView.photoCollectionView.dataSource = self;
@@ -51,8 +51,6 @@
                                          NSForegroundColorAttributeName: [UIColor grayColor]}};
   NSString *markup = @"Alexanderplatz, Berlin\n<em>2 km from you</em>";
   headerView.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
-
-  [headerView sizeToFit];
 
   self.tableView.tableHeaderView = headerView;
 }

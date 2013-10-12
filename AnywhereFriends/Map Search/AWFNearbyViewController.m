@@ -133,7 +133,7 @@ static CGFloat const kButtonBarHeight = 44.0f;
 - (void)viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
   [self hideSegmentedControl];
-}
+} 
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;

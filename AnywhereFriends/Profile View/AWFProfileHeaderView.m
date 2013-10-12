@@ -35,9 +35,9 @@
     // Set up photo collection
 
     UICollectionViewFlowLayout *collectionLayout = [[UICollectionViewFlowLayout alloc] init];
-    collectionLayout.itemSize = CGSizeMake(155.0f, 155.0f);
+    collectionLayout.itemSize = CGSizeMake(159.0f, 159.0f);
     collectionLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    collectionLayout.minimumLineSpacing = 10.0f;
+    collectionLayout.minimumLineSpacing = 2.0f;
 
     UICollectionView *photoCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:collectionLayout];
     photoCollectionView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -109,21 +109,11 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[photoCollectionView]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[followButton]-[messageButton(==followButton)]-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20.0-[locationLabel][locationButton(6.0)]-20.0-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0.5-[photoCollectionView(155.0)]-16.0-[nameLabel]-16.0-[descriptionLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[photoCollectionView(159.0)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[photoCollectionView]-(16.0@900)-[nameLabel]-16.0-[descriptionLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[descriptionLabel]-16.0-[locationLabel]-20.0-[followButton(26.0)]|" options:0 metrics:nil views:views]];
   }
   return self;
-}
-
-#pragma mark - Public methods
-
-- (CGSize)sizeThatFits:(CGSize)size {
-  CGFloat width = size.width;
-  CGFloat nameHeight = [self.nameLabel sizeThatFits:CGSizeMake(width - 40.0f, 0)].height;
-  CGFloat descriptionHeight = [self.descriptionLabel sizeThatFits:CGSizeMake(width - 40.0f, 0)].height;
-  CGFloat locationHeight = [self.locationLabel sizeThatFits:CGSizeMake(width - 40.0f, 0)].height;
-  CGFloat height = 0.5f + 155.0f + 16.0f + nameHeight + 16.0f + descriptionHeight + 16.0f + locationHeight + 20.0f + 26.0f;
-  return CGSizeMake(width, height);
 }
 
 @end
