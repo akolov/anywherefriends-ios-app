@@ -1,7 +1,7 @@
 platform :ios, '7.0'
 
-pod 'Facebook-iOS-SDK', '~> 3.6.0'
-pod 'ReactiveCocoa', '~> 1.9.6'
+pod 'Facebook-iOS-SDK', '~> 3.8.0'
+pod 'ReactiveCocoa', '~> 2.1.1'
 pod 'SDNetworkActivityIndicator', :head
 pod 'SDWebImage', :head
 pod 'Slash', :head
