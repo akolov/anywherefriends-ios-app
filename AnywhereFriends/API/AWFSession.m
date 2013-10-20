@@ -79,7 +79,7 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
     [parameters setValue:firstname forKey:AWFURLParameterFirstName];
     [parameters setValue:lastname forKey:AWFURLParameterLastName];
     [parameters setValue:gender forKey:AWFURLParameterGender];
-    [parameters setValue:@"bla" forKey:@"interests"];
+    [parameters setValue:@"bla" forKey:@"interests"]; // TODO: Remove this
     [parameters setValue:facebookToken forKey:AWFURLParameterFacebookToken];
     [parameters setValue:twitterToken forKey:AWFURLParameterTwitterToken];
     [parameters setValue:vkToken forKey:AWFURLParameterVKToken];
