@@ -4,26 +4,14 @@
   Created by Alexander Kolov on 8/4/13.
   Copyright (c) 2013 Anywherefriends. All rights reserved. */
 
-/* Title of the email form field on the login screen */
-"AWF_LOGIN_FORM_EMAIL_TITLE" = "Email";
-
-/* Title of the password form field on the login screen */
-"AWF_LOGIN_FORM_PASSWORD_TITLE" = "Password";
-
 /* Title of the connect with login section */
 "AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE" = "CONNECT WITH";
-
-/* Title of the login button */
-"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Login";
-
-/* Title of the sign up button on the login form */
-"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE" = "Don't have an account? <strong>Sign Up!</strong>";
 
 /* Placeholder text of the email form field on the login screen */
 "AWF_LOGIN_FORM_EMAIL_PLACEHOLDER" = "Enter your email";
 
-/* Placeholder text of the password form field on the login screen */
-"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER" = "Enter your password";
+/* Title of the email form field on the login screen */
+"AWF_LOGIN_FORM_EMAIL_TITLE" = "Email";
 
 /* Placeholder text of the first field form field on the login screen */
 "AWF_LOGIN_FORM_FIRST_NAME_PLACEHOLDER" = "Enter your first name";
@@ -31,11 +19,29 @@
 /* Title of the first field form field on the login screen */
 "AWF_LOGIN_FORM_FIRST_NAME_TITLE" = "First name";
 
+/* Title of the forgot password button on the login form */
+"AWF_LOGIN_FORM_FORGOT_PASSWORD_TITLE" = "Forgot your password?";
+
+/* Value of the female form field */
+"AWF_LOGIN_FORM_GENDER_FEMALE" = "Female";
+
+/* Value of the male form field */
+"AWF_LOGIN_FORM_GENDER_MALE" = "Male";
+
+/* Title of the gender form field */
+"AWF_LOGIN_FORM_GENDER_TITLE" = "Gender";
+
 /* Placeholder text of the last name form field on the login screen */
 "AWF_LOGIN_FORM_LAST_NAME_PLACEHOLDER" = "Enter your last name";
 
 /* Title of the last name form field on the login screen */
 "AWF_LOGIN_FORM_LAST_NAME_TITLE" = "Last name";
+
+/* Title of the login button */
+"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Login";
+
+/* Title of the login login section */
+"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "LOGIN WITH EMAIL";
 
 /* Placeholder text of the password confirmation form field on the login screen */
 "AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_PLACEHOLDER" = "Verify your password";
@@ -43,32 +49,29 @@
 /* Title of the password confirmation form field on the login screen */
 "AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_TITLE" = "Password";
 
-/* Title of the sign up form */
-"AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Please sign up";
+/* Placeholder text of the password form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER" = "Enter your password";
+
+/* Title of the password form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_TITLE" = "Password";
 
 /* Title of the signup button */
 "AWF_LOGIN_FORM_SIGNUP_BUTTON_TITLE" = "Create your account";
 
-/* Title of the forgot password button on the login form */
-"AWF_LOGIN_FORM_FORGOT_PASSWORD_TITLE" = "Forgot your password?";
+/* Title of the sign up button on the login form */
+"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE" = "Don't have an account? <strong>Sign Up!</strong>";
 
-/* Title of the login login section */
-"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "LOGIN WITH EMAIL";
+/* Title of the sign up form */
+"AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Please sign up";
 
-/* Title for the Friends search scope */
-"AWF_SEARCH_SCOPE_FRIENDS_TITLE" = "Friends";
-
-/* Title for the Nearby search scope */
-"AWF_SEARCH_SCOPE_NEARBY_TITLE" = "Near me";
-
-/* Title for the Searches search scope */
-"AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Discover";
-
-/* Title of the follow button of the profile view */
-"AWF_PROFILE_FOLLOW_BUTTON_TITLE" = "Follow";
+/* Title of the People view controller */
+"AWF_PEOPLE_VIEW_CONTROLLER_TITLE" = "People";
 
 /* Title of the following button of the profile view */
 "AWF_PROFILE_FOLLOWING_BUTTON_TITLE" = "Following";
+
+/* Title of the follow button of the profile view */
+"AWF_PROFILE_FOLLOW_BUTTON_TITLE" = "Follow";
 
 /* Title of the offline button of the profile view */
 "AWF_PROFILE_OFFLINE_BUTTON_TITLE" = "Offline";
@@ -82,6 +85,12 @@
 /* Basic info section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_BASIC_INFO" = "Basic Info";
 
-/* Title of the People view controller */
-"AWF_PEOPLE_VIEW_CONTROLLER_TITLE" = "People";
+/* Title for the Friends search scope */
+"AWF_SEARCH_SCOPE_FRIENDS_TITLE" = "Friends";
+
+/* Title for the Nearby search scope */
+"AWF_SEARCH_SCOPE_NEARBY_TITLE" = "Near me";
+
+/* Title for the Searches search scope */
+"AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Discover";
 

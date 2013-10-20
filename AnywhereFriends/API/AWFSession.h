@@ -13,12 +13,13 @@
 
 @interface AWFSession : NSObject
 
++ (instancetype)sharedSession;
+
 - (RACSignal *)createUserWithEmail:(NSString *)email
                           password:(NSString *)password
                          firstName:(NSString *)firstname
                           lastName:(NSString *)lastname
-                            gender:(NSUInteger)gender
-                         interests:(NSArray *)interests
+                            gender:(NSString *)gender
                      facebookToken:(NSString *)facebookToken
                       twitterToken:(NSString *)twitterToken
                            vkToken:(NSString *)vkToken;

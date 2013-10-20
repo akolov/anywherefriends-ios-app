@@ -26,6 +26,7 @@
 		FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */; };
 		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
+		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB866E4180AAB60005FF64B /* AWFSession.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
 		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
@@ -143,6 +144,8 @@
 		FA3092F518098A3D001F25F2 /* AWFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationController.m; sourceTree = "<group>"; };
 		FA3092F718098A64001F25F2 /* AWFNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationBar.h; sourceTree = "<group>"; };
 		FA3092F818098A64001F25F2 /* AWFNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationBar.m; sourceTree = "<group>"; };
+		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
+		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
 		FAB866E3180AAB60005FF64B /* AWFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFSession.h; sourceTree = "<group>"; };
 		FAB866E4180AAB60005FF64B /* AWFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFSession.m; sourceTree = "<group>"; };
 		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,6 +419,8 @@
 				FADBF68D17ADB74400325DD1 /* AWFLoginViewController.m */,
 				FA1EEC6317B266A500668A40 /* AWFSignupViewController.h */,
 				FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */,
+				FA7667011814242D0093A4CA /* AWFGenderPicker.h */,
+				FA7667021814242D0093A4CA /* AWFGenderPicker.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -749,6 +754,7 @@
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
 				FAE475E417C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m in Sources */,
 				FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
+				FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */,
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,

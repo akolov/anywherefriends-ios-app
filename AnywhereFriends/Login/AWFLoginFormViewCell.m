@@ -11,8 +11,6 @@
 
 @interface AWFLoginFormViewCell ()
 
-@property (nonatomic, strong) UITextField *textField;
-
 @end
 
 
@@ -23,9 +21,7 @@
   if (self) {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(100.0f, 11.0f, CGRectGetWidth(self.bounds) - 100.0f - 20.0f, 22.0f)];
-    self.textField.font = [UIFont helveticaNeueCondensedLightFontOfSize:16.0f];
-    [self.contentView addSubview:self.textField];
+//    self.textField.font = [UIFont helveticaNeueCondensedLightFontOfSize:16.0f];
 
     self.textLabel.font = [UIFont helveticaNeueCondensedMediumFontOfSize:16.0f];
   }
@@ -35,6 +31,21 @@
 - (void)layoutSubviews {
   [super layoutSubviews];
   [self.textLabel setFrameWidth:70.0f];
+}
+
+- (void)prepareForReuse {
+  [super prepareForReuse];
+  [self.field removeFromSuperview];
+}
+
+- (void)setField:(UIView *)field {
+  if (_field == field) {
+    return;
+  }
+
+  _field = field;
+
+  [self addSubview:field];
 }
 
 @end

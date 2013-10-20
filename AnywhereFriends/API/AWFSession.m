@@ -11,18 +11,17 @@
 #import <libextobjc/EXTScope.h>
 
 
-static NSString *AWFAPIBaseURL = @"https://awf.awf";
+static NSString *AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
 
-static NSString *AWFAPIPathUser = @"user";
-static NSString *AWFAPIPathLogin = @"login";
-static NSString *AWFAPIPathLogout = @"logout";
+static NSString *AWFAPIPathUser = @"user/";
+static NSString *AWFAPIPathLogin = @"login/";
+static NSString *AWFAPIPathLogout = @"logout/";
 
 static NSString *AWFURLParameterEmail = @"email";
 static NSString *AWFURLParameterPassword = @"password";
-static NSString *AWFURLParameterFirstName = @"firstname";
-static NSString *AWFURLParameterLastName = @"lastname";
+static NSString *AWFURLParameterFirstName = @"first_name";
+static NSString *AWFURLParameterLastName = @"last_name";
 static NSString *AWFURLParameterGender = @"gender";
-static NSString *AWFURLParameterInterests = @"interests";
 static NSString *AWFURLParameterFacebookToken = @"facebook_token";
 static NSString *AWFURLParameterTwitterToken = @"twitter_token";
 static NSString *AWFURLParameterVKToken = @"vk_token";
@@ -38,6 +37,15 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
 @implementation AWFSession
 
 #pragma mark - Properties
+
++ (instancetype)sharedSession {
+  static AWFSession *session;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    session = [[AWFSession alloc] init];
+  });
+  return session;
+}
 
 + (NSURL *)baseURL {
   return [NSURL URLWithString:AWFAPIBaseURL];
@@ -56,8 +64,7 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                           password:(NSString *)password
                          firstName:(NSString *)firstname
                           lastName:(NSString *)lastname
-                            gender:(NSUInteger)gender
-                         interests:(NSArray *)interests
+                            gender:(NSString *)gender
                      facebookToken:(NSString *)facebookToken
                       twitterToken:(NSString *)twitterToken
                            vkToken:(NSString *)vkToken {
@@ -71,8 +78,8 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
     [parameters setValue:password forKey:AWFURLParameterPassword];
     [parameters setValue:firstname forKey:AWFURLParameterFirstName];
     [parameters setValue:lastname forKey:AWFURLParameterLastName];
-    [parameters setValue:@(gender) forKey:AWFURLParameterGender];
-    [parameters setValue:interests forKey:AWFURLParameterInterests];
+    [parameters setValue:gender forKey:AWFURLParameterGender];
+    [parameters setValue:@"bla" forKey:@"interests"];
     [parameters setValue:facebookToken forKey:AWFURLParameterFacebookToken];
     [parameters setValue:twitterToken forKey:AWFURLParameterTwitterToken];
     [parameters setValue:vkToken forKey:AWFURLParameterVKToken];

@@ -4,26 +4,14 @@
   Created by Alexander Kolov on 8/4/13.
   Copyright (c) 2013 Anywherefriends. All rights reserved. */
 
-/* Title of the email form field on the login screen */
-"AWF_LOGIN_FORM_EMAIL_TITLE" = "Email";
-
-/* Title of the password form field on the login screen */
-"AWF_LOGIN_FORM_PASSWORD_TITLE" = "Пароль";
-
 /* Title of the connect with login section */
 "AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE" = "ВОЙТИ ЧЕРЕЗ";
-
-/* Title of the login button */
-"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Войти";
-
-/* Title of the sign up button on the login form */
-"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE" = "Нет аккаунта? <strong>Зарегистрируйтесь!</strong>";
 
 /* Placeholder text of the email form field on the login screen */
 "AWF_LOGIN_FORM_EMAIL_PLACEHOLDER" = "Введите ваш email";
 
-/* Placeholder text of the password form field on the login screen */
-"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER" = "Введите ваш пароль";
+/* Title of the email form field on the login screen */
+"AWF_LOGIN_FORM_EMAIL_TITLE" = "Email";
 
 /* Placeholder text of the first field form field on the login screen */
 "AWF_LOGIN_FORM_FIRST_NAME_PLACEHOLDER" = "Введите ваше имя";
@@ -31,11 +19,29 @@
 /* Title of the first field form field on the login screen */
 "AWF_LOGIN_FORM_FIRST_NAME_TITLE" = "Имя";
 
+/* Title of the forgot password button on the login form */
+"AWF_LOGIN_FORM_FORGOT_PASSWORD_TITLE" = "Забыли пароль?";
+
+/* Value of the female form field */
+"AWF_LOGIN_FORM_GENDER_FEMALE" = "Мужской";
+
+/* Value of the male form field */
+"AWF_LOGIN_FORM_GENDER_MALE" = "Женский";
+
+/* Title of the gender form field */
+"AWF_LOGIN_FORM_GENDER_TITLE" = "Пол";
+
 /* Placeholder text of the last name form field on the login screen */
 "AWF_LOGIN_FORM_LAST_NAME_PLACEHOLDER" = "Введите вашу фамилию";
 
 /* Title of the last name form field on the login screen */
 "AWF_LOGIN_FORM_LAST_NAME_TITLE" = "Фамилия";
+
+/* Title of the login button */
+"AWF_LOGIN_FORM_LOGIN_BUTTON_TITLE" = "Войти";
+
+/* Title of the login login section */
+"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "ВОЙТИ С ПОМОЩЬЮ EMAIL";
 
 /* Placeholder text of the password confirmation form field on the login screen */
 "AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_PLACEHOLDER" = "Подтвердите ваш пароль";
@@ -43,32 +49,29 @@
 /* Title of the password confirmation form field on the login screen */
 "AWF_LOGIN_FORM_PASSWORD_CONFIRMATION_TITLE" = "Пароль";
 
-/* Title of the sign up form */
-"AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Регистрация";
+/* Placeholder text of the password form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER" = "Введите ваш пароль";
+
+/* Title of the password form field on the login screen */
+"AWF_LOGIN_FORM_PASSWORD_TITLE" = "Пароль";
 
 /* Title of the signup button */
 "AWF_LOGIN_FORM_SIGNUP_BUTTON_TITLE" = "Создать аккаунт";
 
-/* Title of the forgot password button on the login form */
-"AWF_LOGIN_FORM_FORGOT_PASSWORD_TITLE" = "Забыли пароль?";
+/* Title of the sign up button on the login form */
+"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE" = "Нет аккаунта? <strong>Зарегистрируйтесь!</strong>";
 
-/* Title of the login login section */
-"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE" = "ВОЙТИ С ПОМОЩЬЮ EMAIL";
+/* Title of the sign up form */
+"AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Регистрация";
 
-/* Title for the Friends search scope */
-"AWF_SEARCH_SCOPE_FRIENDS_TITLE" = "Друзья";
-
-/* Title for the Nearby search scope */
-"AWF_SEARCH_SCOPE_NEARBY_TITLE" = "Рядом";
-
-/* Title for the Searches search scope */
-"AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Поиск";
-
-/* Title of the follow button of the profile view */
-"AWF_PROFILE_FOLLOW_BUTTON_TITLE" = "В друзья";
+/* Title of the People view controller */
+"AWF_PEOPLE_VIEW_CONTROLLER_TITLE" = "Люди";
 
 /* Title of the following button of the profile view */
 "AWF_PROFILE_FOLLOWING_BUTTON_TITLE" = "Друзья";
+
+/* Title of the follow button of the profile view */
+"AWF_PROFILE_FOLLOW_BUTTON_TITLE" = "В друзья";
 
 /* Title of the offline button of the profile view */
 "AWF_PROFILE_OFFLINE_BUTTON_TITLE" = "Не в сети";
@@ -82,6 +85,12 @@
 /* Basic info section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_BASIC_INFO" = "Основное";
 
-/* Title of the People view controller */
-"AWF_PEOPLE_VIEW_CONTROLLER_TITLE" = "Люди";
+/* Title for the Friends search scope */
+"AWF_SEARCH_SCOPE_FRIENDS_TITLE" = "Друзья";
+
+/* Title for the Nearby search scope */
+"AWF_SEARCH_SCOPE_NEARBY_TITLE" = "Рядом";
+
+/* Title for the Searches search scope */
+"AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Поиск";
 

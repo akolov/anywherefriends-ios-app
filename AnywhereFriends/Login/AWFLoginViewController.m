@@ -13,6 +13,8 @@
 
 #import "UIImage+CustomBackgrounds.h"
 
+#import "AWFSession.h"
+
 #import "AWFLoginConnectViewCell.h"
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
@@ -22,9 +24,15 @@
 
 @interface AWFLoginViewController ()
 
+@property (nonatomic, strong) NSArray *fields;
+
 - (void)onForgotPasswordButtonTouchUpInside:(id)sender;
 - (void)onLoginButtonTouchUpInside:(id)sender;
 - (void)onSignupButtonTouchUpInside:(id)sender;
+
+- (UITextField *)newFormTextField;
+- (NSString *)email;
+- (NSString *)password;
 
 @end
 
@@ -40,8 +48,10 @@
   self.tableView.showsVerticalScrollIndicator = NO;
   self.view.backgroundColor = [UIColor awfDefaultBackgroundColor];
 
-  [self.tableView registerClass:[AWFLoginConnectViewCell class] forCellReuseIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
-  [self.tableView registerClass:[AWFLoginFormViewCell class] forCellReuseIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
+  [self.tableView registerClass:[AWFLoginConnectViewCell class]
+         forCellReuseIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
+  [self.tableView registerClass:[AWFLoginFormViewCell class]
+         forCellReuseIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,15 +82,19 @@
   UITableViewCell *cell;
 
   if (indexPath.section == 0) {
-    AWFLoginFormViewCell *fieldCell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier] forIndexPath:indexPath];
+    AWFLoginFormViewCell *fieldCell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier]
+                                                                      forIndexPath:indexPath];
+
+    UIView *view = self.fields[indexPath.row];
+    fieldCell.field = view;
 
     if (indexPath.row == 0) {
-      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_TITLE", @"Title of the email form field on the login screen");
-      fieldCell.textField.placeholder = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_PLACEHOLDER", @"Placeholder text of the email form field on the login screen");
+      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_TITLE", nil);
+      [(UITextField *)view setPlaceholder:NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_PLACEHOLDER", nil)];
     }
     else if (indexPath.row == 1) {
-      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_TITLE", @"Title of the password form field on the login screen");
-      fieldCell.textField.placeholder = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER", @"Placeholder text of the password form field on the login screen");
+      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_TITLE", nil);
+      [(UITextField *)view setPlaceholder:NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER", nil)];
     }
 
     cell = fieldCell;
@@ -223,6 +237,42 @@
   return view;
 }
 
+#pragma mark - Form Fields
+
+- (UITextField *)newFormTextField {
+  CGRect frame = CGRectMake(100.0f, 12.0f, CGRectGetWidth(self.tableView.bounds) - 100.0f - 20.0f, 22.0f);
+  UITextField *textField = [[UITextField alloc] initWithFrame:frame];
+  textField.font = [UIFont helveticaNeueCondensedLightFontOfSize:16.0f];
+  return textField;
+}
+
+- (NSArray *)fields {
+  if (!_fields) {
+    NSMutableArray *fields = [NSMutableArray array];
+
+    UITextField *email = [self newFormTextField];
+    email.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    email.keyboardType = UIKeyboardTypeEmailAddress;
+    [fields addObject:email];
+
+    UITextField *password = [self newFormTextField];
+    password.secureTextEntry = YES;
+    [fields addObject:password];
+
+    _fields = fields;
+  }
+
+  return _fields;
+}
+
+- (NSString *)email {
+  return [self.fields[0] text];
+}
+
+- (NSString *)password {
+  return [self.fields[1] text];
+}
+
 #pragma mark - Actions
 
 - (void)onForgotPasswordButtonTouchUpInside:(id)sender {
@@ -230,7 +280,17 @@
 }
 
 - (void)onLoginButtonTouchUpInside:(id)sender {
-  [self dismissViewControllerAnimated:YES completion:NULL];
+  [[[AWFSession sharedSession] openSessionWithEmail:self.email
+                                           password:self.password
+                                      facebookToken:nil
+                                       twitterToken:nil
+                                            vkToken:nil]
+   subscribeError:^(NSError *error) {
+     // TODO: Error
+   }
+   completed:^{
+     [self dismissViewControllerAnimated:YES completion:NULL];
+   }];
 }
 
 - (void)onSignupButtonTouchUpInside:(id)sender {
