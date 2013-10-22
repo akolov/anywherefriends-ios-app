@@ -26,8 +26,15 @@
 
   AWFNearbyViewController *nearby = [[AWFNearbyViewController alloc] init];
   AWFNavigationController *nearbyNavigation = [[AWFNavigationController alloc] initWithRootViewController:nearby];
+
+  UIViewController *friends = [[UIViewController alloc] init];
+  friends.title = @"Friends";
+
+  UIViewController *messages = [[UIViewController alloc] init];
+  messages.title = @"Messages";
+
   UITabBarController *tabs = [[UITabBarController alloc] init];
-  tabs.viewControllers = @[nearbyNavigation];
+  tabs.viewControllers = @[nearbyNavigation, friends, messages];
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
