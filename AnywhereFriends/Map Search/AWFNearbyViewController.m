@@ -20,7 +20,7 @@
 #import "AWFLocationManager.h"
 #import "AWFNavigationBar.h"
 #import "AWFNavigationTitleView.h"
-#import "AWFPersonCollectionViewCell.h"
+#import "AWFNearbyViewCell.h"
 #import "AWFProfileViewController.h"
 #import "AWFSession.h"
 
@@ -28,7 +28,7 @@
 static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 
 
-@interface AWFNearbyViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface AWFNearbyViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) NSArray *users;
@@ -79,15 +79,14 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
     layout.minimumInteritemSpacing = 1.0f;
     layout.minimumLineSpacing = 1.0f;
 
-    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    self.collectionView.backgroundColor = [UIColor clearColor];
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    self.collectionView.opaque = NO;
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.opaque = NO;
 
-    [self.collectionView registerClass:[AWFPersonCollectionViewCell class]
-            forCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier]];
-    [self.view addSubview:self.collectionView];
+    [self.tableView registerClass:[AWFNearbyViewCell class] forCellReuseIdentifier:[AWFNearbyViewCell reuseIdentifier]];
+    [self.view addSubview:self.tableView];
   }
 
   // Set up map view
@@ -124,8 +123,8 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 
   CGFloat insetTop = self.view.bounds.size.height - [self.bottomLayoutGuide length] - AWFCollectionItemSize.height * 1.5f;
   CGFloat bottomInset = [self.bottomLayoutGuide length];
-  self.collectionView.contentInset = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
-  self.collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
+  self.tableView.contentInset = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
+  self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
 
   [self lookupNearbyUsers];
 }
@@ -139,22 +138,25 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
   return UIStatusBarStyleLightContent;
 }
 
-#pragma mark - UICollectionView data source
+#pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.users.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  AWFPersonCollectionViewCell *cell = (AWFPersonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  AWFNearbyViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFNearbyViewCell reuseIdentifier]
+                                                            forIndexPath:indexPath];
 
+  NSString *distance = [self.users[indexPath.row][@"distance"] stringValue];
   NSString *firstName = self.users[indexPath.row][@"first_name"];
   NSString *lastName = self.users[indexPath.row][@"first_name"];
   NSString *name;
+
   if (firstName && lastName) {
     name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
   }
@@ -169,13 +171,15 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
   }
 
   cell.imageView.image = [UIImage imageNamed:[name stringByAppendingString:@".jpg"]];
-  cell.nameLabel.text = name;
+  cell.textLabel.text = name;
+  cell.detailTextLabel.text = distance;
+
   return cell;
 }
 
-#pragma mark - UICollectionView delegate methods
+#pragma mark - UITableViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFProfileViewController *vc = [[AWFProfileViewController alloc] init];
   [self.navigationController pushViewController:vc animated:YES];
 }
@@ -225,7 +229,7 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 
 - (void)setUsers:(NSArray *)users {
   _users = users;
-  [self.collectionView reloadData];
+  [self.tableView reloadData];
 }
 
 #pragma mark - Private methods

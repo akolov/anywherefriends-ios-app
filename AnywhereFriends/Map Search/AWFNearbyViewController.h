@@ -12,7 +12,7 @@
 
 @interface AWFNearbyViewController : UIViewController
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MKMapView *mapView;
 
 @end

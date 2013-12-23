@@ -1,6 +1,7 @@
 platform :ios, '7.0'
 
 pod 'AFNetworking', '~> 2.0.3'
+pod 'AXKCollectionViewTools', '~> 1.0'
 pod 'Facebook-iOS-SDK', '~> 3.10'
 pod 'libextobjc', '~> 0.3'
 pod 'ReactiveCocoa', '~> 2.1.8'
