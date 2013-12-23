@@ -43,7 +43,7 @@
   [super viewDidLoad];
 
   self.navigationController.navigationBarHidden = NO;
-  self.title = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_TITLE", @"Title of the sign up form");
+  self.title = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_TITLE", nil);
 
   self.tableView.showsHorizontalScrollIndicator = NO;
   self.tableView.showsVerticalScrollIndicator = NO;
@@ -57,6 +57,10 @@
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Table view data source
