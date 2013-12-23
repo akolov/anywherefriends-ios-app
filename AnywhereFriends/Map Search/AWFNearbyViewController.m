@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+@import CoreLocation;
+
 #import "AWFNearbyViewController.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -15,23 +17,26 @@
 
 #import "AWFIconButton.h"
 #import "AWFLabelButton.h"
+#import "AWFLocationManager.h"
 #import "AWFNavigationBar.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFPersonCollectionViewCell.h"
 #import "AWFProfileViewController.h"
+#import "AWFSession.h"
 
 
-static CGFloat const kHeaderHeight = 224.0f;
-static CGFloat const kButtonBarHeight = 44.0f;
+static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 
 
 @interface AWFNearbyViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
-@property (nonatomic, strong) NSArray *temporaryData;
+@property (nonatomic, strong) NSArray *users;
 
 - (void)showSegmentedControl;
 - (void)hideSegmentedControl;
+
+- (void)onNotification:(NSNotification *)notification;
 
 @end
 
@@ -70,7 +75,7 @@ static CGFloat const kButtonBarHeight = 44.0f;
   // Set up collection view
   {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(106.0f, 106.0f);
+    layout.itemSize = AWFCollectionItemSize;
     layout.minimumInteritemSpacing = 1.0f;
     layout.minimumLineSpacing = 1.0f;
 
@@ -87,9 +92,6 @@ static CGFloat const kButtonBarHeight = 44.0f;
 
   // Set up map view
 
-  CGRect mapFrame = self.view.bounds;
-  mapFrame.size.height = kHeaderHeight + self.navigationController.navigationBar.bounds.size.height;
-
   MKMapView *mapView = [MKMapView autolayoutView];
   mapView.showsUserLocation = YES;
 
@@ -100,18 +102,14 @@ static CGFloat const kButtonBarHeight = 44.0f;
 
   NSDictionary *const views = NSDictionaryOfVariableBindings(mapView);
   [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[mapView]|" options:0 metrics:nil views:views]];
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mapView]" options:0 metrics:nil views:views]];
+  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mapView]|" options:0 metrics:nil views:views]];
 
-  NSLayoutConstraint *headerHeightConstraint = [NSLayoutConstraint constraintWithItem:mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:kHeaderHeight];
-  [self.view addConstraint:headerHeightConstraint];
+  // Actions
 
-  RAC(headerHeightConstraint, constant) = [[RACAble(self.collectionView.contentOffset)
-                                            filter:^BOOL(id value) {
-                                              return [value CGPointValue].y <= 0;
-                                            }]
-                                           map:^id(id value) {
-                                             return @(-[value CGPointValue].y);
-                                           }];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNotification:)
+                                               name:UIApplicationWillEnterForegroundNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNotification:)
+                                               name:AWFLocationManagerDidUpdateLocationsNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,10 +122,12 @@ static CGFloat const kButtonBarHeight = 44.0f;
   [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
   [self showSegmentedControl];
 
-  CGFloat bottomInset = self.tabBarController.tabBar.bounds.size.height;
-  CGFloat topIndicatorInset = [(AWFNavigationBar *)self.navigationController.navigationBar backgroundView].bounds.size.height;
-  self.collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight + kButtonBarHeight, 0, bottomInset, 0);
-  self.collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(topIndicatorInset, 0, bottomInset, 0);
+  CGFloat insetTop = self.view.bounds.size.height - [self.bottomLayoutGuide length] - AWFCollectionItemSize.height * 1.5f;
+  CGFloat bottomInset = [self.bottomLayoutGuide length];
+  self.collectionView.contentInset = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
+  self.collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
+
+  [self lookupNearbyUsers];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -146,13 +146,28 @@ static CGFloat const kButtonBarHeight = 44.0f;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-  return self.temporaryData.count;
+  return self.users.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   AWFPersonCollectionViewCell *cell = (AWFPersonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:[AWFPersonCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
 
-  NSString *name = self.temporaryData[indexPath.row];
+  NSString *firstName = self.users[indexPath.row][@"first_name"];
+  NSString *lastName = self.users[indexPath.row][@"first_name"];
+  NSString *name;
+  if (firstName && lastName) {
+    name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+  }
+  else if (firstName) {
+    name = firstName;
+  }
+  else if (lastName) {
+    name = firstName;
+  }
+  else {
+    name = @"Anonymous";
+  }
+
   cell.imageView.image = [UIImage imageNamed:[name stringByAppendingString:@".jpg"]];
   cell.nameLabel.text = name;
   return cell;
@@ -195,35 +210,38 @@ static CGFloat const kButtonBarHeight = 44.0f;
   [self.segmentedControl removeFromSuperview];
 }
 
+#pragma mark - Actions
+
+- (void)onNotification:(NSNotification *)notification {
+  if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
+    [self lookupNearbyUsers];
+  }
+  else if ([notification.name isEqualToString:AWFLocationManagerDidUpdateLocationsNotification]) {
+    [self lookupNearbyUsers];
+  }
+}
+
+#pragma mark - Getters and Setters
+
+- (void)setUsers:(NSArray *)users {
+  _users = users;
+  [self.collectionView reloadData];
+}
+
 #pragma mark - Private methods
 
-- (NSArray *)temporaryData {
-  if (!_temporaryData) {
-    _temporaryData = @[
-                       @"Marissa",   // 1
-                       @"Lorenza",   // 2
-                       @"Matze",     // 3
-                       @"Veronica",  // 4
-                       @"Jacky",     // 5
-                       @"Marine",    // 6
-                       @"Victoria",  // 7
-                       @"Alessio",   // 8
-                       @"Ajda",      // 9
-                       @"Andrea",    // 10
-                       @"Carrie",    // 11
-                       @"Damien",    // 12
-                       @"Ebba",      // 13
-                       @"Emilia",    // 14
-                       @"Kenza",     // 15
-                       @"Kristina",  // 16
-                       @"Lauren",    // 17
-                       @"Marie",     // 18
-                       @"Max",       // 19
-                       @"Michael",   // 20
-                       @"Olivia",    // 21
-                       ];
-  }
-  return _temporaryData;
+- (void)lookupNearbyUsers {
+  CLLocation *location = [AWFLocationManager sharedManager].currentLocation;
+  [[[AWFSession sharedSession] getUsersAtCoordinate:location.coordinate
+                                        withRadius:100000.0
+                                        pageNumber:0
+                                          pageSize:100]
+   subscribeNext:^(NSDictionary *data) {
+     self.users = data[@"users"];
+   }
+   error:^(NSError *error) {
+     NSLog(@"*** ERROR: %@", error);
+   }];
 }
 
 @end

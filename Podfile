@@ -1,11 +1,10 @@
 platform :ios, '7.0'
 
-pod 'AFNetworking', '~> 2.0.1'
-pod 'Facebook-iOS-SDK', '~> 3.8.0'
+pod 'AFNetworking', '~> 2.0.3'
+pod 'Facebook-iOS-SDK', '~> 3.10'
 pod 'libextobjc', '~> 0.3'
-pod 'ReactiveCocoa', '~> 2.1.1'
-pod 'SDNetworkActivityIndicator', :head
-pod 'SDWebImage', :head
-pod 'Slash', :head
-pod 'SparkInspector', '~> 1.0.12'
-pod 'TestFlightSDK', '~> 1.3.0-beta.7'
+pod 'ReactiveCocoa', '~> 2.1.8'
+pod 'SDNetworkActivityIndicator', '~> 0.0.1'
+pod 'SDWebImage', '~> 3.5'
+pod 'Slash', '~> 0.1'
+pod 'TestFlightSDK', '~> 2.2.0-noadid-beta'

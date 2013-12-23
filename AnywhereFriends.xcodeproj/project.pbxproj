@@ -27,6 +27,8 @@
 		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
+		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
+		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
 		FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB866E4180AAB60005FF64B /* AWFSession.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
 		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
@@ -146,6 +148,9 @@
 		FA3092F818098A64001F25F2 /* AWFNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationBar.m; sourceTree = "<group>"; };
 		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
+		FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLocationManager.h; sourceTree = "<group>"; };
+		FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLocationManager.m; sourceTree = "<group>"; };
+		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		FAB866E3180AAB60005FF64B /* AWFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFSession.h; sourceTree = "<group>"; };
 		FAB866E4180AAB60005FF64B /* AWFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFSession.m; sourceTree = "<group>"; };
 		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +320,15 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		FA8D71C51868745A00C4B6CC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */,
+				FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		FAB866E2180AAB29005FF64B /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +380,7 @@
 				FADBF69317ADB7DE00325DD1 /* Categories */,
 				FADBF68F17ADB79300325DD1 /* Elements */,
 				FA11ACB117B1385E00028A55 /* Glyphs */,
+				FA8D71C51868745A00C4B6CC /* Helpers */,
 				FADBF68B17ADB73500325DD1 /* Login */,
 				FADE215517BCD30800D3A62B /* Map Search */,
 				FA3092F318098A1F001F25F2 /* Navigation */,
@@ -381,6 +396,7 @@
 		FADBF66317ADB68E00325DD1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA8D71CB1868898F00C4B6CC /* default.gpx */,
 				FA11ACAD17B1286500028A55 /* Podfile */,
 				FADBF66417ADB68E00325DD1 /* AnywhereFriends-Info.plist */,
 				FADBF66517ADB68E00325DD1 /* InfoPlist.strings */,
@@ -669,6 +685,7 @@
 				FA11ACD517B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf in Resources */,
 				FADE218B17BCF58700D3A62B /* Marie.jpg in Resources */,
 				FAE475F717C0FAEE006B2C65 /* Jasmin_0.jpg in Resources */,
+				FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */,
 				FADE218617BCF58700D3A62B /* Jacky.jpg in Resources */,
 				FADBF66F17ADB68E00325DD1 /* Images.xcassets in Resources */,
 				FAE4760317C0FDDA006B2C65 /* Jasmin_t2.jpg in Resources */,
@@ -729,6 +746,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA11ACD317B138D100028A55 /* AWFShapeView.m in Sources */,
+				FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */,
 				FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
 				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,

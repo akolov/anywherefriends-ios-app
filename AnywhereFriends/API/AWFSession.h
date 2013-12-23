@@ -7,6 +7,7 @@
 //
 
 @import Foundation;
+@import CoreLocation;
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -31,5 +32,8 @@
                             vkToken:(NSString *)vkToken;
 
 - (RACSignal *)closeSession;
+
+- (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
+                         pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize;
 
 @end

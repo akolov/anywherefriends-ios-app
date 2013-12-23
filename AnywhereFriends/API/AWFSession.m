@@ -14,6 +14,7 @@
 static NSString *AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
 
 static NSString *AWFAPIPathUser = @"user/";
+static NSString *AWFAPIPathUsers = @"users/";
 static NSString *AWFAPIPathLogin = @"login/";
 static NSString *AWFAPIPathLogout = @"logout/";
 
@@ -148,6 +149,37 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                                                    failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                      [subscriber sendError:error];
                                                    }];
+
+    return [RACDisposable disposableWithBlock:^{
+      [task cancel];
+    }];
+  }];
+}
+
+#pragma mark - People search
+
+- (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
+                         pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize {
+  @weakify(self);
+
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSDictionary *parameters = @{@"lat": @(coordinate.latitude),
+                                 @"lon": @(coordinate.longitude),
+                                 @"r": @(radius),
+                                 @"page": @(pageNumber),
+                                 @"per_page": @(pageSize)};
+
+    NSURLSessionDataTask *task = [self.sessionManager GET:AWFAPIPathUsers
+                                               parameters:parameters
+                                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                    [subscriber sendNext:responseObject];
+                                                    [subscriber sendCompleted];
+                                                  }
+                                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                    [subscriber sendError:error];
+                                                  }];
 
     return [RACDisposable disposableWithBlock:^{
       [task cancel];
