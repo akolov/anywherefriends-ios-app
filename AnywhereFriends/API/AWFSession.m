@@ -172,6 +172,30 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
   }];
 }
 
+#pragma mark - Profile methods
+
+- (RACSignal *)getUserSelf {
+  @weakify(self);
+
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSURLSessionDataTask *task = [self.sessionManager POST:AWFAPIPathUser
+                                                parameters:nil
+                                                   success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                     [subscriber sendNext:responseObject];
+                                                     [subscriber sendCompleted];
+                                                   }
+                                                   failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                     [subscriber sendError:error];
+                                                   }];
+
+    return [RACDisposable disposableWithBlock:^{
+      [task cancel];
+    }];
+  }];
+}
+
 #pragma mark - People search
 
 - (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
