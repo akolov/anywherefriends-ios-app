@@ -10,6 +10,7 @@
 #import "AWFLoginViewController.h"
 #import "AWFNearbyViewController.h"
 #import "AWFNavigationController.h"
+#import "AWFSession.h"
 
 
 @implementation AWFAppDelegate
@@ -21,9 +22,6 @@
   [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
   [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
   [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
-
-  AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
-  AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
 
   AWFNearbyViewController *nearby = [[AWFNearbyViewController alloc] init];
   AWFNavigationController *nearbyNavigation = [[AWFNavigationController alloc] initWithRootViewController:nearby];
@@ -40,9 +38,13 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
   self.window.rootViewController = tabs;
-
   [self.window makeKeyAndVisible];
-  [tabs presentViewController:loginNavigation animated:NO completion:NULL];
+
+  if (!AWFSession.isLoggedIn) {
+    AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
+    [tabs presentViewController:loginNavigation animated:NO completion:NULL];
+  }
 
   return YES;
 }

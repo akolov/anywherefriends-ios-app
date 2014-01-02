@@ -48,6 +48,22 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
   return session;
 }
 
++ (BOOL)hasSessionCookie {
+  NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:self.baseURL];
+  for (NSHTTPCookie *cookie in cookies) {
+    if ([cookie.name isEqualToString:@"sid"] &&
+        cookie.value.length > 0 &&
+        [cookie.expiresDate compare:[NSDate date]] == NSOrderedDescending) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
++ (BOOL)isLoggedIn {
+  return self.hasSessionCookie;
+}
+
 + (NSURL *)baseURL {
   return [NSURL URLWithString:AWFAPIBaseURL];
 }
@@ -59,7 +75,7 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
   return _sessionManager;
 }
 
-#pragma mark - User methods
+#pragma mark - Login methods
 
 - (RACSignal *)createUserWithEmail:(NSString *)email
                           password:(NSString *)password

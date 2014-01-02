@@ -15,6 +15,8 @@
 @interface AWFSession : NSObject
 
 + (instancetype)sharedSession;
++ (BOOL)hasSessionCookie;
++ (BOOL)isLoggedIn;
 
 - (RACSignal *)createUserWithEmail:(NSString *)email
                           password:(NSString *)password
@@ -33,6 +35,7 @@
 
 - (RACSignal *)closeSession;
 
+- (RACSignal *)getUserSelf;
 - (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
                          pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize;
 
