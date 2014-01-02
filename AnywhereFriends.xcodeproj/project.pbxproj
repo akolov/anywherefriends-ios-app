@@ -29,6 +29,7 @@
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
 		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
+		FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */; };
 		FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB866E4180AAB60005FF64B /* AWFSession.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
 		FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65E17ADB68E00325DD1 /* CoreGraphics.framework */; };
@@ -149,6 +150,8 @@
 		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		FA8D71CD18688EC000C4B6CC /* AWFNearbyViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNearbyViewCell.h; sourceTree = "<group>"; };
 		FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNearbyViewCell.m; sourceTree = "<group>"; };
+		FAB4BF9C1875AB6C009CC02B /* AWFLayoutGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLayoutGuide.h; sourceTree = "<group>"; };
+		FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLayoutGuide.m; sourceTree = "<group>"; };
 		FAB866E3180AAB60005FF64B /* AWFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFSession.h; sourceTree = "<group>"; };
 		FAB866E4180AAB60005FF64B /* AWFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFSession.m; sourceTree = "<group>"; };
 		FADBF65917ADB68E00325DD1 /* AnywhereFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnywhereFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -445,6 +448,8 @@
 				FADBF69117ADB7AA00325DD1 /* AWFNavigationTitleView.m */,
 				FA11ACD017B138D100028A55 /* AWFShapeView.h */,
 				FA11ACD117B138D100028A55 /* AWFShapeView.m */,
+				FAB4BF9C1875AB6C009CC02B /* AWFLayoutGuide.h */,
+				FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -736,6 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA11ACD317B138D100028A55 /* AWFShapeView.m in Sources */,
+				FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */,
 				FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */,
 				FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,

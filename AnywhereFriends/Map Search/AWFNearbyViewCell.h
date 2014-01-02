@@ -13,4 +13,8 @@
 
 @interface AWFNearbyViewCell : UITableViewCell
 
+@property (nonatomic, strong, readonly) UILabel *nameLabel;
+@property (nonatomic, strong, readonly) UILabel *locationLabel;
+@property (nonatomic, strong, readonly) UILabel *placeholderView;
+
 @end

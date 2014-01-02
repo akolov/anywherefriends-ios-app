@@ -17,6 +17,7 @@
 
 #import "AWFIconButton.h"
 #import "AWFLabelButton.h"
+#import "AWFLayoutGuide.h"
 #import "AWFLocationManager.h"
 #import "AWFNavigationBar.h"
 #import "AWFNavigationTitleView.h"
@@ -25,12 +26,10 @@
 #import "AWFSession.h"
 
 
-static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
-
-
 @interface AWFNearbyViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
+@property (nonatomic, strong) UIView *mapContainerView;
 @property (nonatomic, strong) NSArray *users;
 
 - (void)showSegmentedControl;
@@ -74,16 +73,12 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 
   // Set up collection view
   {
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = AWFCollectionItemSize;
-    layout.minimumInteritemSpacing = 1.0f;
-    layout.minimumLineSpacing = 1.0f;
-
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.opaque = NO;
+    self.tableView.rowHeight = 60.0f;
 
     [self.tableView registerClass:[AWFNearbyViewCell class] forCellReuseIdentifier:[AWFNearbyViewCell reuseIdentifier]];
     [self.view addSubview:self.tableView];
@@ -91,17 +86,16 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 
   // Set up map view
 
-  MKMapView *mapView = [MKMapView autolayoutView];
-  mapView.showsUserLocation = YES;
+  self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
+  self.mapView.showsUserLocation = YES;
+  self.mapView.userTrackingMode = MKUserTrackingModeFollow;
 
-  [self.view insertSubview:mapView atIndex:0];
-  self.mapView = mapView;
+  self.mapContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.rowHeight * 4.0f)];
+  self.mapContainerView.clipsToBounds = YES;
+  [self.mapContainerView addSubview:self.mapView];
+  [self.mapView setFrameOriginY:(self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f];
 
-  // Set up layout
-
-  NSDictionary *const views = NSDictionaryOfVariableBindings(mapView);
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[mapView]|" options:0 metrics:nil views:views]];
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mapView]|" options:0 metrics:nil views:views]];
+  [self.tableView addSubview:self.mapContainerView];
 
   // Actions
 
@@ -116,12 +110,11 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
   // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
   [self showSegmentedControl];
 
-  CGFloat insetTop = self.view.bounds.size.height - [self.bottomLayoutGuide length] - AWFCollectionItemSize.height * 1.5f;
+  CGFloat insetTop = [self.topLayoutGuide length];
   CGFloat bottomInset = [self.bottomLayoutGuide length];
   self.tableView.contentInset = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
   self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
@@ -136,6 +129,10 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
+}
+
+- (id <UILayoutSupport>)topLayoutGuide {
+  return [[AWFLayoutGuide alloc] initWithLength:98.0f];
 }
 
 #pragma mark - UITableViewDataSource
@@ -155,24 +152,30 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
   NSString *distance = [self.users[indexPath.row][@"distance"] stringValue];
   NSString *firstName = self.users[indexPath.row][@"first_name"];
   NSString *lastName = self.users[indexPath.row][@"first_name"];
-  NSString *name;
+  NSString *name, *abbreviation;
 
-  if (firstName && lastName) {
+  if (firstName.length != 0 && lastName.length != 0) {
     name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+    abbreviation = [[firstName substringWithRange:NSMakeRange(0, 1)] stringByAppendingString:
+                    [lastName substringWithRange:NSMakeRange(0, 1)]];
   }
   else if (firstName) {
     name = firstName;
+    abbreviation = [firstName substringWithRange:NSMakeRange(0, 1)];
   }
   else if (lastName) {
-    name = firstName;
+    name = lastName;
+    abbreviation = [lastName substringWithRange:NSMakeRange(0, 1)];
   }
   else {
     name = @"Anonymous";
+    abbreviation = @"XX";
   }
 
+  cell.placeholderView.text = abbreviation;
   cell.imageView.image = [UIImage imageNamed:[name stringByAppendingString:@".jpg"]];
-  cell.textLabel.text = name;
-  cell.detailTextLabel.text = distance;
+  cell.nameLabel.text = name;
+  cell.locationLabel.text = distance;
 
   return cell;
 }
@@ -182,6 +185,20 @@ static CGSize AWFCollectionItemSize = {106.0f, 106.0f};
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFProfileViewController *vc = [[AWFProfileViewController alloc] init];
   [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+  CGFloat dy = scrollView.contentOffset.y + [self.topLayoutGuide length];
+  if (dy < 0) {
+    [self.mapContainerView setFrameOriginY:dy];
+    [self.mapContainerView setFrameHeight:60.0f * 4.0f - dy];
+  }
+  else {
+    [self.mapContainerView setFrameOriginY:0];
+    [self.mapContainerView setFrameHeight:60.0f * 4.0f];
+  }
 }
 
 #pragma mark - Segmented control
