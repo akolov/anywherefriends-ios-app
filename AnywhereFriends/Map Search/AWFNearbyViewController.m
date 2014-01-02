@@ -199,6 +199,8 @@
     [self.mapContainerView setFrameOriginY:0];
     [self.mapContainerView setFrameHeight:60.0f * 4.0f];
   }
+
+  [self.mapView setFrameOriginY:(self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f];
 }
 
 #pragma mark - Segmented control
