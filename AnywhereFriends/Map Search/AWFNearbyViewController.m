@@ -10,6 +10,7 @@
 
 #import "AWFNearbyViewController.h"
 
+#import <libextobjc/EXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "UIBezierPath+MenuGlyph.h"
@@ -254,13 +255,26 @@
 #pragma mark - Private methods
 
 - (void)lookupNearbyUsers {
+  @weakify(self);
   CLLocation *location = [AWFLocationManager sharedManager].currentLocation;
   [[[AWFSession sharedSession] getUsersAtCoordinate:location.coordinate
                                         withRadius:100000.0
                                         pageNumber:0
                                           pageSize:100]
    subscribeNext:^(NSDictionary *data) {
+     @strongify(self);
      self.users = data[@"users"];
+
+     for (NSDictionary *user in self.users) {
+       NSNumber *latitude = user[@"latitude"];
+       NSNumber *longitude = user[@"longitude"];
+
+       MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+       [annotation setCoordinate:CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)];
+       [annotation setTitle:@"User Name"];
+       [annotation setSubtitle:@"User Location"];
+       [self.mapView addAnnotation:annotation];
+     }
    }
    error:^(NSError *error) {
      NSLog(@"*** ERROR: %@", error);
