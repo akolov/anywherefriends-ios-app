@@ -8,7 +8,7 @@
 
 #import "AWFLoginViewController.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <Slash/Slash.h>
 
 #import "UIImage+CustomBackgrounds.h"

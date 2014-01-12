@@ -8,6 +8,8 @@
 
 #import "AWFSignupViewController.h"
 
+#import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+
 #import "UIImage+CustomBackgrounds.h"
 
 #import "AWFGenderPicker.h"

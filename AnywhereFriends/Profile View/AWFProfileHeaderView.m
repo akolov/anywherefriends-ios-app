@@ -8,6 +8,8 @@
 
 #import "AWFProfileHeaderView.h"
 
+#import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+
 #import "UIBezierPath+AccessoryArrowGlyph.h"
 
 #import "AWFIconButton.h"
@@ -17,7 +19,6 @@
 @interface AWFProfileHeaderView ()
 
 @property (nonatomic, weak) UICollectionView *photoCollectionView;
-@property (nonatomic, weak) UILabel *nameLabel;
 @property (nonatomic, weak) UILabel *descriptionLabel;
 @property (nonatomic, weak) UILabel *locationLabel;
 @property (nonatomic, weak) AWFLabelButton *followButton;
@@ -47,14 +48,6 @@
     [photoCollectionView registerClass:[AWFPhotoCollectionViewCell class] forCellWithReuseIdentifier:[AWFPhotoCollectionViewCell reuseIdentifier]];
 
     // Set up labels
-
-    UILabel *nameLabel = [UILabel autolayoutView];
-    nameLabel.font = [UIFont helveticaNeueFontOfSize:24.0f];
-    nameLabel.numberOfLines = 1;
-    nameLabel.preferredMaxLayoutWidth = frame.size.width - 40.0f;
-    nameLabel.textColor = [UIColor whiteColor];
-    self.nameLabel = nameLabel;
-    [self addSubview:nameLabel];
 
     UILabel *descriptionLabel = [UILabel autolayoutView];
     descriptionLabel.font = [UIFont helveticaNeueFontOfSize:14.0f];
@@ -105,12 +98,12 @@
 
     // Set up constraints
 
-    NSDictionary *const views = NSDictionaryOfVariableBindings(photoCollectionView, nameLabel, descriptionLabel, locationLabel, locationButton, followButton, messageButton);
+    NSDictionary *const views = NSDictionaryOfVariableBindings(photoCollectionView, descriptionLabel, locationLabel, locationButton, followButton, messageButton);
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[photoCollectionView]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[followButton]-[messageButton(==followButton)]-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20.0-[locationLabel][locationButton(6.0)]-20.0-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[photoCollectionView(159.0)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[photoCollectionView]-(16.0@900)-[nameLabel]-16.0-[descriptionLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[photoCollectionView]-16.0-[descriptionLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[descriptionLabel]-16.0-[locationLabel]-20.0-[followButton(26.0)]|" options:0 metrics:nil views:views]];
   }
   return self;

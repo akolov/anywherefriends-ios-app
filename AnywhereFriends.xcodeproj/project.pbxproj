@@ -27,6 +27,7 @@
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
+		FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */; };
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
 		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
@@ -148,6 +149,8 @@
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
 		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
 		FA8AA2E018833123005FC371 /* AWFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFPerson.m; sourceTree = "<group>"; };
+		FA8AA2E218833A5B005FC371 /* UITableView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Autolayout.h"; sourceTree = "<group>"; };
+		FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Autolayout.m"; sourceTree = "<group>"; };
 		FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLocationManager.h; sourceTree = "<group>"; };
 		FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLocationManager.m; sourceTree = "<group>"; };
 		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
@@ -482,6 +485,8 @@
 				FADBF69517ADB7EC00325DD1 /* UIFont+CustomFonts.m */,
 				FADBF6B117ADCE5400325DD1 /* UIImage+CustomBackgrounds.h */,
 				FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */,
+				FA8AA2E218833A5B005FC371 /* UITableView+Autolayout.h */,
+				FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */,
 				FADBF6AB17ADC78B00325DD1 /* UIView+Autolayout.h */,
 				FADBF6AC17ADC78B00325DD1 /* UIView+Autolayout.m */,
 				FA11ACA917B11DB600028A55 /* UIView+Frame.h */,
@@ -768,6 +773,7 @@
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
 				FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */,
 				FA11ACCB17B1389400028A55 /* AWFIconButton.m in Sources */,
+				FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */,
 				FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */,
 				FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,

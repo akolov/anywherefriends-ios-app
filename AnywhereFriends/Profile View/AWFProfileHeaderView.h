@@ -13,7 +13,6 @@
 @interface AWFProfileHeaderView : UIView
 
 @property (nonatomic, weak, readonly) UICollectionView *photoCollectionView;
-@property (nonatomic, weak, readonly) UILabel *nameLabel;
 @property (nonatomic, weak, readonly) UILabel *descriptionLabel;
 @property (nonatomic, weak, readonly) UILabel *locationLabel;
 @property (nonatomic, weak, readonly) AWFLabelButton *followButton;

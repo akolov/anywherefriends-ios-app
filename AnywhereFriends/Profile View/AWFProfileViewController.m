@@ -8,6 +8,7 @@
 
 #import "AWFProfileViewController.h"
 
+#import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <Slash/Slash.h>
 
 #import "AWFPhotoCollectionViewCell.h"
@@ -38,34 +39,52 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.title = self.person.fullName;
+
   self.tableView.backgroundColor = [UIColor blackColor];
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   [self.tableView registerClass:[AWFProfileTableViewCell class] forCellReuseIdentifier:[AWFProfileTableViewCell reuseIdentifier]];
 
-  AWFProfileHeaderView *headerView = [[AWFProfileHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 360.0f)];
-  headerView.nameLabel.text = self.person.fullName;
-  headerView.descriptionLabel.text = @"Hi, I’m Jasmin. Follow me while discovering the huge world of fashion. I take you on my travels, events and share my thoughts and experiences with you.";
-  headerView.photoCollectionView.dataSource = self;
-  headerView.photoCollectionView.delegate = self;
-  headerView.followButton.selected = YES;
+  self.tableView.tableHeaderView = ({
+    NSMutableParagraphStyle *const paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = NSTextAlignmentLeft;
 
-  NSMutableParagraphStyle *const paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-  paragraphStyle.alignment = NSTextAlignmentLeft;
+    NSDictionary *const style = @{@"$default": @{NSParagraphStyleAttributeName: paragraphStyle,
+                                                 NSFontAttributeName: [UIFont helveticaNeueFontOfSize:14.0f],
+                                                 NSForegroundColorAttributeName: [UIColor whiteColor]},
+                                  @"em": @{NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
+                                           NSForegroundColorAttributeName: [UIColor grayColor]}};
+    NSString *markup = [NSString stringWithFormat:@"Alexanderplatz, Berlin\n<em>%2.f m from you</em>",
+                        self.person.distance];
 
-  NSDictionary *const style = @{@"$default": @{NSParagraphStyleAttributeName: paragraphStyle,
-                                               NSFontAttributeName: [UIFont helveticaNeueFontOfSize:14.0f],
-                                               NSForegroundColorAttributeName: [UIColor whiteColor]},
-                                @"em": @{NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
-                                         NSForegroundColorAttributeName: [UIColor grayColor]}};
-  NSString *markup = @"Alexanderplatz, Berlin\n<em>2 km from you</em>";
-  headerView.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
+    AWFProfileHeaderView *view = [[AWFProfileHeaderView alloc] init];
+    view.descriptionLabel.text = @"Hi, I’m Jasmin. Follow me while discovering the huge world of fashion. I take you on my travels, events and share my thoughts and experiences with you.";
+    view.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
+    view.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
+    view.photoCollectionView.dataSource = self;
+    view.photoCollectionView.delegate = self;
+    view.followButton.selected = YES;
 
-  self.tableView.tableHeaderView = headerView;
+    CGRect bounds;
+    bounds.size.width = CGRectGetWidth(self.tableView.bounds);
+    bounds.size.height = [view systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+
+    view.bounds = bounds;
+
+    [view setNeedsLayout];
+    [view layoutIfNeeded];
+
+    view;
+  });
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Table view data source
