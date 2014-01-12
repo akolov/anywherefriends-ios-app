@@ -15,6 +15,8 @@ NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUs
 
 @interface AWFLocationManager () <CLLocationManagerDelegate>
 
++ (BOOL)validateLocationServicesAvailability;
+
 @end
 
 
@@ -43,7 +45,9 @@ NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUs
     _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     _locationManager.distanceFilter = 100.0;
 
-    [_locationManager startUpdatingLocation];
+    if ([self.class validateLocationServicesAvailability]) {
+      [_locationManager startUpdatingLocation];
+    }
   }
   return self;
 }
@@ -62,4 +66,33 @@ NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUs
                                                       userInfo:userInfo];
   }
 }
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+  [self.class validateLocationServicesAvailability];
+}
+
+#pragma mark - Private methods
+
++ (BOOL)validateLocationServicesAvailability {
+  // TODO: Replace with better alerts
+  if (![CLLocationManager locationServicesEnabled]) {
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_TITLE", nil)
+                                message:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_MESSAGE", nil)
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"AWF_DISMISS", nil)
+                      otherButtonTitles:nil] show];
+    return NO;
+  }
+  else if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_TITLE", nil)
+                                message:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_MESSAGE", nil)
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"AWF_DISMISS", nil)
+                      otherButtonTitles:nil] show];
+    return NO;
+  }
+
+  return YES;
+}
+
 @end
