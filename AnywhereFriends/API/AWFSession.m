@@ -214,19 +214,20 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                                  @"page": @(pageNumber),
                                  @"per_page": @(pageSize)};
 
-    NSURLSessionDataTask *task = [self.sessionManager GET:AWFAPIPathUsers
-                                               parameters:parameters
-                                                  success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
-                                                    NSMutableArray *people = [NSMutableArray array];
-                                                    for (NSDictionary *dict in responseObject[@"users"]) {
-                                                      [people addObject:[AWFPerson personFromDictionary:dict]];
-                                                    }
-                                                    [subscriber sendNext:people];
-                                                    [subscriber sendCompleted];
-                                                  }
-                                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                    [subscriber sendError:error];
-                                                  }];
+    NSURLSessionDataTask *task = [self.sessionManager
+                                  GET:AWFAPIPathUsers
+                                  parameters:parameters
+                                  success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
+                                    NSMutableArray *people = [NSMutableArray array];
+                                    for (NSDictionary *dict in responseObject[@"users"]) {
+                                      [people addObject:[AWFPerson personFromDictionary:dict]];
+                                    }
+                                    [subscriber sendNext:people];
+                                    [subscriber sendCompleted];
+                                  }
+                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                    [subscriber sendError:error];
+                                  }];
 
     return [RACDisposable disposableWithBlock:^{
       [task cancel];
