@@ -7,6 +7,7 @@
 //
 
 #import "AWFAppDelegate.h"
+#import "AWFLocationManager.h"
 #import "AWFLoginViewController.h"
 #import "AWFNearbyViewController.h"
 #import "AWFNavigationController.h"
@@ -45,6 +46,8 @@
     AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
     [tabs presentViewController:loginNavigation animated:NO completion:NULL];
   }
+
+  [AWFLocationManager sharedManager];
 
   return YES;
 }
