@@ -29,12 +29,8 @@
 
 @interface AWFNearbyViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIView *mapContainerView;
 @property (nonatomic, strong) NSArray *users;
-
-- (void)showSegmentedControl;
-- (void)hideSegmentedControl;
 
 - (void)onNotification:(NSNotification *)notification;
 
@@ -113,7 +109,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  [self showSegmentedControl];
 
   CGFloat insetTop = [self.topLayoutGuide length];
   CGFloat bottomInset = [self.bottomLayoutGuide length];
@@ -123,17 +118,12 @@
   [self lookupNearbyUsers];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-  [super viewWillDisappear:animated];
-  [self hideSegmentedControl];
-} 
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
 
 - (id <UILayoutSupport>)topLayoutGuide {
-  return [[AWFLayoutGuide alloc] initWithLength:98.0f];
+  return [[AWFLayoutGuide alloc] initWithLength:64.0f];
 }
 
 #pragma mark - UITableViewDataSource
@@ -202,36 +192,6 @@
   }
 
   [self.mapView setFrameOriginY:(self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f];
-}
-
-#pragma mark - Segmented control
-
-- (void)showSegmentedControl {
-  AWFNavigationBar *navigationBar = (AWFNavigationBar *)self.navigationController.navigationBar;
-  navigationBar.extended = YES;
-
-  NSArray *segments = @[NSLocalizedString(@"AWF_SEARCH_SCOPE_NEARBY_TITLE", @"Title for the Nearby search scope"),
-                        NSLocalizedString(@"AWF_SEARCH_SCOPE_FRIENDS_TITLE", @"Title for the Friends search scope"),
-                        NSLocalizedString(@"AWF_SEARCH_SCOPE_SEARCHES_TITLE", @"Title for the Searches search scope")];
-  UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segments];
-
-  CGRect frame = segmentedControl.frame;
-  frame.origin.x = 8.0f;
-  frame.origin.y += navigationBar.bounds.size.height;
-  frame.size.width = navigationBar.bounds.size.width - 16.0f;
-  frame.size.height = 27.0f;
-
-  segmentedControl.frame = frame;
-  segmentedControl.selectedSegmentIndex = 0;
-
-  [self.navigationController.navigationBar addSubview:segmentedControl];
-  self.segmentedControl = segmentedControl;
-}
-
-- (void)hideSegmentedControl {
-  AWFNavigationBar *navigationBar = (AWFNavigationBar *)self.navigationController.navigationBar;
-  navigationBar.extended = NO;
-  [self.segmentedControl removeFromSuperview];
 }
 
 #pragma mark - Actions
