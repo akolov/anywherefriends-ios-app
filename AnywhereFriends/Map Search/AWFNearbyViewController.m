@@ -215,16 +215,12 @@ static NSUInteger AWFPageSize = 20;
                                         withRadius:AWFRadius
                                         pageNumber:0
                                           pageSize:AWFPageSize]
-   subscribeNext:^(NSDictionary *data) {
+   subscribeNext:^(NSArray *people) {
      @strongify(self);
-     NSMutableArray *people = [NSMutableArray array];
 
      CLLocationCoordinate2D max;
 
-     for (NSDictionary *dict in data[@"users"]) {
-       AWFPerson *person = [AWFPerson personFromDictionary:dict];
-       [people addObject:person];
-
+     for (AWFPerson *person in people) {
        if (max.latitude < person.location.coordinate.latitude) {
          max.latitude = person.location.coordinate.latitude;
        }
@@ -233,13 +229,10 @@ static NSUInteger AWFPageSize = 20;
          max.longitude = person.location.coordinate.longitude;
        }
 
-       CLLocationDistance distance = [AWFLocationManager distanceBetweenCoordinates:person.location.coordinate
-                                                                                   :coordinate];
-
        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
        [annotation setCoordinate:person.location.coordinate];
        [annotation setTitle:person.fullName];
-       [annotation setSubtitle:[NSString stringWithFormat:@"%.2f km", distance / 1000.0]];
+       [annotation setSubtitle:[NSString stringWithFormat:@"%.2f km", person.distance / 1000.0]];
        [self.mapView addAnnotation:annotation];
      }
 

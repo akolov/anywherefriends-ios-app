@@ -7,8 +7,11 @@
 //
 
 #import "AWFSession.h"
+
 #import <AFNetworking/AFNetworking.h>
 #import <libextobjc/EXTScope.h>
+
+#import "AWFPerson.h"
 
 
 static NSString *AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
@@ -213,8 +216,12 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
 
     NSURLSessionDataTask *task = [self.sessionManager GET:AWFAPIPathUsers
                                                parameters:parameters
-                                                  success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                    [subscriber sendNext:responseObject];
+                                                  success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
+                                                    NSMutableArray *people = [NSMutableArray array];
+                                                    for (NSDictionary *dict in responseObject[@"users"]) {
+                                                      [people addObject:[AWFPerson personFromDictionary:dict]];
+                                                    }
+                                                    [subscriber sendNext:people];
                                                     [subscriber sendCompleted];
                                                   }
                                                   failure:^(NSURLSessionDataTask *task, NSError *error) {
