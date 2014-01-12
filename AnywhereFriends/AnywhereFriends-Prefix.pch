@@ -22,4 +22,11 @@
   #import "UITableViewCell+ReuseIdentifier.h"
   #import "UIView+Autolayout.h"
   #import "UIView+Frame.h"
+
+  #define ErrorLog(error) NSLog(@"*** ERROR: %@", error)
+  #define AWF_METRES_IN_KILOMETRE 1000.0
+  #define AWF_KILOMETRES_IN_DEGREE 111.32
+  #define AWF_METRES_IN_DEGREE (AWF_KILOMETRES_IN_DEGREE * AWF_METRES_IN_KILOMETRE)
+  #define AWF_DEGREES_IN_KILOMETRE (1.0 / AWF_KILOMETRES_IN_DEGREE)
+  #define AWF_DEGREES_IN_METRE (AWF_DEGREES_IN_KILOMETRE / AWF_METRES_IN_KILOMETRE)
 #endif
