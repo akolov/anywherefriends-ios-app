@@ -27,12 +27,19 @@
 #import "AWFSession.h"
 
 
+static double AWFRadius = 20000.0;
+static NSUInteger AWFPageSize = 20;
+
+
 @interface AWFNearbyViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView *mapContainerView;
 @property (nonatomic, strong) NSArray *users;
 
 - (void)onNotification:(NSNotification *)notification;
+
+- (void)centerAndZoomMapAtCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters;
+- (void)lookupUsersAroundCenterCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters;
 
 @end
 
@@ -85,7 +92,6 @@
 
   self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
   self.mapView.showsUserLocation = YES;
-  self.mapView.userTrackingMode = MKUserTrackingModeFollow;
 
   self.mapContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.rowHeight * 4.0f)];
   self.mapContainerView.clipsToBounds = YES;
@@ -114,8 +120,6 @@
   CGFloat bottomInset = [self.bottomLayoutGuide length];
   self.tableView.contentInset = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
   self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
-
-  [self lookupNearbyUsers];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -184,11 +188,11 @@
   CGFloat dy = scrollView.contentOffset.y + [self.topLayoutGuide length];
   if (dy < 0) {
     [self.mapContainerView setFrameOriginY:dy];
-    [self.mapContainerView setFrameHeight:60.0f * 4.0f - dy];
+    [self.mapContainerView setFrameHeight:self.tableView.rowHeight * 4.0f - dy];
   }
   else {
     [self.mapContainerView setFrameOriginY:0];
-    [self.mapContainerView setFrameHeight:60.0f * 4.0f];
+    [self.mapContainerView setFrameHeight:self.tableView.rowHeight * 4.0f];
   }
 
   [self.mapView setFrameOriginY:(self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f];
@@ -198,10 +202,15 @@
 
 - (void)onNotification:(NSNotification *)notification {
   if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
-    [self lookupNearbyUsers];
+    CLLocationCoordinate2D coordinate = [AWFLocationManager sharedManager].currentLocation.coordinate;
+    [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:AWFRadius];
+    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
   }
   else if ([notification.name isEqualToString:AWFLocationManagerDidUpdateLocationsNotification]) {
-    [self lookupNearbyUsers];
+    CLLocation *location = notification.userInfo[AWFLocationManagerLocationUserInfoKey];
+    CLLocationCoordinate2D coordinate = location.coordinate;
+    [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:AWFRadius];
+    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
   }
 }
 
@@ -214,30 +223,55 @@
 
 #pragma mark - Private methods
 
-- (void)lookupNearbyUsers {
+- (void)centerAndZoomMapAtCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters {
+  MKCoordinateRegion region;
+  region.center.latitude = coordinate.latitude;
+  region.center.longitude = coordinate.longitude;
+  region.span.latitudeDelta = meters * AWF_DEGREES_IN_METRE;
+  region.span.longitudeDelta = meters * AWF_DEGREES_IN_METRE;
+  [self.mapView setRegion:region animated:YES];
+}
+
+- (void)lookupUsersAroundCenterCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters {
   @weakify(self);
-  CLLocation *location = [AWFLocationManager sharedManager].currentLocation;
-  [[[AWFSession sharedSession] getUsersAtCoordinate:location.coordinate
-                                        withRadius:100000.0
+  [[[AWFSession sharedSession] getUsersAtCoordinate:coordinate
+                                        withRadius:AWFRadius
                                         pageNumber:0
-                                          pageSize:100]
+                                          pageSize:AWFPageSize]
    subscribeNext:^(NSDictionary *data) {
      @strongify(self);
      self.users = data[@"users"];
 
+     CLLocationCoordinate2D max;
+
      for (NSDictionary *user in self.users) {
-       NSNumber *latitude = user[@"latitude"];
-       NSNumber *longitude = user[@"longitude"];
+       CLLocationDegrees latitude = [user[@"latitude"] doubleValue];
+       CLLocationDegrees longitude = [user[@"longitude"] doubleValue];
+
+       if (max.latitude < latitude) {
+         max.latitude = latitude;
+       }
+
+       if (max.longitude < longitude) {
+         max.longitude = longitude;
+       }
+
+       CLLocationDistance distance = [AWFLocationManager distanceBetweenCoordinates:max :coordinate];
+       NSString *firstName = user[@"first_name"];
+       NSString *lastName = user[@"first_name"];
 
        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-       [annotation setCoordinate:CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)];
-       [annotation setTitle:@"User Name"];
-       [annotation setSubtitle:@"User Location"];
+       [annotation setCoordinate:CLLocationCoordinate2DMake(latitude, longitude)];
+       [annotation setTitle:[firstName stringByAppendingString:lastName]];
+       [annotation setSubtitle:[NSString stringWithFormat:@"%.2f km", distance / 1000.0]];
        [self.mapView addAnnotation:annotation];
      }
+
+     CLLocationDistance distance = [AWFLocationManager distanceBetweenCoordinates:max :coordinate];
+     [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:distance * 4.0];
    }
    error:^(NSError *error) {
-     NSLog(@"*** ERROR: %@", error);
+     ErrorLog(error);
    }];
 }
 
