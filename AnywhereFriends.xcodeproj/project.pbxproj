@@ -26,6 +26,7 @@
 		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
+		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
 		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
@@ -145,6 +146,8 @@
 		FA3092F818098A64001F25F2 /* AWFNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationBar.m; sourceTree = "<group>"; };
 		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
+		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
+		FA8AA2E018833123005FC371 /* AWFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFPerson.m; sourceTree = "<group>"; };
 		FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLocationManager.h; sourceTree = "<group>"; };
 		FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLocationManager.m; sourceTree = "<group>"; };
 		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
@@ -317,6 +320,15 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		FA8AA2DE188330C6005FC371 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA8AA2DF18833123005FC371 /* AWFPerson.h */,
+				FA8AA2E018833123005FC371 /* AWFPerson.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FA8D71C51868745A00C4B6CC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB866E2180AAB29005FF64B /* API */,
+				FA8AA2DE188330C6005FC371 /* Model */,
 				FADBF69317ADB7DE00325DD1 /* Categories */,
 				FADBF68F17ADB79300325DD1 /* Elements */,
 				FA11ACB117B1385E00028A55 /* Glyphs */,
@@ -759,6 +772,7 @@
 				FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
 				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
+				FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */,
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
 				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,

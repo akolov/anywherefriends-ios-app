@@ -23,6 +23,7 @@
 #import "AWFNavigationBar.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFNearbyViewCell.h"
+#import "AWFPerson.h"
 #import "AWFProfileViewController.h"
 #import "AWFSession.h"
 
@@ -34,7 +35,7 @@ static NSUInteger AWFPageSize = 20;
 @interface AWFNearbyViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView *mapContainerView;
-@property (nonatomic, strong) NSArray *users;
+@property (nonatomic, strong) NSArray *people;
 
 - (void)onNotification:(NSNotification *)notification;
 
@@ -137,41 +138,17 @@ static NSUInteger AWFPageSize = 20;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.users.count;
+  return self.people.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFNearbyViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFNearbyViewCell reuseIdentifier]
                                                             forIndexPath:indexPath];
-
-  NSString *distance = [self.users[indexPath.row][@"distance"] stringValue];
-  NSString *firstName = self.users[indexPath.row][@"first_name"];
-  NSString *lastName = self.users[indexPath.row][@"first_name"];
-  NSString *name, *abbreviation;
-
-  if (firstName.length != 0 && lastName.length != 0) {
-    name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-    abbreviation = [[firstName substringWithRange:NSMakeRange(0, 1)] stringByAppendingString:
-                    [lastName substringWithRange:NSMakeRange(0, 1)]];
-  }
-  else if (firstName) {
-    name = firstName;
-    abbreviation = [firstName substringWithRange:NSMakeRange(0, 1)];
-  }
-  else if (lastName) {
-    name = lastName;
-    abbreviation = [lastName substringWithRange:NSMakeRange(0, 1)];
-  }
-  else {
-    name = @"Anonymous";
-    abbreviation = @"XX";
-  }
-
-  cell.placeholderView.text = abbreviation;
-  cell.imageView.image = [UIImage imageNamed:[name stringByAppendingString:@".jpg"]];
-  cell.nameLabel.text = name;
-  cell.locationLabel.text = distance;
-
+  AWFPerson *person = self.people[indexPath.row];
+  cell.placeholderView.text = person.abbreviatedName;
+  cell.imageView.image = nil;
+  cell.nameLabel.text = person.fullName;
+  cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m", person.distance];
   return cell;
 }
 
@@ -216,8 +193,8 @@ static NSUInteger AWFPageSize = 20;
 
 #pragma mark - Getters and Setters
 
-- (void)setUsers:(NSArray *)users {
-  _users = users;
+- (void)setPeople:(NSArray *)people {
+  _people = people;
   [self.tableView reloadData];
 }
 
@@ -240,32 +217,33 @@ static NSUInteger AWFPageSize = 20;
                                           pageSize:AWFPageSize]
    subscribeNext:^(NSDictionary *data) {
      @strongify(self);
-     self.users = data[@"users"];
+     NSMutableArray *people = [NSMutableArray array];
 
      CLLocationCoordinate2D max;
 
-     for (NSDictionary *user in self.users) {
-       CLLocationDegrees latitude = [user[@"latitude"] doubleValue];
-       CLLocationDegrees longitude = [user[@"longitude"] doubleValue];
+     for (NSDictionary *dict in data[@"users"]) {
+       AWFPerson *person = [AWFPerson personFromDictionary:dict];
+       [people addObject:person];
 
-       if (max.latitude < latitude) {
-         max.latitude = latitude;
+       if (max.latitude < person.location.coordinate.latitude) {
+         max.latitude = person.location.coordinate.latitude;
        }
 
-       if (max.longitude < longitude) {
-         max.longitude = longitude;
+       if (max.longitude < person.location.coordinate.longitude) {
+         max.longitude = person.location.coordinate.longitude;
        }
 
-       CLLocationDistance distance = [AWFLocationManager distanceBetweenCoordinates:max :coordinate];
-       NSString *firstName = user[@"first_name"];
-       NSString *lastName = user[@"first_name"];
+       CLLocationDistance distance = [AWFLocationManager distanceBetweenCoordinates:person.location.coordinate
+                                                                                   :coordinate];
 
        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-       [annotation setCoordinate:CLLocationCoordinate2DMake(latitude, longitude)];
-       [annotation setTitle:[firstName stringByAppendingString:lastName]];
+       [annotation setCoordinate:person.location.coordinate];
+       [annotation setTitle:person.fullName];
        [annotation setSubtitle:[NSString stringWithFormat:@"%.2f km", distance / 1000.0]];
        [self.mapView addAnnotation:annotation];
      }
+
+     self.people = people;
 
      CLLocationDistance distance = [AWFLocationManager distanceBetweenCoordinates:max :coordinate];
      [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:distance * 4.0];
