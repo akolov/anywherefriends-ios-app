@@ -155,7 +155,7 @@ static NSUInteger AWFPageSize = 20;
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  AWFProfileViewController *vc = [[AWFProfileViewController alloc] init];
+  AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:self.people[indexPath.row]];
   [self.navigationController pushViewController:vc animated:YES];
 }
 

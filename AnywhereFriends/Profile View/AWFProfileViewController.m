@@ -27,6 +27,14 @@
   return [super initWithStyle:UITableViewStyleGrouped];
 }
 
+- (id)initWithPerson:(AWFPerson *)person {
+  self = [self init];
+  if (self) {
+    self.person = person;
+  }
+  return self;
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 
@@ -35,7 +43,7 @@
   [self.tableView registerClass:[AWFProfileTableViewCell class] forCellReuseIdentifier:[AWFProfileTableViewCell reuseIdentifier]];
 
   AWFProfileHeaderView *headerView = [[AWFProfileHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 360.0f)];
-  headerView.nameLabel.text = @"Jasmin Fatschild";
+  headerView.nameLabel.text = self.person.fullName;
   headerView.descriptionLabel.text = @"Hi, I’m Jasmin. Follow me while discovering the huge world of fashion. I take you on my travels, events and share my thoughts and experiences with you.";
   headerView.photoCollectionView.dataSource = self;
   headerView.photoCollectionView.delegate = self;

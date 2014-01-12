@@ -6,12 +6,17 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
+#import "AWFPerson.h"
 #import "AWFProfileHeaderView.h"
 
 
 @interface AWFProfileViewController : UITableViewController
 
 @property (nonatomic, readonly) AWFProfileHeaderView *headerView;
+@property (nonatomic, strong) AWFPerson *person;
+
+- (id)initWithPerson:(AWFPerson *)person;
 
 @end
