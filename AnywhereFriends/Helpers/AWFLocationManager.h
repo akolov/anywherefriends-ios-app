@@ -20,5 +20,6 @@ OBJC_EXTERN NSString *AWFLocationManagerLocationUserInfoKey;
 @property (nonatomic, strong, readonly) CLLocation *currentLocation;
 
 + (instancetype)sharedManager;
++ (double)distanceBetweenCoordinates:(CLLocationCoordinate2D)c1 :(CLLocationCoordinate2D)c2;
 
 @end
