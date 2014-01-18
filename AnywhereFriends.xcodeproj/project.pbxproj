@@ -27,6 +27,8 @@
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
 		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
+		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
+		FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
 		FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */; };
@@ -151,6 +153,11 @@
 		FA4532E2188B014900A1E242 /* AWFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFObject.m; sourceTree = "<group>"; };
 		FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFAgeFormatter.h; sourceTree = "<group>"; };
 		FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFAgeFormatter.m; sourceTree = "<group>"; };
+		FA4532E7188B404C00A1E242 /* AWFValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFValueTransformers.h; sourceTree = "<group>"; };
+		FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFValueTransformers.m; sourceTree = "<group>"; };
+		FA4532EA188B411400A1E242 /* AWFGender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFGender.h; sourceTree = "<group>"; };
+		FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderFormatter.h; sourceTree = "<group>"; };
+		FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderFormatter.m; sourceTree = "<group>"; };
 		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
 		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
@@ -332,6 +339,7 @@
 		FA8AA2DE188330C6005FC371 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA4532EA188B411400A1E242 /* AWFGender.h */,
 				FA4532E1188B014900A1E242 /* AWFObject.h */,
 				FA4532E2188B014900A1E242 /* AWFObject.m */,
 				FA8AA2DF18833123005FC371 /* AWFPerson.h */,
@@ -347,6 +355,10 @@
 				FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */,
 				FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */,
 				FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */,
+				FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */,
+				FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */,
+				FA4532E7188B404C00A1E242 /* AWFValueTransformers.h */,
+				FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -800,6 +812,7 @@
 				FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
 				FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */,
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
+				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
@@ -810,6 +823,7 @@
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,
 				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
+				FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */,
 				FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

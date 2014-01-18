@@ -7,12 +7,18 @@
 //
 
 #import "AWFPerson.h"
+
 #import <TransformerKit/TransformerKit.h>
+
+#import "AWFValueTransformers.h"
+
 
 @implementation AWFPerson
 
 + (instancetype)personFromDictionary:(NSDictionary *)dictionary {
   AWFPerson *person = [[AWFPerson alloc] init];
+  person.gender = [[[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
+                    transformedValue:nilOrObjectForKey(dictionary, @"gender")] unsignedIntegerValue];
   person.firstName = [nilOrObjectForKey(dictionary, @"first_name") copy];
   person.lastName = [nilOrObjectForKey(dictionary, @"last_name") copy];
   person.bio = [nilOrObjectForKey(dictionary, @"bio") copy];

@@ -12,15 +12,17 @@
 #import <Slash/Slash.h>
 
 #import "AWFAgeFormatter.h"
+#import "AWFGenderFormatter.h"
 #import "AWFPhotoCollectionViewCell.h"
 #import "AWFProfileTableViewCell.h"
 
 
 @interface AWFProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) NSArray *temporaryData;
-@property (nonatomic, strong, readonly) AWFAgeFormatter *ageFormatter;
-@property (nonatomic, strong, readonly) NSDateFormatter *birthdayFormatter;
+@property (nonatomic, strong) NSArray *fields;
+@property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
+@property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
+@property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
 
 @end
 
@@ -112,8 +114,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFProfileTableViewCell reuseIdentifier] forIndexPath:indexPath];
 
-  cell.textLabel.text = self.temporaryData[indexPath.section][indexPath.row][0];
-  cell.detailTextLabel.text = self.temporaryData[indexPath.section][indexPath.row][1];
+  cell.textLabel.text = self.fields[indexPath.section][indexPath.row][0];
+  cell.detailTextLabel.text = self.fields[indexPath.section][indexPath.row][1];
 
   return cell;
 }
@@ -136,43 +138,48 @@
 
 #pragma mark - Private methods
 
-- (NSArray *)temporaryData {
-  if (!_temporaryData) {
-    _temporaryData = @[
-                       @[
-                         @[NSLocalizedString(@"AWF_AGE", nil),
-                           [self.ageFormatter stringFromAge:self.person.age]],
-                         @[NSLocalizedString(@"AWF_BIRTHDAY", nil),
-                           [self.birthdayFormatter stringFromDate:self.person.birthday]]
-                         ],
-                       @[
-                         @[@"Hair", @"Light Brown"],
-                         @[@"Eyes", @"Gray"],
-                         @[@"Height", @"170 cm"],
-                         @[@"Body Type", @"Normal"]]
-                       ];
+- (NSArray *)fields {
+  if (!_fields) {
+    _fields = @[
+                @[
+                  @[NSLocalizedString(@"AWF_GENDER", nil),
+                    [[self.genderFormatter stringFromGender:self.person.gender] capitalizedString]],
+                  @[NSLocalizedString(@"AWF_AGE", nil),
+                    [self.ageFormatter stringFromAge:self.person.age]],
+                  @[NSLocalizedString(@"AWF_BIRTHDAY", nil),
+                    [self.birthdayFormatter stringFromDate:self.person.birthday]]
+                  ],
+                @[
+                  @[@"Hair", @"Light Brown"],
+                  @[@"Eyes", @"Gray"],
+                  @[@"Height", @"170 cm"],
+                  @[@"Body Type", @"Normal"]]
+                ];
   }
-  return _temporaryData;
+  return _fields;
 }
 
 - (NSDateFormatter *)birthdayFormatter {
-  static NSDateFormatter *formatter;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMMd" options:0
-                                                            locale:[NSLocale autoupdatingCurrentLocale]];
-  });
-  return formatter;
+  if (!_birthdayFormatter) {
+    _birthdayFormatter = [[NSDateFormatter alloc] init];
+    _birthdayFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMMd" options:0
+                                                                     locale:[NSLocale autoupdatingCurrentLocale]];
+  }
+  return _birthdayFormatter;
 }
 
 - (AWFAgeFormatter *)ageFormatter {
-  static AWFAgeFormatter *formatter;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    formatter = [[AWFAgeFormatter alloc] init];
-  });
-  return formatter;
+  if (!_ageFormatter) {
+    _ageFormatter = [[AWFAgeFormatter alloc] init];
+  }
+  return _ageFormatter;
+}
+
+- (AWFGenderFormatter *)genderFormatter {
+  if (!_genderFormatter) {
+    _genderFormatter = [[AWFGenderFormatter alloc] init];
+  }
+  return _genderFormatter;
 }
 
 #pragma mark - Public methods

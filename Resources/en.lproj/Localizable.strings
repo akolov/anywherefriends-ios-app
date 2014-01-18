@@ -10,6 +10,9 @@
 /* Birthday */
 "AWF_BIRTHDAY" = "Birthday";
 
+/* Gender */
+"AWF_GENDER" = "Gender";
+
 /* Title of the connect with login section */
 "AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE" = "CONNECT WITH";
 
