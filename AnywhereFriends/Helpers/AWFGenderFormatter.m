@@ -48,7 +48,7 @@
 - (BOOL)getObjectValue:(out __unused __autoreleasing id *)obj
              forString:(__unused NSString *)string
       errorDescription:(out NSString *__autoreleasing *)error {
-  *error = NSLocalizedString(@"Method Not Implemented", nil);
+  *error = @"Method Not Implemented";
   return NO;
 }
 

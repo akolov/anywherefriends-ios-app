@@ -10,8 +10,26 @@
 /* Birthday */
 "AWF_BIRTHDAY" = "День рождения";
 
+/* Body Type */
+"AWF_BODY_TYPE" = "Телосложение";
+
+/* Dismiss */
+"AWF_DISMISS" = "Скрыть";
+
+/* Eye Color */
+"AWF_EYE_COLOR" = "Цвет глаз";
+
 /* Gender */
 "AWF_GENDER" = "Пол";
+
+/* Hair Color */
+"AWF_HAIR_COLOR" = "Цвет волос";
+
+/* Hair Length */
+"AWF_HAIR_LENGTH" = "Длина волос";
+
+/* Person's height */
+"AWF_HEIGHT" = "Рост";
 
 /* Title of the connect with login section */
 "AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE" = "ВОЙТИ ЧЕРЕЗ";

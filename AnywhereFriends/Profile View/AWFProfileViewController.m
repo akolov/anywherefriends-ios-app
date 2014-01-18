@@ -104,15 +104,16 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
   if (section == 0) {
-    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_BASIC_INFO", @"Basic info section header title of the profile view");
+    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_BASIC_INFO", nil);
   }
   else {
-    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_APPEARANCE", @"Appearance section header title of the profile view");
+    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_APPEARANCE", nil);
   }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFProfileTableViewCell reuseIdentifier] forIndexPath:indexPath];
+  UITableViewCell *cell =
+  [tableView dequeueReusableCellWithIdentifier:[AWFProfileTableViewCell reuseIdentifier] forIndexPath:indexPath];
 
   cell.textLabel.text = self.fields[indexPath.section][indexPath.row][0];
   cell.detailTextLabel.text = self.fields[indexPath.section][indexPath.row][1];
@@ -140,21 +141,38 @@
 
 - (NSArray *)fields {
   if (!_fields) {
-    _fields = @[
-                @[
-                  @[NSLocalizedString(@"AWF_GENDER", nil),
-                    [[self.genderFormatter stringFromGender:self.person.gender] capitalizedString]],
-                  @[NSLocalizedString(@"AWF_AGE", nil),
-                    [self.ageFormatter stringFromAge:self.person.age]],
-                  @[NSLocalizedString(@"AWF_BIRTHDAY", nil),
-                    [self.birthdayFormatter stringFromDate:self.person.birthday]]
-                  ],
-                @[
-                  @[@"Hair", @"Light Brown"],
-                  @[@"Eyes", @"Gray"],
-                  @[@"Height", @"170 cm"],
-                  @[@"Body Type", @"Normal"]]
-                ];
+
+    // Section 1
+
+    NSMutableArray *section1 = [NSMutableArray array];
+
+    NSString *gender = [[self.genderFormatter stringFromGender:self.person.gender] capitalizedString];
+    NSString *age = [self.ageFormatter stringFromAge:self.person.age];
+    NSString *birthday = [self.birthdayFormatter stringFromDate:self.person.birthday];
+
+    if (gender.length != 0) {
+      [section1 addObject:@[NSLocalizedString(@"AWF_GENDER", nil), gender]];
+    }
+
+    if (age.length != 0) {
+      [section1 addObject:@[NSLocalizedString(@"AWF_AGE", nil), age]];
+    }
+
+    if (birthday.length != 0) {
+      [section1 addObject:@[NSLocalizedString(@"AWF_BIRTHDAY", nil), birthday]];
+    }
+
+    // Section 2
+
+    NSMutableArray *section2 = [NSMutableArray array];
+
+    [section2 addObject:@[NSLocalizedString(@"AWF_HEIGHT", nil), @"170 cm"]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_BODY_TYPE", nil), @"Normal"]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_LENGTH", nil), @"Shoulder Length"]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_COLOR", nil), @"Light Brown"]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_EYE_COLOR", nil), @"Gray"]];
+
+    _fields = @[section1, section2];
   }
   return _fields;
 }
@@ -163,7 +181,7 @@
   if (!_birthdayFormatter) {
     _birthdayFormatter = [[NSDateFormatter alloc] init];
     _birthdayFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMMd" options:0
-                                                                     locale:[NSLocale autoupdatingCurrentLocale]];
+                                                                     locale:[NSLocale currentLocale]];
   }
   return _birthdayFormatter;
 }

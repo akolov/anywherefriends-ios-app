@@ -145,6 +145,7 @@ static NSUInteger AWFPageSize = 20;
   AWFNearbyViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFNearbyViewCell reuseIdentifier]
                                                             forIndexPath:indexPath];
   AWFPerson *person = self.people[indexPath.row];
+  cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
   cell.placeholderView.text = person.abbreviatedName;
   cell.imageView.image = nil;
   cell.nameLabel.text = person.fullName;
@@ -157,6 +158,10 @@ static NSUInteger AWFPageSize = 20;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:self.people[indexPath.row]];
   [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+  [self.mapView selectAnnotation:nil animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

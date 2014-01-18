@@ -10,8 +10,38 @@
 /* Birthday */
 "AWF_BIRTHDAY" = "Birthday";
 
+/* Body Type */
+"AWF_BODY_TYPE" = "Body Type";
+
+/* Dismiss */
+"AWF_DISMISS" = "Dismiss";
+
+/* Eye Color */
+"AWF_EYE_COLOR" = "Eye Color";
+
 /* Gender */
 "AWF_GENDER" = "Gender";
+
+/* Hair Color */
+"AWF_HAIR_COLOR" = "Hair Color";
+
+/* Hair Length */
+"AWF_HAIR_LENGTH" = "Hair Length";
+
+/* Person's height */
+"AWF_HEIGHT" = "Height";
+
+/* No comment provided by engineer. */
+"AWF_LOCATION_SERVICES_DISABLED_MESSAGE" = "AWF_LOCATION_SERVICES_DISABLED_MESSAGE";
+
+/* No comment provided by engineer. */
+"AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_MESSAGE" = "AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_MESSAGE";
+
+/* No comment provided by engineer. */
+"AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_TITLE" = "AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_TITLE";
+
+/* No comment provided by engineer. */
+"AWF_LOCATION_SERVICES_DISABLED_TITLE" = "AWF_LOCATION_SERVICES_DISABLED_TITLE";
 
 /* Title of the connect with login section */
 "AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE" = "CONNECT WITH";
