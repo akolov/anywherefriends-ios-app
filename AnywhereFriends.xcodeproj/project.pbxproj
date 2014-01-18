@@ -25,6 +25,8 @@
 		FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */; };
 		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
+		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
+		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
 		FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */; };
@@ -145,6 +147,10 @@
 		FA3092F518098A3D001F25F2 /* AWFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationController.m; sourceTree = "<group>"; };
 		FA3092F718098A64001F25F2 /* AWFNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationBar.h; sourceTree = "<group>"; };
 		FA3092F818098A64001F25F2 /* AWFNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationBar.m; sourceTree = "<group>"; };
+		FA4532E1188B014900A1E242 /* AWFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFObject.h; sourceTree = "<group>"; };
+		FA4532E2188B014900A1E242 /* AWFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFObject.m; sourceTree = "<group>"; };
+		FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFAgeFormatter.h; sourceTree = "<group>"; };
+		FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFAgeFormatter.m; sourceTree = "<group>"; };
 		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
 		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
@@ -326,6 +332,8 @@
 		FA8AA2DE188330C6005FC371 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA4532E1188B014900A1E242 /* AWFObject.h */,
+				FA4532E2188B014900A1E242 /* AWFObject.m */,
 				FA8AA2DF18833123005FC371 /* AWFPerson.h */,
 				FA8AA2E018833123005FC371 /* AWFPerson.m */,
 			);
@@ -337,6 +345,8 @@
 			children = (
 				FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */,
 				FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */,
+				FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */,
+				FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -769,6 +779,7 @@
 				FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */,
 				FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */,
 				FA11ACC717B1389400028A55 /* AWFButton.m in Sources */,
+				FA4532E3188B014900A1E242 /* AWFObject.m in Sources */,
 				FADBF68E17ADB74400325DD1 /* AWFLoginViewController.m in Sources */,
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
 				FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */,
@@ -780,6 +791,7 @@
 				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
 				FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */,
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
+				FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */,
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
 				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,
 				FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */,

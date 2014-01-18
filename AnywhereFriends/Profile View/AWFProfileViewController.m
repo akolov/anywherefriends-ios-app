@@ -11,6 +11,7 @@
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <Slash/Slash.h>
 
+#import "AWFAgeFormatter.h"
 #import "AWFPhotoCollectionViewCell.h"
 #import "AWFProfileTableViewCell.h"
 
@@ -18,6 +19,8 @@
 @interface AWFProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray *temporaryData;
+@property (nonatomic, strong, readonly) AWFAgeFormatter *ageFormatter;
+@property (nonatomic, strong, readonly) NSDateFormatter *birthdayFormatter;
 
 @end
 
@@ -58,7 +61,7 @@
                         self.person.distance];
 
     AWFProfileHeaderView *view = [[AWFProfileHeaderView alloc] init];
-    view.descriptionLabel.text = @"Hi, I’m Jasmin. Follow me while discovering the huge world of fashion. I take you on my travels, events and share my thoughts and experiences with you.";
+    view.descriptionLabel.text = self.person.bio;
     view.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
     view.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
     view.photoCollectionView.dataSource = self;
@@ -136,14 +139,40 @@
 - (NSArray *)temporaryData {
   if (!_temporaryData) {
     _temporaryData = @[
-                       @[@[@"Age", @"20 years"],
-                         @[@"Birthday", @"December 8"]],
-                       @[@[@"Hair", @"Light Brown"],
+                       @[
+                         @[NSLocalizedString(@"AWF_AGE", nil),
+                           [self.ageFormatter stringFromAge:self.person.age]],
+                         @[NSLocalizedString(@"AWF_BIRTHDAY", nil),
+                           [self.birthdayFormatter stringFromDate:self.person.birthday]]
+                         ],
+                       @[
+                         @[@"Hair", @"Light Brown"],
                          @[@"Eyes", @"Gray"],
                          @[@"Height", @"170 cm"],
-                         @[@"Body Type", @"Normal"]]];
+                         @[@"Body Type", @"Normal"]]
+                       ];
   }
   return _temporaryData;
+}
+
+- (NSDateFormatter *)birthdayFormatter {
+  static NSDateFormatter *formatter;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMMd" options:0
+                                                            locale:[NSLocale autoupdatingCurrentLocale]];
+  });
+  return formatter;
+}
+
+- (AWFAgeFormatter *)ageFormatter {
+  static AWFAgeFormatter *formatter;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    formatter = [[AWFAgeFormatter alloc] init];
+  });
+  return formatter;
 }
 
 #pragma mark - Public methods

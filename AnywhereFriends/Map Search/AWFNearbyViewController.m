@@ -76,7 +76,6 @@ static NSUInteger AWFPageSize = 20;
 
   self.view.backgroundColor = [UIColor blackColor];
 
-  // Set up collection view
   {
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -93,8 +92,9 @@ static NSUInteger AWFPageSize = 20;
 
   self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
   self.mapView.showsUserLocation = YES;
+  self.mapView.scrollEnabled = NO;
 
-  self.mapContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.rowHeight * 4.0f)];
+  self.mapContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.tableView.rowHeight * 4.0f, self.tableView.bounds.size.width, self.tableView.rowHeight * 4.0f)];
   self.mapContainerView.clipsToBounds = YES;
   [self.mapContainerView addSubview:self.mapView];
   [self.mapView setFrameOriginY:(self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f];
@@ -103,10 +103,10 @@ static NSUInteger AWFPageSize = 20;
 
   // Actions
 
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNotification:)
-                                               name:UIApplicationWillEnterForegroundNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNotification:)
-                                               name:AWFLocationManagerDidUpdateLocationsNotification object:nil];
+  [[NSNotificationCenter defaultCenter]
+   addObserver:self selector:@selector(onNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
+  [[NSNotificationCenter defaultCenter]
+   addObserver:self selector:@selector(onNotification:) name:AWFLocationManagerDidUpdateLocationsNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,7 +119,7 @@ static NSUInteger AWFPageSize = 20;
 
   CGFloat insetTop = [self.topLayoutGuide length];
   CGFloat bottomInset = [self.bottomLayoutGuide length];
-  self.tableView.contentInset = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
+  self.tableView.contentInset = UIEdgeInsetsMake(insetTop + self.tableView.rowHeight * 4.0f, 0, bottomInset, 0);
   self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
 }
 
@@ -164,8 +164,14 @@ static NSUInteger AWFPageSize = 20;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   CGFloat dy = scrollView.contentOffset.y + [self.topLayoutGuide length];
   if (dy < 0) {
-    [self.mapContainerView setFrameOriginY:dy];
-    [self.mapContainerView setFrameHeight:self.tableView.rowHeight * 4.0f - dy];
+//    if ((self.tableView.rowHeight * 4.0f - dy) >
+//        CGRectGetHeight(self.view.bounds) - self.tableView.rowHeight * 2.0f -
+//        [self.topLayoutGuide length] - [self.bottomLayoutGuide length]) {
+//    }
+//    else {
+      [self.mapContainerView setFrameOriginY:dy];
+      [self.mapContainerView setFrameHeight:-dy];
+//    }
   }
   else {
     [self.mapContainerView setFrameOriginY:0];

@@ -222,6 +222,10 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                                     for (NSDictionary *dict in responseObject[@"users"]) {
                                       [people addObject:[AWFPerson personFromDictionary:dict]];
                                     }
+
+                                    [people sortedArrayUsingDescriptors:
+                                     @[[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]]];
+
                                     [subscriber sendNext:people];
                                     [subscriber sendCompleted];
                                   }

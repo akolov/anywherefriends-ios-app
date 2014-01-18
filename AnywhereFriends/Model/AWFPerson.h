@@ -9,10 +9,16 @@
 @import Foundation;
 @import CoreLocation.CLLocation;
 
-@interface AWFPerson : NSObject
+#import "AWFObject.h"
+
+
+@interface AWFPerson : AWFObject
 
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *bio;
+@property (nonatomic, readonly) NSUInteger age;
+@property (nonatomic, strong) NSDate *birthday;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, assign) CLLocationDistance distance;
 
