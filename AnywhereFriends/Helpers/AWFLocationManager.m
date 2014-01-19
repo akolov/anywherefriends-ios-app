@@ -31,7 +31,7 @@ NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUs
   return instance;
 }
 
-+ (CLLocationDistance)distanceBetweenCoordinates:(CLLocationCoordinate2D)c1 :(CLLocationCoordinate2D)c2 {
++ (CLLocationDistance)distanceBetween:(CLLocationCoordinate2D)c1 and:(CLLocationCoordinate2D)c2 {
   CLLocation *a = [[CLLocation alloc] initWithLatitude:c1.latitude longitude:c1.longitude];
   CLLocation *b = [[CLLocation alloc] initWithLatitude:c2.latitude longitude:c2.longitude];
   return [a distanceFromLocation:b];
