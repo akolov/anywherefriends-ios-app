@@ -37,6 +37,7 @@ static NSUInteger AWFPageSize = 20;
 @property (nonatomic, strong) UIView *mapContainerView;
 @property (nonatomic, strong) NSArray *people;
 @property (nonatomic, strong) NSDictionary *annotations;
+@property (nonatomic, assign) UIEdgeInsets defaultTableViewContentInset;
 
 - (void)onNotification:(NSNotification *)notification;
 
@@ -51,6 +52,7 @@ static NSUInteger AWFPageSize = 20;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.automaticallyAdjustsScrollViewInsets = NO;
   self.title = NSLocalizedString(@"AWF_PEOPLE_VIEW_CONTROLLER_TITLE", nil);
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
 
@@ -71,6 +73,13 @@ static NSUInteger AWFPageSize = 20;
     self.tableView.delegate = self;
     self.tableView.opaque = NO;
     self.tableView.rowHeight = 60.0f;
+
+    CGFloat insetTop = [self.topLayoutGuide length];
+    CGFloat bottomInset = [self.bottomLayoutGuide length];
+    self.defaultTableViewContentInset = UIEdgeInsetsMake(insetTop + self.tableView.rowHeight * 4.0f, 0, bottomInset, 0);
+
+    self.tableView.contentInset = self.defaultTableViewContentInset;
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
 
     [self.tableView registerClass:[AWFNearbyViewCell class] forCellReuseIdentifier:[AWFNearbyViewCell reuseIdentifier]];
     [self.view addSubview:self.tableView];
@@ -105,11 +114,6 @@ static NSUInteger AWFPageSize = 20;
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-
-  CGFloat insetTop = [self.topLayoutGuide length];
-  CGFloat bottomInset = [self.bottomLayoutGuide length];
-  self.tableView.contentInset = UIEdgeInsetsMake(insetTop + self.tableView.rowHeight * 4.0f, 0, bottomInset, 0);
-  self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(insetTop, 0, bottomInset, 0);
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -118,6 +122,10 @@ static NSUInteger AWFPageSize = 20;
 
 - (id <UILayoutSupport>)topLayoutGuide {
   return [[AWFLayoutGuide alloc] initWithLength:64.0f];
+}
+
+- (id <UILayoutSupport>)bottomLayoutGuide {
+  return [[AWFLayoutGuide alloc] initWithLength:CGRectGetHeight(self.navigationController.toolbar.bounds)];
 }
 
 #pragma mark - UITableViewDataSource
@@ -145,36 +153,86 @@ static NSUInteger AWFPageSize = 20;
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:self.people[indexPath.row]];
-  [self.navigationController pushViewController:vc animated:YES];
+  if (self.tableView.scrollEnabled) {
+    AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:self.people[indexPath.row]];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else {
+    self.mapView.scrollEnabled = NO;
+    self.tableView.scrollEnabled = YES;
+
+    [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
+    [UIView animateWithDuration:0.25 animations:^{
+      self.tableView.contentInset = self.defaultTableViewContentInset;
+    }];
+  }
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-  AWFPerson *person = self.people[indexPath.row];
-  id <MKAnnotation> annotation = self.annotations[person.personID];
-  [self.mapView selectAnnotation:annotation animated:YES];
+  if (self.tableView.scrollEnabled) {
+    AWFPerson *person = self.people[indexPath.row];
+    id <MKAnnotation> annotation = self.annotations[person.personID];
+    [self.mapView selectAnnotation:annotation animated:YES];
+  }
+  else {
+    self.mapView.scrollEnabled = NO;
+    self.tableView.scrollEnabled = YES;
+
+    [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
+    [UIView animateWithDuration:0.25 animations:^{
+      self.tableView.contentInset = self.defaultTableViewContentInset;
+    }];
+  }
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-  CGFloat dy = scrollView.contentOffset.y + [self.topLayoutGuide length];
-  if (dy < 0) {
-//    if ((self.tableView.rowHeight * 4.0f - dy) >
-//        CGRectGetHeight(self.view.bounds) - self.tableView.rowHeight * 2.0f -
-//        [self.topLayoutGuide length] - [self.bottomLayoutGuide length]) {
-//    }
-//    else {
-      [self.mapContainerView setFrameOriginY:dy];
-      [self.mapContainerView setFrameHeight:-dy];
-//    }
-  }
-  else {
-    [self.mapContainerView setFrameOriginY:0];
-    [self.mapContainerView setFrameHeight:self.tableView.rowHeight * 4.0f];
+  if (!self.tableView.scrollEnabled) {
+    return;
   }
 
-  [self.mapView setFrameOriginY:(self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f];
+  CGFloat dy = scrollView.contentOffset.y + [self.topLayoutGuide length];
+  CGFloat threshold = (CGRectGetHeight(self.view.bounds) - self.tableView.rowHeight * 1.5f -
+                       [self.topLayoutGuide length] - [self.bottomLayoutGuide length]);
+
+  if (dy < 0) {
+    self.mapContainerView.frame = ({
+      CGRect frame = self.mapContainerView.frame;
+      frame.origin.y = dy;
+      frame.size.height = -dy;
+      frame;
+    });
+
+    if (-dy >= threshold) {
+      self.tableView.contentInset = ({
+        UIEdgeInsets inset = self.tableView.contentInset;
+        inset.top = -scrollView.contentOffset.y;
+        inset;
+      });
+
+      self.tableView.scrollEnabled = NO;
+      self.mapView.scrollEnabled = YES;
+
+
+      AWFPerson *first = self.people.firstObject;
+      [self.mapView showAnnotations:@[self.annotations[first.personID], self.mapView.userLocation] animated:YES];
+    }
+  }
+  else {
+    self.mapContainerView.frame = ({
+      CGRect frame = self.mapContainerView.frame;
+      frame.origin.y = 0;
+      frame.size.height = self.tableView.rowHeight * 4.0f;
+      frame;
+    });
+  }
+
+  self.mapView.frame = ({
+    CGRect frame = self.mapView.frame;
+    frame.origin.y = CGRectGetMidY(self.mapContainerView.bounds) - CGRectGetMidY(self.mapView.bounds);
+    frame;
+  });
 }
 
 #pragma mark - Actions
@@ -235,17 +293,8 @@ static NSUInteger AWFPageSize = 20;
      @strongify(self);
 
      NSMutableDictionary *annotations = [NSMutableDictionary dictionary];
-     CLLocationCoordinate2D max;
 
      for (AWFPerson *person in people) {
-       if (max.latitude < person.location.coordinate.latitude) {
-         max.latitude = person.location.coordinate.latitude;
-       }
-
-       if (max.longitude < person.location.coordinate.longitude) {
-         max.longitude = person.location.coordinate.longitude;
-       }
-
        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
        [annotation setCoordinate:person.location.coordinate];
        [annotation setTitle:person.fullName];
@@ -259,10 +308,7 @@ static NSUInteger AWFPageSize = 20;
      self.annotations = annotations;
      self.people = people;
 
-//     [self.mapView addAnnotations:[self.annotations allValues]];
-
-     CLLocationDistance distance = [AWFLocationManager distanceBetween:max and:coordinate];
-     [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:distance * 4.0];
+     [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
    }
    error:^(NSError *error) {
      ErrorLog(error);
