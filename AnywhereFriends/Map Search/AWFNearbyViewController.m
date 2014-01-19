@@ -32,10 +32,11 @@ static double AWFRadius = 20000.0;
 static NSUInteger AWFPageSize = 20;
 
 
-@interface AWFNearbyViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AWFNearbyViewController () <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView *mapContainerView;
 @property (nonatomic, strong) NSArray *people;
+@property (nonatomic, strong) NSDictionary *annotations;
 
 - (void)onNotification:(NSNotification *)notification;
 
@@ -78,6 +79,7 @@ static NSUInteger AWFPageSize = 20;
   // Set up map view
 
   self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
+  self.mapView.delegate = self;
   self.mapView.showsUserLocation = YES;
   self.mapView.scrollEnabled = NO;
 
@@ -148,7 +150,9 @@ static NSUInteger AWFPageSize = 20;
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-  [self.mapView selectAnnotation:nil animated:YES];
+  AWFPerson *person = self.people[indexPath.row];
+  id <MKAnnotation> annotation = self.annotations[person.personID];
+  [self.mapView selectAnnotation:annotation animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -189,6 +193,20 @@ static NSUInteger AWFPageSize = 20;
   }
 }
 
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+  if ([view isKindOfClass:[MKPinAnnotationView class]]) {
+    [(MKPinAnnotationView *)view setPinColor:MKPinAnnotationColorGreen];
+  }
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+  if ([view isKindOfClass:[MKPinAnnotationView class]]) {
+    [(MKPinAnnotationView *)view setPinColor:MKPinAnnotationColorRed];
+  }
+}
+
 #pragma mark - Getters and Setters
 
 - (void)setPeople:(NSArray *)people {
@@ -216,6 +234,7 @@ static NSUInteger AWFPageSize = 20;
    subscribeNext:^(NSArray *people) {
      @strongify(self);
 
+     NSMutableDictionary *annotations = [NSMutableDictionary dictionary];
      CLLocationCoordinate2D max;
 
      for (AWFPerson *person in people) {
@@ -231,12 +250,18 @@ static NSUInteger AWFPageSize = 20;
        [annotation setCoordinate:person.location.coordinate];
        [annotation setTitle:person.fullName];
        [annotation setSubtitle:[NSString stringWithFormat:@"%.2f km", person.distance / 1000.0]];
+
+       annotations[person.personID] = annotation;
+
        [self.mapView addAnnotation:annotation];
      }
 
+     self.annotations = annotations;
      self.people = people;
 
-     CLLocationDistance distance = [AWFLocationManager distanceBetweenCoordinates:max :coordinate];
+//     [self.mapView addAnnotations:[self.annotations allValues]];
+
+     CLLocationDistance distance = [AWFLocationManager distanceBetween:max and:coordinate];
      [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:distance * 4.0];
    }
    error:^(NSError *error) {
