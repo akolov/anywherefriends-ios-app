@@ -17,6 +17,7 @@
 
 + (instancetype)personFromDictionary:(NSDictionary *)dictionary {
   AWFPerson *person = [[AWFPerson alloc] init];
+  person.personID = nilOrObjectForKey(dictionary, @"id");
   person.gender = [[[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
                     transformedValue:nilOrObjectForKey(dictionary, @"gender")] unsignedIntegerValue];
   person.firstName = [nilOrObjectForKey(dictionary, @"first_name") copy];
@@ -68,7 +69,8 @@
 #pragma mark - NSObject
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"AWFPerson: %@ (%@) -> %f", self.fullName, self.birthday, self.distance];
+  return [NSString stringWithFormat:@"AWFPerson: %@ %@ (%@) -> %f",
+          self.personID, self.fullName, self.birthday, self.distance];
 }
 
 @end
