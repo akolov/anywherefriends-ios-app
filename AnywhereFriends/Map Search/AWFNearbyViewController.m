@@ -59,19 +59,6 @@ static NSUInteger AWFPageSize = 20;
   menuButton.icon.path = menuIcon;
   [menuButton setIconColor:[UIColor colorWithWhite:1.0f alpha:0.7f] forState:UIControlStateNormal];
 
-  UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-  self.navigationItem.leftBarButtonItem = leftBarButtonItem;
-
-  UIBezierPath *messagesIcon = [UIBezierPath messagesGlyph];
-  [messagesIcon applyTransform:CGAffineTransformMakeScale(1.3f, 1.3f)];
-
-  AWFIconButton *messagesButton = [[AWFIconButton alloc] initWithFrame:CGRectMake(0, 0, messagesIcon.bounds.size.width, messagesIcon.bounds.size.height)];
-  messagesButton.icon.path = messagesIcon;
-  [messagesButton setIconColor:[UIColor colorWithWhite:1.0f alpha:0.7f] forState:UIControlStateNormal];
-
-  UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:messagesButton];
-  self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-
   // Set up view
 
   self.view.backgroundColor = [UIColor blackColor];
