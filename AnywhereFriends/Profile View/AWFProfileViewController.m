@@ -9,6 +9,7 @@
 #import "AWFProfileViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+#import <FormatterKit/TTTTimeIntervalFormatter.h>
 #import <Slash/Slash.h>
 
 #import "AWFAgeFormatter.h"
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
+@property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
 
 @end
 
@@ -59,8 +61,10 @@
                                                  NSForegroundColorAttributeName: [UIColor whiteColor]},
                                   @"em": @{NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
                                            NSForegroundColorAttributeName: [UIColor grayColor]}};
-    NSString *markup = [NSString stringWithFormat:@"Alexanderplatz, Berlin\n<em>%2.f m from you</em>",
-                        self.person.distance];
+    NSString *lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date]
+                                                                       toDate:self.person.location.timestamp];
+    NSString *markup = [NSString stringWithFormat:@"Alexanderplatz, Berlin\n<em>%2.f m from you — %@</em>",
+                        self.person.distance, lastUpdated];
 
     AWFProfileHeaderView *view = [[AWFProfileHeaderView alloc] init];
     view.descriptionLabel.text = self.person.bio;
@@ -198,6 +202,13 @@
     _genderFormatter = [[AWFGenderFormatter alloc] init];
   }
   return _genderFormatter;
+}
+
+- (TTTTimeIntervalFormatter *)timeFormatter {
+  if (!_timeFormatter) {
+    _timeFormatter = [[TTTTimeIntervalFormatter alloc] init];
+  }
+  return _timeFormatter;
 }
 
 #pragma mark - Public methods

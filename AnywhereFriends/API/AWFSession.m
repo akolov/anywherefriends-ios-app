@@ -6,11 +6,10 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
-#import "AWFSession.h"
-
 #import <AFNetworking/AFNetworking.h>
 #import <libextobjc/EXTScope.h>
 
+#import "AWFSession.h"
 #import "AWFPerson.h"
 
 
