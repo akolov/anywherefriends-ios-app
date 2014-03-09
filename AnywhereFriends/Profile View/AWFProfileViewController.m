@@ -54,6 +54,7 @@
 
   self.tableView.backgroundColor = [UIColor blackColor];
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
   [self.tableView registerClass:[AWFProfileTableViewCell class] forCellReuseIdentifier:[AWFProfileTableViewCell reuseIdentifier]];
 
   self.tableView.tableHeaderView = ({
