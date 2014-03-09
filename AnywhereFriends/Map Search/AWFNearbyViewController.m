@@ -219,14 +219,6 @@ static NSUInteger AWFPageSize = 20;
       [self.mapView showAnnotations:@[self.annotations[first.personID], self.mapView.userLocation] animated:YES];
     }
   }
-  else {
-    self.mapContainerView.frame = ({
-      CGRect frame = self.mapContainerView.frame;
-      frame.origin.y = 0;
-      frame.size.height = self.tableView.rowHeight * 4.0f;
-      frame;
-    });
-  }
 
   self.mapView.frame = ({
     CGRect frame = self.mapView.frame;
