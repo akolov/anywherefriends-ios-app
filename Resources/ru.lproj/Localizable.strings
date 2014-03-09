@@ -11,7 +11,7 @@
 "AWF_BIRTHDAY" = "День рождения";
 
 /* Body Type */
-"AWF_BODY_TYPE" = "Телосложение";
+"AWF_BODY_BUILD" = "Телосложение";
 
 /* Dismiss */
 "AWF_DISMISS" = "Скрыть";

@@ -159,6 +159,10 @@
     NSString *birthday = [self.birthdayFormatter stringFromDate:self.person.birthday];
     NSString *height = [self.heightFormatter stringFromHeight:self.person.height];
     NSString *weight = [self.weightFormatter stringFromWeight:self.person.weight];
+    NSString *bodyBuild = [self.person.bodyBuild capitalizedString];
+    NSString *hairColor = [self.person.hairLength capitalizedString];
+    NSString *hairLength = [self.person.hairColor capitalizedString];
+    NSString *eyeColor = [self.person.eyeColor capitalizedString];
 
     if (gender.length != 0) {
       [section1 addObject:@[NSLocalizedString(@"AWF_GENDER", nil), gender]];
@@ -178,10 +182,10 @@
 
     [section2 addObject:@[NSLocalizedString(@"AWF_HEIGHT", nil), height]];
     [section2 addObject:@[NSLocalizedString(@"AWF_WEIGHT", nil), weight]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_BODY_TYPE", nil), @"Normal"]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_LENGTH", nil), @"Shoulder Length"]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_COLOR", nil), @"Light Brown"]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_EYE_COLOR", nil), @"Gray"]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_BODY_BUILD", nil), bodyBuild]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_LENGTH", nil), hairLength]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_COLOR", nil), hairColor]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_EYE_COLOR", nil), eyeColor]];
 
     _fields = @[section1, section2];
   }

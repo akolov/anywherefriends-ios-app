@@ -24,6 +24,10 @@
 @property (nonatomic, strong) NSDate *birthday;
 @property (nonatomic, strong) NSNumber *weight;
 @property (nonatomic, strong) NSNumber *height;
+@property (nonatomic, strong) NSString *hairLength;
+@property (nonatomic, strong) NSString *hairColor;
+@property (nonatomic, strong) NSString *eyeColor;
+@property (nonatomic, strong) NSString *bodyBuild;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, assign) CLLocationDistance distance;
 

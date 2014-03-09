@@ -29,13 +29,11 @@ static NSString *AWFURLParameterFacebookToken = @"facebook_token";
 static NSString *AWFURLParameterTwitterToken = @"twitter_token";
 static NSString *AWFURLParameterVKToken = @"vk_token";
 
-
 @interface AWFSession ()
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
-
 
 @implementation AWFSession
 
