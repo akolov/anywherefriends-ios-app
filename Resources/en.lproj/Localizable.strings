@@ -133,3 +133,6 @@
 /* Title for the Searches search scope */
 "AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Discover";
 
+/* Weight */
+"AWF_WEIGHT" = "Weight";
+

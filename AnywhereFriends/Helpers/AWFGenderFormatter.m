@@ -11,7 +11,7 @@
 @implementation AWFGenderFormatter
 
 - (NSString *)stringFromGender:(AWFGender)gender {
-  NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+  NSString *languageCode = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleLanguageCode];
   if ([languageCode isEqualToString:@"en"]) {
     switch (gender) {
       case AWFGenderFemale:

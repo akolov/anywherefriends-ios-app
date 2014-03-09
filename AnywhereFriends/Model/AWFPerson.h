@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSString *bio;
 @property (nonatomic, readonly) NSUInteger age;
 @property (nonatomic, strong) NSDate *birthday;
+@property (nonatomic, strong) NSNumber *weight;
+@property (nonatomic, strong) NSNumber *height;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, assign) CLLocationDistance distance;
 

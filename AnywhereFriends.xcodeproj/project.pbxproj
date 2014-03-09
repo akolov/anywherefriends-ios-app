@@ -35,6 +35,8 @@
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
 		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
+		FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */; };
+		FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964718CCB3CA00F65856 /* AWFHeightFormatter.m */; };
 		FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */; };
 		FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB866E4180AAB60005FF64B /* AWFSession.m */; };
 		FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF65C17ADB68E00325DD1 /* Foundation.framework */; };
@@ -169,6 +171,10 @@
 		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		FA8D71CD18688EC000C4B6CC /* AWFNearbyViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNearbyViewCell.h; sourceTree = "<group>"; };
 		FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNearbyViewCell.m; sourceTree = "<group>"; };
+		FA9A964318CCB2F000F65856 /* AWFWeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFWeightFormatter.h; sourceTree = "<group>"; };
+		FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFWeightFormatter.m; sourceTree = "<group>"; };
+		FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFHeightFormatter.h; sourceTree = "<group>"; };
+		FA9A964718CCB3CA00F65856 /* AWFHeightFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFHeightFormatter.m; sourceTree = "<group>"; };
 		FAB4BF9C1875AB6C009CC02B /* AWFLayoutGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLayoutGuide.h; sourceTree = "<group>"; };
 		FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLayoutGuide.m; sourceTree = "<group>"; };
 		FAB866E3180AAB60005FF64B /* AWFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFSession.h; sourceTree = "<group>"; };
@@ -357,6 +363,10 @@
 				FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */,
 				FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */,
 				FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */,
+				FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */,
+				FA9A964718CCB3CA00F65856 /* AWFHeightFormatter.m */,
+				FA9A964318CCB2F000F65856 /* AWFWeightFormatter.h */,
+				FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */,
 				FA4532E7188B404C00A1E242 /* AWFValueTransformers.h */,
 				FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */,
 			);
@@ -787,6 +797,7 @@
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
 				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,
 				FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */,
+				FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */,
 				FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */,
@@ -823,6 +834,7 @@
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,
 				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
+				FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */,
 				FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */,
 				FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */,
 			);

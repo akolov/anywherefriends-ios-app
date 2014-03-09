@@ -14,16 +14,20 @@
 
 #import "AWFAgeFormatter.h"
 #import "AWFGenderFormatter.h"
+#import "AWFHeightFormatter.h"
 #import "AWFPhotoCollectionViewCell.h"
 #import "AWFProfileTableViewCell.h"
+#import "AWFWeightFormatter.h"
 
 
 @interface AWFProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) NSArray *fields;
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
-@property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
+@property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
+@property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
+@property (nonatomic, strong) NSArray *fields;
+@property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
 
 @end
@@ -153,6 +157,8 @@
     NSString *gender = [[self.genderFormatter stringFromGender:self.person.gender] capitalizedString];
     NSString *age = [self.ageFormatter stringFromAge:self.person.age];
     NSString *birthday = [self.birthdayFormatter stringFromDate:self.person.birthday];
+    NSString *height = [self.heightFormatter stringFromHeight:self.person.height];
+    NSString *weight = [self.weightFormatter stringFromWeight:self.person.weight];
 
     if (gender.length != 0) {
       [section1 addObject:@[NSLocalizedString(@"AWF_GENDER", nil), gender]];
@@ -170,7 +176,8 @@
 
     NSMutableArray *section2 = [NSMutableArray array];
 
-    [section2 addObject:@[NSLocalizedString(@"AWF_HEIGHT", nil), @"170 cm"]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_HEIGHT", nil), height]];
+    [section2 addObject:@[NSLocalizedString(@"AWF_WEIGHT", nil), weight]];
     [section2 addObject:@[NSLocalizedString(@"AWF_BODY_TYPE", nil), @"Normal"]];
     [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_LENGTH", nil), @"Shoulder Length"]];
     [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_COLOR", nil), @"Light Brown"]];
@@ -202,6 +209,20 @@
     _genderFormatter = [[AWFGenderFormatter alloc] init];
   }
   return _genderFormatter;
+}
+
+- (AWFHeightFormatter *)heightFormatter {
+  if (!_heightFormatter) {
+    _heightFormatter = [[AWFHeightFormatter alloc] init];
+  }
+  return _heightFormatter;
+}
+
+- (AWFWeightFormatter *)weightFormatter {
+  if (!_weightFormatter) {
+    _weightFormatter = [[AWFWeightFormatter alloc] init];
+  }
+  return _weightFormatter;
 }
 
 - (TTTTimeIntervalFormatter *)timeFormatter {

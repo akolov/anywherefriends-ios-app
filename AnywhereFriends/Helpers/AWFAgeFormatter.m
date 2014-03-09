@@ -11,7 +11,7 @@
 @implementation AWFAgeFormatter
 
 - (NSString *)stringFromAge:(NSUInteger)age {
-  NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+  NSString *languageCode = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleLanguageCode];
   if ([languageCode isEqualToString:@"en"]) {
     if (age != 1) {
       return [NSString stringWithFormat:@"%u years", age];

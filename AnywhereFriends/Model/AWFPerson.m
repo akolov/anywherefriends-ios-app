@@ -23,6 +23,8 @@
   person.firstName = [nilOrObjectForKey(dictionary, @"first_name") copy];
   person.lastName = [nilOrObjectForKey(dictionary, @"last_name") copy];
   person.bio = [nilOrObjectForKey(dictionary, @"bio") copy];
+  person.weight = [nilOrObjectForKey(dictionary, @"weight") copy];
+  person.height = [nilOrObjectForKey(dictionary, @"height") copy];
 
   CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([nilOrObjectForKey(dictionary, @"latitude") doubleValue],
                                                                  [nilOrObjectForKey(dictionary, @"longitude") doubleValue]);

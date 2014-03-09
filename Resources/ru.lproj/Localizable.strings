@@ -121,3 +121,6 @@
 /* Title for the Searches search scope */
 "AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Поиск";
 
+/* Weight */
+"AWF_WEIGHT" = "Вес";
+
