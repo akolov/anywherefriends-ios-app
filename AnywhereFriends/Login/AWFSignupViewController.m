@@ -9,6 +9,7 @@
 #import "AWFSignupViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "UIImage+CustomBackgrounds.h"
 

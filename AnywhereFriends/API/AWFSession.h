@@ -9,8 +9,7 @@
 @import Foundation;
 @import CoreLocation;
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
-
+@class RACSignal;
 
 @interface AWFSession : NSObject
 
@@ -38,5 +37,7 @@
 - (RACSignal *)getUserSelf;
 - (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
                          pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize;
+
+- (RACSignal *)updateUserSelfLocation:(CLPlacemark *)placemark;
 
 @end

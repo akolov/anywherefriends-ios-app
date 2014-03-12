@@ -16,6 +16,7 @@ OBJC_EXTERN NSString *AWFLocationManagerLocationUserInfoKey;
 
 @interface AWFLocationManager : NSObject
 
+@property (nonatomic, strong, readonly) CLGeocoder *geocoder;
 @property (nonatomic, strong, readonly) CLLocationManager *locationManager;
 @property (nonatomic, strong, readonly) CLLocation *currentLocation;
 

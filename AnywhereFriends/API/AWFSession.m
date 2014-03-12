@@ -8,6 +8,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <libextobjc/EXTScope.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "AWFSession.h"
 #import "AWFPerson.h"
@@ -24,6 +25,7 @@ static NSString *AWFURLParameterEmail = @"email";
 static NSString *AWFURLParameterPassword = @"password";
 static NSString *AWFURLParameterFirstName = @"first_name";
 static NSString *AWFURLParameterLastName = @"last_name";
+static NSString *AWFURLParameterLocation = @"location";
 static NSString *AWFURLParameterGender = @"gender";
 static NSString *AWFURLParameterFacebookToken = @"facebook_token";
 static NSString *AWFURLParameterTwitterToken = @"twitter_token";
@@ -175,7 +177,6 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
 
 - (RACSignal *)getUserSelf {
   @weakify(self);
-
   return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
     @strongify(self);
 
@@ -192,6 +193,50 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
     return [RACDisposable disposableWithBlock:^{
       [task cancel];
     }];
+  }];
+}
+
+- (RACSignal *)updateUserSelfLocation:(CLPlacemark *)placemark {
+  @weakify(self);
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSMutableDictionary *placemarkDict = [NSMutableDictionary dictionary];
+    [placemarkDict setValue:placemark.name forKey:@"name"];
+    [placemarkDict setValue:placemark.ISOcountryCode forKey:@"ISOcountryCode"];
+    [placemarkDict setValue:placemark.country forKey:@"country"];
+    [placemarkDict setValue:placemark.postalCode forKey:@"postalCode"];
+    [placemarkDict setValue:placemark.administrativeArea forKey:@"administrativeArea"];
+    [placemarkDict setValue:placemark.subAdministrativeArea forKey:@"subAdministrativeArea"];
+    [placemarkDict setValue:placemark.locality forKey:@"locality"];
+    [placemarkDict setValue:placemark.subLocality forKey:@"subLocality"];
+    [placemarkDict setValue:placemark.thoroughfare forKey:@"thoroughfare"];
+    [placemarkDict setValue:placemark.subThoroughfare forKey:@"subThoroughfare"];
+    [placemarkDict setValue:placemark.region forKey:@"region"];
+
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:placemarkDict options:0 error:&error];
+    if (!jsonData) {
+      [subscriber sendError:error];
+    }
+    else {
+      NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+      NSURLSessionDataTask *task = [self.sessionManager PUT:AWFAPIPathUser
+                                                 parameters:@{AWFURLParameterLocation: json}
+                                                    success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                      [subscriber sendNext:responseObject];
+                                                      [subscriber sendCompleted];
+                                                    }
+                                                    failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                      [subscriber sendError:error];
+                                                    }];
+
+      return [RACDisposable disposableWithBlock:^{
+        [task cancel];
+      }];
+    }
+
+    return nil;
   }];
 }
 

@@ -8,17 +8,18 @@
 
 #import "AWFLocationManager.h"
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
+#import "AWFSession.h"
 
 NSString *AWFLocationManagerDidUpdateLocationsNotification = @"AWFLocationManagerDidUpdateLocationsNotification";
 NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUserInfoKey";
-
 
 @interface AWFLocationManager () <CLLocationManagerDelegate>
 
 + (BOOL)validateLocationServicesAvailability;
 
 @end
-
 
 @implementation AWFLocationManager
 
@@ -40,6 +41,8 @@ NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUs
 - (id)init {
   self = [super init];
   if (self) {
+    _geocoder = [[CLGeocoder alloc] init];
+
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
@@ -60,6 +63,19 @@ NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUs
   NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
   if (abs(howRecent) < 30.0) {
     _currentLocation = location;
+
+    [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+      if (placemarks) {
+        CLPlacemark *placemark = [placemarks lastObject];
+        [[[AWFSession sharedSession] updateUserSelfLocation:placemark] subscribeError:^(NSError *error) {
+          ErrorLog(error.localizedDescription);
+        }];
+      }
+      else {
+        ErrorLog(error.localizedDescription);
+      }
+    }];
+
     NSDictionary *userInfo = @{AWFLocationManagerLocationUserInfoKey: location};
     [[NSNotificationCenter defaultCenter] postNotificationName:AWFLocationManagerDidUpdateLocationsNotification
                                                         object:nil
