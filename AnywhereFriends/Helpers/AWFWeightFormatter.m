@@ -27,10 +27,10 @@
     }
     else {
       if (isMetric) {
-        return [NSString stringWithFormat:@"%u kg", [weight unsignedIntegerValue]];
+        return [NSString stringWithFormat:@"%lu kg", [weight unsignedLongValue]];
       }
       else {
-        return [NSString stringWithFormat:@"%u lbs", [[AWFWeightFormatter metricToImperial:weight] unsignedIntegerValue]];
+        return [NSString stringWithFormat:@"%lu lbs", [[AWFWeightFormatter metricToImperial:weight] unsignedLongValue]];
       }
     }
   }
@@ -40,19 +40,19 @@
     }
     else {
       if (isMetric) {
-        return [NSString stringWithFormat:@"%u кг", [weight unsignedIntegerValue]];
+        return [NSString stringWithFormat:@"%lu кг", [weight unsignedLongValue]];
       }
       else {
-        NSUInteger _weight = [[AWFWeightFormatter metricToImperial:weight] unsignedIntegerValue] % 100;
+        unsigned long _weight = [[AWFWeightFormatter metricToImperial:weight] unsignedIntegerValue] % 100;
         switch (_weight) {
           case 1:
-            return [NSString stringWithFormat:@"%u фунт", _weight];
+            return [NSString stringWithFormat:@"%lu фунт", _weight];
           case 2:
           case 3:
           case 4:
-            return [NSString stringWithFormat:@"%u фунта", _weight];
+            return [NSString stringWithFormat:@"%lu фунта", _weight];
           default:
-            return [NSString stringWithFormat:@"%u фунтов", _weight];
+            return [NSString stringWithFormat:@"%lu фунтов", _weight];
         }
       }
     }

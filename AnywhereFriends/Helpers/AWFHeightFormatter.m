@@ -27,7 +27,7 @@
     }
     else {
       if (isMetric) {
-        return [NSString stringWithFormat:@"%u cm", [height unsignedIntegerValue]];
+        return [NSString stringWithFormat:@"%lu cm", [height unsignedLongValue]];
       }
       else {
         return [AWFHeightFormatter metricToImperial:height];
@@ -40,7 +40,7 @@
     }
     else {
       if (isMetric) {
-        return [NSString stringWithFormat:@"%u см", [height unsignedIntegerValue]];
+        return [NSString stringWithFormat:@"%lu см", [height unsignedLongValue]];
       }
       else {
         return [AWFHeightFormatter metricToImperial:height];
@@ -74,11 +74,11 @@
   CGFloat number = value / 2.54f;
 
   if (number > 12.0f) {
-    return [NSString stringWithFormat:@"%u’%u”", (NSUInteger)floor(number / 12.0f), (NSUInteger)number % 12];
+    return [NSString stringWithFormat:@"%lu’%lu”", (unsigned long)floor(number / 12.0f), (NSUInteger)number % 12];
 
   }
   else {
-    return [NSString stringWithFormat:@"0’%u”", (NSUInteger)round(number)];
+    return [NSString stringWithFormat:@"0’%lu”", (unsigned long)round(number)];
   }
 }
 

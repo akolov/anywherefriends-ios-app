@@ -14,23 +14,23 @@
   NSString *languageCode = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleLanguageCode];
   if ([languageCode isEqualToString:@"en"]) {
     if (age != 1) {
-      return [NSString stringWithFormat:@"%u years", age];
+      return [NSString stringWithFormat:@"%lu years", (unsigned long)age];
     }
     else {
-      return [NSString stringWithFormat:@"%u year", age];
+      return [NSString stringWithFormat:@"%lu year", (unsigned long)age];
     }
   }
   else if ([languageCode isEqualToString:@"ru"]) {
-    NSUInteger _age = age % 100;
+    unsigned long _age = age % 100;
     switch (_age) {
       case 1:
-        return [NSString stringWithFormat:@"%u год", age];
+        return [NSString stringWithFormat:@"%lu год", age];
       case 2:
       case 3:
       case 4:
-        return [NSString stringWithFormat:@"%u года", age];
+        return [NSString stringWithFormat:@"%lu года", _age];
       default:
-        return [NSString stringWithFormat:@"%u лет", age];
+        return [NSString stringWithFormat:@"%lu лет", _age];
     }
   }
   return nil;
