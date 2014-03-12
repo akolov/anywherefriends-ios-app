@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSString *eyeColor;
 @property (nonatomic, strong) NSString *bodyBuild;
 @property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, strong) NSDictionary *placemark;
 @property (nonatomic, assign) CLLocationDistance distance;
 
 + (instancetype)personFromDictionary:(NSDictionary *)dictionary;

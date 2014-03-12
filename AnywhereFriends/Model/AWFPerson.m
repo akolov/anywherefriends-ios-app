@@ -29,6 +29,7 @@
   person.hairLength = [nilOrObjectForKey(dictionary, @"hair_length") copy];
   person.eyeColor = [nilOrObjectForKey(dictionary, @"eye_color") copy];
   person.bodyBuild = [nilOrObjectForKey(dictionary, @"build") copy];
+  person.placemark = [nilOrObjectForKey(dictionary, @"location") copy];
 
   CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([nilOrObjectForKey(dictionary, @"latitude") doubleValue],
                                                                  [nilOrObjectForKey(dictionary, @"longitude") doubleValue]);
