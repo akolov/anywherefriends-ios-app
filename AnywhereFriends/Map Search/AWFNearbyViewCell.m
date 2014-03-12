@@ -32,16 +32,21 @@
     _locationLabel = [UILabel autolayoutView];
     _locationLabel.backgroundColor = [UIColor whiteColor];
     _locationLabel.font = [UIFont systemFontOfSize:12.0f];
+    _locationLabel.textColor = [UIColor grayColor];
     [self.contentView addSubview:_locationLabel];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_nameLabel, _locationLabel, _placeholderView);
 
     [self addConstraints:[NSLayoutConstraint
-                          constraintsWithVisualFormat:@"H:|-8.0-[_placeholderView(35.0)]-[_nameLabel]"
+                          constraintsWithVisualFormat:@"H:|-8.0-[_placeholderView(35.0)]-[_nameLabel]|"
                           options:NSLayoutFormatAlignAllTop
                           metrics:nil
                           views:views]];
-
+    [self addConstraints:[NSLayoutConstraint
+                          constraintsWithVisualFormat:@"H:[_placeholderView]-[_locationLabel]|"
+                          options:0
+                          metrics:nil
+                          views:views]];
     [self addConstraint:[NSLayoutConstraint
                          constraintWithItem:_placeholderView
                          attribute:NSLayoutAttributeCenterY
@@ -64,14 +69,6 @@
                          relatedBy:NSLayoutRelationEqual
                          toItem:_locationLabel
                          attribute:NSLayoutAttributeBaseline
-                         multiplier:1.0f
-                         constant:0]];
-    [self addConstraint:[NSLayoutConstraint
-                         constraintWithItem:_nameLabel
-                         attribute:NSLayoutAttributeLeading
-                         relatedBy:NSLayoutRelationEqual
-                         toItem:_locationLabel
-                         attribute:NSLayoutAttributeLeading
                          multiplier:1.0f
                          constant:0]];
   }

@@ -146,7 +146,7 @@ static NSUInteger AWFPageSize = 20;
   cell.placeholderView.text = person.abbreviatedName;
   cell.imageView.image = nil;
   cell.nameLabel.text = person.fullName;
-  cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m", person.distance];
+  cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m — %@", person.distance, person.locationName];
   return cell;
 }
 

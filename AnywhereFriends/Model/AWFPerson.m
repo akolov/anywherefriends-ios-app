@@ -77,6 +77,24 @@
   return nil;
 }
 
+- (NSString *)locationName {
+  NSString *thoroughfare = self.placemark[@"thoroughfare"];
+  NSString *locality = self.placemark[@"locality"];
+
+  if ([thoroughfare length] != 0 && [locality length] != 0) {
+    return [NSString stringWithFormat:@"%@, %@", thoroughfare, locality];
+  }
+  else if ([locality length] != 0) {
+    return [NSString stringWithFormat:@"%@", locality];
+  }
+  else if ([thoroughfare length] != 0) {
+    return [NSString stringWithFormat:@"%@", thoroughfare];
+  }
+  else {
+    return NSLocalizedString(@"AWF_UNKNOWN_LOCATION", nil);
+  }
+}
+
 #pragma mark - NSObject
 
 - (NSString *)description {

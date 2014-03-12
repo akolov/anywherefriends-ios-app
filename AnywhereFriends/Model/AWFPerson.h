@@ -36,5 +36,6 @@
 
 - (NSString *)fullName;
 - (NSString *)abbreviatedName;
+- (NSString *)locationName;
 
 @end

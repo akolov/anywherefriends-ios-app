@@ -68,25 +68,9 @@
                                            NSForegroundColorAttributeName: [UIColor grayColor]}};
     NSString *lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date]
                                                                        toDate:self.person.location.timestamp];
-    NSString *thoroughfare = self.person.placemark[@"thoroughfare"];
-    NSString *locality = self.person.placemark[@"locality"];
-    NSString *location;
-
-    if ([thoroughfare length] != 0 && [locality length] != 0) {
-      location = [NSString stringWithFormat:@"%@, %@", thoroughfare, locality];
-    }
-    else if ([locality length] != 0) {
-      location = [NSString stringWithFormat:@"%@", locality];
-    }
-    else if ([thoroughfare length] != 0) {
-      location = [NSString stringWithFormat:@"%@", thoroughfare];
-    }
-    else {
-      location = NSLocalizedString(@"AWF_UNKNOWN_LOCATION", nil);
-    }
 
     NSString *markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you — %@</em>",
-                        location, self.person.distance, lastUpdated];
+                        self.person.locationName, self.person.distance, lastUpdated];
 
     AWFProfileHeaderView *view = [[AWFProfileHeaderView alloc] init];
     view.descriptionLabel.text = self.person.bio;
