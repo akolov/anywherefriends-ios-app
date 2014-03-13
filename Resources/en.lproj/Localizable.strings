@@ -133,6 +133,9 @@
 /* Title for the Searches search scope */
 "AWF_SEARCH_SCOPE_SEARCHES_TITLE" = "Discover";
 
+/* Unknown location label */
+"AWF_UNKNOWN_LOCATION" = "Unknown Location";
+
 /* Weight */
 "AWF_WEIGHT" = "Weight";
 
