@@ -43,7 +43,7 @@
   messages.tabBarItem.image = [UIImage imageNamed:@"messages"];
   AWFNavigationController *messagesNavigation = [[AWFNavigationController alloc] initWithRootViewController:messages];
   messagesNavigation.tabBarItem.title = NSLocalizedString(@"AWF_MESSAGES_VIEW_CONTROLLER_TITLE", nil);
-  messagesNavigation.tabBarItem.image = [UIImage imageNamed:@"friends"];
+  messagesNavigation.tabBarItem.image = [UIImage imageNamed:@"messages"];
 
   UITabBarController *tabs = [[UITabBarController alloc] init];
   tabs.viewControllers = @[peopleNavigation, friendsNavigation, messagesNavigation];
