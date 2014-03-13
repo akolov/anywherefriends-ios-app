@@ -24,17 +24,20 @@
   [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
   [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
 
-  AWFNearbyViewController *nearby = [[AWFNearbyViewController alloc] init];
-  AWFNavigationController *nearbyNavigation = [[AWFNavigationController alloc] initWithRootViewController:nearby];
+  AWFNearbyViewController *people = [[AWFNearbyViewController alloc] init];
+  AWFNavigationController *peopleNavigation = [[AWFNavigationController alloc] initWithRootViewController:people];
+  peopleNavigation.tabBarItem.image = [UIImage imageNamed:@"people"];
 
   UIViewController *friends = [[UIViewController alloc] init];
   friends.title = @"Friends";
+  friends.tabBarItem.image = [UIImage imageNamed:@"friends"];
 
   UIViewController *messages = [[UIViewController alloc] init];
   messages.title = @"Messages";
+  messages.tabBarItem.image = [UIImage imageNamed:@"messages"];
 
   UITabBarController *tabs = [[UITabBarController alloc] init];
-  tabs.viewControllers = @[nearbyNavigation, friends, messages];
+  tabs.viewControllers = @[peopleNavigation, friends, messages];
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
