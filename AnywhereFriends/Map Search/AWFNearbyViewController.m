@@ -27,10 +27,8 @@
 #import "AWFProfileViewController.h"
 #import "AWFSession.h"
 
-
 static double AWFRadius = 20000.0;
 static NSUInteger AWFPageSize = 20;
-
 
 @interface AWFNearbyViewController () <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -46,7 +44,6 @@ static NSUInteger AWFPageSize = 20;
 
 @end
 
-
 @implementation AWFNearbyViewController
 
 - (void)viewDidLoad {
@@ -55,12 +52,6 @@ static NSUInteger AWFPageSize = 20;
   self.automaticallyAdjustsScrollViewInsets = NO;
   self.title = NSLocalizedString(@"AWF_PEOPLE_VIEW_CONTROLLER_TITLE", nil);
   self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
-
-  UIBezierPath *menuIcon = [UIBezierPath menuGlyph];
-
-  AWFIconButton *menuButton = [[AWFIconButton alloc] initWithFrame:CGRectMake(0, 0, menuIcon.bounds.size.width, menuIcon.bounds.size.height)];
-  menuButton.icon.path = menuIcon;
-  [menuButton setIconColor:[UIColor colorWithWhite:1.0f alpha:0.7f] forState:UIControlStateNormal];
 
   // Set up view
 

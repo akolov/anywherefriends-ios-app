@@ -29,6 +29,7 @@
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
 		FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */; };
+		FA57F9D918D24A0900E12B5F /* AWFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9D818D24A0900E12B5F /* AWFViewController.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
 		FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */; };
@@ -160,6 +161,8 @@
 		FA4532EA188B411400A1E242 /* AWFGender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFGender.h; sourceTree = "<group>"; };
 		FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderFormatter.h; sourceTree = "<group>"; };
 		FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderFormatter.m; sourceTree = "<group>"; };
+		FA57F9D718D24A0900E12B5F /* AWFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFViewController.h; sourceTree = "<group>"; };
+		FA57F9D818D24A0900E12B5F /* AWFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFViewController.m; sourceTree = "<group>"; };
 		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
 		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
@@ -189,7 +192,7 @@
 		FADBF66A17ADB68E00325DD1 /* AnywhereFriends-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AnywhereFriends-Prefix.pch"; sourceTree = "<group>"; };
 		FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFAppDelegate.h; sourceTree = "<group>"; };
 		FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWFAppDelegate.m; sourceTree = "<group>"; };
-		FADBF66E17ADB68E00325DD1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FADBF66E17ADB68E00325DD1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../AnywhereFriends/Images.xcassets; sourceTree = "<group>"; };
 		FADBF67417ADB68E00325DD1 /* AnywhereFriendsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnywhereFriendsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADBF67517ADB68E00325DD1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		FADBF67D17ADB68E00325DD1 /* AnywhereFriendsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnywhereFriendsTests-Info.plist"; sourceTree = "<group>"; };
@@ -432,7 +435,8 @@
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
-				FADBF66E17ADB68E00325DD1 /* Images.xcassets */,
+				FA57F9D718D24A0900E12B5F /* AWFViewController.h */,
+				FA57F9D818D24A0900E12B5F /* AWFViewController.m */,
 				FADBF66317ADB68E00325DD1 /* Supporting Files */,
 			);
 			path = AnywhereFriends;
@@ -530,6 +534,7 @@
 		FADBF69717ADBADC00325DD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FADBF66E17ADB68E00325DD1 /* Images.xcassets */,
 				FADE216417BCF58700D3A62B /* Temporary */,
 				FA11ACD417B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf */,
 				FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */,
@@ -833,6 +838,7 @@
 				FA11ACCC17B1389400028A55 /* AWFIconLabelButton.m in Sources */,
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,
+				FA57F9D918D24A0900E12B5F /* AWFViewController.m in Sources */,
 				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
 				FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */,
 				FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */,

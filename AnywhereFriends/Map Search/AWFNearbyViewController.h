@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
+@import UIKit;
+@import MapKit;
 
+#import "AWFViewController.h"
 
-@interface AWFNearbyViewController : UIViewController
+@interface AWFNearbyViewController : AWFViewController
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MKMapView *mapView;

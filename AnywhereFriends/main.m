@@ -6,13 +6,12 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "AWFAppDelegate.h"
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
   @autoreleasepool {
-      return UIApplicationMain(argc, argv, nil, NSStringFromClass([AWFAppDelegate class]));
+    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AWFAppDelegate class]));
   }
 }
