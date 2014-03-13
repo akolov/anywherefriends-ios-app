@@ -171,8 +171,10 @@ static NSUInteger AWFPageSize = 20;
   }
 
   CGFloat dy = scrollView.contentOffset.y + [self.topLayoutGuide length];
-  CGFloat threshold = (CGRectGetHeight(self.view.bounds) - self.tableView.rowHeight * 1.5f -
+  CGFloat threshold = (CGRectGetHeight(self.view.bounds) - self.tableView.rowHeight * 2.5f -
                        [self.topLayoutGuide length] - [self.bottomLayoutGuide length]);
+  CGFloat position = (CGRectGetHeight(self.view.bounds) - self.tableView.rowHeight * 0.5f -
+                      [self.topLayoutGuide length] - [self.bottomLayoutGuide length]);
 
   if (dy < 0) {
     self.mapContainerView.frame = ({
@@ -183,18 +185,22 @@ static NSUInteger AWFPageSize = 20;
     });
 
     if (-dy >= threshold) {
-      self.tableView.contentInset = ({
-        UIEdgeInsets inset = self.tableView.contentInset;
-        inset.top = -scrollView.contentOffset.y;
-        inset;
-      });
+      [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1.0f initialSpringVelocity:0 options:0 animations:^{
+        self.tableView.contentOffset = CGPointMake(0, -position);
+        self.tableView.contentInset = ({
+          UIEdgeInsets inset = self.tableView.contentInset;
+          inset.top = position;
+          inset;
+        });
+      } completion:NULL];
 
       self.tableView.scrollEnabled = NO;
       self.mapView.scrollEnabled = YES;
 
-
       AWFPerson *first = self.people.firstObject;
-      [self.mapView showAnnotations:@[self.annotations[first.personID], self.mapView.userLocation] animated:YES];
+      if (first) {
+        [self.mapView showAnnotations:@[self.annotations[first.personID], self.mapView.userLocation] animated:YES];
+      }
     }
   }
 
