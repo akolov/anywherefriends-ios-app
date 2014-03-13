@@ -212,7 +212,6 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
     [placemarkDict setValue:placemark.subLocality forKey:@"subLocality"];
     [placemarkDict setValue:placemark.thoroughfare forKey:@"thoroughfare"];
     [placemarkDict setValue:placemark.subThoroughfare forKey:@"subThoroughfare"];
-    [placemarkDict setValue:placemark.region forKey:@"region"];
 
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:placemarkDict options:0 error:&error];
