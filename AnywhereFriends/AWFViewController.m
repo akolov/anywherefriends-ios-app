@@ -7,6 +7,7 @@
 //
 
 #import "AWFViewController.h"
+#import "AWFNavigationTitleView.h"
 
 @interface AWFViewController ()
 
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
   self.navigationItem.rightBarButtonItem =
     [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
                                      style:UIBarButtonItemStylePlain

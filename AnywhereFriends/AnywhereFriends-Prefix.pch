@@ -4,10 +4,11 @@
 //  The contents of this file are implicitly included at the beginning of every source file.
 //
 
-#import <Availability.h>
+@import Darwin.Availability;
+@import Darwin.POSIX.libgen;
 
-#ifndef __IPHONE_3_0
-#warning "This project uses features only available in iOS SDK 3.0 and later."
+#ifndef __IPHONE_7_0
+#warning "This project uses features only available in iOS SDK 7.0 and later."
 #endif
 
 #ifdef __OBJC__
@@ -23,7 +24,23 @@
   #import "UIView+Autolayout.h"
   #import "UIView+Frame.h"
 
-  #define ErrorLog(error) NSLog(@"*** ERROR: %@", error)
+  #ifdef DEBUG
+  #  define DEBUG_MODE 1
+  #else
+  #  define DEBUG_MODE 0
+  #endif
+
+  #ifndef ErrorLog
+  #define ErrorLog(format, ...) \
+    do { \
+      if (DEBUG_MODE) { \
+        char buf[] = __FILE__; \
+        NSLog([@" *** Error (%s:%d:%s): " stringByAppendingString:format], \
+          basename(buf), __LINE__, __func__, # __VA_ARGS__); \
+      } \
+    } while (0)
+  #endif
+
   #define AWF_METRES_IN_KILOMETRE 1000.0
   #define AWF_KILOMETRES_IN_DEGREE 111.32
   #define AWF_METRES_IN_DEGREE (AWF_KILOMETRES_IN_DEGREE * AWF_METRES_IN_KILOMETRE)

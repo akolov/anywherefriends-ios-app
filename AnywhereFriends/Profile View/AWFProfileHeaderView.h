@@ -6,16 +6,18 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "AWFLabelButton.h"
+@import UIKit;
 
+@class AWFIconButton;
+@class AWFLabelButton;
 
 @interface AWFProfileHeaderView : UIView
 
-@property (nonatomic, weak, readonly) UICollectionView *photoCollectionView;
-@property (nonatomic, weak, readonly) UILabel *descriptionLabel;
-@property (nonatomic, weak, readonly) UILabel *locationLabel;
-@property (nonatomic, weak, readonly) AWFLabelButton *followButton;
-@property (nonatomic, weak, readonly) AWFLabelButton *messageButton;
+@property (nonatomic, strong, readonly) UICollectionView *photoCollectionView;
+@property (nonatomic, strong, readonly) UILabel *descriptionLabel;
+@property (nonatomic, strong, readonly) UILabel *locationLabel;
+@property (nonatomic, strong, readonly) AWFIconButton *locationButton;
+@property (nonatomic, strong, readonly) AWFLabelButton *friendButton;
+@property (nonatomic, strong, readonly) AWFLabelButton *messageButton;
 
 @end

@@ -10,15 +10,18 @@
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <FormatterKit/TTTTimeIntervalFormatter.h>
+#import <ReactiveCocoa/RACEXTScope.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <Slash/Slash.h>
 
 #import "AWFAgeFormatter.h"
 #import "AWFGenderFormatter.h"
 #import "AWFHeightFormatter.h"
+#import "AWFLabelButton.h"
 #import "AWFPhotoCollectionViewCell.h"
 #import "AWFProfileTableViewCell.h"
+#import "AWFSession.h"
 #import "AWFWeightFormatter.h"
-
 
 @interface AWFProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -30,8 +33,9 @@
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
 
-@end
+- (void)onFriendButton:(id)sender;
 
+@end
 
 @implementation AWFProfileViewController
 
@@ -78,7 +82,9 @@
     view.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
     view.photoCollectionView.dataSource = self;
     view.photoCollectionView.delegate = self;
-    view.followButton.selected = YES;
+    view.friendButton.selected = YES;
+
+    [view.friendButton addTarget:self action:@selector(onFriendButton:) forControlEvents:UIControlEventTouchUpInside];
 
     CGRect bounds;
     bounds.size.width = CGRectGetWidth(self.tableView.bounds);
@@ -236,6 +242,18 @@
     _timeFormatter = [[TTTTimeIntervalFormatter alloc] init];
   }
   return _timeFormatter;
+}
+
+#pragma mark - Actions
+
+- (void)onFriendButton:(id)sender {
+  [[[AWFSession sharedSession] friendUser:self.person]
+   subscribeNext:^(id x) {
+
+   }
+   error:^(NSError *error) {
+     ErrorLog(error.localizedDescription);
+   }];
 }
 
 #pragma mark - Public methods

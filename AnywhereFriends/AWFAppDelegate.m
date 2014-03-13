@@ -7,6 +7,7 @@
 //
 
 #import "AWFAppDelegate.h"
+#import "AWFFriendsViewController.h"
 #import "AWFLocationManager.h"
 #import "AWFLoginViewController.h"
 #import "AWFNearbyViewController.h"
@@ -25,19 +26,27 @@
   [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
 
   AWFNearbyViewController *people = [[AWFNearbyViewController alloc] init];
+  people.title = NSLocalizedString(@"AWF_PEOPLE_VIEW_CONTROLLER_TITLE", nil);
   AWFNavigationController *peopleNavigation = [[AWFNavigationController alloc] initWithRootViewController:people];
+  peopleNavigation.tabBarItem.title = NSLocalizedString(@"AWF_PEOPLE_VIEW_CONTROLLER_TITLE", nil);
   peopleNavigation.tabBarItem.image = [UIImage imageNamed:@"people"];
 
-  UIViewController *friends = [[UIViewController alloc] init];
-  friends.title = @"Friends";
+  AWFFriendsViewController *friends = [[AWFFriendsViewController alloc] init];
+  friends.title = NSLocalizedString(@"AWF_FRIENDS_VIEW_CONTROLLER_TITLE", nil);
   friends.tabBarItem.image = [UIImage imageNamed:@"friends"];
+  AWFNavigationController *friendsNavigation = [[AWFNavigationController alloc] initWithRootViewController:friends];
+  friendsNavigation.tabBarItem.title = NSLocalizedString(@"AWF_FRIENDS_VIEW_CONTROLLER_TITLE", nil);
+  friendsNavigation.tabBarItem.image = [UIImage imageNamed:@"friends"];
 
   UIViewController *messages = [[UIViewController alloc] init];
-  messages.title = @"Messages";
+  messages.title = NSLocalizedString(@"AWF_MESSAGES_VIEW_CONTROLLER_TITLE", nil);
   messages.tabBarItem.image = [UIImage imageNamed:@"messages"];
+  AWFNavigationController *messagesNavigation = [[AWFNavigationController alloc] initWithRootViewController:messages];
+  messagesNavigation.tabBarItem.title = NSLocalizedString(@"AWF_MESSAGES_VIEW_CONTROLLER_TITLE", nil);
+  messagesNavigation.tabBarItem.image = [UIImage imageNamed:@"friends"];
 
   UITabBarController *tabs = [[UITabBarController alloc] init];
-  tabs.viewControllers = @[peopleNavigation, friends, messages];
+  tabs.viewControllers = @[peopleNavigation, friendsNavigation, messagesNavigation];
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];

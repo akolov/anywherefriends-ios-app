@@ -9,6 +9,7 @@
 @import Foundation;
 @import CoreLocation;
 
+@class AWFPerson;
 @class RACSignal;
 
 @interface AWFSession : NSObject
@@ -35,9 +36,12 @@
 - (RACSignal *)closeSession;
 
 - (RACSignal *)getUserSelf;
+- (RACSignal *)getUserFriends;
 - (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
                          pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize;
 
 - (RACSignal *)updateUserSelfLocation:(CLPlacemark *)placemark;
+- (RACSignal *)friendUser:(AWFPerson *)person;
+- (RACSignal *)unfriendUser:(AWFPerson *)person;
 
 @end

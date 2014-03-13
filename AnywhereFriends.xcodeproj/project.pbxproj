@@ -30,6 +30,7 @@
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
 		FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */; };
 		FA57F9D918D24A0900E12B5F /* AWFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9D818D24A0900E12B5F /* AWFViewController.m */; };
+		FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
 		FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */; };
@@ -163,6 +164,8 @@
 		FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderFormatter.m; sourceTree = "<group>"; };
 		FA57F9D718D24A0900E12B5F /* AWFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFViewController.h; sourceTree = "<group>"; };
 		FA57F9D818D24A0900E12B5F /* AWFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFViewController.m; sourceTree = "<group>"; };
+		FA57F9DB18D268C300E12B5F /* AWFFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFFriendsViewController.h; sourceTree = "<group>"; };
+		FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFFriendsViewController.m; sourceTree = "<group>"; };
 		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
 		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
@@ -345,6 +348,15 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		FA57F9DA18D268AE00E12B5F /* Friends View */ = {
+			isa = PBXGroup;
+			children = (
+				FA57F9DB18D268C300E12B5F /* AWFFriendsViewController.h */,
+				FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */,
+			);
+			path = "Friends View";
+			sourceTree = "<group>";
+		};
 		FA8AA2DE188330C6005FC371 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +443,7 @@
 				FA8D71C51868745A00C4B6CC /* Helpers */,
 				FADBF68B17ADB73500325DD1 /* Login */,
 				FADE215517BCD30800D3A62B /* Map Search */,
+				FA57F9DA18D268AE00E12B5F /* Friends View */,
 				FA3092F318098A1F001F25F2 /* Navigation */,
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
@@ -830,6 +843,7 @@
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
 				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
+				FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,

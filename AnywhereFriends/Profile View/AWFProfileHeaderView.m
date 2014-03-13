@@ -10,22 +10,21 @@
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 
-#import "UIBezierPath+AccessoryArrowGlyph.h"
-
 #import "AWFIconButton.h"
+#import "AWFLabelButton.h"
 #import "AWFPhotoCollectionViewCell.h"
-
+#import "UIBezierPath+AccessoryArrowGlyph.h"
 
 @interface AWFProfileHeaderView ()
 
-@property (nonatomic, weak) UICollectionView *photoCollectionView;
-@property (nonatomic, weak) UILabel *descriptionLabel;
-@property (nonatomic, weak) UILabel *locationLabel;
-@property (nonatomic, weak) AWFLabelButton *followButton;
-@property (nonatomic, weak) AWFLabelButton *messageButton;
+@property (nonatomic, strong) UICollectionView *photoCollectionView;
+@property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *locationLabel;
+@property (nonatomic, strong) AWFIconButton *locationButton;
+@property (nonatomic, strong) AWFLabelButton *friendButton;
+@property (nonatomic, strong) AWFLabelButton *messageButton;
 
 @end
-
 
 @implementation AWFProfileHeaderView
 
@@ -49,62 +48,58 @@
 
     // Set up labels
 
-    UILabel *descriptionLabel = [UILabel autolayoutView];
-    descriptionLabel.font = [UIFont helveticaNeueFontOfSize:14.0f];
-    descriptionLabel.numberOfLines = 0;
-    descriptionLabel.preferredMaxLayoutWidth = frame.size.width - 40.0f;
-    descriptionLabel.textColor = [UIColor grayColor];
-    self.descriptionLabel = descriptionLabel;
-    [self addSubview:descriptionLabel];
+    self.descriptionLabel = [UILabel autolayoutView];
+    self.descriptionLabel.font = [UIFont helveticaNeueFontOfSize:14.0f];
+    self.descriptionLabel.numberOfLines = 0;
+    self.descriptionLabel.preferredMaxLayoutWidth = frame.size.width - 40.0f;
+    self.descriptionLabel.textColor = [UIColor grayColor];
+    [self addSubview:self.descriptionLabel];
 
     // Set up location button
 
-    UILabel *locationLabel = [UILabel autolayoutView];
-    locationLabel.numberOfLines = 0;
-    locationLabel.preferredMaxLayoutWidth = frame.size.width - 40.0f;
-    self.locationLabel = locationLabel;
-    [self addSubview:locationLabel];
+    self.locationLabel = [UILabel autolayoutView];
+    self.locationLabel.numberOfLines = 0;
+    self.locationLabel.preferredMaxLayoutWidth = frame.size.width - 40.0f;
+    [self addSubview:self.locationLabel];
 
-    AWFIconButton *locationButton = [AWFIconButton autolayoutView];
-    locationButton.icon.path = [UIBezierPath accessoryArrowGlyph];
-    [locationButton setIconColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self addSubview:locationButton];
+    self.locationButton = [AWFIconButton autolayoutView];
+    self.locationButton.icon.path = [UIBezierPath accessoryArrowGlyph];
+    [self.locationButton setIconColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self addSubview:self.locationButton];
 
     // Set up other buttons
 
-    AWFLabelButton *followButton = [AWFLabelButton autolayoutView];
-    followButton.layer.cornerRadius = 5.0f;
-    followButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
-    [followButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FOLLOW_BUTTON_TITLE", @"Title of the follow button of the profile view") forState:UIControlStateNormal];
-    [followButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FOLLOWING_BUTTON_TITLE", @"Title of the following button of the profile view") forState:UIControlStateSelected];
-    [followButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [followButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [followButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateSelected];
-    self.followButton = followButton;
-    [self addSubview:followButton];
+    self.friendButton = [AWFLabelButton autolayoutView];
+    self.friendButton.layer.cornerRadius = 5.0f;
+    self.friendButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
+    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ADD_FRIEND_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FRIENDS_BUTTON_TITLE", nil) forState:UIControlStateSelected];
+    [self.friendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.friendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [self.friendButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self.friendButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateSelected];
+    [self addSubview:self.friendButton];
 
-    AWFLabelButton *messageButton = [AWFLabelButton autolayoutView];
-    messageButton.layer.cornerRadius = 5.0f;
-    messageButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
-    [messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_OFFLINE_BUTTON_TITLE", @"Title of the offline button of the profile view") forState:UIControlStateNormal];
-    [messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ONLINE_BUTTON_TITLE", @"Title of the online button of the profile view") forState:UIControlStateSelected];
-    [messageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [messageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [messageButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [messageButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateSelected];
-    self.messageButton = messageButton;
-    [self addSubview:messageButton];
+    self.messageButton = [AWFLabelButton autolayoutView];
+    self.messageButton.layer.cornerRadius = 5.0f;
+    self.messageButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
+    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_OFFLINE_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ONLINE_BUTTON_TITLE", nil) forState:UIControlStateSelected];
+    [self.messageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.messageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [self.messageButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self.messageButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateSelected];
+    [self addSubview:self.messageButton];
 
     // Set up constraints
 
-    NSDictionary *const views = NSDictionaryOfVariableBindings(photoCollectionView, descriptionLabel, locationLabel, locationButton, followButton, messageButton);
+    NSDictionary *const views = NSDictionaryOfVariableBindings(photoCollectionView, _descriptionLabel, _locationLabel, _locationButton, _friendButton, _messageButton);
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[photoCollectionView]|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[followButton]-[messageButton(==followButton)]-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20.0-[locationLabel][locationButton(6.0)]-20.0-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_friendButton]-[_messageButton(==_friendButton)]-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20.0-[_locationLabel][_locationButton(6.0)]-20.0-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[photoCollectionView(159.0)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[photoCollectionView]-16.0-[descriptionLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[descriptionLabel]-16.0-[locationLabel]-20.0-[followButton(26.0)]|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[photoCollectionView]-16.0-[_descriptionLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_descriptionLabel]-16.0-[_locationLabel]-20.0-[_friendButton(26.0)]|" options:0 metrics:nil views:views]];
   }
   return self;
 }

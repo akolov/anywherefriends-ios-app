@@ -19,6 +19,9 @@
 /* Eye Color */
 "AWF_EYE_COLOR" = "Eye Color";
 
+/* Title of the Friends view */
+"AWF_FRIENDS_VIEW_CONTROLLER_TITLE" = "Friends";
+
 /* Gender */
 "AWF_GENDER" = "Gender";
 
@@ -103,14 +106,17 @@
 /* Title of the sign up form */
 "AWF_LOGIN_FORM_SIGN_UP_TITLE" = "Please sign up";
 
+/* Title of the Messages view */
+"AWF_MESSAGES_VIEW_CONTROLLER_TITLE" = "Messages";
+
 /* Title of the People view controller */
 "AWF_PEOPLE_VIEW_CONTROLLER_TITLE" = "People";
 
-/* Title of the following button of the profile view */
-"AWF_PROFILE_FOLLOWING_BUTTON_TITLE" = "Following";
+/* Title of the friend button of the profile view */
+"AWF_PROFILE_ADD_FRIEND_BUTTON_TITLE" = "Add Friend";
 
-/* Title of the follow button of the profile view */
-"AWF_PROFILE_FOLLOW_BUTTON_TITLE" = "Follow";
+/* Title of the friends button of the profile view */
+"AWF_PROFILE_FRIENDS_BUTTON_TITLE" = "Friends";
 
 /* Title of the offline button of the profile view */
 "AWF_PROFILE_OFFLINE_BUTTON_TITLE" = "Offline";

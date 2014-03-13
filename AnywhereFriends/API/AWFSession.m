@@ -7,16 +7,16 @@
 //
 
 #import <AFNetworking/AFNetworking.h>
-#import <libextobjc/EXTScope.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-#import "AWFSession.h"
 #import "AWFPerson.h"
-
+#import "AWFSession.h"
 
 static NSString *AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
 
 static NSString *AWFAPIPathUser = @"user/";
+static NSString *AWFAPIPathUserFriends = @"user/friends";
 static NSString *AWFAPIPathUsers = @"users/";
 static NSString *AWFAPIPathLogin = @"login/";
 static NSString *AWFAPIPathLogout = @"logout/";
@@ -24,6 +24,7 @@ static NSString *AWFAPIPathLogout = @"logout/";
 static NSString *AWFURLParameterEmail = @"email";
 static NSString *AWFURLParameterPassword = @"password";
 static NSString *AWFURLParameterFirstName = @"first_name";
+static NSString *AWFURLParameterIDs = @"ids";
 static NSString *AWFURLParameterLastName = @"last_name";
 static NSString *AWFURLParameterLocation = @"location";
 static NSString *AWFURLParameterGender = @"gender";
@@ -77,7 +78,7 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
   return _sessionManager;
 }
 
-#pragma mark - Login methods
+#pragma mark - Login and Signup
 
 - (RACSignal *)createUserWithEmail:(NSString *)email
                           password:(NSString *)password
@@ -88,7 +89,6 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                       twitterToken:(NSString *)twitterToken
                            vkToken:(NSString *)vkToken {
   @weakify(self);
-
   return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
     @strongify(self);
 
@@ -124,7 +124,6 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                        twitterToken:(NSString *)twitterToken
                             vkToken:(NSString *)vkToken {
   @weakify(self);
-
   return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
     @strongify(self);
 
@@ -153,7 +152,6 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
 
 - (RACSignal *)closeSession {
   @weakify(self);
-
   return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
     @strongify(self);
 
@@ -173,7 +171,7 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
   }];
 }
 
-#pragma mark - Profile methods
+#pragma mark - Profile
 
 - (RACSignal *)getUserSelf {
   @weakify(self);
@@ -239,12 +237,11 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
   }];
 }
 
-#pragma mark - People search
+#pragma mark - Search
 
 - (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
                          pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize {
   @weakify(self);
-
   return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
     @strongify(self);
 
@@ -272,6 +269,79 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                                   failure:^(NSURLSessionDataTask *task, NSError *error) {
                                     [subscriber sendError:error];
                                   }];
+
+    return [RACDisposable disposableWithBlock:^{
+      [task cancel];
+    }];
+  }];
+}
+
+#pragma mark - Friends
+
+- (RACSignal *)getUserFriends {
+  @weakify(self);
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSURLSessionDataTask *task = [self.sessionManager GET:AWFAPIPathUserFriends
+                                               parameters:nil
+                                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                    [subscriber sendNext:responseObject];
+                                                    [subscriber sendCompleted];
+                                                  }
+                                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                    [subscriber sendError:error];
+                                                  }];
+
+    return [RACDisposable disposableWithBlock:^{
+      [task cancel];
+    }];
+  }];
+}
+
+- (RACSignal *)friendUser:(AWFPerson *)person {
+  if (!person || !person.personID) {
+    return [RACSignal empty];
+  }
+
+  @weakify(self);
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSURLSessionDataTask *task = [self.sessionManager POST:AWFAPIPathUserFriends
+                                                parameters:@{AWFURLParameterIDs: person.personID}
+                                                   success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                     [subscriber sendNext:responseObject];
+                                                     [subscriber sendCompleted];
+                                                   }
+                                                   failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                     [subscriber sendError:error];
+                                                   }];
+
+    return [RACDisposable disposableWithBlock:^{
+      [task cancel];
+    }];
+  }];
+}
+
+- (RACSignal *)unfriendUser:(AWFPerson *)person {
+  if (!person || !person.personID) {
+    return [RACSignal empty];
+  }
+
+  @weakify(self);
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSURLSessionDataTask *task = [self.sessionManager DELETE:AWFAPIPathUserFriends
+                                                  parameters:@{AWFURLParameterIDs: person.personID}
+                                                     success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                       [subscriber sendNext:responseObject];
+                                                       [subscriber sendCompleted];
+                                                     }
+                                                     failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                       [subscriber sendError:error];
+                                                     }];
 
     return [RACDisposable disposableWithBlock:^{
       [task cancel];

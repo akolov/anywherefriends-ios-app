@@ -21,7 +21,6 @@
 #import "AWFLayoutGuide.h"
 #import "AWFLocationManager.h"
 #import "AWFNavigationBar.h"
-#import "AWFNavigationTitleView.h"
 #import "AWFNearbyViewCell.h"
 #import "AWFPerson.h"
 #import "AWFProfileViewController.h"
@@ -46,15 +45,12 @@ static NSUInteger AWFPageSize = 20;
 
 @implementation AWFNearbyViewController
 
+#pragma mark - View Life Cycle
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 
   self.automaticallyAdjustsScrollViewInsets = NO;
-  self.title = NSLocalizedString(@"AWF_PEOPLE_VIEW_CONTROLLER_TITLE", nil);
-  self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
-
-  // Set up view
-
   self.view.backgroundColor = [UIColor blackColor];
 
   {
@@ -96,15 +92,6 @@ static NSUInteger AWFPageSize = 20;
    addObserver:self selector:@selector(onNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
   [[NSNotificationCenter defaultCenter]
    addObserver:self selector:@selector(onNotification:) name:AWFLocationManagerDidUpdateLocationsNotification object:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -248,7 +235,7 @@ static NSUInteger AWFPageSize = 20;
   }
 }
 
-#pragma mark - Getters and Setters
+#pragma mark - Accessors
 
 - (void)setPeople:(NSArray *)people {
   _people = people;
@@ -294,7 +281,7 @@ static NSUInteger AWFPageSize = 20;
      [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
    }
    error:^(NSError *error) {
-     ErrorLog(error);
+     ErrorLog(error.localizedDescription);
    }];
 }
 
