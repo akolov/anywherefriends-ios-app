@@ -29,6 +29,7 @@
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
 		FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */; };
+		FA57837418D4776600F10FD7 /* AWFFriendsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57837318D4776600F10FD7 /* AWFFriendsViewCell.m */; };
 		FA57F9D918D24A0900E12B5F /* AWFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9D818D24A0900E12B5F /* AWFViewController.m */; };
 		FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
@@ -161,6 +162,8 @@
 		FA4532EA188B411400A1E242 /* AWFGender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFGender.h; sourceTree = "<group>"; };
 		FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderFormatter.h; sourceTree = "<group>"; };
 		FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderFormatter.m; sourceTree = "<group>"; };
+		FA57837218D4776600F10FD7 /* AWFFriendsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFFriendsViewCell.h; sourceTree = "<group>"; };
+		FA57837318D4776600F10FD7 /* AWFFriendsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFFriendsViewCell.m; sourceTree = "<group>"; };
 		FA57F9D718D24A0900E12B5F /* AWFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFViewController.h; sourceTree = "<group>"; };
 		FA57F9D818D24A0900E12B5F /* AWFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFViewController.m; sourceTree = "<group>"; };
 		FA57F9DB18D268C300E12B5F /* AWFFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFFriendsViewController.h; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 		FA57F9DA18D268AE00E12B5F /* Friends View */ = {
 			isa = PBXGroup;
 			children = (
+				FA57837218D4776600F10FD7 /* AWFFriendsViewCell.h */,
+				FA57837318D4776600F10FD7 /* AWFFriendsViewCell.m */,
 				FA57F9DB18D268C300E12B5F /* AWFFriendsViewController.h */,
 				FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */,
 			);
@@ -555,10 +560,10 @@
 		FADE215517BCD30800D3A62B /* Map Search */ = {
 			isa = PBXGroup;
 			children = (
-				FADE215B17BCDB1700D3A62B /* AWFNearbyViewController.h */,
-				FADE215C17BCDB1700D3A62B /* AWFNearbyViewController.m */,
 				FA8D71CD18688EC000C4B6CC /* AWFNearbyViewCell.h */,
 				FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */,
+				FADE215B17BCDB1700D3A62B /* AWFNearbyViewController.h */,
+				FADE215C17BCDB1700D3A62B /* AWFNearbyViewController.m */,
 			);
 			path = "Map Search";
 			sourceTree = "<group>";
@@ -824,6 +829,7 @@
 				FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */,
 				FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
+				FA57837418D4776600F10FD7 /* AWFFriendsViewCell.m in Sources */,
 				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
 				FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */,
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
