@@ -112,7 +112,7 @@
 - (UIView *)tableFooterView {
   UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 50.0f)];
 
-  UIButton *signupButton = [UIButton autolayoutButton];
+  UIButton *signupButton = [UIButton autolayoutView];
   signupButton.backgroundColor = nil;
   signupButton.frame = CGRectMake(10.0f, 0, 300.0f, 44.0f);
   signupButton.layer.cornerRadius = 2.0f;

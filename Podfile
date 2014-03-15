@@ -2,6 +2,7 @@ platform :ios, '7.0'
 
 pod 'AFNetworking', '~> 2.2.0'
 pod 'AXKCollectionViewTools', '~> 1.0.2'
+pod 'AXKViewLayout', :path => '~/Projects/My Libraries/AXKViewLayout'
 pod 'Facebook-iOS-SDK', '~> 3.12.0'
 pod 'FormatterKit', '~> 1.4.0'
 pod 'JRSwizzle', '~> 1.0'

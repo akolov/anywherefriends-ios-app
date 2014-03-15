@@ -59,7 +59,6 @@
 		FADBF69917ADBADC00325DD1 /* MAGNETOB.TTF in Resources */ = {isa = PBXBuildFile; fileRef = FADBF69817ADBADC00325DD1 /* MAGNETOB.TTF */; };
 		FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF69C17ADBFDF00325DD1 /* UIColor+CustomColors.m */; };
 		FADBF6A217ADC23600325DD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FADBF6A417ADC23600325DD1 /* Localizable.strings */; };
-		FADBF6A817ADC4E200325DD1 /* UIButton+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF6A717ADC4E200325DD1 /* UIButton+Autolayout.m */; };
 		FADBF6AA17ADC59E00325DD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF6A917ADC59E00325DD1 /* QuartzCore.framework */; };
 		FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF6AC17ADC78B00325DD1 /* UIView+Autolayout.m */; };
 		FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */; };
@@ -214,8 +213,6 @@
 		FADBF69F17ADC20300325DD1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FADBF6A317ADC23600325DD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FADBF6A517ADC23900325DD1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FADBF6A617ADC4E200325DD1 /* UIButton+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Autolayout.h"; sourceTree = "<group>"; };
-		FADBF6A717ADC4E200325DD1 /* UIButton+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Autolayout.m"; sourceTree = "<group>"; };
 		FADBF6A917ADC59E00325DD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FADBF6AB17ADC78B00325DD1 /* UIView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Autolayout.h"; sourceTree = "<group>"; };
 		FADBF6AC17ADC78B00325DD1 /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Autolayout.m"; sourceTree = "<group>"; };
@@ -524,8 +521,6 @@
 			children = (
 				FADBF6B417ADCE9800325DD1 /* CGContext+Blocks.h */,
 				FADBF6B517ADCE9800325DD1 /* CGContext+Blocks.m */,
-				FADBF6A617ADC4E200325DD1 /* UIButton+Autolayout.h */,
-				FADBF6A717ADC4E200325DD1 /* UIButton+Autolayout.m */,
 				FADBF6B717ADCF6600325DD1 /* UIColor+ColorTools.h */,
 				FADBF6B817ADCF6600325DD1 /* UIColor+ColorTools.m */,
 				FADBF69B17ADBFDF00325DD1 /* UIColor+CustomColors.h */,
@@ -848,7 +843,6 @@
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
 				FA11ACB017B136EA00028A55 /* AWFLoginConnectViewCell.m in Sources */,
-				FADBF6A817ADC4E200325DD1 /* UIButton+Autolayout.m in Sources */,
 				FA11ACCC17B1389400028A55 /* AWFIconLabelButton.m in Sources */,
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,

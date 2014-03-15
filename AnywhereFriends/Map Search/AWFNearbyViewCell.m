@@ -35,42 +35,11 @@
     _locationLabel.textColor = [UIColor grayColor];
     [self.contentView addSubview:_locationLabel];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_nameLabel, _locationLabel, _placeholderView);
-
-    [self addConstraints:[NSLayoutConstraint
-                          constraintsWithVisualFormat:@"H:|-8.0-[_placeholderView(35.0)]-[_nameLabel]|"
-                          options:NSLayoutFormatAlignAllTop
-                          metrics:nil
-                          views:views]];
-    [self addConstraints:[NSLayoutConstraint
-                          constraintsWithVisualFormat:@"H:[_placeholderView]-[_locationLabel]|"
-                          options:0
-                          metrics:nil
-                          views:views]];
-    [self addConstraint:[NSLayoutConstraint
-                         constraintWithItem:_placeholderView
-                         attribute:NSLayoutAttributeCenterY
-                         relatedBy:NSLayoutRelationEqual
-                         toItem:self.contentView
-                         attribute:NSLayoutAttributeCenterY
-                         multiplier:1.0f
-                         constant:0]];
-    [self addConstraint:[NSLayoutConstraint
-                         constraintWithItem:_placeholderView
-                         attribute:NSLayoutAttributeHeight
-                         relatedBy:NSLayoutRelationEqual
-                         toItem:nil
-                         attribute:NSLayoutAttributeNotAnAttribute
-                         multiplier:1.0f
-                         constant:35.0f]];
-    [self addConstraint:[NSLayoutConstraint
-                         constraintWithItem:_placeholderView
-                         attribute:NSLayoutAttributeBottom
-                         relatedBy:NSLayoutRelationEqual
-                         toItem:_locationLabel
-                         attribute:NSLayoutAttributeBaseline
-                         multiplier:1.0f
-                         constant:0]];
+    [self.contentView pin:@"H:|-8.0-[placeholderView(35.0)]-[nameLabel]|" options:NSLayoutFormatAlignAllTop owner:self];
+    [self.contentView pin:@"H:[placeholderView]-[locationLabel]|" options:0 owner:self];
+    [_placeholderView pinToCenterInContainerOnAxis:UILayoutConstraintAxisVertical];
+    [_placeholderView pinEdge:NSLayoutAttributeBottom toView:_locationLabel edge:NSLayoutAttributeBaseline];
+    [_placeholderView pinHeight:35.0f withRelation:NSLayoutRelationEqual];
   }
   return self;
 }

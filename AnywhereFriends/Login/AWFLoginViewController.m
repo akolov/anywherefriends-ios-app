@@ -160,7 +160,7 @@
 
     // Login button
 
-    UIButton *loginButton = [UIButton autolayoutButton];
+    UIButton *loginButton = [UIButton autolayoutView];
     loginButton.backgroundColor = nil;
     loginButton.frame = CGRectMake(10.0f, 0, 300.0f, 44.0f);
     loginButton.layer.cornerRadius = 2.0f;
@@ -187,7 +187,7 @@
 
     // Forgot password button
 
-    UIButton *forgotButton = [UIButton autolayoutButton];
+    UIButton *forgotButton = [UIButton autolayoutView];
     forgotButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     forgotButton.titleLabel.font = [UIFont helveticaNeueCondensedLightFontOfSize:14.0f];
     forgotButton.titleLabel.minimumScaleFactor = 0.5f;
@@ -219,7 +219,7 @@
     NSString *markup = NSLocalizedString(@"AWF_LOGIN_FORM_SIGN_UP_BUTTON_TITLE", @"Title of the sign up button on the login form");
     NSAttributedString *attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
 
-    UIButton *signupButton = [UIButton autolayoutButton];
+    UIButton *signupButton = [UIButton autolayoutView];
     signupButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     signupButton.titleLabel.minimumScaleFactor = 0.5f;
     signupButton.titleLabel.numberOfLines = 1;
