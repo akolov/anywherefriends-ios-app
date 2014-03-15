@@ -10,8 +10,9 @@
 
 #import "AWFNearbyViewController.h"
 
-#import <libextobjc/EXTScope.h>
+#import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 
 #import "UIBezierPath+MenuGlyph.h"
 #import "UIBezierPath+MessagesGlyph.h"
