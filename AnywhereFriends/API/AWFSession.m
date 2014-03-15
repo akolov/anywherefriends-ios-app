@@ -18,7 +18,6 @@
 static NSString *AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
 
 static NSString *AWFAPIPathUser = @"user/";
-static NSString *AWFAPIPathUserSelf = @"user/self";
 static NSString *AWFAPIPathUserFriends = @"user/friends";
 static NSString *AWFAPIPathUsers = @"users/";
 static NSString *AWFAPIPathLogin = @"login/";
@@ -183,7 +182,7 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
     @strongify(self);
 
     NSURLSessionDataTask *task =
-    [self.sessionManager GET:AWFAPIPathUserSelf parameters:nil
+    [self.sessionManager GET:AWFAPIPathUser parameters:nil
                      success:^(NSURLSessionDataTask *task, id responseObject) {
                        self.currentUser = [AWFPerson personFromDictionary:responseObject];
                        [subscriber sendNext:self.currentUser];

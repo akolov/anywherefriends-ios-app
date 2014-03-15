@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *bio;
-@property (nonatomic, readonly) NSUInteger age;
+@property (nonatomic, readonly) NSNumber *age;
 @property (nonatomic, strong) NSDate *birthday;
 @property (nonatomic, strong) NSNumber *weight;
 @property (nonatomic, strong) NSNumber *height;

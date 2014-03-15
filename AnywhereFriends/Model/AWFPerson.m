@@ -42,12 +42,16 @@
   return person;
 }
 
-- (NSUInteger)age {
+- (NSNumber *)age {
+  if (!self.birthday) {
+    return nil;
+  }
+
   NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit
                                                                     fromDate:self.birthday
                                                                       toDate:[NSDate date]
                                                                      options:0];
-  return [ageComponents year];
+  return @([ageComponents year]);
 }
 
 - (NSString *)fullName {

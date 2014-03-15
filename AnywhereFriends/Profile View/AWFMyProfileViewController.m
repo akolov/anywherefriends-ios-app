@@ -25,6 +25,7 @@
    subscribeNext:^(AWFPerson *person) {
      self.person = person;
      [super viewDidLoad];
+     [self.tableView reloadData];
      self.navigationItem.rightBarButtonItem = self.editButtonItem;
    }
    error:^(NSError *error) {

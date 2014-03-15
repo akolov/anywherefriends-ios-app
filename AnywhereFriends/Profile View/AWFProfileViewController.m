@@ -174,15 +174,50 @@
 
     NSMutableArray *section1 = [NSMutableArray array];
 
-    NSString *gender = [[self.genderFormatter stringFromGender:self.person.gender] capitalizedString];
-    NSString *age = [self.ageFormatter stringFromAge:self.person.age];
-    NSString *birthday = [self.birthdayFormatter stringFromDate:self.person.birthday];
-    NSString *height = [self.heightFormatter stringFromHeight:self.person.height];
-    NSString *weight = [self.weightFormatter stringFromWeight:self.person.weight];
-    NSString *bodyBuild = [self.person.bodyBuild capitalizedString];
-    NSString *hairColor = [self.person.hairLength capitalizedString];
-    NSString *hairLength = [self.person.hairColor capitalizedString];
-    NSString *eyeColor = [self.person.eyeColor capitalizedString];
+    NSString *gender = @"—";
+    if (self.person.gender != AWFGenderUnknown) {
+      gender = [[self.genderFormatter stringFromGender:self.person.gender] capitalizedString];
+    }
+
+    NSString *age = @"—";
+    if (self.person.age) {
+      age = [self.ageFormatter stringFromAge:[self.person.age integerValue]];
+    }
+
+    NSString *birthday = @"—";
+    if (self.person.birthday) {
+      birthday = [self.birthdayFormatter stringFromDate:self.person.birthday];
+    }
+
+    NSString *height = @"—";
+    if (self.person.height) {
+      height = [self.heightFormatter stringFromHeight:self.person.height];
+    }
+
+    NSString *weight = @"—";
+    if (self.person.weight) {
+      weight = [self.weightFormatter stringFromWeight:self.person.weight];
+    }
+
+    NSString *bodyBuild = @"—";
+    if (self.person.bodyBuild) {
+      bodyBuild = [self.person.bodyBuild capitalizedString];
+    }
+
+    NSString *hairColor = @"—";
+    if (self.person.hairLength) {
+      hairColor = [self.person.hairLength capitalizedString];
+    }
+
+    NSString *hairLength = @"—";
+    if (self.person.hairColor) {
+      hairLength = [self.person.hairColor capitalizedString];
+    }
+
+    NSString *eyeColor = @"—";
+    if (self.person.eyeColor) {
+      eyeColor = [self.person.eyeColor capitalizedString];
+    }
 
     if (gender.length != 0) {
       [section1 addObject:@[NSLocalizedString(@"AWF_GENDER", nil), gender]];
