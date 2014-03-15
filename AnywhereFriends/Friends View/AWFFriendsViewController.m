@@ -54,8 +54,6 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
   format.preloadPolicy = HNKPreloadPolicyAll;
   [[HNKCache sharedCache] registerFormat:format];
 
-  self.automaticallyAdjustsScrollViewInsets = NO;
-
   self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
   self.tableView.backgroundColor = [UIColor whiteColor];
   self.tableView.dataSource = self;

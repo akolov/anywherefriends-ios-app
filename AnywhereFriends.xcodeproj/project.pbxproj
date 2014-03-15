@@ -107,6 +107,8 @@
 		FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE4760A17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m */; };
 		FAF0F3CF18D49E920063BB30 /* AWFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3CE18D49E920063BB30 /* AWFMapViewController.m */; };
 		FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3D118D49F7D0063BB30 /* MKMapView+AWFCentering.m */; };
+		FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3DF18D4AEBB0063BB30 /* AWFMessagesViewCell.m */; };
+		FAF0F3E318D4AEBB0063BB30 /* AWFMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,6 +281,10 @@
 		FAF0F3CE18D49E920063BB30 /* AWFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMapViewController.m; sourceTree = "<group>"; };
 		FAF0F3D018D49F7D0063BB30 /* MKMapView+AWFCentering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+AWFCentering.h"; sourceTree = "<group>"; };
 		FAF0F3D118D49F7D0063BB30 /* MKMapView+AWFCentering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+AWFCentering.m"; sourceTree = "<group>"; };
+		FAF0F3DE18D4AEBB0063BB30 /* AWFMessagesViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMessagesViewCell.h; sourceTree = "<group>"; };
+		FAF0F3DF18D4AEBB0063BB30 /* AWFMessagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMessagesViewCell.m; sourceTree = "<group>"; };
+		FAF0F3E018D4AEBB0063BB30 /* AWFMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMessagesViewController.h; sourceTree = "<group>"; };
+		FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMessagesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,6 +459,7 @@
 				FADE215517BCD30800D3A62B /* Map Search */,
 				FA57F9DA18D268AE00E12B5F /* Friends View */,
 				FAF0F3CC18D49E7D0063BB30 /* Map View */,
+				FAF0F3DD18D4AEBB0063BB30 /* Messages View */,
 				FA3092F318098A1F001F25F2 /* Navigation */,
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
@@ -653,6 +660,17 @@
 				FAF0F3CE18D49E920063BB30 /* AWFMapViewController.m */,
 			);
 			path = "Map View";
+			sourceTree = "<group>";
+		};
+		FAF0F3DD18D4AEBB0063BB30 /* Messages View */ = {
+			isa = PBXGroup;
+			children = (
+				FAF0F3DE18D4AEBB0063BB30 /* AWFMessagesViewCell.h */,
+				FAF0F3DF18D4AEBB0063BB30 /* AWFMessagesViewCell.m */,
+				FAF0F3E018D4AEBB0063BB30 /* AWFMessagesViewController.h */,
+				FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */,
+			);
+			path = "Messages View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -863,6 +881,7 @@
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
 				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
+				FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */,
 				FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
 				FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */,
@@ -872,6 +891,7 @@
 				FA11ACCC17B1389400028A55 /* AWFIconLabelButton.m in Sources */,
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,
+				FAF0F3E318D4AEBB0063BB30 /* AWFMessagesViewController.m in Sources */,
 				FA57F9D918D24A0900E12B5F /* AWFViewController.m in Sources */,
 				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
 				FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */,

@@ -11,10 +11,10 @@
 #import "AWFFriendsViewController.h"
 #import "AWFLocationManager.h"
 #import "AWFLoginViewController.h"
+#import "AWFMessagesViewController.h"
 #import "AWFNearbyViewController.h"
 #import "AWFNavigationController.h"
 #import "AWFSession.h"
-
 
 @implementation AWFAppDelegate
 
@@ -39,7 +39,7 @@
   friendsNavigation.tabBarItem.title = NSLocalizedString(@"AWF_FRIENDS_VIEW_CONTROLLER_TITLE", nil);
   friendsNavigation.tabBarItem.image = [UIImage imageNamed:@"friends"];
 
-  UIViewController *messages = [[UIViewController alloc] init];
+  AWFMessagesViewController *messages = [[AWFMessagesViewController alloc] init];
   messages.title = NSLocalizedString(@"AWF_MESSAGES_VIEW_CONTROLLER_TITLE", nil);
   messages.tabBarItem.image = [UIImage imageNamed:@"messages"];
   AWFNavigationController *messagesNavigation = [[AWFNavigationController alloc] initWithRootViewController:messages];
