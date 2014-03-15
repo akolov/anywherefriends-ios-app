@@ -8,9 +8,6 @@
 
 @import UIKit;
 
-#import <AXKCollectionViewTools/AXKCollectionViewTools.h>
-
-
 @interface AWFNearbyViewCell : UITableViewCell
 
 @property (nonatomic, strong, readonly) UILabel *nameLabel;

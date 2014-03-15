@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Alexander Kolov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UIView (Frame)
 

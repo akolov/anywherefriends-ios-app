@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 
 typedef void(^CGStateBlock)();
