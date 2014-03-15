@@ -14,6 +14,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "AWFMessagesViewCell.h"
+#import "AWFNavigationTitleView.h"
 #import "AWFPerson.h"
 #import "AWFSession.h"
 
@@ -31,6 +32,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.navigationItem.titleView = [AWFNavigationTitleView navigationTitleView];
   self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
   self.formatter = [[TTTTimeIntervalFormatter alloc] init];
