@@ -6,12 +6,14 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
+#import "AWFSession.h"
+
 #import <AFNetworking/AFNetworking.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "AWFPerson.h"
-#import "AWFSession.h"
 
 static NSString *AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
 

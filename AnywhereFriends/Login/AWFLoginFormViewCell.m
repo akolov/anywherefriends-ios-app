@@ -6,13 +6,8 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFLoginFormViewCell.h"
-
-
-@interface AWFLoginFormViewCell ()
-
-@end
-
 
 @implementation AWFLoginFormViewCell
 
@@ -30,7 +25,10 @@
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  [self.textLabel setFrameWidth:70.0f];
+
+  CGRect frame = self.textLabel.frame;
+  frame.size.width = 70.0f;
+  self.textLabel.frame = frame;
 }
 
 - (void)prepareForReuse {

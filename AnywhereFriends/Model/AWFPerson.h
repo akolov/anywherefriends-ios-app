@@ -12,7 +12,6 @@
 #import "AWFObject.h"
 #import "AWFGender.h"
 
-
 @interface AWFPerson : AWFObject
 
 @property (nonatomic, assign) AWFGender gender;

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFLabelButton.h"
-
 
 @interface AWFLabelButton ()
 
@@ -21,7 +21,6 @@
 - (void)updateButtonForState:(UIControlState)state;
 
 @end
-
 
 @implementation AWFLabelButton
 

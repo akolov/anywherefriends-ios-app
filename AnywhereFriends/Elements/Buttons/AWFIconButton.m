@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFIconButton.h"
 #import "AWFShapeView.h"
-
 
 @interface AWFIconButton ()
 
@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSMutableDictionary *iconColors;
 
 @end
-
 
 @implementation AWFIconButton
 

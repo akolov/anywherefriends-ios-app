@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "UIImage+CustomBackgrounds.h"
 #import "UIColor+ColorTools.h"
-
 
 NSString *const UIImageBackgroundColor = @"UIImageBackgroundColor";
 NSString *const UIImageForegroundColor = @"UIImageForegroundColor";
@@ -17,7 +17,6 @@ NSString *const UIImageTopStrokeColor = @"UIImageTopStrokeColor";
 NSString *const UIImageBottomStrokeColor = @"UIImageBottomStrokeColor";
 NSString *const UIImageStrokeColor = @"UIImageStrokeColor";
 NSString *const UIImageStrokeWidth = @"UIImageStrokeWidth";
-
 
 @implementation UIImage (CustomBackgrounds)
 

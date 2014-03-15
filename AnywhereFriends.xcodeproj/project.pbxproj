@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		06DC33336B9B492586CCB402 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE6E10FA69445AA854D1E68 /* libPods.a */; };
 		FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA417B11A7500028A55 /* AWFLoginFormViewCell.m */; };
-		FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACAA17B11DB600028A55 /* UIView+Frame.m */; };
 		FA11ACB017B136EA00028A55 /* AWFLoginConnectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACAF17B136EA00028A55 /* AWFLoginConnectViewCell.m */; };
 		FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACB317B1385E00028A55 /* UIBezierPath+FacebookGlyph.m */; };
 		FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACB517B1385E00028A55 /* UIBezierPath+TwitterGlyph.m */; };
@@ -34,7 +33,6 @@
 		FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
-		FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */; };
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
 		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
@@ -61,7 +59,6 @@
 		FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF69C17ADBFDF00325DD1 /* UIColor+CustomColors.m */; };
 		FADBF6A217ADC23600325DD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FADBF6A417ADC23600325DD1 /* Localizable.strings */; };
 		FADBF6AA17ADC59E00325DD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBF6A917ADC59E00325DD1 /* QuartzCore.framework */; };
-		FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF6AC17ADC78B00325DD1 /* UIView+Autolayout.m */; };
 		FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */; };
 		FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF6B517ADCE9800325DD1 /* CGContext+Blocks.m */; };
 		FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = FADBF6B817ADCF6600325DD1 /* UIColor+ColorTools.m */; };
@@ -126,8 +123,6 @@
 		8FE6E10FA69445AA854D1E68 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA11ACA317B11A7500028A55 /* AWFLoginFormViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLoginFormViewCell.h; sourceTree = "<group>"; };
 		FA11ACA417B11A7500028A55 /* AWFLoginFormViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLoginFormViewCell.m; sourceTree = "<group>"; };
-		FA11ACA917B11DB600028A55 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		FA11ACAA17B11DB600028A55 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		FA11ACAD17B1286500028A55 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FA11ACAE17B136EA00028A55 /* AWFLoginConnectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLoginConnectViewCell.h; sourceTree = "<group>"; };
 		FA11ACAF17B136EA00028A55 /* AWFLoginConnectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLoginConnectViewCell.m; sourceTree = "<group>"; };
@@ -176,8 +171,6 @@
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
 		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
 		FA8AA2E018833123005FC371 /* AWFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFPerson.m; sourceTree = "<group>"; };
-		FA8AA2E218833A5B005FC371 /* UITableView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Autolayout.h"; sourceTree = "<group>"; };
-		FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Autolayout.m"; sourceTree = "<group>"; };
 		FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLocationManager.h; sourceTree = "<group>"; };
 		FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLocationManager.m; sourceTree = "<group>"; };
 		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
@@ -221,8 +214,6 @@
 		FADBF6A317ADC23600325DD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FADBF6A517ADC23900325DD1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FADBF6A917ADC59E00325DD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FADBF6AB17ADC78B00325DD1 /* UIView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Autolayout.h"; sourceTree = "<group>"; };
-		FADBF6AC17ADC78B00325DD1 /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Autolayout.m"; sourceTree = "<group>"; };
 		FADBF6B117ADCE5400325DD1 /* UIImage+CustomBackgrounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CustomBackgrounds.h"; sourceTree = "<group>"; };
 		FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CustomBackgrounds.m"; sourceTree = "<group>"; };
 		FADBF6B417ADCE9800325DD1 /* CGContext+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGContext+Blocks.h"; sourceTree = "<group>"; };
@@ -285,6 +276,7 @@
 		FAF0F3DF18D4AEBB0063BB30 /* AWFMessagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMessagesViewCell.m; sourceTree = "<group>"; };
 		FAF0F3E018D4AEBB0063BB30 /* AWFMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMessagesViewController.h; sourceTree = "<group>"; };
 		FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMessagesViewController.m; sourceTree = "<group>"; };
+		FAF0F3E418D4C78D0063BB30 /* AWFConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -464,6 +456,7 @@
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
+				FAF0F3E418D4C78D0063BB30 /* AWFConfig.h */,
 				FA57F9D718D24A0900E12B5F /* AWFViewController.h */,
 				FA57F9D818D24A0900E12B5F /* AWFViewController.m */,
 				FADBF66317ADB68E00325DD1 /* Supporting Files */,
@@ -550,12 +543,6 @@
 				FADBF69517ADB7EC00325DD1 /* UIFont+CustomFonts.m */,
 				FADBF6B117ADCE5400325DD1 /* UIImage+CustomBackgrounds.h */,
 				FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */,
-				FA8AA2E218833A5B005FC371 /* UITableView+Autolayout.h */,
-				FA8AA2E318833A5B005FC371 /* UITableView+Autolayout.m */,
-				FADBF6AB17ADC78B00325DD1 /* UIView+Autolayout.h */,
-				FADBF6AC17ADC78B00325DD1 /* UIView+Autolayout.m */,
-				FA11ACA917B11DB600028A55 /* UIView+Frame.h */,
-				FA11ACAA17B11DB600028A55 /* UIView+Frame.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -853,7 +840,6 @@
 				FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */,
 				FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
-				FADBF6AD17ADC78B00325DD1 /* UIView+Autolayout.m in Sources */,
 				FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */,
 				FA11ACC717B1389400028A55 /* AWFButton.m in Sources */,
 				FA4532E3188B014900A1E242 /* AWFObject.m in Sources */,
@@ -861,8 +847,6 @@
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
 				FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */,
 				FA11ACCB17B1389400028A55 /* AWFIconButton.m in Sources */,
-				FA8AA2E418833A5B005FC371 /* UITableView+Autolayout.m in Sources */,
-				FA11ACAB17B11DB600028A55 /* UIView+Frame.m in Sources */,
 				FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
 				FA57837418D4776600F10FD7 /* AWFFriendsViewCell.m in Sources */,

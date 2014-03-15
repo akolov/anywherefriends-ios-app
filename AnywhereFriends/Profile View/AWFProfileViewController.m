@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFProfileViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
@@ -20,7 +21,9 @@
 #import "AWFIconButton.h"
 #import "AWFLabelButton.h"
 #import "AWFMapViewController.h"
+#import "AWFPerson.h"
 #import "AWFPhotoCollectionViewCell.h"
+#import "AWFProfileHeaderView.h"
 #import "AWFProfileTableViewCell.h"
 #import "AWFSession.h"
 #import "AWFWeightFormatter.h"

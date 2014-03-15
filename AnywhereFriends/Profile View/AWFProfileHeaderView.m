@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFProfileHeaderView.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>

@@ -8,9 +8,8 @@
 
 @import UIKit;
 
-#import "AWFPerson.h"
-#import "AWFProfileHeaderView.h"
-
+@class AWFPerson;
+@class AWFProfileHeaderView;
 
 @interface AWFProfileViewController : UITableViewController
 

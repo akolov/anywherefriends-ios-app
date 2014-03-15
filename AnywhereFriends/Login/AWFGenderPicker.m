@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFGenderPicker.h"
 
 #import "UIColor+CustomColors.h"
-
 
 @interface AWFGenderPicker ()
 
@@ -19,7 +19,6 @@
 - (void)onButtonTouchUpInside:(UIButton *)sender;
 
 @end
-
 
 @implementation AWFGenderPicker
 

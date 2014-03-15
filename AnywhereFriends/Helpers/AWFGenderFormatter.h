@@ -10,7 +10,6 @@
 
 #import "AWFGender.h"
 
-
 @interface AWFGenderFormatter : NSFormatter
 
 - (NSString *)stringFromGender:(AWFGender)gender;

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFShapeView.h"
-
 
 @implementation AWFShapeView
 

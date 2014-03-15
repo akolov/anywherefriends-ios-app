@@ -6,19 +6,17 @@
 //  Copyright (c) 2014 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFValueTransformers.h"
 
 #import <TransformerKit/NSValueTransformer+TransformerKit.h>
 
 #import "AWFGender.h"
 
-
 NSString *const AWFGenderValueTransformerName = @"AWFGenderValueTransformerName";
-
 
 static NSString *const AWFGenderMaleName   = @"male";
 static NSString *const AWFGenderFemaleName = @"female";
-
 
 @implementation AWFValueTransformers
 

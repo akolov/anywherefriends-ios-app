@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-
 OBJC_EXPORT NSString *const UIImageBackgroundColor;
 OBJC_EXPORT NSString *const UIImageForegroundColor;
 OBJC_EXPORT NSString *const UIImageGradientColors;
@@ -16,7 +15,6 @@ OBJC_EXPORT NSString *const UIImageTopStrokeColor;
 OBJC_EXPORT NSString *const UIImageBottomStrokeColor;
 OBJC_EXPORT NSString *const UIImageStrokeColor;
 OBJC_EXPORT NSString *const UIImageStrokeWidth;
-
 
 @interface UIImage (CustomBackgrounds)
 

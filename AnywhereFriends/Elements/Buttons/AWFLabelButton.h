@@ -8,7 +8,6 @@
 
 #import "AWFButton.h"
 
-
 @interface AWFLabelButton : AWFButton
 
 @property (nonatomic, strong, readonly) UILabel *titleLabel;

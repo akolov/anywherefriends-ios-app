@@ -7,8 +7,8 @@
 //
 
 @import UIKit;
-#import "AWFIconButton.h"
 
+@class AWFIconButton;
 
 @interface AWFLoginConnectViewCell : UITableViewCell
 

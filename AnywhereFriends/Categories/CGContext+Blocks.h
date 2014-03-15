@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-
 typedef void(^CGStateBlock)();
 typedef void(^CGContextBlock)(CGRect rect, CGContextRef context);
 

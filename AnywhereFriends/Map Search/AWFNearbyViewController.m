@@ -8,6 +8,7 @@
 
 @import CoreLocation;
 
+#import "AWFConfig.h"
 #import "AWFNearbyViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
@@ -81,7 +82,10 @@ static NSUInteger AWFPageSize = 20;
   self.mapContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.tableView.rowHeight * 4.0f, self.tableView.bounds.size.width, self.tableView.rowHeight * 4.0f)];
   self.mapContainerView.clipsToBounds = YES;
   [self.mapContainerView addSubview:self.mapView];
-  [self.mapView setFrameOriginY:(self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f];
+
+  CGRect frame = self.mapView.frame;
+  frame.origin.y = (self.mapContainerView.bounds.size.height - self.mapView.bounds.size.height) / 2.0f;
+  self.mapView.frame = frame;
 
   [self.tableView addSubview:self.mapContainerView];
 

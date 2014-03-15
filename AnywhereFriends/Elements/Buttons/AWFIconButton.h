@@ -7,8 +7,8 @@
 //
 
 #import "AWFButton.h"
-#import "AWFShapeView.h"
 
+@class AWFShapeView;
 
 @interface AWFIconButton : AWFButton
 

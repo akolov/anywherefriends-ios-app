@@ -6,8 +6,11 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFIconLabelButton.h"
 
+#import "AWFIconLabelView.h"
+#import "AWFShapeView.h"
 
 @interface AWFIconLabelButton ()
 

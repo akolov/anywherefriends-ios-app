@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-
 @interface AWFButton : UIControl
 
 @property (nonatomic, strong, readonly) UIImageView *backgroundImageView;

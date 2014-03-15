@@ -7,8 +7,6 @@
 //
 
 @import UIKit;
-#import <QuartzCore/QuartzCore.h>
-
 
 @interface AWFShapeView : UIView
 

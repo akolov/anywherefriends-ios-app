@@ -6,22 +6,20 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFLoginViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <Slash/Slash.h>
 
-#import "UIImage+CustomBackgrounds.h"
-
-#import "AWFSession.h"
-
 #import "AWFLoginConnectViewCell.h"
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFNearbyViewController.h"
+#import "AWFSession.h"
 #import "AWFSignupViewController.h"
-
+#import "UIImage+CustomBackgrounds.h"
 
 @interface AWFLoginViewController ()
 
@@ -36,7 +34,6 @@
 - (NSString *)password;
 
 @end
-
 
 @implementation AWFLoginViewController
 

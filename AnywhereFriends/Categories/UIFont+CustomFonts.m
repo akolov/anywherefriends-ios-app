@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "UIFont+CustomFonts.h"
-
 
 @implementation UIFont (CustomFonts)
 

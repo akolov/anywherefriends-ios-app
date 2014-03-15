@@ -11,6 +11,5 @@
 @interface AWFNavigationBar : UINavigationBar
 
 @property (nonatomic, readonly) UIView *backgroundView;
-@property (nonatomic, assign) BOOL extended;
 
 @end

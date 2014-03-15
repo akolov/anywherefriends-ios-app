@@ -6,13 +6,12 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "UIColor+ColorTools.h"
-
 
 static inline CGFloat normalizeColorComponent(const CGFloat component) {
   return MIN(255.0f, MAX(0, component)) / 255.0f;
 }
-
 
 @implementation UIColor (ColorTools)
 

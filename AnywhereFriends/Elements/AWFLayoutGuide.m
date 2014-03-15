@@ -6,15 +6,14 @@
 //  Copyright (c) 2014 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFLayoutGuide.h"
-
 
 @interface AWFLayoutGuide ()
 
 @property (nonatomic, assign) CGFloat length;
 
 @end
-
 
 @implementation AWFLayoutGuide
 

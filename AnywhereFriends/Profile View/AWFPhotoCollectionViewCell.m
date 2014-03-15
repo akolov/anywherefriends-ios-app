@@ -6,15 +6,14 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFPhotoCollectionViewCell.h"
-
 
 @interface AWFPhotoCollectionViewCell ()
 
 @property (nonatomic, weak) UIImageView *imageView;
 
 @end
-
 
 @implementation AWFPhotoCollectionViewCell
 

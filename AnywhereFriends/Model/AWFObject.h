@@ -11,7 +11,6 @@
 #define nilOrObjectForKey(JSON_, KEY_) \
   [[JSON_ objectForKey:KEY_] isEqual:[NSNull null]] ? nil : [JSON_ objectForKey:KEY_]
 
-
 @interface AWFObject : NSObject
 
 

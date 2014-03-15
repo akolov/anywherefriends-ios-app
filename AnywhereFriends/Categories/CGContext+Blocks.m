@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "CGContext+Blocks.h"
-
 
 void UIGraphicsPushedContext(CGContextRef context, CGStateBlock actions) {
   UIGraphicsPushContext(context);

@@ -6,19 +6,17 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFSignupViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-#import "UIImage+CustomBackgrounds.h"
-
 #import "AWFGenderPicker.h"
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
-
 #import "AWFSession.h"
-
+#import "UIImage+CustomBackgrounds.h"
 
 @interface AWFSignupViewController ()
 
@@ -38,7 +36,6 @@
 - (void)onSignupButtonTouchUpInside:(id)sender;
 
 @end
-
 
 @implementation AWFSignupViewController
 

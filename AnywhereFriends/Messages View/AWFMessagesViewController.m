@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFMessagesViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>

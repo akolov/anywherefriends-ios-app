@@ -7,7 +7,8 @@
 //
 
 @import UIKit;
-#import "AWFShapeView.h"
+
+@class AWFShapeView;
 
 @interface AWFIconLabelView : UIView
 

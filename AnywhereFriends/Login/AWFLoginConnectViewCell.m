@@ -6,15 +6,16 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFLoginConnectViewCell.h"
 
+#import "AWFIconButton.h"
+#import "AWFShapeView.h"
 #import "UIBezierPath+FacebookGlyph.h"
 #import "UIBezierPath+TwitterGlyph.h"
 #import "UIBezierPath+VKontakteGlyph.h"
 
-
-static CGFloat const kButtonSize = 45.0f;
-
+static CGFloat const AWFButtonSize = 45.0f;
 
 @interface AWFLoginConnectViewCell ()
 
@@ -23,7 +24,6 @@ static CGFloat const kButtonSize = 45.0f;
 @property (nonatomic, strong) AWFIconButton *vkontakteButton;
 
 @end
-
 
 @implementation AWFLoginConnectViewCell
 
@@ -34,7 +34,7 @@ static CGFloat const kButtonSize = 45.0f;
 
     // Facebook button
 
-    UIImage *facebookBackground = UIGraphicsContextWithOptions(CGSizeMake(kButtonSize, kButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
+    UIImage *facebookBackground = UIGraphicsContextWithOptions(CGSizeMake(AWFButtonSize, AWFButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
       UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12.0f];
       [path addClip];
 
@@ -58,7 +58,7 @@ static CGFloat const kButtonSize = 45.0f;
 
     // Twitter button
 
-    UIImage *twitterBackground = UIGraphicsContextWithOptions(CGSizeMake(kButtonSize, kButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
+    UIImage *twitterBackground = UIGraphicsContextWithOptions(CGSizeMake(AWFButtonSize, AWFButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
       UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12.0f];
       [path addClip];
 
@@ -82,7 +82,7 @@ static CGFloat const kButtonSize = 45.0f;
 
     // VKontakte button
 
-    UIImage *vkontakteBackground = UIGraphicsContextWithOptions(CGSizeMake(kButtonSize, kButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
+    UIImage *vkontakteBackground = UIGraphicsContextWithOptions(CGSizeMake(AWFButtonSize, AWFButtonSize), NO, 0, ^(CGRect rect, CGContextRef context) {
       UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12.0f];
       [path addClip];
 
@@ -118,15 +118,15 @@ static CGFloat const kButtonSize = 45.0f;
     UIView *spacerFour = [UIView autolayoutView];
     [self.contentView addSubview:spacerFour];
 
-    NSDictionary *const metrics = @{@"size": @(kButtonSize)};
+    NSDictionary *const metrics = @{@"size": @(AWFButtonSize)};
     NSDictionary *const views = NSDictionaryOfVariableBindings(_facebookButton, _twitterButton, _vkontakteButton, spacerOne, spacerTwo, spacerThree, spacerFour);
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[spacerOne][_facebookButton(size)][spacerTwo(==spacerOne)][_twitterButton(==_facebookButton)][spacerThree(==spacerOne)][_vkontakteButton(==_facebookButton)][spacerFour(==spacerOne)]|" options:0 metrics:metrics views:views]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.facebookButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.facebookButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:kButtonSize]];
+    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.facebookButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:AWFButtonSize]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.twitterButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.twitterButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:kButtonSize]];
+    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.twitterButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:AWFButtonSize]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.vkontakteButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.vkontakteButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:kButtonSize]];
+    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.vkontakteButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:AWFButtonSize]];
   }
 
   return self;

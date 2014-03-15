@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 AnywhereFriends. All rights reserved.
 //
 
+#import "AWFConfig.h"
 #import "AWFButton.h"
-
 
 @interface AWFButton ()
 
@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSMutableDictionary *backgroundImages;
 
 @end
-
 
 @implementation AWFButton
 

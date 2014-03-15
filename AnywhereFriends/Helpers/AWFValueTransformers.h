@@ -8,9 +8,7 @@
 
 @import Foundation;
 
-
 OBJC_EXPORT NSString *const AWFGenderValueTransformerName;
-
 
 @interface AWFValueTransformers : NSObject
 
