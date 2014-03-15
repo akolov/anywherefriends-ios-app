@@ -24,6 +24,12 @@
     _placeholderView.layer.masksToBounds = YES;
     [self.contentView addSubview:_placeholderView];
 
+    _unreadIndicator = [UIView autolayoutView];
+    _unreadIndicator.backgroundColor = [UIColor redColor];
+    _unreadIndicator.layer.cornerRadius = 5.0f;
+    _unreadIndicator.layer.masksToBounds = YES;
+    [self.contentView addSubview:_unreadIndicator];
+
     _nameLabel = [UILabel autolayoutView];
     _nameLabel.backgroundColor = [UIColor whiteColor];
     _nameLabel.font = [UIFont boldSystemFontOfSize:14.0f];
@@ -51,6 +57,10 @@
     [self.contentView pin:@"V:|-8.0-[nameLabel][lastMessageLabel]-(>=8.0)-|" options:0 owner:self];
     [self.contentView pin:@"H:[placeholderView]-8.0-[lastMessageLabel]-8.0-|" options:0 owner:self];
     [_placeholderView pinSize:CGSizeMake(35.0f, 35.0f) withRelation:NSLayoutRelationEqual];
+
+    [_unreadIndicator pinSize:CGSizeMake(10.0f, 10.0f) withRelation:NSLayoutRelationEqual];
+    [_unreadIndicator pinToCenterOfView:_placeholderView onAxis:UILayoutConstraintAxisHorizontal];
+    [self.contentView pin:@"V:[placeholderView]-8.0-[unreadIndicator]" options:0 owner:self];
   }
   return self;
 }

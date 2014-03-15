@@ -14,5 +14,6 @@
 @property (nonatomic, strong, readonly) UILabel *timeLabel;
 @property (nonatomic, strong, readonly) UILabel *lastMessageLabel;
 @property (nonatomic, strong, readonly) UILabel *placeholderView;
+@property (nonatomic, strong, readonly) UIView *unreadIndicator;
 
 @end
