@@ -10,7 +10,7 @@
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 
-#import "AWFIconButton.h"
+#import "AWFShapeView.h"
 #import "AWFLabelButton.h"
 #import "AWFPhotoCollectionViewCell.h"
 #import "UIBezierPath+AccessoryArrowGlyph.h"
@@ -20,7 +20,8 @@
 @property (nonatomic, strong) UICollectionView *photoCollectionView;
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UILabel *locationLabel;
-@property (nonatomic, strong) AWFIconButton *locationButton;
+@property (nonatomic, strong) UIButton *locationButton;
+@property (nonatomic, strong) AWFShapeView *arrowView;
 @property (nonatomic, strong) AWFLabelButton *friendButton;
 @property (nonatomic, strong) AWFLabelButton *messageButton;
 
@@ -57,23 +58,28 @@
 
     // Set up location button
 
+    self.locationButton = [UIButton autolayoutView];
+    [self addSubview:self.locationButton];
+
     self.locationLabel = [UILabel autolayoutView];
     self.locationLabel.numberOfLines = 0;
     self.locationLabel.preferredMaxLayoutWidth = frame.size.width - 40.0f;
-    [self addSubview:self.locationLabel];
+    [self.locationButton addSubview:self.locationLabel];
 
-    self.locationButton = [AWFIconButton autolayoutView];
-    self.locationButton.icon.path = [UIBezierPath accessoryArrowGlyph];
-    [self.locationButton setIconColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self addSubview:self.locationButton];
+    self.arrowView = [AWFShapeView autolayoutView];
+    self.arrowView.path = [UIBezierPath accessoryArrowGlyph];
+    self.arrowView.shapeLayer.fillColor = [UIColor grayColor].CGColor;
+    [self.locationButton addSubview:self.arrowView];
 
     // Set up other buttons
 
     self.friendButton = [AWFLabelButton autolayoutView];
     self.friendButton.layer.cornerRadius = 5.0f;
     self.friendButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
-    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ADD_FRIEND_BUTTON_TITLE", nil) forState:UIControlStateNormal];
-    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FRIENDS_BUTTON_TITLE", nil) forState:UIControlStateSelected];
+    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ADD_FRIEND_BUTTON_TITLE", nil)
+                           forState:UIControlStateNormal];
+    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FRIENDS_BUTTON_TITLE", nil)
+                           forState:UIControlStateSelected];
     [self.friendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.friendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [self.friendButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -83,8 +89,10 @@
     self.messageButton = [AWFLabelButton autolayoutView];
     self.messageButton.layer.cornerRadius = 5.0f;
     self.messageButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
-    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_OFFLINE_BUTTON_TITLE", nil) forState:UIControlStateNormal];
-    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ONLINE_BUTTON_TITLE", nil) forState:UIControlStateSelected];
+    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_OFFLINE_BUTTON_TITLE", nil)
+                            forState:UIControlStateNormal];
+    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ONLINE_BUTTON_TITLE", nil)
+                            forState:UIControlStateSelected];
     [self.messageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.messageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [self.messageButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -93,13 +101,20 @@
 
     // Set up constraints
 
-    NSDictionary *const views = NSDictionaryOfVariableBindings(photoCollectionView, _descriptionLabel, _locationLabel, _locationButton, _friendButton, _messageButton);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[photoCollectionView]|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_friendButton]-[_messageButton(==_friendButton)]-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20.0-[_locationLabel][_locationButton(6.0)]-20.0-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[photoCollectionView(159.0)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[photoCollectionView]-16.0-[_descriptionLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_descriptionLabel]-16.0-[_locationLabel]-20.0-[_friendButton(26.0)]|" options:0 metrics:nil views:views]];
+    [self.photoCollectionView pinToFillContainerOnAxis:UILayoutConstraintAxisHorizontal];
+    [self.photoCollectionView pinHeight:159.0f withRelation:NSLayoutRelationEqual];
+    [self pin:@"V:|[photoCollectionView]-16.0-[descriptionLabel]-16.0-[locationButton]"
+      options:NSLayoutFormatAlignAllCenterX owner:self];
+
+    [self pin:@"H:|-[friendButton]-[messageButton(==friendButton)]-|"
+      options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom owner:self];
+    [self pin:@"V:[locationButton]-16.0-[friendButton]|" options:0 owner:self];
+    [self.friendButton pinHeight:26.0f withRelation:NSLayoutRelationEqual];
+
+    [self.locationButton pin:@"H:|[locationLabel][arrowView]|" options:0 owner:self];
+    [self.locationLabel pinToFillContainerOnAxis:UILayoutConstraintAxisVertical];
+    [self.arrowView pinToCenterInContainerOnAxis:UILayoutConstraintAxisVertical];
+    [self pin:@"H:|-[locationButton]-|" options:0 owner:self];
   }
   return self;
 }

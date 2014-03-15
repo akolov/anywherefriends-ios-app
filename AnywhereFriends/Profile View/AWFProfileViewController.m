@@ -17,7 +17,9 @@
 #import "AWFAgeFormatter.h"
 #import "AWFGenderFormatter.h"
 #import "AWFHeightFormatter.h"
+#import "AWFIconButton.h"
 #import "AWFLabelButton.h"
+#import "AWFMapViewController.h"
 #import "AWFPhotoCollectionViewCell.h"
 #import "AWFProfileTableViewCell.h"
 #import "AWFSession.h"
@@ -34,6 +36,7 @@
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
 
 - (void)onFriendButton:(id)sender;
+- (void)onLocationButton:(id)sender;
 
 @end
 
@@ -84,7 +87,10 @@
     view.photoCollectionView.delegate = self;
     view.friendButton.selected = YES;
 
-    [view.friendButton addTarget:self action:@selector(onFriendButton:) forControlEvents:UIControlEventTouchUpInside];
+    [view.friendButton addTarget:self action:@selector(onFriendButton:)
+                forControlEvents:UIControlEventTouchUpInside];
+    [view.locationButton addTarget:self action:@selector(onLocationButton:)
+                  forControlEvents:UIControlEventTouchUpInside];
 
     CGRect bounds;
     bounds.size.width = CGRectGetWidth(self.tableView.bounds);
@@ -254,6 +260,11 @@
    error:^(NSError *error) {
      ErrorLog(error.localizedDescription);
    }];
+}
+
+- (void)onLocationButton:(id)sender {
+  AWFMapViewController *vc = [[AWFMapViewController alloc] initWithPerson:self.person];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Public methods

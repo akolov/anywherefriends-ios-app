@@ -105,6 +105,8 @@
 		FAE4760517C0FDDA006B2C65 /* Jasmin_t4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAE4760017C0FDDA006B2C65 /* Jasmin_t4.jpg */; };
 		FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE4760717C112FF006B2C65 /* AWFProfileTableViewCell.m */; };
 		FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE4760A17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m */; };
+		FAF0F3CF18D49E920063BB30 /* AWFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3CE18D49E920063BB30 /* AWFMapViewController.m */; };
+		FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3D118D49F7D0063BB30 /* MKMapView+AWFCentering.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +275,10 @@
 		FAE4760717C112FF006B2C65 /* AWFProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileTableViewCell.m; sourceTree = "<group>"; };
 		FAE4760917C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+AccessoryArrowGlyph.h"; sourceTree = "<group>"; };
 		FAE4760A17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+AccessoryArrowGlyph.m"; sourceTree = "<group>"; };
+		FAF0F3CD18D49E920063BB30 /* AWFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMapViewController.h; sourceTree = "<group>"; };
+		FAF0F3CE18D49E920063BB30 /* AWFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMapViewController.m; sourceTree = "<group>"; };
+		FAF0F3D018D49F7D0063BB30 /* MKMapView+AWFCentering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+AWFCentering.h"; sourceTree = "<group>"; };
+		FAF0F3D118D49F7D0063BB30 /* MKMapView+AWFCentering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+AWFCentering.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +452,7 @@
 				FADBF68B17ADB73500325DD1 /* Login */,
 				FADE215517BCD30800D3A62B /* Map Search */,
 				FA57F9DA18D268AE00E12B5F /* Friends View */,
+				FAF0F3CC18D49E7D0063BB30 /* Map View */,
 				FA3092F318098A1F001F25F2 /* Navigation */,
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
@@ -526,6 +533,8 @@
 			children = (
 				FADBF6B417ADCE9800325DD1 /* CGContext+Blocks.h */,
 				FADBF6B517ADCE9800325DD1 /* CGContext+Blocks.m */,
+				FAF0F3D018D49F7D0063BB30 /* MKMapView+AWFCentering.h */,
+				FAF0F3D118D49F7D0063BB30 /* MKMapView+AWFCentering.m */,
 				FADBF6B717ADCF6600325DD1 /* UIColor+ColorTools.h */,
 				FADBF6B817ADCF6600325DD1 /* UIColor+ColorTools.m */,
 				FADBF69B17ADBFDF00325DD1 /* UIColor+CustomColors.h */,
@@ -635,6 +644,15 @@
 				FAE4760017C0FDDA006B2C65 /* Jasmin_t4.jpg */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		FAF0F3CC18D49E7D0063BB30 /* Map View */ = {
+			isa = PBXGroup;
+			children = (
+				FAF0F3CD18D49E920063BB30 /* AWFMapViewController.h */,
+				FAF0F3CE18D49E920063BB30 /* AWFMapViewController.m */,
+			);
+			path = "Map View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -840,12 +858,14 @@
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
 				FAE475E417C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m in Sources */,
 				FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
+				FAF0F3CF18D49E920063BB30 /* AWFMapViewController.m in Sources */,
 				FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */,
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
 				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
 				FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
+				FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
 				FA11ACB017B136EA00028A55 /* AWFLoginConnectViewCell.m in Sources */,

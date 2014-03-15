@@ -14,9 +14,6 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 
-#import "UIBezierPath+MenuGlyph.h"
-#import "UIBezierPath+MessagesGlyph.h"
-
 #import "AWFIconButton.h"
 #import "AWFLabelButton.h"
 #import "AWFLayoutGuide.h"
@@ -26,6 +23,9 @@
 #import "AWFPerson.h"
 #import "AWFProfileViewController.h"
 #import "AWFSession.h"
+#import "MKMapView+AWFCentering.h"
+#import "UIBezierPath+MenuGlyph.h"
+#import "UIBezierPath+MessagesGlyph.h"
 
 static double AWFRadius = 20000.0;
 static NSUInteger AWFPageSize = 20;
@@ -38,8 +38,6 @@ static NSUInteger AWFPageSize = 20;
 @property (nonatomic, assign) UIEdgeInsets defaultTableViewContentInset;
 
 - (void)onNotification:(NSNotification *)notification;
-
-- (void)centerAndZoomMapAtCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters;
 - (void)lookupUsersAroundCenterCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters;
 
 @end
@@ -217,13 +215,13 @@ static NSUInteger AWFPageSize = 20;
 - (void)onNotification:(NSNotification *)notification {
   if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
     CLLocationCoordinate2D coordinate = [AWFLocationManager sharedManager].currentLocation.coordinate;
-    [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:AWFRadius];
+    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
     [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
   }
   else if ([notification.name isEqualToString:AWFLocationManagerDidUpdateLocationsNotification]) {
     CLLocation *location = notification.userInfo[AWFLocationManagerLocationUserInfoKey];
     CLLocationCoordinate2D coordinate = location.coordinate;
-    [self centerAndZoomMapAtCoordinate:coordinate andSpanInMeters:AWFRadius];
+    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
     [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
   }
 }
@@ -250,15 +248,6 @@ static NSUInteger AWFPageSize = 20;
 }
 
 #pragma mark - Private methods
-
-- (void)centerAndZoomMapAtCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters {
-  MKCoordinateRegion region;
-  region.center.latitude = coordinate.latitude;
-  region.center.longitude = coordinate.longitude;
-  region.span.latitudeDelta = meters * AWF_DEGREES_IN_METRE;
-  region.span.longitudeDelta = meters * AWF_DEGREES_IN_METRE;
-  [self.mapView setRegion:region animated:YES];
-}
 
 - (void)lookupUsersAroundCenterCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters {
   @weakify(self);

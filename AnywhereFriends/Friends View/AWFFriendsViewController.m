@@ -17,6 +17,7 @@
 
 #import "AWFFriendsViewCell.h"
 #import "AWFLocationManager.h"
+#import "AWFMapViewController.h"
 #import "AWFPerson.h"
 #import "AWFProfileViewController.h"
 #import "AWFSession.h"
@@ -195,6 +196,11 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:self.people[indexPath.row]];
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+  AWFMapViewController *vc = [[AWFMapViewController alloc] initWithPerson:self.people[indexPath.row]];
   [self.navigationController pushViewController:vc animated:YES];
 }
 

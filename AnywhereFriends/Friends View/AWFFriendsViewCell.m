@@ -8,6 +8,14 @@
 
 #import "AWFFriendsViewCell.h"
 
+#import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+
+@interface AWFFriendsViewCell ()
+
+- (void)onTapGesture:(UITapGestureRecognizer *)recognizer;
+
+@end
+
 @implementation AWFFriendsViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -43,7 +51,11 @@
 
     _mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40.0f, 40.0f)];
     _mapImageView.backgroundColor = [UIColor lightGrayColor];
+    _mapImageView.userInteractionEnabled = YES;
     self.accessoryView = _mapImageView;
+
+    [_mapImageView addGestureRecognizer:
+     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGesture:)]];
   }
   return self;
 }
@@ -51,6 +63,10 @@
 - (void)prepareForReuse {
   [super prepareForReuse];
   self.mapImageView.image = nil;
+}
+
+- (void)onTapGesture:(UITapGestureRecognizer *)recognizer {
+  [self.tableView.delegate tableView:self.tableView accessoryButtonTappedForRowWithIndexPath:self.indexPath];
 }
 
 @end
