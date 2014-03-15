@@ -14,6 +14,8 @@
 
 @interface AWFSession : NSObject
 
+@property (nonatomic, strong, readonly) AWFPerson *currentUser;
+
 + (instancetype)sharedSession;
 + (BOOL)hasSessionCookie;
 + (BOOL)isLoggedIn;

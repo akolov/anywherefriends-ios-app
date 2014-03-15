@@ -97,6 +97,9 @@
 /* Title of the Messages view */
 "AWF_MESSAGES_VIEW_CONTROLLER_TITLE" = "Сообщения";
 
+/* Title of the Me view controller */
+"AWF_ME_VIEW_CONTROLLER_TITLE" = "Я";
+
 /* Title of the People view controller */
 "AWF_PEOPLE_VIEW_CONTROLLER_TITLE" = "Люди";
 

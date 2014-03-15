@@ -106,6 +106,7 @@
 		FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3D118D49F7D0063BB30 /* MKMapView+AWFCentering.m */; };
 		FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3DF18D4AEBB0063BB30 /* AWFMessagesViewCell.m */; };
 		FAF0F3E318D4AEBB0063BB30 /* AWFMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */; };
+		FAF0F3E718D4CD8B0063BB30 /* AWFMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3E618D4CD8B0063BB30 /* AWFMyProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,6 +278,8 @@
 		FAF0F3E018D4AEBB0063BB30 /* AWFMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMessagesViewController.h; sourceTree = "<group>"; };
 		FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMessagesViewController.m; sourceTree = "<group>"; };
 		FAF0F3E418D4C78D0063BB30 /* AWFConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFConfig.h; sourceTree = "<group>"; };
+		FAF0F3E518D4CD8B0063BB30 /* AWFMyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMyProfileViewController.h; sourceTree = "<group>"; };
+		FAF0F3E618D4CD8B0063BB30 /* AWFMyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMyProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,6 +622,8 @@
 				FAE475E017C0EC15006B2C65 /* AWFProfileHeaderView.m */,
 				FAE475DC17C0EAF0006B2C65 /* AWFProfileViewController.h */,
 				FAE475DD17C0EAF0006B2C65 /* AWFProfileViewController.m */,
+				FAF0F3E518D4CD8B0063BB30 /* AWFMyProfileViewController.h */,
+				FAF0F3E618D4CD8B0063BB30 /* AWFMyProfileViewController.m */,
 			);
 			path = "Profile View";
 			sourceTree = "<group>";
@@ -872,6 +877,7 @@
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
 				FA11ACB017B136EA00028A55 /* AWFLoginConnectViewCell.m in Sources */,
+				FAF0F3E718D4CD8B0063BB30 /* AWFMyProfileViewController.m in Sources */,
 				FA11ACCC17B1389400028A55 /* AWFIconLabelButton.m in Sources */,
 				FA11ACD217B138D100028A55 /* AWFIconLabelView.m in Sources */,
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,

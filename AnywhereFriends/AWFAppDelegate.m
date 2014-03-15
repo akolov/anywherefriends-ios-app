@@ -13,6 +13,7 @@
 #import "AWFLocationManager.h"
 #import "AWFLoginViewController.h"
 #import "AWFMessagesViewController.h"
+#import "AWFMyProfileViewController.h"
 #import "AWFNearbyViewController.h"
 #import "AWFNavigationController.h"
 #import "AWFSession.h"
@@ -47,8 +48,15 @@
   messagesNavigation.tabBarItem.title = NSLocalizedString(@"AWF_MESSAGES_VIEW_CONTROLLER_TITLE", nil);
   messagesNavigation.tabBarItem.image = [UIImage imageNamed:@"messages"];
 
+  AWFMyProfileViewController *me = [[AWFMyProfileViewController alloc] init];
+  me.title = NSLocalizedString(@"AWF_ME_VIEW_CONTROLLER_TITLE", nil);
+  me.tabBarItem.image = [UIImage imageNamed:@"me"];
+  AWFNavigationController *meNavigation = [[AWFNavigationController alloc] initWithRootViewController:me];
+  meNavigation.tabBarItem.title = NSLocalizedString(@"AWF_ME_VIEW_CONTROLLER_TITLE", nil);
+  meNavigation.tabBarItem.image = [UIImage imageNamed:@"me"];
+
   UITabBarController *tabs = [[UITabBarController alloc] init];
-  tabs.viewControllers = @[peopleNavigation, friendsNavigation, messagesNavigation];
+  tabs.viewControllers = @[peopleNavigation, friendsNavigation, messagesNavigation, meNavigation];
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];

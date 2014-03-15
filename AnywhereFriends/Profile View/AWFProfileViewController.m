@@ -53,6 +53,7 @@
   self = [self init];
   if (self) {
     self.person = person;
+    self.title = self.person.fullName;
   }
   return self;
 }
@@ -60,12 +61,10 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.title = self.person.fullName;
-
   self.tableView.backgroundColor = [UIColor blackColor];
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-  [self.tableView registerClass:[AWFProfileTableViewCell class] forCellReuseIdentifier:[AWFProfileTableViewCell reuseIdentifier]];
+  [self.tableView registerClassForCellReuse:[AWFProfileTableViewCell class]];
 
   self.tableView.tableHeaderView = ({
     NSMutableParagraphStyle *const paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -165,6 +164,10 @@
 #pragma mark - Private methods
 
 - (NSArray *)fields {
+  if (!self.person) {
+    return nil;
+  }
+
   if (!_fields) {
 
     // Section 1
