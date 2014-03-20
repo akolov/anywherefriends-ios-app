@@ -19,7 +19,7 @@
   AWFPerson *person = [[AWFPerson alloc] init];
   person.personID = nilOrObjectForKey(dictionary, @"id");
   person.gender = [[[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
-                    transformedValue:nilOrObjectForKey(dictionary, @"gender")] unsignedIntegerValue];
+                    transformedValue:dictionary[@"gender"]] unsignedIntegerValue];
   person.firstName = [nilOrObjectForKey(dictionary, @"first_name") copy];
   person.lastName = [nilOrObjectForKey(dictionary, @"last_name") copy];
   person.bio = [nilOrObjectForKey(dictionary, @"bio") copy];
@@ -30,12 +30,18 @@
   person.eyeColor = [nilOrObjectForKey(dictionary, @"eye_color") copy];
   person.bodyBuild = [nilOrObjectForKey(dictionary, @"build") copy];
   person.placemark = [nilOrObjectForKey(dictionary, @"location") copy];
+  person.friendship = [[[NSValueTransformer valueTransformerForName:AWFFriendshipStatusTransformerName]
+                        transformedValue:dictionary[@"friendship"]] unsignedIntegerValue];
 
-  CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([nilOrObjectForKey(dictionary, @"latitude") doubleValue],
-                                                                 [nilOrObjectForKey(dictionary, @"longitude") doubleValue]);
+  CLLocationCoordinate2D coordinate =
+    CLLocationCoordinate2DMake([nilOrObjectForKey(dictionary, @"latitude") doubleValue],
+                               [nilOrObjectForKey(dictionary, @"longitude") doubleValue]);
 
-  NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:[nilOrObjectForKey(dictionary, @"location_updated") doubleValue]];
-  person.location = [[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0 timestamp:timestamp];
+  NSDate *timestamp =
+    [NSDate dateWithTimeIntervalSince1970:[nilOrObjectForKey(dictionary, @"location_updated") doubleValue]];
+  person.location =
+    [[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0
+                                 timestamp:timestamp];
   person.distance = [nilOrObjectForKey(dictionary, @"distance") doubleValue];
   person.birthday = [[NSValueTransformer valueTransformerForName:TTTISO8601DateTransformerName]
                      reverseTransformedValue:nilOrObjectForKey(dictionary, @"birthday")];

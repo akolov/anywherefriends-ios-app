@@ -9,6 +9,7 @@
 @import Foundation;
 
 OBJC_EXPORT NSString *const AWFGenderValueTransformerName;
+OBJC_EXPORT NSString *const AWFFriendshipStatusTransformerName;
 
 @interface AWFValueTransformers : NSObject
 

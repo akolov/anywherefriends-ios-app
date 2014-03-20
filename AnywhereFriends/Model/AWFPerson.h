@@ -12,6 +12,12 @@
 #import "AWFObject.h"
 #import "AWFGender.h"
 
+typedef NS_ENUM(NSUInteger, AWFFriendshipStatus) {
+  AWFFriendshipStatusNone,
+  AWFFriendshipStatusPending,
+  AWFFriendshipStatusFriend
+};
+
 @interface AWFPerson : AWFObject
 
 @property (nonatomic, assign) AWFGender gender;
@@ -30,6 +36,7 @@
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSDictionary *placemark;
 @property (nonatomic, assign) CLLocationDistance distance;
+@property (nonatomic, assign) AWFFriendshipStatus friendship;
 
 + (instancetype)personFromDictionary:(NSDictionary *)dictionary;
 

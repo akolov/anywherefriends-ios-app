@@ -12,11 +12,16 @@
 #import <TransformerKit/NSValueTransformer+TransformerKit.h>
 
 #import "AWFGender.h"
+#import "AWFPerson.h"
 
 NSString *const AWFGenderValueTransformerName = @"AWFGenderValueTransformerName";
+NSString *const AWFFriendshipStatusTransformerName = @"AWFFriendshipStatusTransformerName";
 
 static NSString *const AWFGenderMaleName   = @"male";
 static NSString *const AWFGenderFemaleName = @"female";
+
+static NSString *const AWFFriendshipStatusFriendName = @"friend";
+static NSString *const AWFFriendshipStatusPendingName = @"pending";
 
 @implementation AWFValueTransformers
 
@@ -25,7 +30,7 @@ static NSString *const AWFGenderFemaleName = @"female";
     [NSValueTransformer
      registerValueTransformerWithName:AWFGenderValueTransformerName transformedValueClass:[NSString class]
      returningTransformedValueWithBlock:^id(id value) {
-       if (!value) {
+       if (!value || [value isEqual:[NSNull null]]) {
          return @(AWFGenderUnknown);
        }
        else if ([value caseInsensitiveCompare:AWFGenderFemaleName] == NSOrderedSame) {
@@ -36,11 +41,34 @@ static NSString *const AWFGenderFemaleName = @"female";
        }
        return @(AWFGenderUnknown);
      } allowingReverseTransformationWithBlock:^id(id value) {
-       switch ([value integerValue]) {
+       switch ([value unsignedIntegerValue]) {
          case AWFGenderFemale:
            return AWFGenderFemaleName;
          case AWFGenderMale:
            return AWFGenderMaleName;
+       }
+       return nil;
+     }];
+
+    [NSValueTransformer
+     registerValueTransformerWithName:AWFFriendshipStatusTransformerName transformedValueClass:[NSString class]
+     returningTransformedValueWithBlock:^id(id value) {
+       if (!value || [value isEqual:[NSNull null]]) {
+         return @(AWFFriendshipStatusNone);
+       }
+       else if ([value caseInsensitiveCompare:AWFFriendshipStatusPendingName] == NSOrderedSame) {
+         return @(AWFFriendshipStatusPending);
+       }
+       else if ([value caseInsensitiveCompare:AWFFriendshipStatusFriendName] == NSOrderedSame) {
+         return @(AWFFriendshipStatusFriend);
+       }
+       return @(AWFFriendshipStatusNone);
+     } allowingReverseTransformationWithBlock:^id(id value) {
+       switch ([value unsignedIntegerValue]) {
+         case AWFFriendshipStatusPending:
+           return AWFFriendshipStatusPendingName;
+         case AWFFriendshipStatusFriend:
+           return AWFFriendshipStatusFriendName;
        }
        return nil;
      }];
