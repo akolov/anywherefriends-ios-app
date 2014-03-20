@@ -9,6 +9,7 @@
 @import Foundation;
 @import CoreLocation;
 
+@class AWFActivity;
 @class AWFPerson;
 @class RACSignal;
 
@@ -45,5 +46,8 @@
 - (RACSignal *)updateUserSelfLocation:(CLPlacemark *)placemark;
 - (RACSignal *)friendUser:(AWFPerson *)person;
 - (RACSignal *)unfriendUser:(AWFPerson *)person;
+
+- (RACSignal *)getActivity;
+- (RACSignal *)markActivityAsRead:(AWFActivity *)activity;
 
 @end

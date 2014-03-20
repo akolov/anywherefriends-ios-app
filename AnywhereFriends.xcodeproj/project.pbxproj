@@ -36,6 +36,7 @@
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
 		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
+		FA8D9AF918DB860C00262071 /* AWFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D9AF818DB860C00262071 /* AWFActivity.m */; };
 		FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */; };
 		FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964718CCB3CA00F65856 /* AWFHeightFormatter.m */; };
 		FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */; };
@@ -177,6 +178,8 @@
 		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		FA8D71CD18688EC000C4B6CC /* AWFNearbyViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNearbyViewCell.h; sourceTree = "<group>"; };
 		FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNearbyViewCell.m; sourceTree = "<group>"; };
+		FA8D9AF718DB860C00262071 /* AWFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFActivity.h; sourceTree = "<group>"; };
+		FA8D9AF818DB860C00262071 /* AWFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFActivity.m; sourceTree = "<group>"; };
 		FA9A964318CCB2F000F65856 /* AWFWeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFWeightFormatter.h; sourceTree = "<group>"; };
 		FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFWeightFormatter.m; sourceTree = "<group>"; };
 		FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFHeightFormatter.h; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 				FA4532EA188B411400A1E242 /* AWFGender.h */,
 				FA4532E1188B014900A1E242 /* AWFObject.h */,
 				FA4532E2188B014900A1E242 /* AWFObject.m */,
+				FA8D9AF718DB860C00262071 /* AWFActivity.h */,
+				FA8D9AF818DB860C00262071 /* AWFActivity.m */,
 				FA8AA2DF18833123005FC371 /* AWFPerson.h */,
 				FA8AA2E018833123005FC371 /* AWFPerson.m */,
 			);
@@ -887,6 +892,7 @@
 				FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */,
 				FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */,
 				FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */,
+				FA8D9AF918DB860C00262071 /* AWFActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

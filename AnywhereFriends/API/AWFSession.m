@@ -13,15 +13,17 @@
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+#import "AWFActivity.h"
 #import "AWFPerson.h"
 
 static NSString *AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
 
-static NSString *AWFAPIPathUser = @"user/";
-static NSString *AWFAPIPathUserFriends = @"user/friends";
-static NSString *AWFAPIPathUsers = @"users/";
 static NSString *AWFAPIPathLogin = @"login/";
 static NSString *AWFAPIPathLogout = @"logout/";
+static NSString *AWFAPIPathUser = @"user/";
+static NSString *AWFAPIPathUserActivity = @"user/activity/";
+static NSString *AWFAPIPathUserFriends = @"user/friends/";
+static NSString *AWFAPIPathUsers = @"users/";
 
 static NSString *AWFURLParameterEmail = @"email";
 static NSString *AWFURLParameterPassword = @"password";
@@ -255,25 +257,25 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                                  @"page": @(pageNumber),
                                  @"per_page": @(pageSize)};
 
-    NSURLSessionDataTask *task = [self.sessionManager
-                                  GET:AWFAPIPathUsers
-                                  parameters:parameters
-                                  success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
-                                    NSMutableArray *people = [NSMutableArray array];
-                                    for (NSDictionary *dict in responseObject[@"users"]) {
-                                      [people addObject:[AWFPerson personFromDictionary:dict]];
-                                    }
+    NSURLSessionDataTask *task =
+    [self.sessionManager GET:AWFAPIPathUsers
+                  parameters:parameters
+                     success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
+                       NSMutableArray *people = [NSMutableArray array];
+                       for (NSDictionary *dict in responseObject[@"users"]) {
+                         [people addObject:[AWFPerson personFromDictionary:dict]];
+                       }
 
-                                    [people sortedArrayUsingDescriptors:
-                                     @[[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]]];
+                       [people sortedArrayUsingDescriptors:
+                        @[[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]]];
 
-                                    [subscriber sendNext:people];
-                                    [subscriber sendCompleted];
-                                  }
-                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                    [subscriber sendError:error];
-                                  }];
-
+                       [subscriber sendNext:people];
+                       [subscriber sendCompleted];
+                     }
+                     failure:^(NSURLSessionDataTask *task, NSError *error) {
+                       [subscriber sendError:error];
+                     }];
+    
     return [RACDisposable disposableWithBlock:^{
       [task cancel];
     }];
@@ -287,15 +289,24 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
   return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
     @strongify(self);
 
-    NSURLSessionDataTask *task = [self.sessionManager GET:AWFAPIPathUserFriends
-                                               parameters:nil
-                                                  success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                    [subscriber sendNext:responseObject];
-                                                    [subscriber sendCompleted];
-                                                  }
-                                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                    [subscriber sendError:error];
-                                                  }];
+    NSURLSessionDataTask *task =
+    [self.sessionManager GET:AWFAPIPathUserFriends
+                  parameters:nil
+                     success:^(NSURLSessionDataTask *task, id responseObject) {
+                       NSMutableArray *people = [NSMutableArray array];
+                       for (NSDictionary *dict in responseObject[@"friends"]) {
+                         [people addObject:[AWFPerson personFromDictionary:dict]];
+                       }
+
+                       [people sortedArrayUsingDescriptors:
+                        @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]]];
+
+                       [subscriber sendNext:people];
+                       [subscriber sendCompleted];
+                     }
+                     failure:^(NSURLSessionDataTask *task, NSError *error) {
+                       [subscriber sendError:error];
+                     }];
 
     return [RACDisposable disposableWithBlock:^{
       [task cancel];
@@ -346,6 +357,51 @@ static NSString *AWFURLParameterVKToken = @"vk_token";
                                                      failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                        [subscriber sendError:error];
                                                      }];
+
+    return [RACDisposable disposableWithBlock:^{
+      [task cancel];
+    }];
+  }];
+}
+
+#pragma mark - Activity
+
+- (RACSignal *)getActivity {
+  @weakify(self);
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSURLSessionDataTask *task = [self.sessionManager GET:AWFAPIPathUserActivity
+                                               parameters:nil
+                                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                    [subscriber sendNext:responseObject];
+                                                    [subscriber sendCompleted];
+                                                  }
+                                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                    [subscriber sendError:error];
+                                                  }];
+
+    return [RACDisposable disposableWithBlock:^{
+      [task cancel];
+    }];
+  }];
+}
+
+- (RACSignal *)markActivityAsRead:(AWFActivity *)activity {
+  @weakify(self);
+  return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    @strongify(self);
+
+    NSString *url = [NSString stringWithFormat:@"%@/%@", AWFAPIPathUserActivity, activity.activityID];
+    NSURLSessionDataTask *task = [self.sessionManager PUT:url
+                                               parameters:nil
+                                                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                    [subscriber sendNext:responseObject];
+                                                    [subscriber sendCompleted];
+                                                  }
+                                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                    [subscriber sendError:error];
+                                                  }];
 
     return [RACDisposable disposableWithBlock:^{
       [task cancel];

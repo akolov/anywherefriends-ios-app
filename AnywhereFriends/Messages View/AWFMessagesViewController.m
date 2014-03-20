@@ -63,22 +63,10 @@
 
 - (void)getConversations {
   @weakify(self);
-  //  [[[AWFSession sharedSession] getActivity]
-  //   subscribeNext:^(NSArray *people) {
-  //     @strongify(self);
-  //     self.people = people;
-  //   }
-  //   error:^(NSError *error) {
-  //     ErrorLog(error.localizedDescription);
-  //   }];
-
-  [[[AWFSession sharedSession] getUsersAtCoordinate:CLLocationCoordinate2DMake(48.136767, 11.576843)
-                                         withRadius:20000.0
-                                         pageNumber:0
-                                           pageSize:20]
+  [[[AWFSession sharedSession] getActivity]
    subscribeNext:^(NSArray *people) {
      @strongify(self);
-     self.people = people;
+
    }
    error:^(NSError *error) {
      ErrorLog(error.localizedDescription);
