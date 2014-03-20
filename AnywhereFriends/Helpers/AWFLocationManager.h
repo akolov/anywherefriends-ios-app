@@ -9,8 +9,8 @@
 @import Foundation;
 @import CoreLocation;
 
-OBJC_EXTERN NSString *AWFLocationManagerDidUpdateLocationsNotification;
-OBJC_EXTERN NSString *AWFLocationManagerLocationUserInfoKey;
+OBJC_EXTERN NSString *const AWFLocationManagerDidUpdateLocationsNotification;
+OBJC_EXTERN NSString *const AWFLocationManagerLocationUserInfoKey;
 
 @interface AWFLocationManager : NSObject
 

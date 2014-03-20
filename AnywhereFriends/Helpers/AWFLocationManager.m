@@ -13,8 +13,8 @@
 
 #import "AWFSession.h"
 
-NSString *AWFLocationManagerDidUpdateLocationsNotification = @"AWFLocationManagerDidUpdateLocationsNotification";
-NSString *AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUserInfoKey";
+NSString *const AWFLocationManagerDidUpdateLocationsNotification = @"AWFLocationManagerDidUpdateLocationsNotification";
+NSString *const AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLocationUserInfoKey";
 
 @interface AWFLocationManager () <CLLocationManagerDelegate>
 
