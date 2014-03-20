@@ -1,9 +1,9 @@
 platform :ios, '7.0'
 
-pod 'AFNetworking', '~> 2.2.0'
-pod 'AXKCollectionViewTools', '~> 1.0.2'
-pod 'AXKViewLayout', :path => '~/Projects/My Libraries/AXKViewLayout'
-pod 'Facebook-iOS-SDK', '~> 3.12.0'
+pod 'AFNetworking', '~> 2.2.1'
+pod 'AXKCollectionViewTools', '~> 1.0.3'
+pod 'AXKViewLayout', '~> 1.0.1'
+pod 'Facebook-iOS-SDK', '~> 3.13.0'
 pod 'FormatterKit', '~> 1.4.0'
 pod 'Haneke', '~> 0.0.4'
 pod 'JRSwizzle', '~> 1.0'
