@@ -34,7 +34,7 @@
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
 		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
-		FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* default.gpx */; };
+		FA8D71CC1868898F00C4B6CC /* Munich, Germany.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* Munich, Germany.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
 		FA8D9AF918DB860C00262071 /* AWFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D9AF818DB860C00262071 /* AWFActivity.m */; };
 		FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */; };
@@ -175,7 +175,7 @@
 		FA8AA2E018833123005FC371 /* AWFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFPerson.m; sourceTree = "<group>"; };
 		FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLocationManager.h; sourceTree = "<group>"; };
 		FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLocationManager.m; sourceTree = "<group>"; };
-		FA8D71CB1868898F00C4B6CC /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
+		FA8D71CB1868898F00C4B6CC /* Munich, Germany.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Munich, Germany.gpx"; sourceTree = "<group>"; };
 		FA8D71CD18688EC000C4B6CC /* AWFNearbyViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNearbyViewCell.h; sourceTree = "<group>"; };
 		FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNearbyViewCell.m; sourceTree = "<group>"; };
 		FA8D9AF718DB860C00262071 /* AWFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFActivity.h; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 		FADBF66317ADB68E00325DD1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA8D71CB1868898F00C4B6CC /* default.gpx */,
+				FA8D71CB1868898F00C4B6CC /* Munich, Germany.gpx */,
 				FA11ACAD17B1286500028A55 /* Podfile */,
 				FADBF66417ADB68E00325DD1 /* AnywhereFriends-Info.plist */,
 				FADBF66517ADB68E00325DD1 /* InfoPlist.strings */,
@@ -781,7 +781,7 @@
 				FA11ACD517B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf in Resources */,
 				FADE218B17BCF58700D3A62B /* Marie.jpg in Resources */,
 				FAE475F717C0FAEE006B2C65 /* Jasmin_0.jpg in Resources */,
-				FA8D71CC1868898F00C4B6CC /* default.gpx in Resources */,
+				FA8D71CC1868898F00C4B6CC /* Munich, Germany.gpx in Resources */,
 				FADE218617BCF58700D3A62B /* Jacky.jpg in Resources */,
 				FADBF66F17ADB68E00325DD1 /* Images.xcassets in Resources */,
 				FAE4760317C0FDDA006B2C65 /* Jasmin_t2.jpg in Resources */,
