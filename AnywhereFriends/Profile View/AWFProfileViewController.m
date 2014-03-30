@@ -37,7 +37,6 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 @property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
 @property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
 @property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
-@property (nonatomic, strong) NSArray *fields;
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
 @property (nonatomic, readonly) AWFPerson *person;
@@ -141,11 +140,14 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
       [[NSFetchedResultsController alloc]
        initWithFetchRequest:request managedObjectContext:[AWFSession managedObjectContext]
        sectionNameKeyPath:nil cacheName:nil];
-      _fetchedResultsController.delegate = self;
+    _fetchedResultsController.delegate = self;
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
       ErrorLog(error.localizedDescription);
+    }
+    else {
+      self.title = self.person.fullName;
     }
   }
 
@@ -163,92 +165,7 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 
   _personID = personID;
   _fetchedResultsController = nil;
-  _fields = nil;
   [self.tableView reloadData];
-}
-
-- (NSArray *)fields {
-  if (!self.person) {
-    return nil;
-  }
-
-  if (!_fields) {
-
-    // Section 1
-
-    NSMutableArray *section1 = [NSMutableArray array];
-
-    NSString *gender = @"—";
-    if (self.person.gender != AWFGenderUnknown) {
-      gender = [[self.genderFormatter stringFromGender:self.person.genderValue] capitalizedString];
-    }
-
-    NSString *age = @"—";
-    if (self.person.age) {
-      age = [self.ageFormatter stringFromAge:[self.person.age integerValue]];
-    }
-
-    NSString *birthday = @"—";
-    if (self.person.birthday) {
-      birthday = [self.birthdayFormatter stringFromDate:self.person.birthday];
-    }
-
-    NSString *height = @"—";
-    if (self.person.height) {
-      height = [self.heightFormatter stringFromHeight:self.person.height];
-    }
-
-    NSString *weight = @"—";
-    if (self.person.weight) {
-      weight = [self.weightFormatter stringFromWeight:self.person.weight];
-    }
-
-    NSString *bodyBuild = @"—";
-    if (self.person.bodyBuild) {
-      bodyBuild = [self.person.bodyBuild capitalizedString];
-    }
-
-    NSString *hairColor = @"—";
-    if (self.person.hairLength) {
-      hairColor = [self.person.hairLength capitalizedString];
-    }
-
-    NSString *hairLength = @"—";
-    if (self.person.hairColor) {
-      hairLength = [self.person.hairColor capitalizedString];
-    }
-
-    NSString *eyeColor = @"—";
-    if (self.person.eyeColor) {
-      eyeColor = [self.person.eyeColor capitalizedString];
-    }
-
-    if (gender.length != 0) {
-      [section1 addObject:@[NSLocalizedString(@"AWF_GENDER", nil), gender]];
-    }
-
-    if (age.length != 0) {
-      [section1 addObject:@[NSLocalizedString(@"AWF_AGE", nil), age]];
-    }
-
-    if (birthday.length != 0) {
-      [section1 addObject:@[NSLocalizedString(@"AWF_BIRTHDAY", nil), birthday]];
-    }
-
-    // Section 2
-
-    NSMutableArray *section2 = [NSMutableArray array];
-
-    [section2 addObject:@[NSLocalizedString(@"AWF_HEIGHT", nil), height]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_WEIGHT", nil), weight]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_BODY_BUILD", nil), bodyBuild]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_LENGTH", nil), hairLength]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_HAIR_COLOR", nil), hairColor]];
-    [section2 addObject:@[NSLocalizedString(@"AWF_EYE_COLOR", nil), eyeColor]];
-
-    _fields = @[section1, section2];
-  }
-  return _fields;
 }
 
 - (NSDateFormatter *)birthdayFormatter {
@@ -322,18 +239,22 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
   self.title = self.person.fullName;
-  _fields = nil;
   [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return self.fields.count;
+  return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.fields[section] count];
+  switch (section) {
+    case 0:
+      return 3;
+    default:
+      return 6;
+  }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -349,8 +270,86 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
   UITableViewCell *cell =
     [tableView dequeueReusableCellWithIdentifier:[AWFProfileTableViewCell reuseIdentifier] forIndexPath:indexPath];
 
-  cell.textLabel.text = self.fields[indexPath.section][indexPath.row][0];
-  cell.detailTextLabel.text = self.fields[indexPath.section][indexPath.row][1];
+  NSString *text, *detail = @"—";
+
+  if (indexPath.section == 0) {
+    switch (indexPath.row) {
+      case 0:
+        text = NSLocalizedString(@"AWF_GENDER", nil);
+        if (self.person.gender != AWFGenderUnknown) {
+          detail = [[self.genderFormatter stringFromGender:self.person.genderValue] capitalizedString];
+        }
+        break;
+
+      case 1:
+        text = NSLocalizedString(@"AWF_AGE", nil);
+        if (self.person.age) {
+          detail = [self.ageFormatter stringFromAge:[self.person.age integerValue]];
+        }
+        break;
+
+      case 2:
+        text = NSLocalizedString(@"AWF_BIRTHDAY", nil);
+        if (self.person.birthday) {
+          detail = [self.birthdayFormatter stringFromDate:self.person.birthday];
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+  else {
+    switch (indexPath.row) {
+      case 0:
+        text = NSLocalizedString(@"AWF_HEIGHT", nil);
+        if (self.person.height) {
+          detail = [self.heightFormatter stringFromHeight:self.person.height];
+        }
+        break;
+
+      case 1:
+        text = NSLocalizedString(@"AWF_WEIGHT", nil);
+        if (self.person.weight) {
+          detail = [self.weightFormatter stringFromWeight:self.person.weight];
+        }
+        break;
+
+      case 2:
+        text = NSLocalizedString(@"AWF_BODY_BUILD", nil);
+        if (self.person.bodyBuild) {
+          detail = [self.person.bodyBuild capitalizedString];
+        }
+        break;
+
+      case 3:
+        text = NSLocalizedString(@"AWF_HAIR_LENGTH", nil);
+        if (self.person.hairLength) {
+          detail = [self.person.hairLength capitalizedString];
+        }
+        break;
+
+      case 4:
+        text = NSLocalizedString(@"AWF_HAIR_COLOR", nil);
+        if (self.person.hairColor) {
+          detail = [self.person.hairColor capitalizedString];
+        }
+        break;
+
+      case 5:
+        text = NSLocalizedString(@"AWF_EYE_COLOR", nil);
+        if (self.person.eyeColor) {
+          detail = [self.person.eyeColor capitalizedString];
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  cell.textLabel.text = text;
+  cell.detailTextLabel.text = detail;
 
   return cell;
 }
