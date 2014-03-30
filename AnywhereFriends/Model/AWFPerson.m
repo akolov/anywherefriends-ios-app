@@ -8,14 +8,6 @@
 
 #import "AWFPerson.h"
 
-
-@interface AWFPerson ()
-
-// Private interface goes here.
-
-@end
-
-
 @implementation AWFPerson
 
 - (NSNumber *)age {
@@ -24,7 +16,8 @@
   }
 
   NSDateComponents* ageComponents =
-    [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:self.birthday toDate:[NSDate date] options:0];
+    [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:self.birthday
+                                      toDate:[NSDate date] options:0];
   return @([ageComponents year]);
 }
 

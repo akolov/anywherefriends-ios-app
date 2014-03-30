@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AWFActivity" representedClassName="AWFActivity" syncable="YES">
+        <attribute name="activityID" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="dateCreated" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AWFPerson" inverseName="activitiesCreated" inverseEntity="AWFPerson" syncable="YES"/>
+    </entity>
     <entity name="AWFPerson" representedClassName="AWFPerson" syncable="YES">
         <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
@@ -22,8 +29,10 @@
         <attribute name="locationUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="personID" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="activitiesCreated" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AWFActivity" inverseName="creator" inverseEntity="AWFActivity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AWFPerson" positionX="-63" positionY="-18" width="128" height="360"/>
+        <element name="AWFPerson" positionX="-63" positionY="-18" width="128" height="373"/>
+        <element name="AWFActivity" positionX="-54" positionY="144" width="128" height="118"/>
     </elements>
 </model>

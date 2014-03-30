@@ -21,6 +21,7 @@
 #import "AFHTTPClient+RACSupport.h"
 #import "AWFActivity.h"
 #import "AWFClient.h"
+#import "AWFActivity+RestKit.h"
 #import "AWFPerson+RestKit.h"
 #import "NSManagedObject+RestKit.h"
 #import "RKObjectManager+RACSupport.h"
@@ -58,10 +59,12 @@
 
     // Response descriptors
 
+    [manager addResponseDescriptorsFromArray:[AWFActivity responseDescriptors]];
     [manager addResponseDescriptorsFromArray:[AWFPerson responseDescriptors]];
 
     // Request descriptors
 
+    [manager addRequestDescriptorsFromArray:[AWFActivity requestDescriptors]];
     [manager addRequestDescriptorsFromArray:[AWFPerson requestDescriptors]];
 
     // Core Data stack initialization
@@ -87,8 +90,10 @@
       }
       else {
         if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-          [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-          NSAssert(error, @"Failed to delete old persistent store with error: %@", error);
+          if (![[NSFileManager defaultManager] removeItemAtPath:path error:&error]) {
+            ErrorLog(error.localizedDescription);
+            stop = YES;
+          }
         }
         else {
           stop = YES;
@@ -102,6 +107,23 @@
     // Configure a managed object cache to ensure we do not create duplicate objects
     NSManagedObjectContext *context = objectStore.persistentStoreManagedObjectContext;
     objectStore.managedObjectCache = [[RKInMemoryManagedObjectCache alloc] initWithManagedObjectContext:context];
+
+    // Fetch request blocks
+
+    [manager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
+      RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:AWFAPIPathUserActivity];
+
+      BOOL match = [pathMatcher matchesPath:[URL relativeString] tokenizeQueryStrings:NO parsedArguments:NULL];
+      if (match) {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[AWFActivity entityName]];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
+        fetchRequest.includesPropertyValues = NO;
+        fetchRequest.includesSubentities = NO;
+        return fetchRequest;
+      }
+
+      return nil;
+    }];
 
     [manager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
       RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:AWFAPIPathUsers];
@@ -274,13 +296,13 @@
   [parameters setValue:vkToken forKey:AWFURLParameterVKToken];
 
   @weakify(self);
-  return [[[[RKObjectManager sharedManager] rac_postObject:nil path:AWFAPIPathLogin parameters:parameters]
+  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]
            then:^RACSignal *{
              return [self getUserSelf];
            }]
-          map:^id(RACTuple *x) {
+          map:^id(AWFPerson *person) {
             @strongify(self);
-            self.currentUserID = [[x.second firstObject] personID];
+            self.currentUserID = person.personID;
             return self.currentUser;
           }];
 }

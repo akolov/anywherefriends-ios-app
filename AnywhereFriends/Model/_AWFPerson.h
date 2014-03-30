@@ -29,11 +29,13 @@ extern const struct AWFPersonAttributes {
 } AWFPersonAttributes;
 
 extern const struct AWFPersonRelationships {
+	__unsafe_unretained NSString *activitiesCreated;
 } AWFPersonRelationships;
 
 extern const struct AWFPersonFetchedProperties {
 } AWFPersonFetchedProperties;
 
+@class AWFActivity;
 
 
 
@@ -308,10 +310,22 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSSet *activitiesCreated;
+
+- (NSMutableSet*)activitiesCreatedSet;
+
+
+
+
 
 @end
 
 @interface _AWFPerson (CoreDataGeneratedAccessors)
+
+- (void)addActivitiesCreated:(NSSet*)value_;
+- (void)removeActivitiesCreated:(NSSet*)value_;
+- (void)addActivitiesCreatedObject:(AWFActivity*)value_;
+- (void)removeActivitiesCreatedObject:(AWFActivity*)value_;
 
 @end
 
@@ -463,6 +477,11 @@ extern const struct AWFPersonFetchedProperties {
 - (void)setPrimitiveWeightValue:(float)value_;
 
 
+
+
+
+- (NSMutableSet*)primitiveActivitiesCreated;
+- (void)setPrimitiveActivitiesCreated:(NSMutableSet*)value;
 
 
 @end

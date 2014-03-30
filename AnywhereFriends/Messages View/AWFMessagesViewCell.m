@@ -55,7 +55,7 @@
 
     [self.contentView pin:@"H:|-8.0-[placeholderView]-8.0-[nameLabel]-(>=0)-[timeLabel]-8.0-|"
                   options:NSLayoutFormatAlignAllTop owner:self];
-    [self.contentView pin:@"V:|-8.0-[nameLabel][lastMessageLabel]-(>=8.0)-|" options:0 owner:self];
+    [self.contentView pin:@"V:|-8.0-[nameLabel]-4.0-[lastMessageLabel]-(>=8.0)-|" options:0 owner:self];
     [self.contentView pin:@"H:[placeholderView]-8.0-[lastMessageLabel]-8.0-|" options:0 owner:self];
     [_placeholderView pinSize:CGSizeMake(35.0f, 35.0f) withRelation:NSLayoutRelationEqual];
 

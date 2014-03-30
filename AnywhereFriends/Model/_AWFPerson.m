@@ -28,6 +28,7 @@ const struct AWFPersonAttributes AWFPersonAttributes = {
 };
 
 const struct AWFPersonRelationships AWFPersonRelationships = {
+	.activitiesCreated = @"activitiesCreated",
 };
 
 const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
@@ -380,6 +381,19 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 
 
 
+
+@dynamic activitiesCreated;
+
+	
+- (NSMutableSet*)activitiesCreatedSet {
+	[self willAccessValueForKey:@"activitiesCreated"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"activitiesCreated"];
+  
+	[self didAccessValueForKey:@"activitiesCreated"];
+	return result;
+}
+	
 
 
 

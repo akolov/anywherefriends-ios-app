@@ -16,15 +16,18 @@
 
 #import "AWFMessagesViewCell.h"
 #import "AWFNavigationTitleView.h"
+#import "AWFActivity.h"
 #import "AWFPerson.h"
 #import "AWFSession.h"
 
-@interface AWFMessagesViewController ()
+static NSUInteger AWFPageSize = 20;
 
-@property (nonatomic, strong) NSArray *people;
+@interface AWFMessagesViewController () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *formatter;
 
-- (void)getConversations;
+- (void)getActivity;
 
 @end
 
@@ -39,60 +42,86 @@
   self.formatter = [[TTTTimeIntervalFormatter alloc] init];
 
   [self.tableView registerClassForCellReuse:[AWFMessagesViewCell class]];
+}
 
-  [self getConversations];
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  [self getActivity];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+  _fetchedResultsController = nil;
 }
+
+#pragma mark - Accessors
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
 
-#pragma mark - Accessors
+- (NSFetchedResultsController *)fetchedResultsController {
+  if (!_fetchedResultsController) {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[AWFPerson entityName]];
+    request.predicate = [NSPredicate predicateWithFormat:@"activitiesCreated.@count != 0"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES],
+                                [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
+    request.includesPropertyValues = YES;
+    request.includesSubentities = YES;
+    request.fetchBatchSize = AWFPageSize;
 
-- (void)setPeople:(NSArray *)people {
-  _people = people;
-  [self.tableView reloadData];
+    _fetchedResultsController =
+      [[NSFetchedResultsController alloc]
+       initWithFetchRequest:request managedObjectContext:[AWFSession managedObjectContext]
+       sectionNameKeyPath:nil cacheName:nil];
+    _fetchedResultsController.delegate = self;
+
+    NSError *error;
+    if (![_fetchedResultsController performFetch:&error]) {
+      ErrorLog(error.localizedDescription);
+    }
+  }
+
+  return _fetchedResultsController;
 }
 
 #pragma mark - Private Methods
 
-- (void)getConversations {
-  @weakify(self);
+- (void)getActivity {
   [[[AWFSession sharedSession] getUserSelfActivity]
-   subscribeNext:^(NSArray *people) {
-     @strongify(self);
-
-   }
-   error:^(NSError *error) {
+   subscribeError:^(NSError *error) {
      ErrorLog(error.localizedDescription);
    }];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+  return (NSInteger)self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.people.count;
+  id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[(NSUInteger)section];
+  return (NSInteger)sectionInfo.numberOfObjects;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFMessagesViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFMessagesViewCell reuseIdentifier]
                                                               forIndexPath:indexPath];
-  AWFPerson *person = self.people[indexPath.row];
+  AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  NSDate *lastActivityDate = [person.activitiesCreated valueForKeyPath:@"@max.dateCreated"];
   cell.imageView.image = nil;
   cell.nameLabel.text = person.fullName;
-  cell.lastMessageLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut convallis porta erat, quis tincidunt magna consectetur sed. Proin fermentum tristique nibh, in lobortis purus luctus sed. Vestibulum quis quam eu nunc volutpat vehicula sed ut velit. Nullam sed lorem vitae est dignissim fermentum.";
-  cell.timeLabel.text = [self.formatter stringForTimeIntervalFromDate:[NSDate date] toDate:person.locationUpdated];
+  cell.timeLabel.text = [self.formatter stringForTimeIntervalFromDate:[NSDate date] toDate:lastActivityDate];
   cell.placeholderView.text = person.abbreviatedName;
-
+  cell.lastMessageLabel.text =
+    [NSString stringWithFormat:NSLocalizedString(@"AWF_FRIENDSHIP_EREQUEST_STRING", nil), person.fullName];
   return cell;
 }
 

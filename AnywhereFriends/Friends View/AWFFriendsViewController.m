@@ -27,7 +27,9 @@
 static NSUInteger AWFPageSize = 20;
 static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatName";
 
-@interface AWFFriendsViewController () <NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface AWFFriendsViewController () <
+NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
+>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 

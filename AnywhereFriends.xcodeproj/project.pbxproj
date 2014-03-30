@@ -47,6 +47,8 @@
 		FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */; };
 		FA3D4C5118E8542F008C5366 /* AFHTTPClient+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */; };
 		FA3D4C5418E85507008C5366 /* RKObjectManager+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */; };
+		FA3D4C5818E89553008C5366 /* _AWFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5718E89553008C5366 /* _AWFActivity.m */; };
+		FA3D4C5B18E89560008C5366 /* AWFActivity+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5A18E89560008C5366 /* AWFActivity+RestKit.m */; };
 		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
@@ -193,6 +195,10 @@
 		FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+RACSupport.m"; sourceTree = "<group>"; };
 		FA3D4C5218E85507008C5366 /* RKObjectManager+RACSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKObjectManager+RACSupport.h"; sourceTree = "<group>"; };
 		FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKObjectManager+RACSupport.m"; sourceTree = "<group>"; };
+		FA3D4C5618E89553008C5366 /* _AWFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AWFActivity.h; sourceTree = "<group>"; };
+		FA3D4C5718E89553008C5366 /* _AWFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AWFActivity.m; sourceTree = "<group>"; };
+		FA3D4C5918E89560008C5366 /* AWFActivity+RestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFActivity+RestKit.h"; sourceTree = "<group>"; };
+		FA3D4C5A18E89560008C5366 /* AWFActivity+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AWFActivity+RestKit.m"; sourceTree = "<group>"; };
 		FA4532E1188B014900A1E242 /* AWFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFObject.h; sourceTree = "<group>"; };
 		FA4532E2188B014900A1E242 /* AWFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFObject.m; sourceTree = "<group>"; };
 		FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFAgeFormatter.h; sourceTree = "<group>"; };
@@ -395,6 +401,32 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		FA3D4C5518E89545008C5366 /* AWFPerson */ = {
+			isa = PBXGroup;
+			children = (
+				FA3D4C4318E849CF008C5366 /* _AWFPerson.h */,
+				FA3D4C4418E849CF008C5366 /* _AWFPerson.m */,
+				FA3D4C4618E849E9008C5366 /* AWFPerson.h */,
+				FA3D4C4718E849E9008C5366 /* AWFPerson.m */,
+				FA3D4C4C18E84A9F008C5366 /* AWFPerson+RestKit.h */,
+				FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */,
+			);
+			name = AWFPerson;
+			sourceTree = "<group>";
+		};
+		FA3D4C5C18E89565008C5366 /* AWFActivity */ = {
+			isa = PBXGroup;
+			children = (
+				FA3D4C5618E89553008C5366 /* _AWFActivity.h */,
+				FA3D4C5718E89553008C5366 /* _AWFActivity.m */,
+				FA8D9AF718DB860C00262071 /* AWFActivity.h */,
+				FA8D9AF818DB860C00262071 /* AWFActivity.m */,
+				FA3D4C5918E89560008C5366 /* AWFActivity+RestKit.h */,
+				FA3D4C5A18E89560008C5366 /* AWFActivity+RestKit.m */,
+			);
+			name = AWFActivity;
+			sourceTree = "<group>";
+		};
 		FA57F9DA18D268AE00E12B5F /* Friends View */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,14 +446,8 @@
 				FA4532EA188B411400A1E242 /* AWFGender.h */,
 				FA4532E1188B014900A1E242 /* AWFObject.h */,
 				FA4532E2188B014900A1E242 /* AWFObject.m */,
-				FA8D9AF718DB860C00262071 /* AWFActivity.h */,
-				FA8D9AF818DB860C00262071 /* AWFActivity.m */,
-				FA3D4C4318E849CF008C5366 /* _AWFPerson.h */,
-				FA3D4C4418E849CF008C5366 /* _AWFPerson.m */,
-				FA3D4C4618E849E9008C5366 /* AWFPerson.h */,
-				FA3D4C4718E849E9008C5366 /* AWFPerson.m */,
-				FA3D4C4C18E84A9F008C5366 /* AWFPerson+RestKit.h */,
-				FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */,
+				FA3D4C5C18E89565008C5366 /* AWFActivity */,
+				FA3D4C5518E89545008C5366 /* AWFPerson */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -934,6 +960,7 @@
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
 				FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */,
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
+				FA3D4C5818E89553008C5366 /* _AWFActivity.m in Sources */,
 				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,
 				FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */,
 				FA3D4C3A18E84634008C5366 /* AWFConstants.m in Sources */,
@@ -952,6 +979,7 @@
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
 				FA3D4C5118E8542F008C5366 /* AFHTTPClient+RACSupport.m in Sources */,
 				FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */,
+				FA3D4C5B18E89560008C5366 /* AWFActivity+RestKit.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
 				FA3D4C3D18E8475F008C5366 /* AnywhereFriends.xcdatamodeld in Sources */,
@@ -1185,6 +1213,7 @@
 				FA3D4C4118E84977008C5366 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FADBF65417ADB68E00325DD1 /* Build configuration list for PBXProject "AnywhereFriends" */ = {
 			isa = XCConfigurationList;

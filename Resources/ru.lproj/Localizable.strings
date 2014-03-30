@@ -19,6 +19,9 @@
 /* Eye Color */
 "AWF_EYE_COLOR" = "Цвет глаз";
 
+/* Friendship request string */
+"AWF_FRIENDSHIP_EREQUEST_STRING" = "%@ хочет быть вашим другом!";
+
 /* Title of the Friends view */
 "AWF_FRIENDS_VIEW_CONTROLLER_TITLE" = "Друзья";
 

@@ -1,5 +1,5 @@
 //
-//  AWFPerson+RestKit.m
+//  AWFActivity+RestKit.m
 //  AnywhereFriends
 //
 //  Created by Alexander Kolov on 30/03/14.
@@ -7,14 +7,15 @@
 //
 
 #import "AWFConfig.h"
-#import "AWFPerson+RestKit.h"
+#import "AWFActivity+RestKit.h"
 
 #import <RestKit/RestKit.h>
 
+#import "AWFPerson+RestKit.h"
 #import "AWFValueTransformers.h"
 #import "NSManagedObject+RestKit.h"
 
-@implementation AWFPerson (RestKit)
+@implementation AWFActivity (RestKit)
 
 #pragma mark - Response
 
@@ -25,13 +26,13 @@
   dispatch_once(&onceToken, ^{
     mapping = [super responseMapping];
 
-    // Gender
+    // Activity Status
 
     {
-      RKAttributeMapping *genderMapping =
-        [RKAttributeMapping attributeMappingFromKeyPath:@"gender" toKeyPath:@"gender"];
+      RKAttributeMapping *statusMapping =
+      [RKAttributeMapping attributeMappingFromKeyPath:@"status" toKeyPath:@"status"];
 
-      genderMapping.valueTransformer =
+      statusMapping.valueTransformer =
         [RKBlockValueTransformer
          valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
                                                    __unsafe_unretained Class outputValueClass) {
@@ -42,21 +43,21 @@
            RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
            RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
 
-           *outputValue = [[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
+           *outputValue = [[NSValueTransformer valueTransformerForName:AWFActivityStatusTransformerName]
                            transformedValue:inputValue];
            return YES;
          }];
 
-      [mapping addPropertyMapping:genderMapping];
+      [mapping addPropertyMapping:statusMapping];
     }
 
-    // Friendship
+    // Activity Type
 
     {
-      RKAttributeMapping *friendshipMapping =
-        [RKAttributeMapping attributeMappingFromKeyPath:@"friendship" toKeyPath:@"friendship"];
+      RKAttributeMapping *typeMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"type" toKeyPath:@"type"];
 
-      friendshipMapping.valueTransformer =
+      typeMapping.valueTransformer =
         [RKBlockValueTransformer
          valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
                                                    __unsafe_unretained Class outputValueClass) {
@@ -67,47 +68,42 @@
            RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
            RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
 
-           *outputValue = [[NSValueTransformer valueTransformerForName:AWFFriendshipStatusTransformerName]
+           *outputValue = [[NSValueTransformer valueTransformerForName:AWFActivityTypeTransformerName]
                            transformedValue:inputValue];
            return YES;
          }];
 
-      [mapping addPropertyMapping:friendshipMapping];
+      [mapping addPropertyMapping:typeMapping];
+    }
+
+    // Creator
+
+    {
+      RKRelationshipMapping *creatorMapping =
+        [RKRelationshipMapping relationshipMappingFromKeyPath:@"created_by" toKeyPath:@"creator"
+                                                  withMapping:[AWFPerson responseMapping]];
+      [mapping addPropertyMapping:creatorMapping];
     }
   });
-
+  
   return mapping;
 }
 
 + (NSArray *)responseDescriptorMatrix {
-  return @[@[@(RKRequestMethodGET),  AWFAPIPathUser,        [NSNull null]],
-           @[@(RKRequestMethodPOST), AWFAPIPathUser,        @"user"],
-           @[@(RKRequestMethodPUT),  AWFAPIPathUser,        @"user"],
-           @[@(RKRequestMethodGET),  AWFAPIPathUsers,       @"users"],
-           @[@(RKRequestMethodGET),  AWFAPIPathUserFriends, @"friends"]];
+  return @[@[@(RKRequestMethodGET), AWFAPIPathUserActivity, @"activity"]];
 }
 
 + (NSArray *)identificationAttributes {
-  return @[@"personID"];
+  return @[@"activityID"];
 }
 
-+ (NSArray *)attributeMappingsArray {
-  return @[@"bio", @"birthday", @"email", @"height", @"weight"];
++ (NSArray *)modificationAttributes {
+  return @[@"dateCreated"];
 }
 
 + (NSDictionary *)attributeMappingsDictionary {
-  return @{@"id"          : @"personID",
-           @"build"       : @"bodyBuild",
-           @"eye_color"   : @"eyeColor",
-           @"first_name"  : @"firstName",
-           @"hair_color"  : @"hairColor",
-           @"hair_length" : @"hairLength",
-           @"last_name"   : @"lastName",
-           @"latitude"    : @"locationLatitude",
-           @"longitude"   : @"locationLongitude",
-           @"location.locality"     : @"locationLocality",
-           @"location.thoroughfare" : @"locationThoroughfare",
-           @"location_updated"      : @"locationUpdated"};
+  return @{@"id"   : @"activityID",
+           @"date" : @"dateCreated"};
 }
 
 @end

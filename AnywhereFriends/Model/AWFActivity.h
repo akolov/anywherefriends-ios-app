@@ -6,10 +6,19 @@
 //  Copyright (c) 2014 Anywherefriends. All rights reserved.
 //
 
-#import "AWFObject.h"
+#import "_AWFActivity.h"
 
-@interface AWFActivity : AWFObject
+typedef NS_ENUM(NSUInteger, AWFActivityStatus) {
+  AWFActivityStatusUnknown = 0,
+  AWFActivityStatusUnread = 1,
+  AWFActivityStatusRead = 2
+};
 
-@property (nonatomic, assign) NSNumber *activityID;
+typedef NS_ENUM(NSUInteger, AWFActivityType) {
+  AWFActivityTypeUnknown = 0,
+  AWFActivityTypeFriendRequest = 1
+};
+
+@interface AWFActivity : _AWFActivity
 
 @end

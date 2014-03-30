@@ -50,6 +50,7 @@
 
     [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
       [subscriber sendNext:RACTuplePack(operation, mappingResult)];
+      [subscriber sendCompleted];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
       [subscriber sendError:error];
     }];
