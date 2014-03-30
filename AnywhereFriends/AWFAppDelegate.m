@@ -9,6 +9,8 @@
 #import "AWFConfig.h"
 #import "AWFAppDelegate.h"
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 #import "AWFFriendsViewController.h"
 #import "AWFLocationManager.h"
 #import "AWFLoginViewController.h"
@@ -68,6 +70,10 @@
     AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
     [tabs presentViewController:loginNavigation animated:NO completion:NULL];
   }
+
+  [[[AWFSession sharedSession] getUserSelf] subscribeError:^(NSError *error) {
+    ErrorLog(error.localizedDescription);
+  }];
 
   [AWFLocationManager sharedManager];
 

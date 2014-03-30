@@ -42,7 +42,7 @@ static double AWFRadius = 3000.0;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self.mapView setCoordinate:self.person.location.coordinate spanInMeters:AWFRadius animated:NO];
+  [self.mapView setCoordinate:self.person.locationCoordinate spanInMeters:AWFRadius animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -57,10 +57,10 @@ static double AWFRadius = 3000.0;
 
 - (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered {
   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-  [annotation setCoordinate:self.person.location.coordinate];
+  [annotation setCoordinate:self.person.locationCoordinate];
   [annotation setTitle:self.person.fullName];
   [annotation setSubtitle:[NSString stringWithFormat:@"%@ — %.2f km",
-                           self.person.locationName, self.person.distance / 1000.0]];
+                           self.person.locationName, self.person.locationDistanceValue / 1000.0]];
 
   [self.mapView addAnnotation:annotation];
   [self.mapView showAnnotations:@[annotation] animated:YES];

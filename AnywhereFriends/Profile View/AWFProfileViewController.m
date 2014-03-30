@@ -76,10 +76,10 @@
                                   @"em": @{NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
                                            NSForegroundColorAttributeName: [UIColor grayColor]}};
     NSString *lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date]
-                                                                       toDate:self.person.location.timestamp];
+                                                                       toDate:self.person.locationUpdated];
 
     NSString *markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you — %@</em>",
-                        self.person.locationName, self.person.distance, lastUpdated];
+                        self.person.locationName, self.person.locationDistanceValue, lastUpdated];
 
     AWFProfileHeaderView *view = [[AWFProfileHeaderView alloc] init];
     view.descriptionLabel.text = self.person.bio;
@@ -176,7 +176,7 @@
 
     NSString *gender = @"—";
     if (self.person.gender != AWFGenderUnknown) {
-      gender = [[self.genderFormatter stringFromGender:self.person.gender] capitalizedString];
+      gender = [[self.genderFormatter stringFromGender:self.person.genderValue] capitalizedString];
     }
 
     NSString *age = @"—";

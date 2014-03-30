@@ -2,15 +2,13 @@
 //  AWFPerson.h
 //  AnywhereFriends
 //
-//  Created by Alexander Kolov on 12/01/14.
+//  Created by Alexander Kolov on 30/03/14.
 //  Copyright (c) 2014 Anywherefriends. All rights reserved.
 //
 
-@import Foundation;
-@import CoreLocation.CLLocation;
+@import CoreLocation;
 
-#import "AWFObject.h"
-#import "AWFGender.h"
+#import "_AWFPerson.h"
 
 typedef NS_ENUM(NSUInteger, AWFFriendshipStatus) {
   AWFFriendshipStatusNone,
@@ -18,30 +16,12 @@ typedef NS_ENUM(NSUInteger, AWFFriendshipStatus) {
   AWFFriendshipStatusFriend
 };
 
-@interface AWFPerson : AWFObject
+@interface AWFPerson : _AWFPerson
 
-@property (nonatomic, assign) AWFGender gender;
-@property (nonatomic, strong) NSString *personID;
-@property (nonatomic, strong) NSString *firstName;
-@property (nonatomic, strong) NSString *lastName;
-@property (nonatomic, strong) NSString *bio;
 @property (nonatomic, readonly) NSNumber *age;
-@property (nonatomic, strong) NSDate *birthday;
-@property (nonatomic, strong) NSNumber *weight;
-@property (nonatomic, strong) NSNumber *height;
-@property (nonatomic, strong) NSString *hairLength;
-@property (nonatomic, strong) NSString *hairColor;
-@property (nonatomic, strong) NSString *eyeColor;
-@property (nonatomic, strong) NSString *bodyBuild;
-@property (nonatomic, strong) CLLocation *location;
-@property (nonatomic, strong) NSDictionary *placemark;
-@property (nonatomic, assign) CLLocationDistance distance;
-@property (nonatomic, assign) AWFFriendshipStatus friendship;
-
-+ (instancetype)personFromDictionary:(NSDictionary *)dictionary;
-
-- (NSString *)fullName;
-- (NSString *)abbreviatedName;
-- (NSString *)locationName;
+@property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, readonly) NSString *abbreviatedName;
+@property (nonatomic, readonly) NSString *locationName;
+@property (nonatomic, readonly) CLLocationCoordinate2D locationCoordinate;
 
 @end

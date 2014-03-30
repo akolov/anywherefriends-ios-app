@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		FA3D4C3E18E84976008C5366 /* Mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FA3D4C3F18E84977008C5366 /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
+			buildPhases = (
+				FA3D4C4218E8497F008C5366 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Mogenerator;
+			productName = Mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		06DC33336B9B492586CCB402 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE6E10FA69445AA854D1E68 /* libPods.a */; };
 		FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACA417B11A7500028A55 /* AWFLoginFormViewCell.m */; };
@@ -24,6 +38,15 @@
 		FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */; };
 		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
+		FA3D4C3718E84555008C5366 /* AWFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C3618E84555008C5366 /* AWFClient.m */; };
+		FA3D4C3A18E84634008C5366 /* AWFConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C3918E84634008C5366 /* AWFConstants.m */; };
+		FA3D4C3D18E8475F008C5366 /* AnywhereFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C3B18E8475F008C5366 /* AnywhereFriends.xcdatamodeld */; };
+		FA3D4C4518E849CF008C5366 /* _AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4418E849CF008C5366 /* _AWFPerson.m */; };
+		FA3D4C4818E849E9008C5366 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4718E849E9008C5366 /* AWFPerson.m */; };
+		FA3D4C4B18E84A32008C5366 /* NSManagedObject+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4A18E84A32008C5366 /* NSManagedObject+RestKit.m */; };
+		FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */; };
+		FA3D4C5118E8542F008C5366 /* AFHTTPClient+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */; };
+		FA3D4C5418E85507008C5366 /* RKObjectManager+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */; };
 		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
@@ -32,7 +55,6 @@
 		FA57F9D918D24A0900E12B5F /* AWFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9D818D24A0900E12B5F /* AWFViewController.m */; };
 		FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */; };
 		FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7667021814242D0093A4CA /* AWFGenderPicker.m */; };
-		FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8AA2E018833123005FC371 /* AWFPerson.m */; };
 		FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */; };
 		FA8D71CC1868898F00C4B6CC /* Munich, Germany.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* Munich, Germany.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
@@ -154,6 +176,23 @@
 		FA3092F518098A3D001F25F2 /* AWFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationController.m; sourceTree = "<group>"; };
 		FA3092F718098A64001F25F2 /* AWFNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationBar.h; sourceTree = "<group>"; };
 		FA3092F818098A64001F25F2 /* AWFNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationBar.m; sourceTree = "<group>"; };
+		FA3D4C3518E84555008C5366 /* AWFClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFClient.h; sourceTree = "<group>"; };
+		FA3D4C3618E84555008C5366 /* AWFClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFClient.m; sourceTree = "<group>"; };
+		FA3D4C3818E84634008C5366 /* AWFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFConstants.h; sourceTree = "<group>"; };
+		FA3D4C3918E84634008C5366 /* AWFConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFConstants.m; sourceTree = "<group>"; };
+		FA3D4C3C18E8475F008C5366 /* AnywhereFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnywhereFriends.xcdatamodel; sourceTree = "<group>"; };
+		FA3D4C4318E849CF008C5366 /* _AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AWFPerson.h; sourceTree = "<group>"; };
+		FA3D4C4418E849CF008C5366 /* _AWFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AWFPerson.m; sourceTree = "<group>"; };
+		FA3D4C4618E849E9008C5366 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
+		FA3D4C4718E849E9008C5366 /* AWFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFPerson.m; sourceTree = "<group>"; };
+		FA3D4C4918E84A32008C5366 /* NSManagedObject+RestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+RestKit.h"; sourceTree = "<group>"; };
+		FA3D4C4A18E84A32008C5366 /* NSManagedObject+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+RestKit.m"; sourceTree = "<group>"; };
+		FA3D4C4C18E84A9F008C5366 /* AWFPerson+RestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFPerson+RestKit.h"; sourceTree = "<group>"; };
+		FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AWFPerson+RestKit.m"; sourceTree = "<group>"; };
+		FA3D4C4F18E8542F008C5366 /* AFHTTPClient+RACSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+RACSupport.h"; sourceTree = "<group>"; };
+		FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+RACSupport.m"; sourceTree = "<group>"; };
+		FA3D4C5218E85507008C5366 /* RKObjectManager+RACSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKObjectManager+RACSupport.h"; sourceTree = "<group>"; };
+		FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKObjectManager+RACSupport.m"; sourceTree = "<group>"; };
 		FA4532E1188B014900A1E242 /* AWFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFObject.h; sourceTree = "<group>"; };
 		FA4532E2188B014900A1E242 /* AWFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFObject.m; sourceTree = "<group>"; };
 		FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFAgeFormatter.h; sourceTree = "<group>"; };
@@ -171,8 +210,6 @@
 		FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFFriendsViewController.m; sourceTree = "<group>"; };
 		FA7667011814242D0093A4CA /* AWFGenderPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderPicker.h; sourceTree = "<group>"; };
 		FA7667021814242D0093A4CA /* AWFGenderPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderPicker.m; sourceTree = "<group>"; };
-		FA8AA2DF18833123005FC371 /* AWFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFPerson.h; sourceTree = "<group>"; };
-		FA8AA2E018833123005FC371 /* AWFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFPerson.m; sourceTree = "<group>"; };
 		FA8D71C61868746B00C4B6CC /* AWFLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFLocationManager.h; sourceTree = "<group>"; };
 		FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFLocationManager.m; sourceTree = "<group>"; };
 		FA8D71CB1868898F00C4B6CC /* Munich, Germany.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Munich, Germany.gpx"; sourceTree = "<group>"; };
@@ -372,13 +409,19 @@
 		FA8AA2DE188330C6005FC371 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA3D4C4918E84A32008C5366 /* NSManagedObject+RestKit.h */,
+				FA3D4C4A18E84A32008C5366 /* NSManagedObject+RestKit.m */,
 				FA4532EA188B411400A1E242 /* AWFGender.h */,
 				FA4532E1188B014900A1E242 /* AWFObject.h */,
 				FA4532E2188B014900A1E242 /* AWFObject.m */,
 				FA8D9AF718DB860C00262071 /* AWFActivity.h */,
 				FA8D9AF818DB860C00262071 /* AWFActivity.m */,
-				FA8AA2DF18833123005FC371 /* AWFPerson.h */,
-				FA8AA2E018833123005FC371 /* AWFPerson.m */,
+				FA3D4C4318E849CF008C5366 /* _AWFPerson.h */,
+				FA3D4C4418E849CF008C5366 /* _AWFPerson.m */,
+				FA3D4C4618E849E9008C5366 /* AWFPerson.h */,
+				FA3D4C4718E849E9008C5366 /* AWFPerson.m */,
+				FA3D4C4C18E84A9F008C5366 /* AWFPerson+RestKit.h */,
+				FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -407,6 +450,8 @@
 			children = (
 				FAB866E3180AAB60005FF64B /* AWFSession.h */,
 				FAB866E4180AAB60005FF64B /* AWFSession.m */,
+				FA3D4C3518E84555008C5366 /* AWFClient.h */,
+				FA3D4C3618E84555008C5366 /* AWFClient.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -465,6 +510,8 @@
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
 				FAF0F3E418D4C78D0063BB30 /* AWFConfig.h */,
+				FA3D4C3818E84634008C5366 /* AWFConstants.h */,
+				FA3D4C3918E84634008C5366 /* AWFConstants.m */,
 				FA57F9D718D24A0900E12B5F /* AWFViewController.h */,
 				FA57F9D818D24A0900E12B5F /* AWFViewController.m */,
 				FADBF66317ADB68E00325DD1 /* Supporting Files */,
@@ -481,6 +528,7 @@
 				FADBF66517ADB68E00325DD1 /* InfoPlist.strings */,
 				FADBF66817ADB68E00325DD1 /* main.m */,
 				FADBF66A17ADB68E00325DD1 /* AnywhereFriends-Prefix.pch */,
+				FA3D4C3B18E8475F008C5366 /* AnywhereFriends.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -539,6 +587,10 @@
 		FADBF69317ADB7DE00325DD1 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				FA3D4C4F18E8542F008C5366 /* AFHTTPClient+RACSupport.h */,
+				FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */,
+				FA3D4C5218E85507008C5366 /* RKObjectManager+RACSupport.h */,
+				FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */,
 				FADBF6B417ADCE9800325DD1 /* CGContext+Blocks.h */,
 				FADBF6B517ADCE9800325DD1 /* CGContext+Blocks.m */,
 				FAF0F3D018D49F7D0063BB30 /* MKMapView+AWFCentering.h */,
@@ -743,6 +795,7 @@
 			targets = (
 				FADBF65817ADB68E00325DD1 /* AnywhereFriends */,
 				FADBF67317ADB68E00325DD1 /* AnywhereFriendsTests */,
+				FA3D4C3E18E84976008C5366 /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -834,6 +887,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FA3D4C4218E8497F008C5366 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd AnywhereFriends\n/usr/local/bin/mogenerator --template-var arc=true -m AnywhereFriends.xcdatamodeld/AnywhereFriends.xcdatamodel -O Model\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -849,9 +915,13 @@
 				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,
 				FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */,
 				FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */,
+				FA3D4C5418E85507008C5366 /* RKObjectManager+RACSupport.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */,
+				FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */,
 				FA11ACC717B1389400028A55 /* AWFButton.m in Sources */,
+				FA3D4C4818E849E9008C5366 /* AWFPerson.m in Sources */,
+				FA3D4C4518E849CF008C5366 /* _AWFPerson.m in Sources */,
 				FA4532E3188B014900A1E242 /* AWFObject.m in Sources */,
 				FADBF68E17ADB74400325DD1 /* AWFLoginViewController.m in Sources */,
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
@@ -861,13 +931,14 @@
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
 				FA57837418D4776600F10FD7 /* AWFFriendsViewCell.m in Sources */,
 				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
-				FA8AA2E118833123005FC371 /* AWFPerson.m in Sources */,
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
 				FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */,
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
 				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,
 				FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */,
+				FA3D4C3A18E84634008C5366 /* AWFConstants.m in Sources */,
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
+				FA3D4C4B18E84A32008C5366 /* NSManagedObject+RestKit.m in Sources */,
 				FAE475E417C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m in Sources */,
 				FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
 				FAF0F3CF18D49E920063BB30 /* AWFMapViewController.m in Sources */,
@@ -875,12 +946,15 @@
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
 				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
+				FA3D4C3718E84555008C5366 /* AWFClient.m in Sources */,
 				FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */,
 				FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
+				FA3D4C5118E8542F008C5366 /* AFHTTPClient+RACSupport.m in Sources */,
 				FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
+				FA3D4C3D18E8475F008C5366 /* AnywhereFriends.xcdatamodeld in Sources */,
 				FA11ACB017B136EA00028A55 /* AWFLoginConnectViewCell.m in Sources */,
 				FAF0F3E718D4CD8B0063BB30 /* AWFMyProfileViewController.m in Sources */,
 				FA11ACCC17B1389400028A55 /* AWFIconLabelButton.m in Sources */,
@@ -945,6 +1019,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FA3D4C4018E84977008C5366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FA3D4C4118E84977008C5366 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		FADBF68317ADB68E00325DD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1090,6 +1178,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FA3D4C3F18E84977008C5366 /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA3D4C4018E84977008C5366 /* Debug */,
+				FA3D4C4118E84977008C5366 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		FADBF65417ADB68E00325DD1 /* Build configuration list for PBXProject "AnywhereFriends" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1118,6 +1214,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FA3D4C3B18E8475F008C5366 /* AnywhereFriends.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FA3D4C3C18E8475F008C5366 /* AnywhereFriends.xcdatamodel */,
+			);
+			currentVersion = FA3D4C3C18E8475F008C5366 /* AnywhereFriends.xcdatamodel */;
+			path = AnywhereFriends.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FADBF65117ADB68E00325DD1 /* Project object */;
 }

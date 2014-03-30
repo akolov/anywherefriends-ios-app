@@ -15,11 +15,13 @@
 
 @interface AWFSession : NSObject
 
+@property (nonatomic, strong, readonly) NSString *currentUserID;
 @property (nonatomic, strong, readonly) AWFPerson *currentUser;
 
 + (instancetype)sharedSession;
 + (BOOL)hasSessionCookie;
 + (BOOL)isLoggedIn;
++ (NSManagedObjectContext *)managedObjectContext;
 
 - (RACSignal *)createUserWithEmail:(NSString *)email
                           password:(NSString *)password
@@ -39,7 +41,7 @@
 - (RACSignal *)closeSession;
 
 - (RACSignal *)getUserSelf;
-- (RACSignal *)getUserFriends;
+- (RACSignal *)getUserSelfFriends;
 - (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius
                          pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize;
 
@@ -47,7 +49,7 @@
 - (RACSignal *)friendUser:(AWFPerson *)person;
 - (RACSignal *)unfriendUser:(AWFPerson *)person;
 
-- (RACSignal *)getActivity;
+- (RACSignal *)getUserSelfActivity;
 - (RACSignal *)markActivityAsRead:(AWFActivity *)activity;
 
 @end

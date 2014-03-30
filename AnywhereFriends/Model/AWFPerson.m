@@ -2,61 +2,29 @@
 //  AWFPerson.m
 //  AnywhereFriends
 //
-//  Created by Alexander Kolov on 12/01/14.
+//  Created by Alexander Kolov on 30/03/14.
 //  Copyright (c) 2014 Anywherefriends. All rights reserved.
 //
 
-#import "AWFConfig.h"
 #import "AWFPerson.h"
 
-#import <TransformerKit/TransformerKit.h>
 
-#import "AWFValueTransformers.h"
+@interface AWFPerson ()
+
+// Private interface goes here.
+
+@end
+
 
 @implementation AWFPerson
-
-+ (instancetype)personFromDictionary:(NSDictionary *)dictionary {
-  AWFPerson *person = [[AWFPerson alloc] init];
-  person.personID = nilOrObjectForKey(dictionary, @"id");
-  person.gender = [[[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
-                    transformedValue:dictionary[@"gender"]] unsignedIntegerValue];
-  person.firstName = [nilOrObjectForKey(dictionary, @"first_name") copy];
-  person.lastName = [nilOrObjectForKey(dictionary, @"last_name") copy];
-  person.bio = [nilOrObjectForKey(dictionary, @"bio") copy];
-  person.weight = [nilOrObjectForKey(dictionary, @"weight") copy];
-  person.height = [nilOrObjectForKey(dictionary, @"height") copy];
-  person.hairColor = [nilOrObjectForKey(dictionary, @"hair_color") copy];
-  person.hairLength = [nilOrObjectForKey(dictionary, @"hair_length") copy];
-  person.eyeColor = [nilOrObjectForKey(dictionary, @"eye_color") copy];
-  person.bodyBuild = [nilOrObjectForKey(dictionary, @"build") copy];
-  person.placemark = [nilOrObjectForKey(dictionary, @"location") copy];
-  person.friendship = [[[NSValueTransformer valueTransformerForName:AWFFriendshipStatusTransformerName]
-                        transformedValue:dictionary[@"friendship"]] unsignedIntegerValue];
-
-  CLLocationCoordinate2D coordinate =
-    CLLocationCoordinate2DMake([nilOrObjectForKey(dictionary, @"latitude") doubleValue],
-                               [nilOrObjectForKey(dictionary, @"longitude") doubleValue]);
-
-  NSDate *timestamp =
-    [NSDate dateWithTimeIntervalSince1970:[nilOrObjectForKey(dictionary, @"location_updated") doubleValue]];
-  person.location =
-    [[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0
-                                 timestamp:timestamp];
-  person.distance = [nilOrObjectForKey(dictionary, @"distance") doubleValue];
-  person.birthday = [[NSValueTransformer valueTransformerForName:TTTISO8601DateTransformerName]
-                     reverseTransformedValue:nilOrObjectForKey(dictionary, @"birthday")];
-  return person;
-}
 
 - (NSNumber *)age {
   if (!self.birthday) {
     return nil;
   }
 
-  NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit
-                                                                    fromDate:self.birthday
-                                                                      toDate:[NSDate date]
-                                                                     options:0];
+  NSDateComponents* ageComponents =
+    [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:self.birthday toDate:[NSDate date] options:0];
   return @([ageComponents year]);
 }
 
@@ -88,28 +56,26 @@
 }
 
 - (NSString *)locationName {
-  NSString *thoroughfare = self.placemark[@"thoroughfare"];
-  NSString *locality = self.placemark[@"locality"];
-
-  if ([thoroughfare length] != 0 && [locality length] != 0) {
-    return [NSString stringWithFormat:@"%@, %@", thoroughfare, locality];
+  if ([self.locationThoroughfare length] != 0 && [self.locationLocality length] != 0) {
+    return [NSString stringWithFormat:@"%@, %@", self.locationThoroughfare, self.locationLocality];
   }
-  else if ([locality length] != 0) {
-    return [NSString stringWithFormat:@"%@", locality];
+  else if ([self.locationLocality length] != 0) {
+    return [NSString stringWithFormat:@"%@", self.locationLocality];
   }
-  else if ([thoroughfare length] != 0) {
-    return [NSString stringWithFormat:@"%@", thoroughfare];
+  else if ([self.locationThoroughfare length] != 0) {
+    return [NSString stringWithFormat:@"%@", self.locationThoroughfare];
   }
   else {
     return NSLocalizedString(@"AWF_UNKNOWN_LOCATION", nil);
   }
 }
 
-#pragma mark - NSObject
+- (CLLocationCoordinate2D)locationCoordinate {
+  if (!self.locationLatitude || !self.locationLongitude) {
+    return kCLLocationCoordinate2DInvalid;
+  }
 
-- (NSString *)description {
-  return [NSString stringWithFormat:@"AWFPerson: %@ %@ (%@) -> %f",
-          self.personID, self.fullName, self.birthday, self.distance];
+  return CLLocationCoordinate2DMake(self.locationLatitudeValue, self.locationLongitudeValue);
 }
 
 @end

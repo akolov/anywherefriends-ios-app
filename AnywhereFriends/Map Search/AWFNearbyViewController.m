@@ -31,10 +31,13 @@
 static double AWFRadius = 20000.0;
 static NSUInteger AWFPageSize = 20;
 
-@interface AWFNearbyViewController () <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface AWFNearbyViewController () <
+MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
+>
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @property (nonatomic, strong) UIView *mapContainerView;
-@property (nonatomic, strong) NSArray *people;
 @property (nonatomic, strong) NSDictionary *annotations;
 @property (nonatomic, assign) UIEdgeInsets defaultTableViewContentInset;
 
@@ -97,6 +100,24 @@ static NSUInteger AWFPageSize = 20;
    addObserver:self selector:@selector(onNotification:) name:AWFLocationManagerDidUpdateLocationsNotification object:nil];
 }
 
+#pragma mark - Actions
+
+- (void)onNotification:(NSNotification *)notification {
+  if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
+    CLLocationCoordinate2D coordinate = [AWFLocationManager sharedManager].currentLocation.coordinate;
+    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
+    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
+  }
+  else if ([notification.name isEqualToString:AWFLocationManagerDidUpdateLocationsNotification]) {
+    CLLocation *location = notification.userInfo[AWFLocationManagerLocationUserInfoKey];
+    CLLocationCoordinate2D coordinate = location.coordinate;
+    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
+    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
+  }
+}
+
+#pragma mark - Accessors
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
@@ -109,25 +130,105 @@ static NSUInteger AWFPageSize = 20;
   return [[AWFLayoutGuide alloc] initWithLength:CGRectGetHeight(self.navigationController.toolbar.bounds)];
 }
 
+- (NSFetchedResultsController *)fetchedResultsController {
+  if (!_fetchedResultsController) {
+    NSString *currentUserID = [AWFSession sharedSession].currentUserID;
+    NSArray *predicates = @[[NSPredicate predicateWithFormat:@"locationDistance <= %f", AWFRadius],
+                            [NSPredicate predicateWithFormat:@"personID != %@", currentUserID]];
+
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[AWFPerson entityName]];
+    request.predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES],
+                                [NSSortDescriptor sortDescriptorWithKey:@"locationUpdated" ascending:NO]];
+    request.includesPropertyValues = YES;
+    request.includesSubentities = YES;
+    request.fetchBatchSize = AWFPageSize;
+
+    _fetchedResultsController =
+      [[NSFetchedResultsController alloc]
+       initWithFetchRequest:request managedObjectContext:[AWFSession managedObjectContext]
+       sectionNameKeyPath:nil cacheName:nil];
+    _fetchedResultsController.delegate = self;
+
+    NSError *error;
+    if (![_fetchedResultsController performFetch:&error]) {
+      ErrorLog(error.localizedDescription);
+    }
+  }
+
+  return _fetchedResultsController;
+}
+
+#pragma mark - Private methods
+
+- (void)lookupUsersAroundCenterCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters {
+  @weakify(self);
+  [[[AWFSession sharedSession] getUsersAtCoordinate:coordinate withRadius:AWFRadius pageNumber:0 pageSize:AWFPageSize]
+   subscribeNext:^(NSArray *people) {
+     @strongify(self);
+
+     NSMutableDictionary *annotations = [NSMutableDictionary dictionary];
+
+     for (AWFPerson *person in people) {
+       MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+       [annotation setCoordinate:person.locationCoordinate];
+       [annotation setTitle:person.fullName];
+       [annotation setSubtitle:[NSString stringWithFormat:@"%.2f km", person.locationDistanceValue / 1000.0]];
+
+       annotations[person.personID] = annotation;
+
+       [self.mapView addAnnotation:annotation];
+     }
+
+     self.annotations = annotations;
+
+     [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
+   }
+   error:^(NSError *error) {
+     ErrorLog(error.localizedDescription);
+   }];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+  if ([view isKindOfClass:[MKPinAnnotationView class]]) {
+    [(MKPinAnnotationView *)view setPinColor:MKPinAnnotationColorGreen];
+  }
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+  if ([view isKindOfClass:[MKPinAnnotationView class]]) {
+    [(MKPinAnnotationView *)view setPinColor:MKPinAnnotationColorRed];
+  }
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  [self.tableView reloadData];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+  return (NSInteger)self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.people.count;
+  id<NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[(NSUInteger)section];
+  return (NSInteger)sectionInfo.numberOfObjects;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFNearbyViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFNearbyViewCell reuseIdentifier]
                                                             forIndexPath:indexPath];
-  AWFPerson *person = self.people[indexPath.row];
+  AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
   cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
   cell.placeholderView.text = person.abbreviatedName;
   cell.imageView.image = nil;
   cell.nameLabel.text = person.fullName;
-  cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m — %@", person.distance, person.locationName];
+  cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m — %@", person.locationDistanceValue, person.locationName];
   return cell;
 }
 
@@ -135,7 +236,8 @@ static NSUInteger AWFPageSize = 20;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (self.tableView.scrollEnabled) {
-    AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:self.people[indexPath.row]];
+    AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:person];
     [self.navigationController pushViewController:vc animated:YES];
   }
   else {
@@ -151,7 +253,7 @@ static NSUInteger AWFPageSize = 20;
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
   if (self.tableView.scrollEnabled) {
-    AWFPerson *person = self.people[indexPath.row];
+    AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
     id <MKAnnotation> annotation = self.annotations[person.personID];
     [self.mapView selectAnnotation:annotation animated:YES];
   }
@@ -200,7 +302,7 @@ static NSUInteger AWFPageSize = 20;
       self.tableView.scrollEnabled = NO;
       self.mapView.scrollEnabled = YES;
 
-      AWFPerson *first = self.people.firstObject;
+      AWFPerson *first = [self.fetchedResultsController.fetchedObjects firstObject];
       if (first) {
         [self.mapView showAnnotations:@[self.annotations[first.personID], self.mapView.userLocation] animated:YES];
       }
@@ -212,77 +314,6 @@ static NSUInteger AWFPageSize = 20;
     frame.origin.y = CGRectGetMidY(self.mapContainerView.bounds) - CGRectGetMidY(self.mapView.bounds);
     frame;
   });
-}
-
-#pragma mark - Actions
-
-- (void)onNotification:(NSNotification *)notification {
-  if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
-    CLLocationCoordinate2D coordinate = [AWFLocationManager sharedManager].currentLocation.coordinate;
-    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
-    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
-  }
-  else if ([notification.name isEqualToString:AWFLocationManagerDidUpdateLocationsNotification]) {
-    CLLocation *location = notification.userInfo[AWFLocationManagerLocationUserInfoKey];
-    CLLocationCoordinate2D coordinate = location.coordinate;
-    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
-    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
-  }
-}
-
-#pragma mark - MKMapViewDelegate
-
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-  if ([view isKindOfClass:[MKPinAnnotationView class]]) {
-    [(MKPinAnnotationView *)view setPinColor:MKPinAnnotationColorGreen];
-  }
-}
-
-- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-  if ([view isKindOfClass:[MKPinAnnotationView class]]) {
-    [(MKPinAnnotationView *)view setPinColor:MKPinAnnotationColorRed];
-  }
-}
-
-#pragma mark - Accessors
-
-- (void)setPeople:(NSArray *)people {
-  _people = people;
-  [self.tableView reloadData];
-}
-
-#pragma mark - Private methods
-
-- (void)lookupUsersAroundCenterCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters {
-  @weakify(self);
-  [[[AWFSession sharedSession] getUsersAtCoordinate:coordinate
-                                        withRadius:AWFRadius
-                                        pageNumber:0
-                                          pageSize:AWFPageSize]
-   subscribeNext:^(NSArray *people) {
-     @strongify(self);
-
-     NSMutableDictionary *annotations = [NSMutableDictionary dictionary];
-
-     for (AWFPerson *person in people) {
-       MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-       [annotation setCoordinate:person.location.coordinate];
-       [annotation setTitle:person.fullName];
-       [annotation setSubtitle:[NSString stringWithFormat:@"%.2f km", person.distance / 1000.0]];
-
-       annotations[person.personID] = annotation;
-
-       [self.mapView addAnnotation:annotation];
-     }
-
-     self.annotations = annotations;
-     self.people = people;
-
-     [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
-   }
-   error:^(NSError *error) {
-     ErrorLog(error.localizedDescription);
-   }];
 }
 
 @end

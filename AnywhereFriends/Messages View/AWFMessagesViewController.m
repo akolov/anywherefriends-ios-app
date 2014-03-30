@@ -63,7 +63,7 @@
 
 - (void)getConversations {
   @weakify(self);
-  [[[AWFSession sharedSession] getActivity]
+  [[[AWFSession sharedSession] getUserSelfActivity]
    subscribeNext:^(NSArray *people) {
      @strongify(self);
 
@@ -90,7 +90,7 @@
   cell.imageView.image = nil;
   cell.nameLabel.text = person.fullName;
   cell.lastMessageLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut convallis porta erat, quis tincidunt magna consectetur sed. Proin fermentum tristique nibh, in lobortis purus luctus sed. Vestibulum quis quam eu nunc volutpat vehicula sed ut velit. Nullam sed lorem vitae est dignissim fermentum.";
-  cell.timeLabel.text = [self.formatter stringForTimeIntervalFromDate:[NSDate date] toDate:person.location.timestamp];
+  cell.timeLabel.text = [self.formatter stringForTimeIntervalFromDate:[NSDate date] toDate:person.locationUpdated];
   cell.placeholderView.text = person.abbreviatedName;
 
   return cell;

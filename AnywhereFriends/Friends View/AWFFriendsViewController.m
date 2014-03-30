@@ -91,7 +91,7 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
 
 - (void)getFriends {
   @weakify(self);
-  [[[AWFSession sharedSession] getUserFriends]
+  [[[AWFSession sharedSession] getUserSelfFriends]
    subscribeNext:^(NSArray *people) {
      @strongify(self);
      self.people = people;
@@ -117,7 +117,7 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
   AWFPerson *person = self.people[indexPath.row];
   cell.imageView.image = nil;
   cell.nameLabel.text = person.fullName;
-  cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m — %@", person.distance, person.locationName];
+  cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m — %@", person.locationDistanceValue, person.locationName];
   cell.placeholderView.text = person.abbreviatedName;
 
   return cell;
@@ -129,8 +129,8 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
   AWFPerson *person = self.people[indexPath.row];
 
   MKCoordinateRegion region;
-  region.center.latitude = person.location.coordinate.latitude;
-  region.center.longitude = person.location.coordinate.longitude;
+  region.center.latitude = person.locationCoordinate.latitude;
+  region.center.longitude = person.locationCoordinate.longitude;
   region.span.latitudeDelta = 2000.0f * AWF_DEGREES_IN_METRE;
   region.span.longitudeDelta = 2000.0f * AWF_DEGREES_IN_METRE;
 
@@ -158,7 +158,7 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
          UIImage *pinImage = [UIImage imageWithCGImage:pin.image.CGImage scale:pin.image.scale * 2.0f
                                            orientation:UIImageOrientationUp];
 
-         CGPoint pinPoint = [snapshot pointForCoordinate:person.location.coordinate];
+         CGPoint pinPoint = [snapshot pointForCoordinate:person.locationCoordinate];
          CGPoint pinCenterOffset = pin.centerOffset;
          pinPoint.x -= CGRectGetMidX(pin.bounds);
          pinPoint.y -= CGRectGetMidY(pin.bounds);

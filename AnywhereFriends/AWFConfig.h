@@ -12,6 +12,7 @@
 
 #import <AXKViewLayout/UIView+AXKViewLayout.h>
 
+#import "AWFConstants.h"
 #import "CGContext+Blocks.h"
 #import "UIColor+ColorTools.h"
 #import "UIColor+CustomColors.h"
