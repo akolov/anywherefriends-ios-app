@@ -103,18 +103,56 @@
     NSManagedObjectContext *context = objectStore.persistentStoreManagedObjectContext;
     objectStore.managedObjectCache = [[RKInMemoryManagedObjectCache alloc] initWithManagedObjectContext:context];
 
-    // Initialize API
+    [manager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
+      RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:AWFAPIPathUsers];
+      NSDictionary *args;
 
-    unsigned int count;
-    Method *method = class_copyMethodList(object_getClass([self class]), &count);
-    for (unsigned int i = 0; i < count; ++i) {
-      SEL selector = method_getName(method[i]);
-      NSString *name = NSStringFromSelector(selector);
-      if ([name hasPrefix:@"initialize"] && name.length > 10) {
-        objc_msgSend(self, selector);
+      BOOL match = [pathMatcher matchesPath:[URL relativeString] tokenizeQueryStrings:YES parsedArguments:&args];
+      if (match) {
+        NSString *radius = args[@"r"];
+
+        if (!radius) {
+          return nil;
+        }
+
+        NSString *currentUserID = [AWFSession sharedSession].currentUserID;
+        NSArray *subpredicates = @[[NSPredicate predicateWithFormat:@"personID != %@", currentUserID],
+                                   [NSPredicate predicateWithFormat:@"friendship == %d", AWFFriendshipStatusNone],
+                                   [NSPredicate predicateWithFormat:@"locationDistance <= %f", [radius doubleValue]]];
+
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[AWFPerson entityName]];
+        fetchRequest.predicate = [NSCompoundPredicate andPredicateWithSubpredicates:subpredicates];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
+        fetchRequest.includesPropertyValues = NO;
+        fetchRequest.includesSubentities = NO;
+
+        return fetchRequest;
       }
-    }
-    free(method);
+      
+      return nil;
+    }];
+
+    [manager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
+      RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:AWFAPIPathUserFriends];
+
+      BOOL match = [pathMatcher matchesPath:[URL relativeString] tokenizeQueryStrings:NO parsedArguments:NULL];
+      if (match) {
+        NSString *currentUserID = [AWFSession sharedSession].currentUserID;
+        NSArray *subpredicates = @[[NSPredicate predicateWithFormat:@"personID != %@", currentUserID],
+                                   [NSPredicate predicateWithFormat:@"friendship != %d", AWFFriendshipStatusNone]];
+
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[AWFPerson entityName]];
+        fetchRequest.predicate = [NSCompoundPredicate andPredicateWithSubpredicates:subpredicates];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES],
+                                         [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
+        fetchRequest.includesPropertyValues = NO;
+        fetchRequest.includesSubentities = NO;
+
+        return fetchRequest;
+      }
+      
+      return nil;
+    }];
   });
 }
 
@@ -236,7 +274,10 @@
   [parameters setValue:vkToken forKey:AWFURLParameterVKToken];
 
   @weakify(self);
-  return [[[RKObjectManager sharedManager] rac_postObject:nil path:AWFAPIPathLogin parameters:parameters]
+  return [[[[RKObjectManager sharedManager] rac_postObject:nil path:AWFAPIPathLogin parameters:parameters]
+           then:^RACSignal *{
+             return [self getUserSelf];
+           }]
           map:^id(RACTuple *x) {
             @strongify(self);
             self.currentUserID = [[x.second firstObject] personID];

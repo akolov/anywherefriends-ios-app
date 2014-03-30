@@ -11,6 +11,7 @@
 
 #import <RestKit/RestKit.h>
 
+#import "AWFValueTransformers.h"
 #import "NSManagedObject+RestKit.h"
 
 @implementation AWFPerson (RestKit)
@@ -19,18 +20,71 @@
 
 + (RKEntityMapping *)responseMapping {
   static RKEntityMapping *mapping;
+
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     mapping = [super responseMapping];
+
+    // Gender
+
+    {
+      RKAttributeMapping *contentTypeMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"gender" toKeyPath:@"gender"];
+
+      contentTypeMapping.valueTransformer =
+      [RKBlockValueTransformer
+       valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                 __unsafe_unretained Class outputValueClass) {
+         return ([inputValueClass isSubclassOfClass:[NSString class]] &&
+                 [outputValueClass isSubclassOfClass:[NSNumber class]]);
+       } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                   __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
+
+         *outputValue = [[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
+                         transformedValue:inputValue];
+         return YES;
+       }];
+
+      [mapping addPropertyMapping:contentTypeMapping];
+    }
+
+    // Friendship
+
+    {
+      RKAttributeMapping *contentTypeMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"friendship" toKeyPath:@"friendship"];
+
+      contentTypeMapping.valueTransformer =
+      [RKBlockValueTransformer
+       valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                 __unsafe_unretained Class outputValueClass) {
+         return ([inputValueClass isSubclassOfClass:[NSString class]] &&
+                 [outputValueClass isSubclassOfClass:[NSNumber class]]);
+       } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                   __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
+
+         *outputValue = [[NSValueTransformer valueTransformerForName:AWFFriendshipStatusTransformerName]
+                         transformedValue:inputValue];
+         return YES;
+       }];
+
+      [mapping addPropertyMapping:contentTypeMapping];
+    }
   });
+
   return mapping;
 }
 
 + (NSArray *)responseDescriptorMatrix {
-  return @[@[@(RKRequestMethodGET) , AWFAPIPathUser,  [NSNull null]],
-           @[@(RKRequestMethodPOST), AWFAPIPathUser,  @"user"],
-           @[@(RKRequestMethodPUT),  AWFAPIPathUser,  @"user"],
-           @[@(RKRequestMethodGET),  AWFAPIPathUsers, @"users"]];
+  return @[@[@(RKRequestMethodGET),  AWFAPIPathUser,        [NSNull null]],
+           @[@(RKRequestMethodPOST), AWFAPIPathUser,        @"user"],
+           @[@(RKRequestMethodPUT),  AWFAPIPathUser,        @"user"],
+           @[@(RKRequestMethodGET),  AWFAPIPathUsers,       @"users"],
+           @[@(RKRequestMethodGET),  AWFAPIPathUserFriends, @"friends"]];
 }
 
 + (NSArray *)identificationAttributes {
@@ -38,7 +92,7 @@
 }
 
 + (NSArray *)attributeMappingsArray {
-  return @[@"bio", @"birthday", @"email", @"gender", @"height", @"weight"];
+  return @[@"bio", @"birthday", @"email", @"height", @"weight"];
 }
 
 + (NSDictionary *)attributeMappingsDictionary {

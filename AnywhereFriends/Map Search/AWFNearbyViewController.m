@@ -36,12 +36,10 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
 >
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
 @property (nonatomic, strong) UIView *mapContainerView;
 @property (nonatomic, strong) NSDictionary *annotations;
 @property (nonatomic, assign) UIEdgeInsets defaultTableViewContentInset;
 
-- (void)onNotification:(NSNotification *)notification;
 - (void)lookupUsersAroundCenterCoordinate:(CLLocationCoordinate2D)coordinate andSpanInMeters:(double)meters;
 
 @end
@@ -94,26 +92,28 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
 
   // Actions
 
-  [[NSNotificationCenter defaultCenter]
-   addObserver:self selector:@selector(onNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
-  [[NSNotificationCenter defaultCenter]
-   addObserver:self selector:@selector(onNotification:) name:AWFLocationManagerDidUpdateLocationsNotification object:nil];
+  @weakify(self);
+  [RACObserveNotificationUntilDealloc(UIApplicationWillEnterForegroundNotification)
+   subscribeNext:^(NSNotification *note) {
+     @strongify(self);
+     CLLocationCoordinate2D coordinate = [AWFLocationManager sharedManager].currentLocation.coordinate;
+     [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
+     [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
+   }];
+
+  [RACObserveNotificationUntilDealloc(AWFLocationManagerDidUpdateLocationsNotification)
+   subscribeNext:^(NSNotification *note) {
+     @strongify(self);
+     CLLocation *location = note.userInfo[AWFLocationManagerLocationUserInfoKey];
+     CLLocationCoordinate2D coordinate = location.coordinate;
+     [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
+     [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
+   }];
 }
 
-#pragma mark - Actions
-
-- (void)onNotification:(NSNotification *)notification {
-  if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
-    CLLocationCoordinate2D coordinate = [AWFLocationManager sharedManager].currentLocation.coordinate;
-    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
-    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
-  }
-  else if ([notification.name isEqualToString:AWFLocationManagerDidUpdateLocationsNotification]) {
-    CLLocation *location = notification.userInfo[AWFLocationManagerLocationUserInfoKey];
-    CLLocationCoordinate2D coordinate = location.coordinate;
-    [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
-    [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
-  }
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  _fetchedResultsController = nil;
 }
 
 #pragma mark - Accessors
@@ -216,7 +216,7 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  id<NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[(NSUInteger)section];
+  id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[(NSUInteger)section];
   return (NSInteger)sectionInfo.numberOfObjects;
 }
 
@@ -237,7 +237,7 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (self.tableView.scrollEnabled) {
     AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:person];
+    AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPersonID:person.personID];
     [self.navigationController pushViewController:vc animated:YES];
   }
   else {

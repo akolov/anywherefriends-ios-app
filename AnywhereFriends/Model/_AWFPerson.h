@@ -9,8 +9,10 @@ extern const struct AWFPersonAttributes {
 	__unsafe_unretained NSString *birthday;
 	__unsafe_unretained NSString *bodyBuild;
 	__unsafe_unretained NSString *dateUpdated;
+	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *eyeColor;
 	__unsafe_unretained NSString *firstName;
+	__unsafe_unretained NSString *friendship;
 	__unsafe_unretained NSString *gender;
 	__unsafe_unretained NSString *hairColor;
 	__unsafe_unretained NSString *hairLength;
@@ -31,6 +33,8 @@ extern const struct AWFPersonRelationships {
 
 extern const struct AWFPersonFetchedProperties {
 } AWFPersonFetchedProperties;
+
+
 
 
 
@@ -106,6 +110,16 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* email;
+
+
+
+//- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* eyeColor;
 
 
@@ -121,6 +135,20 @@ extern const struct AWFPersonFetchedProperties {
 
 
 //- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* friendship;
+
+
+
+@property int16_t friendshipValue;
+- (int16_t)friendshipValue;
+- (void)setFriendshipValue:(int16_t)value_;
+
+//- (BOOL)validateFriendship:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -314,6 +342,12 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
+- (NSString*)primitiveEmail;
+- (void)setPrimitiveEmail:(NSString*)value;
+
+
+
+
 - (NSString*)primitiveEyeColor;
 - (void)setPrimitiveEyeColor:(NSString*)value;
 
@@ -322,6 +356,15 @@ extern const struct AWFPersonFetchedProperties {
 
 - (NSString*)primitiveFirstName;
 - (void)setPrimitiveFirstName:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveFriendship;
+- (void)setPrimitiveFriendship:(NSNumber*)value;
+
+- (int16_t)primitiveFriendshipValue;
+- (void)setPrimitiveFriendshipValue:(int16_t)value_;
 
 
 

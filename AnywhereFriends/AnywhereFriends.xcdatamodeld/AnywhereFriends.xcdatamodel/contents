@@ -8,6 +8,7 @@
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eyeColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="friendship" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="hairColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hairLength" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,6 +24,6 @@
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AWFPerson" positionX="-63" positionY="-18" width="128" height="345"/>
+        <element name="AWFPerson" positionX="-63" positionY="-18" width="128" height="360"/>
     </elements>
 </model>

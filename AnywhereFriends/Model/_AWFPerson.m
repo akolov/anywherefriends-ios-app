@@ -8,8 +8,10 @@ const struct AWFPersonAttributes AWFPersonAttributes = {
 	.birthday = @"birthday",
 	.bodyBuild = @"bodyBuild",
 	.dateUpdated = @"dateUpdated",
+	.email = @"email",
 	.eyeColor = @"eyeColor",
 	.firstName = @"firstName",
+	.friendship = @"friendship",
 	.gender = @"gender",
 	.hairColor = @"hairColor",
 	.hairLength = @"hairLength",
@@ -57,6 +59,11 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"friendshipValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"friendship"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"genderValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"gender"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -122,6 +129,13 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 
 
 
+@dynamic email;
+
+
+
+
+
+
 @dynamic eyeColor;
 
 
@@ -131,6 +145,32 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 
 @dynamic firstName;
 
+
+
+
+
+
+@dynamic friendship;
+
+
+
+- (int16_t)friendshipValue {
+	NSNumber *result = [self friendship];
+	return [result shortValue];
+}
+
+- (void)setFriendshipValue:(int16_t)value_ {
+	[self setFriendship:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveFriendshipValue {
+	NSNumber *result = [self primitiveFriendship];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveFriendshipValue:(int16_t)value_ {
+	[self setPrimitiveFriendship:[NSNumber numberWithShort:value_]];
+}
 
 
 

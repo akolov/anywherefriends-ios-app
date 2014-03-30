@@ -12,20 +12,17 @@
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+#import "AWFPerson.h"
 #import "AWFSession.h"
-
-@interface AWFMyProfileViewController ()
-
-@end
 
 @implementation AWFMyProfileViewController
 
-- (void)viewDidLoad {
+- (void)viewDidAppear:(BOOL)animated {
+  @weakify(self);
   [[[AWFSession sharedSession] getUserSelf]
    subscribeNext:^(AWFPerson *person) {
-     self.person = person;
-     [super viewDidLoad];
-     [self.tableView reloadData];
+     @strongify(self);
+     self.personID = person.personID;
      self.navigationItem.rightBarButtonItem = self.editButtonItem;
    }
    error:^(NSError *error) {
@@ -36,6 +33,12 @@
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Accessors 
+
+- (NSString *)personID {
+  return [AWFSession sharedSession].currentUserID;
 }
 
 @end

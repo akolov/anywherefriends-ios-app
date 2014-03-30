@@ -20,6 +20,7 @@ NSString *const AWFFriendshipStatusTransformerName = @"AWFFriendshipStatusTransf
 static NSString *const AWFGenderMaleName   = @"male";
 static NSString *const AWFGenderFemaleName = @"female";
 
+static NSString *const AWFFriendshipStatusNotFriendName = @"not_friend";
 static NSString *const AWFFriendshipStatusFriendName = @"friend";
 static NSString *const AWFFriendshipStatusPendingName = @"pending";
 
@@ -56,6 +57,9 @@ static NSString *const AWFFriendshipStatusPendingName = @"pending";
        if (!value || [value isEqual:[NSNull null]]) {
          return @(AWFFriendshipStatusNone);
        }
+       else if ([value caseInsensitiveCompare:AWFFriendshipStatusNotFriendName] == NSOrderedSame) {
+         return @(AWFFriendshipStatusNone);
+       }
        else if ([value caseInsensitiveCompare:AWFFriendshipStatusPendingName] == NSOrderedSame) {
          return @(AWFFriendshipStatusPending);
        }
@@ -69,6 +73,8 @@ static NSString *const AWFFriendshipStatusPendingName = @"pending";
            return AWFFriendshipStatusPendingName;
          case AWFFriendshipStatusFriend:
            return AWFFriendshipStatusFriendName;
+         case AWFFriendshipStatusNone:
+           return AWFFriendshipStatusNotFriendName;
        }
        return nil;
      }];

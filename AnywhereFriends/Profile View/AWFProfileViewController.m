@@ -28,8 +28,11 @@
 #import "AWFSession.h"
 #import "AWFWeightFormatter.h"
 
-@interface AWFProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface AWFProfileViewController () <
+NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate
+>
 
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
 @property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
 @property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
@@ -37,6 +40,7 @@
 @property (nonatomic, strong) NSArray *fields;
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
+@property (nonatomic, readonly) AWFPerson *person;
 
 - (void)onFriendButton:(id)sender;
 - (void)onLocationButton:(id)sender;
@@ -49,14 +53,15 @@
   return [super initWithStyle:UITableViewStyleGrouped];
 }
 
-- (id)initWithPerson:(AWFPerson *)person {
+- (id)initWithPersonID:(NSString *)personID {
   self = [self init];
   if (self) {
-    self.person = person;
-    self.title = self.person.fullName;
+    self.personID = personID;
   }
   return self;
 }
+
+#pragma mark - View Life Cycle
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -75,11 +80,16 @@
                                                  NSForegroundColorAttributeName: [UIColor whiteColor]},
                                   @"em": @{NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
                                            NSForegroundColorAttributeName: [UIColor grayColor]}};
-    NSString *lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date]
-                                                                       toDate:self.person.locationUpdated];
-
-    NSString *markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you — %@</em>",
-                        self.person.locationName, self.person.locationDistanceValue, lastUpdated];
+    NSString *lastUpdated, *markup;
+    if (self.person.locationUpdated) {
+      lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:self.person.locationUpdated];
+      markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you — %@</em>",
+                self.person.locationName, self.person.locationDistanceValue, lastUpdated];
+    }
+    else {
+      markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you</em>",
+                self.person.locationName, self.person.locationDistanceValue];
+    }
 
     AWFProfileHeaderView *view = [[AWFProfileHeaderView alloc] init];
     view.descriptionLabel.text = self.person.bio;
@@ -109,59 +119,53 @@
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+  _fetchedResultsController = nil;
 }
+
+#pragma mark - Accessors
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
 
-#pragma mark - Table view data source
+- (NSFetchedResultsController *)fetchedResultsController {
+  if (!_fetchedResultsController) {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[AWFPerson entityName]];
+    request.predicate = [NSPredicate predicateWithFormat:@"personID == %@", self.personID];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"personID" ascending:YES]];
+    request.includesPropertyValues = YES;
+    request.includesSubentities = YES;
+    request.fetchLimit = 1;
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return self.fields.count;
-}
+    _fetchedResultsController =
+      [[NSFetchedResultsController alloc]
+       initWithFetchRequest:request managedObjectContext:[AWFSession managedObjectContext]
+       sectionNameKeyPath:nil cacheName:nil];
+      _fetchedResultsController.delegate = self;
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.fields[section] count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-  if (section == 0) {
-    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_BASIC_INFO", nil);
+    NSError *error;
+    if (![_fetchedResultsController performFetch:&error]) {
+      ErrorLog(error.localizedDescription);
+    }
   }
-  else {
-    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_APPEARANCE", nil);
+
+  return _fetchedResultsController;
+}
+
+- (AWFPerson *)person {
+  return [self.fetchedResultsController.fetchedObjects lastObject];
+}
+
+- (void)setPersonID:(NSString *)personID {
+  if ([_personID isEqual:personID]) {
+    return;
   }
+
+  _personID = personID;
+  _fetchedResultsController = nil;
+  _fields = nil;
+  [self.tableView reloadData];
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell =
-  [tableView dequeueReusableCellWithIdentifier:[AWFProfileTableViewCell reuseIdentifier] forIndexPath:indexPath];
-
-  cell.textLabel.text = self.fields[indexPath.section][indexPath.row][0];
-  cell.detailTextLabel.text = self.fields[indexPath.section][indexPath.row][1];
-
-  return cell;
-}
-
-#pragma mark - Collection view data source
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-  return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-  return 5;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  AWFPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[AWFPhotoCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
-  cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Jasmin_t%ld.jpg", (long)indexPath.row]];
-  return cell;
-}
-
-#pragma mark - Private methods
 
 - (NSArray *)fields {
   if (!self.person) {
@@ -312,6 +316,59 @@
 
 - (AWFProfileHeaderView *)headerView {
   return (AWFProfileHeaderView *)self.tableView.tableHeaderView;
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  self.title = self.person.fullName;
+  _fields = nil;
+  [self.tableView reloadData];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return self.fields.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return [self.fields[section] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+  if (section == 0) {
+    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_BASIC_INFO", nil);
+  }
+  else {
+    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_APPEARANCE", nil);
+  }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell =
+    [tableView dequeueReusableCellWithIdentifier:[AWFProfileTableViewCell reuseIdentifier] forIndexPath:indexPath];
+
+  cell.textLabel.text = self.fields[indexPath.section][indexPath.row][0];
+  cell.detailTextLabel.text = self.fields[indexPath.section][indexPath.row][1];
+
+  return cell;
+}
+
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+  return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+  return 5;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+  AWFPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[AWFPhotoCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
+  cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Jasmin_t%ld.jpg", (long)indexPath.row]];
+  return cell;
 }
 
 @end

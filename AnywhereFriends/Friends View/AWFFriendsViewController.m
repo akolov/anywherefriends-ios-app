@@ -15,6 +15,7 @@
 #import <Haneke/Haneke.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
 #import "AWFFriendsViewCell.h"
 #import "AWFLocationManager.h"
@@ -23,24 +24,18 @@
 #import "AWFProfileViewController.h"
 #import "AWFSession.h"
 
+static NSUInteger AWFPageSize = 20;
 static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatName";
 
-@interface AWFFriendsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AWFFriendsViewController () <NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) id locationObserver;
-@property (nonatomic, strong) NSArray *people;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 - (void)getFriends;
 
 @end
 
 @implementation AWFFriendsViewController
-
-- (void)dealloc {
-  if (self.locationObserver) {
-    [[NSNotificationCenter defaultCenter] removeObserver:self.locationObserver];
-  }
-}
 
 #pragma mark - View Life Cycle
 
@@ -65,56 +60,88 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
   [self.view addSubview:self.tableView];
 
   @weakify(self);
-  self.locationObserver =
-  [[NSNotificationCenter defaultCenter]
-   addObserverForName:AWFLocationManagerDidUpdateLocationsNotification object:nil queue:[NSOperationQueue mainQueue]
-   usingBlock:^(NSNotification *note) {
+  [RACObserveNotificationUntilDealloc(AWFLocationManagerDidUpdateLocationsNotification)
+   subscribeNext:^(NSNotification *note) {
      @strongify(self);
      [self.tableView reloadData];
    }];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
   [self getFriends];
 }
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  _fetchedResultsController = nil;
+}
+
+#pragma mark - Accessors
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
 
-#pragma mark - Accessors
+- (NSFetchedResultsController *)fetchedResultsController {
+  if (!_fetchedResultsController) {
+    NSString *currentUserID = [AWFSession sharedSession].currentUserID;
+    NSArray *predicates = @[[NSPredicate predicateWithFormat:@"personID != %@", currentUserID],
+                            [NSPredicate predicateWithFormat:@"friendship != %d", AWFFriendshipStatusNone]];
 
-- (void)setPeople:(NSArray *)people {
-  _people = people;
-  [self.tableView reloadData];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[AWFPerson entityName]];
+    request.predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES],
+                                [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
+    request.includesPropertyValues = YES;
+    request.includesSubentities = YES;
+    request.fetchBatchSize = AWFPageSize;
+
+    _fetchedResultsController =
+      [[NSFetchedResultsController alloc]
+       initWithFetchRequest:request managedObjectContext:[AWFSession managedObjectContext]
+       sectionNameKeyPath:nil cacheName:nil];
+      _fetchedResultsController.delegate = self;
+
+    NSError *error;
+    if (![_fetchedResultsController performFetch:&error]) {
+      ErrorLog(error.localizedDescription);
+    }
+  }
+
+  return _fetchedResultsController;
 }
 
 #pragma mark - Private Methods
 
 - (void)getFriends {
-  @weakify(self);
   [[[AWFSession sharedSession] getUserSelfFriends]
-   subscribeNext:^(NSArray *people) {
-     @strongify(self);
-     self.people = people;
-   }
-   error:^(NSError *error) {
+   subscribeError:^(NSError *error) {
      ErrorLog(error.localizedDescription);
    }];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+  return (NSInteger)self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.people count];
+  id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[(NSUInteger)section];
+  return (NSInteger)sectionInfo.numberOfObjects;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   AWFFriendsViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFFriendsViewCell reuseIdentifier]
                                                             forIndexPath:indexPath];
-  AWFPerson *person = self.people[indexPath.row];
+  AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
   cell.imageView.image = nil;
   cell.nameLabel.text = person.fullName;
   cell.locationLabel.text = [NSString stringWithFormat:@"%.2f m — %@", person.locationDistanceValue, person.locationName];
@@ -126,7 +153,7 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(AWFFriendsViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 
-  AWFPerson *person = self.people[indexPath.row];
+  AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
   MKCoordinateRegion region;
   region.center.latitude = person.locationCoordinate.latitude;
@@ -182,12 +209,14 @@ static NSString *AWFMapThumbnailCacheFormatName = @"AWFMapThumbnailCacheFormatNa
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPerson:self.people[indexPath.row]];
+  AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  AWFProfileViewController *vc = [[AWFProfileViewController alloc] initWithPersonID:person.personID];
   [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-  AWFMapViewController *vc = [[AWFMapViewController alloc] initWithPerson:self.people[indexPath.row]];
+  AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  AWFMapViewController *vc = [[AWFMapViewController alloc] initWithPerson:person];
   [self.navigationController pushViewController:vc animated:YES];
 }
 

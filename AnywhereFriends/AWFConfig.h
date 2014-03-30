@@ -40,3 +40,12 @@
 #define AWF_METRES_IN_DEGREE (AWF_KILOMETRES_IN_DEGREE * AWF_METRES_IN_KILOMETRE)
 #define AWF_DEGREES_IN_KILOMETRE (1.0 / AWF_KILOMETRES_IN_DEGREE)
 #define AWF_DEGREES_IN_METRE (AWF_DEGREES_IN_KILOMETRE / AWF_METRES_IN_KILOMETRE)
+
+#define RACObserveNotification(name) \
+  [[NSNotificationCenter defaultCenter] rac_addObserverForName:name object:nil]
+
+#define RACObserveNotificationUntilDealloc(name) \
+  [[[NSNotificationCenter defaultCenter] rac_addObserverForName:name object:nil] takeUntil:[self rac_willDeallocSignal]]
+
+#define RACObserveTwoNotificationsUntilDealloc(one, two) \
+  [[RACSignal merge:@[RACObserveNotification(one), RACObserveNotification(two)]] takeUntil:[self rac_willDeallocSignal]]
