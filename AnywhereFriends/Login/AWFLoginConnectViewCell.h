@@ -16,4 +16,8 @@
 @property (nonatomic, strong, readonly) AWFIconButton *twitterButton;
 @property (nonatomic, strong, readonly) AWFIconButton *vkontakteButton;
 
+@property (nonatomic, copy) void (^onFacebookButtonAction)(void);
+@property (nonatomic, copy) void (^onTwitterButtonAction)(void);
+@property (nonatomic, copy) void (^onVkontakteButtonAction)(void);
+
 @end

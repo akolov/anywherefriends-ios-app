@@ -23,6 +23,8 @@ static CGFloat const AWFButtonSize = 45.0f;
 @property (nonatomic, strong) AWFIconButton *twitterButton;
 @property (nonatomic, strong) AWFIconButton *vkontakteButton;
 
+- (void)onButtonTouchUpInside:(id)sender;
+
 @end
 
 @implementation AWFLoginConnectViewCell
@@ -54,6 +56,8 @@ static CGFloat const AWFButtonSize = 45.0f;
 
     [self.facebookButton setBackgroundImage:facebookBackground forState:UIControlStateNormal];
     [self.facebookButton setIconColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.facebookButton addTarget:self action:@selector(onButtonTouchUpInside:)
+                  forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.facebookButton];
 
     // Twitter button
@@ -78,6 +82,8 @@ static CGFloat const AWFButtonSize = 45.0f;
 
     [self.twitterButton setBackgroundImage:twitterBackground forState:UIControlStateNormal];
     [self.twitterButton setIconColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.twitterButton addTarget:self action:@selector(onButtonTouchUpInside:)
+                  forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.twitterButton];
 
     // VKontakte button
@@ -102,6 +108,8 @@ static CGFloat const AWFButtonSize = 45.0f;
 
     [self.vkontakteButton setBackgroundImage:vkontakteBackground forState:UIControlStateNormal];
     [self.vkontakteButton setIconColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.vkontakteButton addTarget:self action:@selector(onButtonTouchUpInside:)
+                   forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.vkontakteButton];
 
     // Autolayout
@@ -130,6 +138,18 @@ static CGFloat const AWFButtonSize = 45.0f;
   }
 
   return self;
+}
+
+- (void)onButtonTouchUpInside:(id)sender {
+  if (sender == self.facebookButton) {
+    AWF_SAFE_CALLBACK(self.onFacebookButtonAction);
+  }
+  else if (sender == self.twitterButton) {
+    AWF_SAFE_CALLBACK(self.onTwitterButtonAction);
+  }
+  else if (sender == self.vkontakteButton) {
+    AWF_SAFE_CALLBACK(self.onVkontakteButtonAction);
+  }
 }
 
 @end

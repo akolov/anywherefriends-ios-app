@@ -85,8 +85,8 @@
            @[@(RKRequestMethodPUT),    AWFAPIPathUser,        @"user"],
            @[@(RKRequestMethodGET),    AWFAPIPathUsers,       @"users"],
            @[@(RKRequestMethodGET),    AWFAPIPathUserFriends, @"friends"],
-           @[@(RKRequestMethodPOST),   AWFAPIPathUserFriends, @"friend"],
-           @[@(RKRequestMethodDELETE), AWFAPIPathUserFriends, @"friend"]];
+           @[@(RKRequestMethodPOST),   AWFAPIPathUserFriends, @"friends"],
+           @[@(RKRequestMethodDELETE), AWFAPIPathUserFriends, @"friends"]];
 }
 
 + (NSArray *)identificationAttributes {

@@ -10,9 +10,11 @@
 #import "AWFLoginViewController.h"
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <Slash/Slash.h>
 
+#import "AWFAppDelegate.h"
 #import "AWFLoginConnectViewCell.h"
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
@@ -46,10 +48,8 @@
   self.tableView.showsVerticalScrollIndicator = NO;
   self.view.backgroundColor = [UIColor awfDefaultBackgroundColor];
 
-  [self.tableView registerClass:[AWFLoginConnectViewCell class]
-         forCellReuseIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
-  [self.tableView registerClass:[AWFLoginFormViewCell class]
-         forCellReuseIdentifier:[AWFLoginFormViewCell reuseIdentifier]];
+  [self.tableView registerClassForCellReuse:[AWFLoginConnectViewCell class]];
+  [self.tableView registerClassForCellReuse:[AWFLoginFormViewCell class]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,31 +77,39 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell;
-
   if (indexPath.section == 0) {
-    AWFLoginFormViewCell *fieldCell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier]
-                                                                      forIndexPath:indexPath];
+    AWFLoginFormViewCell *cell =
+      [tableView dequeueReusableCellWithIdentifier:[AWFLoginFormViewCell reuseIdentifier] forIndexPath:indexPath];
 
     UIView *view = self.fields[indexPath.row];
-    fieldCell.field = view;
+    cell.field = view;
 
     if (indexPath.row == 0) {
-      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_TITLE", nil);
+      cell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_TITLE", nil);
       [(UITextField *)view setPlaceholder:NSLocalizedString(@"AWF_LOGIN_FORM_EMAIL_PLACEHOLDER", nil)];
     }
     else if (indexPath.row == 1) {
-      fieldCell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_TITLE", nil);
+      cell.textLabel.text = NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_TITLE", nil);
       [(UITextField *)view setPlaceholder:NSLocalizedString(@"AWF_LOGIN_FORM_PASSWORD_PLACEHOLDER", nil)];
     }
 
-    cell = fieldCell;
+    return cell;
   }
   else {
-    cell = [tableView dequeueReusableCellWithIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
+    AWFLoginConnectViewCell *cell =
+      [tableView dequeueReusableCellWithIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
+    cell.onFacebookButtonAction = ^{
+      [FBSession
+       openActiveSessionWithReadPermissions:AWF_FACEBOOK_PERMISSIONS
+       allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+         AWFAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+         [appDelegate sessionStateChanged:session state:state error:error];
+       }];
+    };
+    return cell;
   }
 
-  return cell;
+  return nil;
 }
 
 #pragma mark - UITableView delegates
@@ -126,10 +134,10 @@
   title.font = [UIFont helveticaNeueCondensedLightFontOfSize:14.0f];
 
   if (section == 0) {
-    title.text = NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE", @"Title of the login login section");
+    title.text = NSLocalizedString(@"AWF_LOGIN_FORM_LOGIN_SECTION_TITLE", nil);
   }
   else {
-    title.text = NSLocalizedString(@"AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE", @"Title of the connect with login section");
+    title.text = NSLocalizedString(@"AWF_LOGIN_FORM_CONNECT_WITH_SECTION_TITLE", nil);
   }
 
   title.textColor = [UIColor awfDarkGrayTextColor];
@@ -278,13 +286,9 @@
 }
 
 - (void)onLoginButtonTouchUpInside:(id)sender {
-  [[[AWFSession sharedSession] openSessionWithEmail:self.email
-                                           password:self.password
-                                      facebookToken:nil
-                                       twitterToken:nil
-                                            vkToken:nil]
+  [[[AWFSession sharedSession] openSessionWithEmail:self.email password:self.password]
    subscribeError:^(NSError *error) {
-     // TODO: Error
+     ErrorLog(error.localizedDescription);
    }
    completed:^{
      [self dismissViewControllerAnimated:YES completion:NULL];

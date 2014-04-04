@@ -68,8 +68,31 @@
   }
 }
 
-- (NSString *)gender {
-  return self.femaleButton.selected ? @"female" : @"male";
+- (void)setGender:(AWFGender)gender {
+  switch (gender) {
+    case AWFGenderMale:
+      self.maleButton.selected = YES;
+      self.femaleButton.selected = NO;
+      break;
+    case AWFGenderFemale:
+      self.maleButton.selected = NO;
+      self.femaleButton.selected = YES;
+      break;
+    default:
+      self.maleButton.selected = NO;
+      self.femaleButton.selected = NO;
+      break;
+  }
+}
+
+- (AWFGender)gender {
+  if (self.maleButton.selected) {
+    return AWFGenderMale;
+  }
+  else if (self.femaleButton.selected) {
+    return AWFGenderFemale;
+  }
+  return AWFGenderUnknown;
 }
 
 @end

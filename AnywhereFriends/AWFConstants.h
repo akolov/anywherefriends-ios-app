@@ -30,6 +30,10 @@ OBJC_EXPORT NSString *const AWFURLParameterFacebookToken;
 OBJC_EXPORT NSString *const AWFURLParameterTwitterToken;
 OBJC_EXPORT NSString *const AWFURLParameterVKToken;
 
+// Facebook
+
+#define AWF_FACEBOOK_PERMISSIONS @[@"email", @"user_birthday", @"user_likes", @"user_location"]
+
 // CoreData
 
 OBJC_EXPORT NSString *const AWFPersistentStoreName;

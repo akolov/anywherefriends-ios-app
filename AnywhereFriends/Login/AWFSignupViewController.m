@@ -16,6 +16,7 @@
 #import "AWFLoginFormViewCell.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFSession.h"
+#import "AWFValueTransformers.h"
 #import "UIImage+CustomBackgrounds.h"
 
 @interface AWFSignupViewController ()
@@ -27,11 +28,11 @@
 - (UITextField *)newFormTextField;
 - (AWFGenderPicker *)newGenderPicker;
 
-- (NSString *)email;
-- (NSString *)password;
-- (NSString *)firstName;
-- (NSString *)lastName;
-- (NSString *)gender;
+- (NSString *)emailFieldValue;
+- (NSString *)passwordFieldValue;
+- (NSString *)firstNameFieldValue;
+- (NSString *)lastNameFieldValue;
+- (NSString *)genderFieldValue;
 
 - (void)onSignupButtonTouchUpInside:(id)sender;
 
@@ -163,6 +164,7 @@
     NSMutableArray *fields = [NSMutableArray array];
 
     UITextField *email = [self newFormTextField];
+    email.text = self.email;
     email.autocapitalizationType = UITextAutocapitalizationTypeNone;
     email.keyboardType = UIKeyboardTypeEmailAddress;
     [fields addObject:email];
@@ -172,15 +174,18 @@
     [fields addObject:password];
 
     UITextField *firstName = [self newFormTextField];
+    firstName.text = self.firstName;
     firstName.autocapitalizationType = UITextAutocapitalizationTypeWords;
     [fields addObject:firstName];
 
     UITextField *lastName = [self newFormTextField];
+    lastName.text = self.lastName;
     lastName.autocapitalizationType = UITextAutocapitalizationTypeWords;
     [fields addObject:lastName];
 
-    AWFGenderPicker *gender = [self newGenderPicker];
-    [fields addObject:gender];
+    AWFGenderPicker *genderPicker = [self newGenderPicker];
+    genderPicker.gender = self.gender;
+    [fields addObject:genderPicker];
 
     _fields = fields;
   }
@@ -188,39 +193,40 @@
   return _fields;
 }
 
-- (NSString *)email {
+- (NSString *)emailFieldValue {
   return [self.fields[0] text];
 }
 
-- (NSString *)password {
+- (NSString *)passwordFieldValue {
   return [self.fields[1] text];
 }
 
-- (NSString *)firstName {
+- (NSString *)firstNameFieldValue {
   return [self.fields[2] text];
 }
 
-- (NSString *)lastName {
+- (NSString *)lastNameFieldValue {
   return [self.fields[3] text];
 }
 
-- (NSString *)gender {
-  return [(AWFGenderPicker *)self.fields[4] gender];
+- (NSString *)genderFieldValue {
+  return [[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
+          reverseTransformedValue:@([(AWFGenderPicker *)self.fields[4] gender])];
 }
 
 #pragma mark - Actions
 
 - (void)onSignupButtonTouchUpInside:(id)sender {
-  [[[AWFSession sharedSession] createUserWithEmail:self.email
-                                          password:self.password
-                                         firstName:self.firstName
-                                          lastName:self.lastName
-                                            gender:self.gender
+  [[[AWFSession sharedSession] createUserWithEmail:self.emailFieldValue
+                                          password:self.passwordFieldValue
+                                         firstName:self.firstNameFieldValue
+                                          lastName:self.lastNameFieldValue
+                                            gender:self.genderFieldValue
                                      facebookToken:nil
                                       twitterToken:nil
                                            vkToken:nil]
    subscribeError:^(NSError *error) {
-     // TODO: Error
+     ErrorLog(error.localizedDescription);
    }
    completed:^{
      [self dismissViewControllerAnimated:YES completion:NULL];

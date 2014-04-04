@@ -292,18 +292,29 @@
           }];
 }
 
-- (RACSignal *)openSessionWithEmail:(NSString *)email
-                           password:(NSString *)password
-                      facebookToken:(NSString *)facebookToken
-                       twitterToken:(NSString *)twitterToken
-                            vkToken:(NSString *)vkToken {
+- (RACSignal *)openSessionWithEmail:(NSString *)email password:(NSString *)password {
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
   [parameters setValue:email forKey:AWFURLParameterEmail];
   [parameters setValue:password forKey:AWFURLParameterPassword];
+
+  @weakify(self);
+  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]
+           then:^RACSignal *{
+             return [self getUserSelf];
+           }]
+          map:^id(AWFPerson *person) {
+            @strongify(self);
+            self.currentUserID = person.personID;
+            return self.currentUser;
+          }];
+}
+
+- (RACSignal *)openSessionWithEmail:(NSString *)email facebookToken:(NSString *)facebookToken {
+
+  NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+  [parameters setValue:email forKey:AWFURLParameterEmail];
   [parameters setValue:facebookToken forKey:AWFURLParameterFacebookToken];
-  [parameters setValue:twitterToken forKey:AWFURLParameterTwitterToken];
-  [parameters setValue:vkToken forKey:AWFURLParameterVKToken];
 
   @weakify(self);
   return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]

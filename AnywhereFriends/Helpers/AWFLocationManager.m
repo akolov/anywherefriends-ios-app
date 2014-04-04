@@ -93,19 +93,11 @@ NSString *const AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLoca
 + (BOOL)validateLocationServicesAvailability {
   // TODO: Replace with better alerts
   if (![CLLocationManager locationServicesEnabled]) {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_TITLE", nil)
-                                message:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_MESSAGE", nil)
-                               delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"AWF_DISMISS", nil)
-                      otherButtonTitles:nil] show];
+    // TODO: Tell user that location services are disabled
     return NO;
   }
   else if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_TITLE", nil)
-                                message:NSLocalizedString(@"AWF_LOCATION_SERVICES_DISABLED_RESTRICTED_MESSAGE", nil)
-                               delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"AWF_DISMISS", nil)
-                      otherButtonTitles:nil] show];
+    // TODO: Tell user that location services are restricted
     return NO;
   }
 

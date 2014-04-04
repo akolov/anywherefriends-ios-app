@@ -32,11 +32,8 @@
                       twitterToken:(NSString *)twitterToken
                            vkToken:(NSString *)vkToken;
 
-- (RACSignal *)openSessionWithEmail:(NSString *)email
-                           password:(NSString *)password
-                      facebookToken:(NSString *)facebookToken
-                       twitterToken:(NSString *)twitterToken
-                            vkToken:(NSString *)vkToken;
+- (RACSignal *)openSessionWithEmail:(NSString *)email password:(NSString *)password;
+- (RACSignal *)openSessionWithEmail:(NSString *)email facebookToken:(NSString *)facebookToken;
 
 - (RACSignal *)closeSession;
 

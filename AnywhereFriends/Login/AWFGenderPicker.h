@@ -8,8 +8,10 @@
 
 @import UIKit;
 
+#import "AWFGender.h"
+
 @interface AWFGenderPicker : UIView
 
-- (NSString *)gender;
+@property (nonatomic, assign) AWFGender gender;
 
 @end
