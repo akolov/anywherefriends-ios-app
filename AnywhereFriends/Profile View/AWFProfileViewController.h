@@ -12,7 +12,7 @@
 
 @interface AWFProfileViewController : UITableViewController
 
-@property (nonatomic, readonly) AWFProfileHeaderView *headerView;
+@property (nonatomic, strong, readonly) AWFProfileHeaderView *headerView;
 @property (nonatomic, strong) NSString *personID;
 
 - (id)initWithPersonID:(NSString *)personID;

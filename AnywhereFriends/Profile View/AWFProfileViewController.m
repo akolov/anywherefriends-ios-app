@@ -39,10 +39,13 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 @property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
+@property (nonatomic, strong) AWFProfileHeaderView *headerView;
 @property (nonatomic, readonly) AWFPerson *person;
 
 - (void)onFriendButton:(id)sender;
 - (void)onLocationButton:(id)sender;
+
+- (void)reloadHeaderView;
 
 @end
 
@@ -70,50 +73,21 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
   self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
   [self.tableView registerClassForCellReuse:[AWFProfileTableViewCell class]];
 
-  self.tableView.tableHeaderView = ({
-    NSMutableParagraphStyle *const paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.alignment = NSTextAlignmentLeft;
+  // Header View
 
-    NSDictionary *const style = @{@"$default": @{NSParagraphStyleAttributeName: paragraphStyle,
-                                                 NSFontAttributeName: [UIFont helveticaNeueFontOfSize:14.0f],
-                                                 NSForegroundColorAttributeName: [UIColor whiteColor]},
-                                  @"em": @{NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
-                                           NSForegroundColorAttributeName: [UIColor grayColor]}};
-    NSString *lastUpdated, *markup;
-    if (self.person.locationUpdated) {
-      lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:self.person.locationUpdated];
-      markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you — %@</em>",
-                self.person.locationName, self.person.locationDistanceValue, lastUpdated];
-    }
-    else {
-      markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you</em>",
-                self.person.locationName, self.person.locationDistanceValue];
-    }
+  self.headerView = [[AWFProfileHeaderView alloc] init];
+  self.headerView.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
+  self.headerView.photoCollectionView.dataSource = self;
+  self.headerView.photoCollectionView.delegate = self;
 
-    AWFProfileHeaderView *view = [[AWFProfileHeaderView alloc] init];
-    view.descriptionLabel.text = self.person.bio;
-    view.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
-    view.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
-    view.photoCollectionView.dataSource = self;
-    view.photoCollectionView.delegate = self;
-    view.friendButton.selected = YES;
+  [self.headerView.friendButton addTarget:self action:@selector(onFriendButton:)
+                         forControlEvents:UIControlEventTouchUpInside];
+  [self.headerView.locationButton addTarget:self action:@selector(onLocationButton:)
+                           forControlEvents:UIControlEventTouchUpInside];
 
-    [view.friendButton addTarget:self action:@selector(onFriendButton:)
-                forControlEvents:UIControlEventTouchUpInside];
-    [view.locationButton addTarget:self action:@selector(onLocationButton:)
-                  forControlEvents:UIControlEventTouchUpInside];
+  [self reloadHeaderView];
 
-    CGRect bounds;
-    bounds.size.width = CGRectGetWidth(self.tableView.bounds);
-    bounds.size.height = [view systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-
-    view.bounds = bounds;
-
-    [view setNeedsLayout];
-    [view layoutIfNeeded];
-
-    view;
-  });
+  self.tableView.tableHeaderView = self.headerView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -231,8 +205,44 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 
 #pragma mark - Public methods
 
-- (AWFProfileHeaderView *)headerView {
-  return (AWFProfileHeaderView *)self.tableView.tableHeaderView;
+- (void)reloadHeaderView {
+  NSDictionary *style = @{@"$default": @{
+                              NSParagraphStyleAttributeName: ({
+                                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                                paragraphStyle.alignment = NSTextAlignmentLeft;
+                                paragraphStyle;
+                              }),
+                              NSFontAttributeName: [UIFont helveticaNeueFontOfSize:14.0f],
+                              NSForegroundColorAttributeName: [UIColor whiteColor]
+                              },
+                          @"em": @{
+                              NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
+                              NSForegroundColorAttributeName: [UIColor grayColor]}
+                          };
+
+  NSString *lastUpdated, *markup;
+  if (self.person.locationUpdated) {
+    lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:self.person.locationUpdated];
+    markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you — %@</em>",
+              self.person.locationName, self.person.locationDistanceValue, lastUpdated];
+  }
+  else {
+    markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you</em>",
+              self.person.locationName, self.person.locationDistanceValue];
+  }
+
+  self.headerView.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
+  self.headerView.descriptionLabel.text = self.person.bio;
+  [self.headerView setFriendshipStatus:self.person.friendshipValue];
+
+  CGRect bounds;
+  bounds.size.width = CGRectGetWidth(self.tableView.bounds);
+  bounds.size.height = [self.headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+
+  self.headerView.bounds = bounds;
+
+  [self.headerView setNeedsLayout];
+  [self.headerView layoutIfNeeded];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

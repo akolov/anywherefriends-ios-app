@@ -81,30 +81,22 @@
                            forState:UIControlStateNormal];
     [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FRIENDS_BUTTON_TITLE", nil)
                            forState:UIControlStateSelected];
-    [self.friendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.friendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [self.friendButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.friendButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateSelected];
     [self addSubview:self.friendButton];
+    [self setFriendshipStatus:AWFFriendshipStatusNone];
 
     self.messageButton = [AWFLabelButton autolayoutView];
     self.messageButton.layer.cornerRadius = 5.0f;
     self.messageButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
-    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_OFFLINE_BUTTON_TITLE", nil)
+    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_SEND_MESSAGE_BUTTON_TITLE", nil)
                             forState:UIControlStateNormal];
-    [self.messageButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ONLINE_BUTTON_TITLE", nil)
-                            forState:UIControlStateSelected];
     [self.messageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.messageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [self.messageButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.messageButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateSelected];
+    [self.messageButton setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:self.messageButton];
 
     // Set up constraints
 
     [self.photoCollectionView pinToFillContainerOnAxis:UILayoutConstraintAxisHorizontal];
-    [self.photoCollectionView pinHeight:159.0f withRelation:NSLayoutRelationEqual];
-    [self pin:@"V:|[photoCollectionView]-16.0-[descriptionLabel]-16.0-[locationButton]"
+    [self pin:@"V:|[photoCollectionView(159.0)]-16.0-[descriptionLabel]-16.0-[locationButton]"
       options:NSLayoutFormatAlignAllCenterX owner:self];
 
     [self pin:@"H:|-[friendButton]-[messageButton(==friendButton)]-|"
@@ -118,6 +110,23 @@
     [self pin:@"H:|-[locationButton]-|" options:0 owner:self];
   }
   return self;
+}
+
+- (void)setFriendshipStatus:(AWFFriendshipStatus)status {
+  switch (status) {
+    case AWFFriendshipStatusFriend:
+      [self.friendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      [self.friendButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateNormal];
+      break;
+    case AWFFriendshipStatusPending:
+      [self.friendButton setTitleColor:[UIColor awfGreenColor] forState:UIControlStateNormal];
+      [self.friendButton setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      break;
+    default:
+      [self.friendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+      [self.friendButton setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      break;
+  }
 }
 
 @end

@@ -112,17 +112,14 @@
 /* Title of the friends button of the profile view */
 "AWF_PROFILE_FRIENDS_BUTTON_TITLE" = "Друзья";
 
-/* Title of the offline button of the profile view */
-"AWF_PROFILE_OFFLINE_BUTTON_TITLE" = "Не в сети";
-
-/* Title of the online button of the profile view */
-"AWF_PROFILE_ONLINE_BUTTON_TITLE" = "В сети";
-
 /* Appearance section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_APPEARANCE" = "Внешность";
 
 /* Basic info section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_BASIC_INFO" = "Основное";
+
+/* Send message button title */
+"AWF_PROFILE_SEND_MESSAGE_BUTTON_TITLE" = "Написать сообщение";
 
 /* Title for the Friends search scope */
 "AWF_SEARCH_SCOPE_FRIENDS_TITLE" = "Друзья";
