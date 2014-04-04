@@ -211,6 +211,14 @@
   return [RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext;
 }
 
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    _currentUserID = [[NSUserDefaults standardUserDefaults] stringForKey:AWFUserDefaultsCurrentUserIDKey];
+  }
+  return self;
+}
+
 #pragma mark - Accessors
 
 - (void)setCurrentUserID:(NSString *)currentUserID {
@@ -220,6 +228,8 @@
 
   _currentUserID = currentUserID;
   _fetchedResultsController = nil;
+
+  [[NSUserDefaults standardUserDefaults] setValue:currentUserID forKey:AWFUserDefaultsCurrentUserIDKey];
 }
 
 - (AWFPerson *)currentUser {

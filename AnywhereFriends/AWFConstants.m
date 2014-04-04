@@ -35,3 +35,7 @@ NSString *const AWFPersistentStoreName = @"AnywhereFriends.sqlite";
 // Errors
 
 NSString *const AWFErrorDomain = @"com.anywherefriends";
+
+// User Defaults
+
+NSString *const AWFUserDefaultsCurrentUserIDKey = @"AWFUserDefaultsCurrentUserIDKey";

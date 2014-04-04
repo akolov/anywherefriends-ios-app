@@ -37,3 +37,7 @@ OBJC_EXPORT NSString *const AWFPersistentStoreName;
 // Errors
 
 OBJC_EXPORT NSString *const AWFErrorDomain;
+
+// User Defaults
+
+OBJC_EXPORT NSString *const AWFUserDefaultsCurrentUserIDKey;
