@@ -57,18 +57,18 @@
   meNavigation.tabBarItem.title = NSLocalizedString(@"AWF_ME_VIEW_CONTROLLER_TITLE", nil);
   meNavigation.tabBarItem.image = [UIImage imageNamed:@"me"];
 
-  UITabBarController *tabs = [[UITabBarController alloc] init];
-  tabs.viewControllers = @[peopleNavigation, friendsNavigation, messagesNavigation, meNavigation];
+  self.tabBarController = [[UITabBarController alloc] init];
+  self.tabBarController.viewControllers = @[peopleNavigation, friendsNavigation, messagesNavigation, meNavigation];
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
-  self.window.rootViewController = tabs;
+  self.window.rootViewController = self.tabBarController;
   [self.window makeKeyAndVisible];
 
   if (!AWFSession.isLoggedIn) {
     AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
     AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
-    [tabs presentViewController:loginNavigation animated:NO completion:NULL];
+    [self.tabBarController presentViewController:loginNavigation animated:NO completion:NULL];
   }
 
   [[[AWFSession sharedSession] getUserSelf] subscribeError:^(NSError *error) {

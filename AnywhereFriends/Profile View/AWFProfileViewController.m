@@ -16,6 +16,7 @@
 #import <Slash/Slash.h>
 
 #import "AWFAgeFormatter.h"
+#import "AWFAppDelegate.h"
 #import "AWFGenderFormatter.h"
 #import "AWFHeightFormatter.h"
 #import "AWFIconButton.h"
@@ -43,6 +44,7 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 @property (nonatomic, readonly) AWFPerson *person;
 
 - (void)onFriendButton:(id)sender;
+- (void)onSendMessageButton:(id)sender;
 - (void)onLocationButton:(id)sender;
 
 - (void)reloadHeaderView;
@@ -82,6 +84,8 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 
   [self.headerView.friendButton addTarget:self action:@selector(onFriendButton:)
                          forControlEvents:UIControlEventTouchUpInside];
+  [self.headerView.messageButton addTarget:self action:@selector(onSendMessageButton:)
+                          forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.locationButton addTarget:self action:@selector(onLocationButton:)
                            forControlEvents:UIControlEventTouchUpInside];
 
@@ -196,6 +200,11 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
    completed:^{
      [self.headerView setFriendshipStatus:AWFFriendshipStatusPending];
    }];
+}
+
+- (void)onSendMessageButton:(id)sender {
+  AWFAppDelegate *appDelegate = (AWFAppDelegate *)[UIApplication sharedApplication].delegate;
+  appDelegate.tabBarController.selectedIndex = 2;
 }
 
 - (void)onLocationButton:(id)sender {
