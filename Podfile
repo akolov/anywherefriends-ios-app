@@ -1,6 +1,9 @@
 platform :ios, '7.0'
 
 pod 'AXKCollectionViewTools', '~> 1.0.3'
+pod 'AXKRACExtensions', '~> 1.0.1'
+pod 'AXKRACExtensions/AFNetworking'
+pod 'AXKRACExtensions/RestKit'
 pod 'AXKViewLayout', '~> 1.0.1'
 pod 'Facebook-iOS-SDK', '~> 3.13.0'
 pod 'FormatterKit', '~> 1.4.0'

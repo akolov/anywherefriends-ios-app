@@ -45,8 +45,6 @@
 		FA3D4C4818E849E9008C5366 /* AWFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4718E849E9008C5366 /* AWFPerson.m */; };
 		FA3D4C4B18E84A32008C5366 /* NSManagedObject+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4A18E84A32008C5366 /* NSManagedObject+RestKit.m */; };
 		FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */; };
-		FA3D4C5118E8542F008C5366 /* AFHTTPClient+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */; };
-		FA3D4C5418E85507008C5366 /* RKObjectManager+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */; };
 		FA3D4C5818E89553008C5366 /* _AWFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5718E89553008C5366 /* _AWFActivity.m */; };
 		FA3D4C5B18E89560008C5366 /* AWFActivity+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5A18E89560008C5366 /* AWFActivity+RestKit.m */; };
 		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
@@ -191,10 +189,6 @@
 		FA3D4C4A18E84A32008C5366 /* NSManagedObject+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+RestKit.m"; sourceTree = "<group>"; };
 		FA3D4C4C18E84A9F008C5366 /* AWFPerson+RestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFPerson+RestKit.h"; sourceTree = "<group>"; };
 		FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AWFPerson+RestKit.m"; sourceTree = "<group>"; };
-		FA3D4C4F18E8542F008C5366 /* AFHTTPClient+RACSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+RACSupport.h"; sourceTree = "<group>"; };
-		FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+RACSupport.m"; sourceTree = "<group>"; };
-		FA3D4C5218E85507008C5366 /* RKObjectManager+RACSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKObjectManager+RACSupport.h"; sourceTree = "<group>"; };
-		FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKObjectManager+RACSupport.m"; sourceTree = "<group>"; };
 		FA3D4C5618E89553008C5366 /* _AWFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AWFActivity.h; sourceTree = "<group>"; };
 		FA3D4C5718E89553008C5366 /* _AWFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AWFActivity.m; sourceTree = "<group>"; };
 		FA3D4C5918E89560008C5366 /* AWFActivity+RestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFActivity+RestKit.h"; sourceTree = "<group>"; };
@@ -613,10 +607,6 @@
 		FADBF69317ADB7DE00325DD1 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				FA3D4C4F18E8542F008C5366 /* AFHTTPClient+RACSupport.h */,
-				FA3D4C5018E8542F008C5366 /* AFHTTPClient+RACSupport.m */,
-				FA3D4C5218E85507008C5366 /* RKObjectManager+RACSupport.h */,
-				FA3D4C5318E85507008C5366 /* RKObjectManager+RACSupport.m */,
 				FADBF6B417ADCE9800325DD1 /* CGContext+Blocks.h */,
 				FADBF6B517ADCE9800325DD1 /* CGContext+Blocks.m */,
 				FAF0F3D018D49F7D0063BB30 /* MKMapView+AWFCentering.h */,
@@ -941,7 +931,6 @@
 				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,
 				FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */,
 				FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */,
-				FA3D4C5418E85507008C5366 /* RKObjectManager+RACSupport.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */,
 				FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */,
@@ -977,7 +966,6 @@
 				FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */,
 				FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
-				FA3D4C5118E8542F008C5366 /* AFHTTPClient+RACSupport.m in Sources */,
 				FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */,
 				FA3D4C5B18E89560008C5366 /* AWFActivity+RestKit.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,

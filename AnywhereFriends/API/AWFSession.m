@@ -14,17 +14,17 @@
 #import "AWFSession.h"
 
 #import <AFNetworking/AFNetworking.h>
+#import <AXKRACExtensions/AFHTTPClient+AXKRACExtensions.h>
+#import <AXKRACExtensions/RKObjectManager+AXKRACExtensions.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <RestKit/RestKit.h>
 
-#import "AFHTTPClient+RACSupport.h"
 #import "AWFActivity.h"
 #import "AWFClient.h"
 #import "AWFActivity+RestKit.h"
 #import "AWFPerson+RestKit.h"
 #import "NSManagedObject+RestKit.h"
-#import "RKObjectManager+RACSupport.h"
 
 @interface AWFSession ()
 
