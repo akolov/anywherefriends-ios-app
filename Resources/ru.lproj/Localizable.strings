@@ -112,6 +112,9 @@
 /* Title of the friends button of the profile view */
 "AWF_PROFILE_FRIENDS_BUTTON_TITLE" = "Друзья";
 
+/* Title of the friend request pending button */
+"AWF_PROFILE_PENDING_BUTTON_TITLE" = "Запрос отправлен";
+
 /* Appearance section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_APPEARANCE" = "Внешность";
 

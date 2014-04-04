@@ -124,6 +124,9 @@
 /* Title of the friends button of the profile view */
 "AWF_PROFILE_FRIENDS_BUTTON_TITLE" = "Friends";
 
+/* Title of the friend request pending button */
+"AWF_PROFILE_PENDING_BUTTON_TITLE" = "Request Pending";
+
 /* Appearance section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_APPEARANCE" = "Appearance";
 

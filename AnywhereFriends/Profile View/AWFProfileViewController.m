@@ -190,11 +190,11 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 
 - (void)onFriendButton:(id)sender {
   [[[AWFSession sharedSession] friendUser:self.person]
-   subscribeNext:^(id x) {
-
-   }
-   error:^(NSError *error) {
+   subscribeError:^(NSError *error) {
      ErrorLog(error.localizedDescription);
+   }
+   completed:^{
+     [self.headerView setFriendshipStatus:AWFFriendshipStatusPending];
    }];
 }
 

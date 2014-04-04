@@ -77,10 +77,6 @@
     self.friendButton = [AWFLabelButton autolayoutView];
     self.friendButton.layer.cornerRadius = 5.0f;
     self.friendButton.titleLabel.font = [UIFont helveticaNeueFontOfSize:16.0f];
-    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ADD_FRIEND_BUTTON_TITLE", nil)
-                           forState:UIControlStateNormal];
-    [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FRIENDS_BUTTON_TITLE", nil)
-                           forState:UIControlStateSelected];
     [self addSubview:self.friendButton];
     [self setFriendshipStatus:AWFFriendshipStatusNone];
 
@@ -117,14 +113,20 @@
     case AWFFriendshipStatusFriend:
       [self.friendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       [self.friendButton setBackgroundColor:[UIColor awfGreenColor] forState:UIControlStateNormal];
+      [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_FRIENDS_BUTTON_TITLE", nil)
+                             forState:UIControlStateSelected];
       break;
     case AWFFriendshipStatusPending:
       [self.friendButton setTitleColor:[UIColor awfGreenColor] forState:UIControlStateNormal];
       [self.friendButton setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_PENDING_BUTTON_TITLE", nil)
+                             forState:UIControlStateNormal];
       break;
     default:
       [self.friendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       [self.friendButton setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      [self.friendButton setTitleText:NSLocalizedString(@"AWF_PROFILE_ADD_FRIEND_BUTTON_TITLE", nil)
+                             forState:UIControlStateNormal];
       break;
   }
 }

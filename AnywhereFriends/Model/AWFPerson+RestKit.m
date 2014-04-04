@@ -80,11 +80,13 @@
 }
 
 + (NSArray *)responseDescriptorMatrix {
-  return @[@[@(RKRequestMethodGET),  AWFAPIPathUser,        [NSNull null]],
-           @[@(RKRequestMethodPOST), AWFAPIPathUser,        @"user"],
-           @[@(RKRequestMethodPUT),  AWFAPIPathUser,        @"user"],
-           @[@(RKRequestMethodGET),  AWFAPIPathUsers,       @"users"],
-           @[@(RKRequestMethodGET),  AWFAPIPathUserFriends, @"friends"]];
+  return @[@[@(RKRequestMethodGET),    AWFAPIPathUser,        [NSNull null]],
+           @[@(RKRequestMethodPOST),   AWFAPIPathUser,        @"user"],
+           @[@(RKRequestMethodPUT),    AWFAPIPathUser,        @"user"],
+           @[@(RKRequestMethodGET),    AWFAPIPathUsers,       @"users"],
+           @[@(RKRequestMethodGET),    AWFAPIPathUserFriends, @"friends"],
+           @[@(RKRequestMethodPOST),   AWFAPIPathUserFriends, @"friend"],
+           @[@(RKRequestMethodDELETE), AWFAPIPathUserFriends, @"friend"]];
 }
 
 + (NSArray *)identificationAttributes {
