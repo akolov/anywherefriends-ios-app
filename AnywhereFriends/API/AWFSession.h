@@ -33,7 +33,7 @@
                            vkToken:(NSString *)vkToken;
 
 - (RACSignal *)openSessionWithEmail:(NSString *)email password:(NSString *)password;
-- (RACSignal *)openSessionWithEmail:(NSString *)email facebookToken:(NSString *)facebookToken;
+- (RACSignal *)openSessionWithFacebookToken:(NSString *)facebookToken;
 
 - (RACSignal *)closeSession;
 

@@ -310,10 +310,9 @@
           }];
 }
 
-- (RACSignal *)openSessionWithEmail:(NSString *)email facebookToken:(NSString *)facebookToken {
+- (RACSignal *)openSessionWithFacebookToken:(NSString *)facebookToken {
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-  [parameters setValue:email forKey:AWFURLParameterEmail];
   [parameters setValue:facebookToken forKey:AWFURLParameterFacebookToken];
 
   @weakify(self);

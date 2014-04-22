@@ -133,7 +133,7 @@
        if (!facebookError) {
          NSString *email = [user objectForKey:@"email"];
 
-         [[[AWFSession sharedSession] openSessionWithEmail:email facebookToken:session.accessTokenData.accessToken]
+         [[[AWFSession sharedSession] openSessionWithFacebookToken:session.accessTokenData.accessToken]
           subscribeError:^(NSError *error) {
             NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
                                                            allowLossyConversion:NO];
@@ -157,8 +157,15 @@
                   vc.gender = AWFGenderFemale;
                 }
 
-                AWFNavigationController *navigation = [[AWFNavigationController alloc] initWithRootViewController:vc];
-                [self.tabBarController presentViewController:navigation animated:YES completion:NULL];
+                if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
+                  UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
+                  [navigation pushViewController:vc animated:NO];
+                }
+                else {
+                  AWFNavigationController *navigation = [[AWFNavigationController alloc] initWithRootViewController:vc];
+                  [self.tabBarController presentViewController:navigation animated:NO completion:NULL];
+                }
+
                 return;
               }
             }
