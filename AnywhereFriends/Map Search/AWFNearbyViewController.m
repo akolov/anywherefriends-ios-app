@@ -77,7 +77,7 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
 
   self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
   self.mapView.delegate = self;
-  self.mapView.showsUserLocation = YES;
+  self.mapView.showsUserLocation = [AWFSession isLoggedIn];
   self.mapView.scrollEnabled = NO;
 
   self.mapContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.tableView.rowHeight * 4.0f, self.tableView.bounds.size.width, self.tableView.rowHeight * 4.0f)];
@@ -109,6 +109,11 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
      [self.mapView setCoordinate:coordinate spanInMeters:AWFRadius animated:YES];
      [self lookupUsersAroundCenterCoordinate:coordinate andSpanInMeters:AWFRadius];
    }];
+
+  [RACObserveNotificationUntilDealloc(AWFUserDidLoginNotification) subscribeNext:^(NSNotification *note) {
+    @strongify(self);
+    self.mapView.showsUserLocation = [AWFSession isLoggedIn];
+  }];
 }
 
 - (void)didReceiveMemoryWarning {
