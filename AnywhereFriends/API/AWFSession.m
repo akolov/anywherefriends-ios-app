@@ -306,6 +306,7 @@
           map:^id(AWFPerson *person) {
             @strongify(self);
             self.currentUserID = person.personID;
+            [[NSNotificationCenter defaultCenter] postNotificationName:AWFUserDidLoginNotification object:self.currentUser];
             return self.currentUser;
           }];
 }
@@ -323,6 +324,7 @@
           map:^id(AWFPerson *person) {
             @strongify(self);
             self.currentUserID = person.personID;
+            [[NSNotificationCenter defaultCenter] postNotificationName:AWFUserDidLoginNotification object:self.currentUser];
             return self.currentUser;
           }];
 }

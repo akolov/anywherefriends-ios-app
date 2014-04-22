@@ -9,6 +9,7 @@
 #import "AWFConfig.h"
 #import "AWFLocationManager.h"
 
+#import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "AWFSession.h"
@@ -18,7 +19,7 @@ NSString *const AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLoca
 
 @interface AWFLocationManager () <CLLocationManagerDelegate>
 
-+ (BOOL)validateLocationServicesAvailability;
+- (BOOL)validateLocationServicesAvailability;
 
 @end
 
@@ -49,9 +50,17 @@ NSString *const AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLoca
     _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     _locationManager.distanceFilter = 100.0;
 
-    if ([self.class validateLocationServicesAvailability]) {
+    if ([self validateLocationServicesAvailability]) {
       [_locationManager startUpdatingLocation];
     }
+
+    @weakify(self);
+    [RACObserveNotificationUntilDealloc(AWFUserDidLoginNotification) subscribeNext:^(NSNotification *note) {
+      @strongify(self);
+      if ([self validateLocationServicesAvailability]) {
+        [self.locationManager startUpdatingLocation];
+      }
+    }];
   }
   return self;
 }
@@ -85,12 +94,18 @@ NSString *const AWFLocationManagerLocationUserInfoKey = @"AWFLocationManagerLoca
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-  [self.class validateLocationServicesAvailability];
+  if ([self validateLocationServicesAvailability]) {
+    [self.locationManager startUpdatingLocation];
+  }
 }
 
 #pragma mark - Private methods
 
-+ (BOOL)validateLocationServicesAvailability {
+- (BOOL)validateLocationServicesAvailability {
+  if (![AWFSession isLoggedIn]) {
+    return NO;
+  }
+
   // TODO: Replace with better alerts
   if (![CLLocationManager locationServicesEnabled]) {
     // TODO: Tell user that location services are disabled

@@ -45,3 +45,7 @@ OBJC_EXPORT NSString *const AWFErrorDomain;
 // User Defaults
 
 OBJC_EXPORT NSString *const AWFUserDefaultsCurrentUserIDKey;
+
+// Notifications
+
+OBJC_EXPORT NSString *const AWFUserDidLoginNotification;
