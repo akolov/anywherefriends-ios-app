@@ -25,7 +25,7 @@
     unsigned long _age = age % 100;
     switch (_age) {
       case 1:
-        return [NSString stringWithFormat:@"%lu год", age];
+        return [NSString stringWithFormat:@"%lu год", (unsigned long)age];
       case 2:
       case 3:
       case 4:

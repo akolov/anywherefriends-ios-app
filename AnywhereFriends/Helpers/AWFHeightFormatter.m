@@ -75,7 +75,7 @@
   CGFloat number = value / 2.54f;
 
   if (number > 12.0f) {
-    return [NSString stringWithFormat:@"%lu’%lu”", (unsigned long)floor(number / 12.0f), (NSUInteger)number % 12];
+    return [NSString stringWithFormat:@"%lu’%lu”", (unsigned long)floor(number / 12.0f), (unsigned long)number % 12];
 
   }
   else {
