@@ -4,6 +4,9 @@
   Created by Alexander Kolov on 8/4/13.
   Copyright (c) 2013 Anywherefriends. All rights reserved. */
 
+/* Accept button title */
+"AWF_ACCEPT" = "Принять";
+
 /* Age */
 "AWF_AGE" = "Возраст";
 
@@ -20,7 +23,7 @@
 "AWF_EYE_COLOR" = "Цвет глаз";
 
 /* Friendship request string */
-"AWF_FRIENDSHIP_EREQUEST_STRING" = "%@ хочет быть вашим другом!";
+"AWF_FRIENDSHIP_REQUEST_STRING" = "%@ хочет быть вашим другом!";
 
 /* Title of the Friends view */
 "AWF_FRIENDS_VIEW_CONTROLLER_TITLE" = "Друзья";
@@ -124,6 +127,9 @@
 /* Send message button title */
 "AWF_PROFILE_SEND_MESSAGE_BUTTON_TITLE" = "Написать сообщение";
 
+/* Reject button title */
+"AWF_REJECT" = "Отклонить";
+
 /* Title for the Friends search scope */
 "AWF_SEARCH_SCOPE_FRIENDS_TITLE" = "Друзья";
 
@@ -137,5 +143,5 @@
 "AWF_UNKNOWN_LOCATION" = "Неизвестное местоположение";
 
 /* Weight */
-"AWF_WEIGHT" = "Вес";
+"AWF_WEIGHT" = "Вес";
 

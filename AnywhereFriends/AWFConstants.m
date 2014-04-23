@@ -15,6 +15,8 @@ NSString *const AWFAPIPathUser = @"user/";
 NSString *const AWFAPIPathUserActivity = @"user/activity/";
 NSString *const AWFAPIPathUserActivityID = @"user/activity/:activityID";
 NSString *const AWFAPIPathUserFriends = @"user/friends/";
+NSString *const AWFAPIPathUserFriendsApprove = @"user/friends/approve/";
+NSString *const AWFAPIPathUserFriendsReject = @"user/friends/reject/";
 NSString *const AWFAPIPathUsers = @"users/";
 
 NSString *const AWFURLParameterEmail = @"email";

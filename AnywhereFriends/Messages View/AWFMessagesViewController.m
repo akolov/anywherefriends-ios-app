@@ -13,8 +13,9 @@
 #import <FormatterKit/TTTTimeIntervalFormatter.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <RestKit/CoreData/NSManagedObjectContext+RKAdditions.h>
 
-#import "AWFMessagesViewCell.h"
+#import "AWFMessagesRequestCell.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFActivity.h"
 #import "AWFPerson.h"
@@ -41,7 +42,7 @@ static NSUInteger AWFPageSize = 20;
 
   self.formatter = [[TTTTimeIntervalFormatter alloc] init];
 
-  [self.tableView registerClassForCellReuse:[AWFMessagesViewCell class]];
+  [self.tableView registerClassForCellReuse:[AWFMessagesRequestCell class]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,10 +63,11 @@ static NSUInteger AWFPageSize = 20;
 
 - (NSFetchedResultsController *)fetchedResultsController {
   if (!_fetchedResultsController) {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[AWFPerson entityName]];
-    request.predicate = [NSPredicate predicateWithFormat:@"activitiesCreated.@count != 0"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES],
-                                [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[AWFActivity entityName]];
+    request.predicate = [NSPredicate predicateWithFormat:@"type == %d", AWFActivityTypeFriendRequest];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO],
+                                [NSSortDescriptor sortDescriptorWithKey:@"creator.lastName" ascending:YES],
+                                [NSSortDescriptor sortDescriptorWithKey:@"creator.firstName" ascending:YES]];
     request.includesPropertyValues = YES;
     request.includesSubentities = YES;
     request.fetchBatchSize = AWFPageSize;
@@ -112,16 +114,44 @@ static NSUInteger AWFPageSize = 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  AWFMessagesViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFMessagesViewCell reuseIdentifier]
-                                                              forIndexPath:indexPath];
-  AWFPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  NSDate *lastActivityDate = [person.activitiesCreated valueForKeyPath:@"@max.dateCreated"];
+  AWFMessagesRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:[AWFMessagesRequestCell reuseIdentifier]
+                                                                 forIndexPath:indexPath];
+  AWFActivity *activity = [self.fetchedResultsController objectAtIndexPath:indexPath];
   cell.imageView.image = nil;
-  cell.nameLabel.text = person.fullName;
-  cell.timeLabel.text = [self.formatter stringForTimeIntervalFromDate:[NSDate date] toDate:lastActivityDate];
-  cell.placeholderView.text = person.abbreviatedName;
+  cell.nameLabel.text = activity.creator.fullName;
+  cell.timeLabel.text = [self.formatter stringForTimeIntervalFromDate:[NSDate date] toDate:activity.dateCreated];
+  cell.placeholderView.text = activity.creator.abbreviatedName;
   cell.lastMessageLabel.text =
-    [NSString stringWithFormat:NSLocalizedString(@"AWF_FRIENDSHIP_EREQUEST_STRING", nil), person.fullName];
+    [NSString stringWithFormat:NSLocalizedString(@"AWF_FRIENDSHIP_REQUEST_STRING", nil), activity.creator.fullName];
+
+  cell.onAcceptAction = ^{
+    [[[AWFSession sharedSession] approveFriendRequestFromUser:activity.creator]
+     subscribeError:^(NSError *error) {
+       ErrorLog(error.localizedDescription);
+     }
+     completed:^{
+       NSError *error;
+       [activity.managedObjectContext deleteObject:activity];
+       if (![activity.managedObjectContext saveToPersistentStore:&error]) {
+         ErrorLog(error.localizedDescription);
+       }
+     }];
+  };
+
+  cell.onIgnoreAction = ^{
+    [[[AWFSession sharedSession] rejectFriendRequestFromUser:activity.creator]
+     subscribeError:^(NSError *error) {
+       ErrorLog(error.localizedDescription);
+     }
+     completed:^{
+       NSError *error;
+       [activity.managedObjectContext deleteObject:activity];
+       if (![activity.managedObjectContext saveToPersistentStore:&error]) {
+         ErrorLog(error.localizedDescription);
+       }
+     }];
+  };
+
   return cell;
 }
 
@@ -138,7 +168,7 @@ static NSUInteger AWFPageSize = 20;
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 70.0f;
+  return 80.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -130,6 +130,7 @@
 		FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3DF18D4AEBB0063BB30 /* AWFMessagesViewCell.m */; };
 		FAF0F3E318D4AEBB0063BB30 /* AWFMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */; };
 		FAF0F3E718D4CD8B0063BB30 /* AWFMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF0F3E618D4CD8B0063BB30 /* AWFMyProfileViewController.m */; };
+		FAF3AB491906AC9F0078D776 /* AWFMessagesRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF3AB481906AC9F0078D776 /* AWFMessagesRequestCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +321,8 @@
 		FAF0F3E418D4C78D0063BB30 /* AWFConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFConfig.h; sourceTree = "<group>"; };
 		FAF0F3E518D4CD8B0063BB30 /* AWFMyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMyProfileViewController.h; sourceTree = "<group>"; };
 		FAF0F3E618D4CD8B0063BB30 /* AWFMyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMyProfileViewController.m; sourceTree = "<group>"; };
+		FAF3AB471906AC9F0078D776 /* AWFMessagesRequestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMessagesRequestCell.h; sourceTree = "<group>"; };
+		FAF3AB481906AC9F0078D776 /* AWFMessagesRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMessagesRequestCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -732,6 +735,8 @@
 			children = (
 				FAF0F3DE18D4AEBB0063BB30 /* AWFMessagesViewCell.h */,
 				FAF0F3DF18D4AEBB0063BB30 /* AWFMessagesViewCell.m */,
+				FAF3AB471906AC9F0078D776 /* AWFMessagesRequestCell.h */,
+				FAF3AB481906AC9F0078D776 /* AWFMessagesRequestCell.m */,
 				FAF0F3E018D4AEBB0063BB30 /* AWFMessagesViewController.h */,
 				FAF0F3E118D4AEBB0063BB30 /* AWFMessagesViewController.m */,
 			);
@@ -928,6 +933,7 @@
 				FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */,
 				FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
+				FAF3AB491906AC9F0078D776 /* AWFMessagesRequestCell.m in Sources */,
 				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,
 				FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */,
 				FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */,

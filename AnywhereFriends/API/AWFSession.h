@@ -45,6 +45,8 @@
 - (RACSignal *)updateUserSelfLocation:(CLPlacemark *)placemark;
 - (RACSignal *)friendUser:(AWFPerson *)person;
 - (RACSignal *)unfriendUser:(AWFPerson *)person;
+- (RACSignal *)approveFriendRequestFromUser:(AWFPerson *)person;
+- (RACSignal *)rejectFriendRequestFromUser:(AWFPerson *)person;
 
 - (RACSignal *)getUserSelfActivity;
 - (RACSignal *)markActivityAsRead:(AWFActivity *)activity;

@@ -17,6 +17,8 @@ OBJC_EXPORT NSString *const AWFAPIPathUser;
 OBJC_EXPORT NSString *const AWFAPIPathUserActivity;
 OBJC_EXPORT NSString *const AWFAPIPathUserActivityID;
 OBJC_EXPORT NSString *const AWFAPIPathUserFriends;
+OBJC_EXPORT NSString *const AWFAPIPathUserFriendsApprove;
+OBJC_EXPORT NSString *const AWFAPIPathUserFriendsReject;
 OBJC_EXPORT NSString *const AWFAPIPathUsers;
 
 OBJC_EXPORT NSString *const AWFURLParameterEmail;

@@ -412,6 +412,16 @@
   return [[RKObjectManager sharedManager] rac_deleteObject:nil path:AWFAPIPathUserFriends parameters:parameters];
 }
 
+- (RACSignal *)approveFriendRequestFromUser:(AWFPerson *)person {
+  NSDictionary *parameters = @{AWFURLParameterIDs: person.personID};
+  return [[RKObjectManager sharedManager] rac_postObject:nil path:AWFAPIPathUserFriendsApprove parameters:parameters];
+}
+
+- (RACSignal *)rejectFriendRequestFromUser:(AWFPerson *)person {
+  NSDictionary *parameters = @{AWFURLParameterIDs: person.personID};
+  return [[RKObjectManager sharedManager] rac_postObject:nil path:AWFAPIPathUserFriendsReject parameters:parameters];
+}
+
 #pragma mark - Activity
 
 - (RACSignal *)getUserSelfActivity {
