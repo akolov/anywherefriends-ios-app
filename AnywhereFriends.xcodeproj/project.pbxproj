@@ -1129,6 +1129,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Adamenko (2UT39H653L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Adamenko (2UT39H653L)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AnywhereFriends/AnywhereFriends-Prefix.pch";
 				INFOPLIST_FILE = "AnywhereFriends/AnywhereFriends-Info.plist";
@@ -1144,6 +1146,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mark Adamenko (NN2DTJ2JMT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mark Adamenko (NN2DTJ2JMT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AnywhereFriends/AnywhereFriends-Prefix.pch";
 				INFOPLIST_FILE = "AnywhereFriends/AnywhereFriends-Info.plist";
