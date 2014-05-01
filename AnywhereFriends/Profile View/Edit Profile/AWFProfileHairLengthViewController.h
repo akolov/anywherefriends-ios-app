@@ -1,5 +1,5 @@
 //
-//  AWFProfileBodyBuildViewController.h
+//  AWFProfileHairLengthViewController.h
 //  AnywhereFriends
 //
 //  Created by Alexander Kolov on 01/05/14.
@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface AWFProfileBodyBuildViewController : UITableViewController
+@interface AWFProfileHairLengthViewController : UITableViewController
 
 @end

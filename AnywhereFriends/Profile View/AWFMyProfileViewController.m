@@ -15,6 +15,7 @@
 #import "AWFPerson.h"
 #import "AWFProfileBodyBuildViewController.h"
 #import "AWFProfileGenderViewController.h"
+#import "AWFProfileHairLengthViewController.h"
 #import "AWFSession.h"
 
 @implementation AWFMyProfileViewController
@@ -77,7 +78,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
           [self.navigationController pushViewController:vc animated:YES];
         }
           break;
-
+        case 3: {
+          AWFProfileHairLengthViewController *vc = [[AWFProfileHairLengthViewController alloc] init];
+          [self.navigationController pushViewController:vc animated:YES];
+        }
         default:
           break;
       }

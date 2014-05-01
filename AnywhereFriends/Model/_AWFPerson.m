@@ -75,6 +75,11 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"hairLengthValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"hairLength"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"heightValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"height"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -236,6 +241,25 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 
 @dynamic hairLength;
 
+
+
+- (int16_t)hairLengthValue {
+	NSNumber *result = [self hairLength];
+	return [result shortValue];
+}
+
+- (void)setHairLengthValue:(int16_t)value_ {
+	[self setHairLength:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveHairLengthValue {
+	NSNumber *result = [self primitiveHairLength];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveHairLengthValue:(int16_t)value_ {
+	[self setPrimitiveHairLength:[NSNumber numberWithShort:value_]];
+}
 
 
 

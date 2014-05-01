@@ -10,6 +10,7 @@
 
 OBJC_EXPORT NSString *const AWFBodyBuildValueTransformerName;
 OBJC_EXPORT NSString *const AWFGenderValueTransformerName;
+OBJC_EXPORT NSString *const AWFHairLengthValueTransformerName;
 OBJC_EXPORT NSString *const AWFFriendshipStatusTransformerName;
 OBJC_EXPORT NSString *const AWFActivityStatusTransformerName;
 OBJC_EXPORT NSString *const AWFActivityTypeTransformerName;

@@ -10,18 +10,25 @@
 
 #import "_AWFPerson.h"
 
-typedef NS_ENUM(NSUInteger, AWFFriendshipStatus) {
-  AWFFriendshipStatusNone,
-  AWFFriendshipStatusPending,
-  AWFFriendshipStatusFriend
-};
-
 typedef NS_ENUM(NSUInteger, AWFBodyBuild) {
   AWFBodyBuildUnknown,
   AWFBodyBuildSlim,
   AWFBodyBuildAverage,
   AWFBodyBuildAthletic,
   AWFBodyBuildExtraPounds
+};
+
+typedef NS_ENUM(NSUInteger, AWFHairLength) {
+  AWFHairLengthUnknown,
+  AWFHairLengthShort,
+  AWFHairLengthMedium,
+  AWFHairLengthLong
+};
+
+typedef NS_ENUM(NSUInteger, AWFFriendshipStatus) {
+  AWFFriendshipStatusNone,
+  AWFFriendshipStatusPending,
+  AWFFriendshipStatusFriend
 };
 
 @interface AWFPerson : _AWFPerson

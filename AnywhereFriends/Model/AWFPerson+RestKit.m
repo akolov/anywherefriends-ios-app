@@ -75,6 +75,31 @@
       [mapping addPropertyMapping:genderMapping];
     }
 
+    // Hair Length
+
+    {
+      RKAttributeMapping *hairLengthMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"hair_length" toKeyPath:@"hairLength"];
+
+      hairLengthMapping.valueTransformer =
+        [RKBlockValueTransformer
+         valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                   __unsafe_unretained Class outputValueClass) {
+           return ([inputValueClass isSubclassOfClass:[NSString class]] &&
+                   [outputValueClass isSubclassOfClass:[NSNumber class]]);
+         } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                     __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+           RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+           RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
+
+           *outputValue = [[NSValueTransformer valueTransformerForName:AWFHairLengthValueTransformerName]
+                           transformedValue:inputValue];
+           return YES;
+         }];
+
+      [mapping addPropertyMapping:hairLengthMapping];
+    }
+
     // Friendship
 
     {
@@ -127,7 +152,6 @@
            @"eye_color"   : @"eyeColor",
            @"first_name"  : @"firstName",
            @"hair_color"  : @"hairColor",
-           @"hair_length" : @"hairLength",
            @"last_name"   : @"lastName",
            @"latitude"    : @"locationLatitude",
            @"longitude"   : @"locationLongitude",

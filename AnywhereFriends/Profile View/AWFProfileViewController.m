@@ -19,6 +19,7 @@
 #import "AWFAppDelegate.h"
 #import "AWFBodyBuildFormatter.h"
 #import "AWFGenderFormatter.h"
+#import "AWFHairLengthFormatter.h"
 #import "AWFHeightFormatter.h"
 #import "AWFIconButton.h"
 #import "AWFLabelButton.h"
@@ -38,6 +39,7 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
 @property (nonatomic, strong) AWFBodyBuildFormatter *bodyBuildFormatter;
 @property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
+@property (nonatomic, strong) AWFHairLengthFormatter *hairLengthFormatter;
 @property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
 @property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
@@ -176,6 +178,13 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
     _genderFormatter = [[AWFGenderFormatter alloc] init];
   }
   return _genderFormatter;
+}
+
+- (AWFHairLengthFormatter *)hairLengthFormatter {
+  if (!_hairLengthFormatter) {
+    _hairLengthFormatter = [[AWFHairLengthFormatter alloc] init];
+  }
+  return _hairLengthFormatter;
 }
 
 - (AWFHeightFormatter *)heightFormatter {
@@ -346,14 +355,14 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
       case 2:
         text = NSLocalizedString(@"AWF_BODY_BUILD", nil);
         if (self.person.bodyBuild) {
-          detail = [[self.bodyBuildFormatter stringFromBodyBuild:self.person.bodyBuildValue ] capitalizedString];
+          detail = [[self.bodyBuildFormatter stringFromBodyBuild:self.person.bodyBuildValue] capitalizedString];
         }
         break;
 
       case 3:
         text = NSLocalizedString(@"AWF_HAIR_LENGTH", nil);
         if (self.person.hairLength) {
-          detail = [self.person.hairLength capitalizedString];
+          detail = [[self.hairLengthFormatter stringFromHairLength:self.person.hairLengthValue] capitalizedString];
         }
         break;
 

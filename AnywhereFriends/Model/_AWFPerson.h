@@ -184,9 +184,13 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* hairLength;
+@property (nonatomic, strong) NSNumber* hairLength;
 
 
+
+@property int16_t hairLengthValue;
+- (int16_t)hairLengthValue;
+- (void)setHairLengthValue:(int16_t)value_;
 
 //- (BOOL)validateHairLength:(id*)value_ error:(NSError**)error_;
 
@@ -405,8 +409,11 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-- (NSString*)primitiveHairLength;
-- (void)setPrimitiveHairLength:(NSString*)value;
+- (NSNumber*)primitiveHairLength;
+- (void)setPrimitiveHairLength:(NSNumber*)value;
+
+- (int16_t)primitiveHairLengthValue;
+- (void)setPrimitiveHairLengthValue:(int16_t)value_;
 
 
 

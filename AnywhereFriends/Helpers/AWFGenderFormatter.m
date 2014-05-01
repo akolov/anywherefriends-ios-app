@@ -20,7 +20,7 @@
       case AWFGenderMale:
         return @"male";
       default:
-        return @"unknown";
+        return @"—";
     }
   }
   else if ([languageCode isEqualToString:@"ru"]) {
@@ -30,7 +30,7 @@
       case AWFGenderMale:
         return @"мужской";
       default:
-        return @"неизвестный";
+        return @"—";
     }
   }
 

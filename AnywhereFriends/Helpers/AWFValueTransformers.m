@@ -17,6 +17,7 @@
 
 NSString *const AWFBodyBuildValueTransformerName = @"AWFBodyBuildValueTransformerName";
 NSString *const AWFGenderValueTransformerName = @"AWFGenderValueTransformerName";
+NSString *const AWFHairLengthValueTransformerName = @"AWFHairLengthValueTransformerName";
 NSString *const AWFFriendshipStatusTransformerName = @"AWFFriendshipStatusTransformerName";
 NSString *const AWFActivityStatusTransformerName = @"AWFActivityStatusTransformerName";
 NSString *const AWFActivityTypeTransformerName = @"AWFActivityTypeTransformerName";
@@ -28,6 +29,10 @@ static NSString *const AWFBodyBuildExtraPoundsName = @"extra_pounds";
 
 static NSString *const AWFGenderMaleName   = @"male";
 static NSString *const AWFGenderFemaleName = @"female";
+
+static NSString *const AWFHairLengthShortName  = @"short";
+static NSString *const AWFHairLengthMediumName = @"middle";
+static NSString *const AWFHairLengthLongName   = @"long";
 
 static NSString *const AWFFriendshipStatusNotFriendName = @"not_friend";
 static NSString *const AWFFriendshipStatusFriendName = @"friend";
@@ -100,6 +105,37 @@ static NSString *const AWFActivityTypeFriendRequestName = @"friend_request";
            return AWFBodyBuildAthleticName;
          case AWFBodyBuildExtraPounds:
            return AWFBodyBuildExtraPoundsName;
+         default:
+           return nil;
+       }
+     }];
+
+    // Hair Length
+
+    [NSValueTransformer
+     registerValueTransformerWithName:AWFHairLengthValueTransformerName transformedValueClass:[NSString class]
+     returningTransformedValueWithBlock:^id(id value) {
+       if (!value || [value isEqual:[NSNull null]]) {
+         return @(AWFHairLengthUnknown);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairLengthShortName] == NSOrderedSame) {
+         return @(AWFHairLengthShort);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairLengthMediumName] == NSOrderedSame) {
+         return @(AWFHairLengthMedium);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairLengthLongName] == NSOrderedSame) {
+         return @(AWFHairLengthLong);
+       }
+       return @(AWFHairLengthUnknown);
+     } allowingReverseTransformationWithBlock:^id(id value) {
+       switch ([value unsignedIntegerValue]) {
+         case AWFHairLengthShort:
+           return AWFHairLengthShortName;
+         case AWFHairLengthMedium:
+           return AWFHairLengthMediumName;
+         case AWFHairLengthLong:
+           return AWFHairLengthLongName;
          default:
            return nil;
        }

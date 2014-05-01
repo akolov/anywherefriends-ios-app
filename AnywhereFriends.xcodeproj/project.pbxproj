@@ -50,6 +50,8 @@
 		FA4401841912CE3D00D1CA9A /* AWFProfileGenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401831912CE3D00D1CA9A /* AWFProfileGenderViewController.m */; };
 		FA4401871912D59000D1CA9A /* AWFProfileBodyBuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401861912D59000D1CA9A /* AWFProfileBodyBuildViewController.m */; };
 		FA44018A1912D83900D1CA9A /* AWFBodyBuildFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */; };
+		FA44018D1912DCA200D1CA9A /* AWFHairLengthFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA44018C1912DCA200D1CA9A /* AWFHairLengthFormatter.m */; };
+		FA4401901912DE4100D1CA9A /* AWFProfileHairLengthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA44018F1912DE4100D1CA9A /* AWFProfileHairLengthViewController.m */; };
 		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
@@ -203,6 +205,10 @@
 		FA4401861912D59000D1CA9A /* AWFProfileBodyBuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileBodyBuildViewController.m; sourceTree = "<group>"; };
 		FA4401881912D83900D1CA9A /* AWFBodyBuildFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFBodyBuildFormatter.h; sourceTree = "<group>"; };
 		FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFBodyBuildFormatter.m; sourceTree = "<group>"; };
+		FA44018B1912DCA200D1CA9A /* AWFHairLengthFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFHairLengthFormatter.h; sourceTree = "<group>"; };
+		FA44018C1912DCA200D1CA9A /* AWFHairLengthFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFHairLengthFormatter.m; sourceTree = "<group>"; };
+		FA44018E1912DE4100D1CA9A /* AWFProfileHairLengthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileHairLengthViewController.h; sourceTree = "<group>"; };
+		FA44018F1912DE4100D1CA9A /* AWFProfileHairLengthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileHairLengthViewController.m; sourceTree = "<group>"; };
 		FA4532E1188B014900A1E242 /* AWFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFObject.h; sourceTree = "<group>"; };
 		FA4532E2188B014900A1E242 /* AWFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFObject.m; sourceTree = "<group>"; };
 		FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFAgeFormatter.h; sourceTree = "<group>"; };
@@ -436,10 +442,12 @@
 		FA4401811912CE2600D1CA9A /* Edit Profile */ = {
 			isa = PBXGroup;
 			children = (
-				FA4401821912CE3D00D1CA9A /* AWFProfileGenderViewController.h */,
-				FA4401831912CE3D00D1CA9A /* AWFProfileGenderViewController.m */,
 				FA4401851912D59000D1CA9A /* AWFProfileBodyBuildViewController.h */,
 				FA4401861912D59000D1CA9A /* AWFProfileBodyBuildViewController.m */,
+				FA4401821912CE3D00D1CA9A /* AWFProfileGenderViewController.h */,
+				FA4401831912CE3D00D1CA9A /* AWFProfileGenderViewController.m */,
+				FA44018E1912DE4100D1CA9A /* AWFProfileHairLengthViewController.h */,
+				FA44018F1912DE4100D1CA9A /* AWFProfileHairLengthViewController.m */,
 			);
 			path = "Edit Profile";
 			sourceTree = "<group>";
@@ -480,6 +488,8 @@
 				FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */,
 				FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */,
 				FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */,
+				FA44018B1912DCA200D1CA9A /* AWFHairLengthFormatter.h */,
+				FA44018C1912DCA200D1CA9A /* AWFHairLengthFormatter.m */,
 				FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */,
 				FA9A964718CCB3CA00F65856 /* AWFHeightFormatter.m */,
 				FA9A964318CCB2F000F65856 /* AWFWeightFormatter.h */,
@@ -959,6 +969,7 @@
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
 				FAF3AB491906AC9F0078D776 /* AWFMessagesRequestCell.m in Sources */,
 				FADE219B17BD132400D3A62B /* UIBezierPath+MessagesGlyph.m in Sources */,
+				FA44018D1912DCA200D1CA9A /* AWFHairLengthFormatter.m in Sources */,
 				FAE475E117C0EC15006B2C65 /* AWFProfileHeaderView.m in Sources */,
 				FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
@@ -971,6 +982,7 @@
 				FADBF68E17ADB74400325DD1 /* AWFLoginViewController.m in Sources */,
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
 				FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */,
+				FA4401901912DE4100D1CA9A /* AWFProfileHairLengthViewController.m in Sources */,
 				FA11ACCB17B1389400028A55 /* AWFIconButton.m in Sources */,
 				FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,

@@ -1,41 +1,37 @@
 //
-//  AWFBodyBuildFormatter.m
+//  AWFHairLengthFormatter.m
 //  AnywhereFriends
 //
 //  Created by Alexander Kolov on 01/05/14.
 //  Copyright (c) 2014 Anywherefriends. All rights reserved.
 //
 
-#import "AWFBodyBuildFormatter.h"
+#import "AWFHairLengthFormatter.h"
 
-@implementation AWFBodyBuildFormatter
+@implementation AWFHairLengthFormatter
 
-- (NSString *)stringFromBodyBuild:(AWFBodyBuild)bodyBuild {
+- (NSString *)stringFromHairLength:(AWFHairLength)hairLength {
   NSString *languageCode = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleLanguageCode];
   if ([languageCode isEqualToString:@"en"]) {
-    switch (bodyBuild) {
-      case AWFBodyBuildSlim:
-        return @"slim";
-      case AWFBodyBuildAverage:
-        return @"average";
-      case AWFBodyBuildAthletic:
-        return @"athletic";
-      case AWFBodyBuildExtraPounds:
-        return @"extra pounds";
+    switch (hairLength) {
+      case AWFHairLengthShort:
+        return @"short";
+      case AWFHairLengthMedium:
+        return @"medium";
+      case AWFHairLengthLong:
+        return @"long";
       default:
         return @"—";
     }
   }
   else if ([languageCode isEqualToString:@"ru"]) {
-    switch (bodyBuild) {
-      case AWFBodyBuildSlim:
-        return @"худощавое";
-      case AWFBodyBuildAverage:
-        return @"обычное";
-      case AWFBodyBuildAthletic:
-        return @"спортивное";
-      case AWFBodyBuildExtraPounds:
-        return @"полное";
+    switch (hairLength) {
+      case AWFHairLengthShort:
+        return @"короткие";
+      case AWFHairLengthMedium:
+        return @"средние";
+      case AWFHairLengthLong:
+        return @"длинные";
       default:
         return @"—";
     }
@@ -51,7 +47,7 @@
     return nil;
   }
 
-  return [self stringFromBodyBuild:[anObject unsignedIntegerValue]];
+  return [self stringFromHairLength:[anObject unsignedIntegerValue]];
 }
 
 - (BOOL)getObjectValue:(out __unused __autoreleasing id *)obj

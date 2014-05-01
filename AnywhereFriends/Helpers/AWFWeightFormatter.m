@@ -24,7 +24,7 @@
 
   if ([languageCode isEqualToString:@"en"]) {
     if (!weight || [weight unsignedIntegerValue] == 0) {
-      return [NSString stringWithFormat:@"n/a"];
+      return [NSString stringWithFormat:@"—"];
     }
     else {
       if (isMetric) {
@@ -37,7 +37,7 @@
   }
   else if ([languageCode isEqualToString:@"ru"]) {
     if (!weight || [weight unsignedIntegerValue] == 0) {
-      return [NSString stringWithFormat:@"неизвестен"];
+      return [NSString stringWithFormat:@"—"];
     }
     else {
       if (isMetric) {
