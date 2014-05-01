@@ -9,7 +9,9 @@
 @import Foundation;
 
 OBJC_EXPORT NSString *const AWFBodyBuildValueTransformerName;
+OBJC_EXPORT NSString *const AWFEyeColorValueTransformerName;
 OBJC_EXPORT NSString *const AWFGenderValueTransformerName;
+OBJC_EXPORT NSString *const AWFHairColorValueTransformerName;
 OBJC_EXPORT NSString *const AWFHairLengthValueTransformerName;
 OBJC_EXPORT NSString *const AWFFriendshipStatusTransformerName;
 OBJC_EXPORT NSString *const AWFActivityStatusTransformerName;

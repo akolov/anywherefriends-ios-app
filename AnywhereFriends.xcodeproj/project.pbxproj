@@ -36,6 +36,7 @@
 		FA11ACD717B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */; };
 		FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */; };
 		FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */; };
+		FA22D15D1912E7C600B025E3 /* UIViewController+ShownTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22D15C1912E7C600B025E3 /* UIViewController+ShownTitle.m */; };
 		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
 		FA3D4C3718E84555008C5366 /* AWFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C3618E84555008C5366 /* AWFClient.m */; };
@@ -52,6 +53,10 @@
 		FA44018A1912D83900D1CA9A /* AWFBodyBuildFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */; };
 		FA44018D1912DCA200D1CA9A /* AWFHairLengthFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA44018C1912DCA200D1CA9A /* AWFHairLengthFormatter.m */; };
 		FA4401901912DE4100D1CA9A /* AWFProfileHairLengthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA44018F1912DE4100D1CA9A /* AWFProfileHairLengthViewController.m */; };
+		FA4401931912E32E00D1CA9A /* AWFEyeColorFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401921912E32E00D1CA9A /* AWFEyeColorFormatter.m */; };
+		FA4401961912E42100D1CA9A /* AWFHairColorFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401951912E42100D1CA9A /* AWFHairColorFormatter.m */; };
+		FA4401991912E57B00D1CA9A /* AWFProfileEyeColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401981912E57B00D1CA9A /* AWFProfileEyeColorViewController.m */; };
+		FA44019C1912E59300D1CA9A /* AWFProfileHairColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA44019B1912E59300D1CA9A /* AWFProfileHairColorViewController.m */; };
 		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
@@ -178,6 +183,8 @@
 		FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFSignupViewController.m; sourceTree = "<group>"; };
 		FA1EEC6617B2824B00668A40 /* UIBezierPath+VKontakteGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+VKontakteGlyph.h"; sourceTree = "<group>"; };
 		FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+VKontakteGlyph.m"; sourceTree = "<group>"; };
+		FA22D15B1912E7C600B025E3 /* UIViewController+ShownTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShownTitle.h"; sourceTree = "<group>"; };
+		FA22D15C1912E7C600B025E3 /* UIViewController+ShownTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShownTitle.m"; sourceTree = "<group>"; };
 		FA3092F418098A3D001F25F2 /* AWFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationController.h; sourceTree = "<group>"; };
 		FA3092F518098A3D001F25F2 /* AWFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationController.m; sourceTree = "<group>"; };
 		FA3092F718098A64001F25F2 /* AWFNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationBar.h; sourceTree = "<group>"; };
@@ -209,6 +216,14 @@
 		FA44018C1912DCA200D1CA9A /* AWFHairLengthFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFHairLengthFormatter.m; sourceTree = "<group>"; };
 		FA44018E1912DE4100D1CA9A /* AWFProfileHairLengthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileHairLengthViewController.h; sourceTree = "<group>"; };
 		FA44018F1912DE4100D1CA9A /* AWFProfileHairLengthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileHairLengthViewController.m; sourceTree = "<group>"; };
+		FA4401911912E32E00D1CA9A /* AWFEyeColorFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFEyeColorFormatter.h; sourceTree = "<group>"; };
+		FA4401921912E32E00D1CA9A /* AWFEyeColorFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFEyeColorFormatter.m; sourceTree = "<group>"; };
+		FA4401941912E42100D1CA9A /* AWFHairColorFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFHairColorFormatter.h; sourceTree = "<group>"; };
+		FA4401951912E42100D1CA9A /* AWFHairColorFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFHairColorFormatter.m; sourceTree = "<group>"; };
+		FA4401971912E57B00D1CA9A /* AWFProfileEyeColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileEyeColorViewController.h; sourceTree = "<group>"; };
+		FA4401981912E57B00D1CA9A /* AWFProfileEyeColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileEyeColorViewController.m; sourceTree = "<group>"; };
+		FA44019A1912E59300D1CA9A /* AWFProfileHairColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileHairColorViewController.h; sourceTree = "<group>"; };
+		FA44019B1912E59300D1CA9A /* AWFProfileHairColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileHairColorViewController.m; sourceTree = "<group>"; };
 		FA4532E1188B014900A1E242 /* AWFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFObject.h; sourceTree = "<group>"; };
 		FA4532E2188B014900A1E242 /* AWFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFObject.m; sourceTree = "<group>"; };
 		FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFAgeFormatter.h; sourceTree = "<group>"; };
@@ -444,8 +459,12 @@
 			children = (
 				FA4401851912D59000D1CA9A /* AWFProfileBodyBuildViewController.h */,
 				FA4401861912D59000D1CA9A /* AWFProfileBodyBuildViewController.m */,
+				FA4401971912E57B00D1CA9A /* AWFProfileEyeColorViewController.h */,
+				FA4401981912E57B00D1CA9A /* AWFProfileEyeColorViewController.m */,
 				FA4401821912CE3D00D1CA9A /* AWFProfileGenderViewController.h */,
 				FA4401831912CE3D00D1CA9A /* AWFProfileGenderViewController.m */,
+				FA44019A1912E59300D1CA9A /* AWFProfileHairColorViewController.h */,
+				FA44019B1912E59300D1CA9A /* AWFProfileHairColorViewController.m */,
 				FA44018E1912DE4100D1CA9A /* AWFProfileHairLengthViewController.h */,
 				FA44018F1912DE4100D1CA9A /* AWFProfileHairLengthViewController.m */,
 			);
@@ -486,8 +505,12 @@
 				FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */,
 				FA4401881912D83900D1CA9A /* AWFBodyBuildFormatter.h */,
 				FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */,
+				FA4401911912E32E00D1CA9A /* AWFEyeColorFormatter.h */,
+				FA4401921912E32E00D1CA9A /* AWFEyeColorFormatter.m */,
 				FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */,
 				FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */,
+				FA4401941912E42100D1CA9A /* AWFHairColorFormatter.h */,
+				FA4401951912E42100D1CA9A /* AWFHairColorFormatter.m */,
 				FA44018B1912DCA200D1CA9A /* AWFHairLengthFormatter.h */,
 				FA44018C1912DCA200D1CA9A /* AWFHairLengthFormatter.m */,
 				FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */,
@@ -654,6 +677,8 @@
 				FADBF69517ADB7EC00325DD1 /* UIFont+CustomFonts.m */,
 				FADBF6B117ADCE5400325DD1 /* UIImage+CustomBackgrounds.h */,
 				FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */,
+				FA22D15B1912E7C600B025E3 /* UIViewController+ShownTitle.h */,
+				FA22D15C1912E7C600B025E3 /* UIViewController+ShownTitle.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -976,8 +1001,10 @@
 				FAE4760817C112FF006B2C65 /* AWFProfileTableViewCell.m in Sources */,
 				FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */,
 				FA11ACC717B1389400028A55 /* AWFButton.m in Sources */,
+				FA4401961912E42100D1CA9A /* AWFHairColorFormatter.m in Sources */,
 				FA3D4C4818E849E9008C5366 /* AWFPerson.m in Sources */,
 				FA3D4C4518E849CF008C5366 /* _AWFPerson.m in Sources */,
+				FA4401991912E57B00D1CA9A /* AWFProfileEyeColorViewController.m in Sources */,
 				FA4532E3188B014900A1E242 /* AWFObject.m in Sources */,
 				FADBF68E17ADB74400325DD1 /* AWFLoginViewController.m in Sources */,
 				FADBF66917ADB68E00325DD1 /* main.m in Sources */,
@@ -991,6 +1018,7 @@
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
 				FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */,
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
+				FA22D15D1912E7C600B025E3 /* UIViewController+ShownTitle.m in Sources */,
 				FA3D4C5818E89553008C5366 /* _AWFActivity.m in Sources */,
 				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,
 				FA4401871912D59000D1CA9A /* AWFProfileBodyBuildViewController.m in Sources */,
@@ -1006,12 +1034,14 @@
 				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
 				FA3D4C3718E84555008C5366 /* AWFClient.m in Sources */,
+				FA44019C1912E59300D1CA9A /* AWFProfileHairColorViewController.m in Sources */,
 				FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */,
 				FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
 				FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */,
 				FA3D4C5B18E89560008C5366 /* AWFActivity+RestKit.m in Sources */,
 				FA4401841912CE3D00D1CA9A /* AWFProfileGenderViewController.m in Sources */,
+				FA4401931912E32E00D1CA9A /* AWFEyeColorFormatter.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
 				FA3D4C3D18E8475F008C5366 /* AnywhereFriends.xcdatamodeld in Sources */,

@@ -16,7 +16,9 @@
 #import "AWFPerson.h"
 
 NSString *const AWFBodyBuildValueTransformerName = @"AWFBodyBuildValueTransformerName";
+NSString *const AWFEyeColorValueTransformerName = @"AWFEyeColorValueTransformerName";
 NSString *const AWFGenderValueTransformerName = @"AWFGenderValueTransformerName";
+NSString *const AWFHairColorValueTransformerName = @"AWFHairColorValueTransformerName";
 NSString *const AWFHairLengthValueTransformerName = @"AWFHairLengthValueTransformerName";
 NSString *const AWFFriendshipStatusTransformerName = @"AWFFriendshipStatusTransformerName";
 NSString *const AWFActivityStatusTransformerName = @"AWFActivityStatusTransformerName";
@@ -27,8 +29,26 @@ static NSString *const AWFBodyBuildAverageName     = @"average";
 static NSString *const AWFBodyBuildAthleticName    = @"athletic";
 static NSString *const AWFBodyBuildExtraPoundsName = @"extra_pounds";
 
+static NSString *const AWFEyeColorAmberName  = @"amber";
+static NSString *const AWFEyeColorBlueName   = @"blue";
+static NSString *const AWFEyeColorBrownName  = @"brown";
+static NSString *const AWFEyeColorGrayName   = @"gray";
+static NSString *const AWFEyeColorGreenName  = @"green";
+static NSString *const AWFEyeColorHazelName  = @"hazel";
+static NSString *const AWFEyeColorRedName    = @"red";
+static NSString *const AWFEyeColorVioletName = @"violet";
+
 static NSString *const AWFGenderMaleName   = @"male";
 static NSString *const AWFGenderFemaleName = @"female";
+
+static NSString *const AWFHairColorAuburnName   = @"auburn";
+static NSString *const AWFHairColorBlackName    = @"black";
+static NSString *const AWFHairColorBlondName    = @"blond";
+static NSString *const AWFHairColorBrownName    = @"brown";
+static NSString *const AWFHairColorChestnutName = @"chestnut";
+static NSString *const AWFHairColorGrayName     = @"gray";
+static NSString *const AWFHairColorRedName      = @"red";
+static NSString *const AWFHairColorWhiteName    = @"white";
 
 static NSString *const AWFHairLengthShortName  = @"short";
 static NSString *const AWFHairLengthMediumName = @"middle";
@@ -74,6 +94,62 @@ static NSString *const AWFActivityTypeFriendRequestName = @"friend_request";
        }
      }];
 
+    // Eye Color
+
+    [NSValueTransformer
+     registerValueTransformerWithName:AWFEyeColorValueTransformerName transformedValueClass:[NSString class]
+     returningTransformedValueWithBlock:^id(id value) {
+       if (!value || [value isEqual:[NSNull null]]) {
+         return @(AWFEyeColorUnknown);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorAmberName] == NSOrderedSame) {
+         return @(AWFEyeColorAmber);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorBlueName] == NSOrderedSame) {
+         return @(AWFEyeColorBlue);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorBrownName] == NSOrderedSame) {
+         return @(AWFEyeColorBrown);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorGrayName] == NSOrderedSame) {
+         return @(AWFEyeColorGray);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorGreenName] == NSOrderedSame) {
+         return @(AWFEyeColorGreen);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorHazelName] == NSOrderedSame) {
+         return @(AWFEyeColorHazel);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorRedName] == NSOrderedSame) {
+         return @(AWFEyeColorRed);
+       }
+       else if ([value caseInsensitiveCompare:AWFEyeColorVioletName] == NSOrderedSame) {
+         return @(AWFEyeColorViolet);
+       }
+       return @(AWFEyeColorUnknown);
+     } allowingReverseTransformationWithBlock:^id(id value) {
+       switch ([value unsignedIntegerValue]) {
+         case AWFEyeColorAmber:
+           return AWFEyeColorAmberName;
+         case AWFEyeColorBlue:
+           return AWFEyeColorBlueName;
+         case AWFEyeColorBrown:
+           return AWFEyeColorBrownName;
+         case AWFEyeColorGray:
+           return AWFEyeColorGrayName;
+         case AWFEyeColorGreen:
+           return AWFEyeColorGreenName;
+         case AWFEyeColorHazel:
+           return AWFEyeColorHazelName;
+         case AWFEyeColorRed:
+           return AWFEyeColorRedName;
+         case AWFEyeColorViolet:
+           return AWFEyeColorVioletName;
+         default:
+           return nil;
+       }
+     }];
+
     // Body Build
 
     [NSValueTransformer
@@ -105,6 +181,62 @@ static NSString *const AWFActivityTypeFriendRequestName = @"friend_request";
            return AWFBodyBuildAthleticName;
          case AWFBodyBuildExtraPounds:
            return AWFBodyBuildExtraPoundsName;
+         default:
+           return nil;
+       }
+     }];
+
+    // Hair Color
+
+    [NSValueTransformer
+     registerValueTransformerWithName:AWFHairColorValueTransformerName transformedValueClass:[NSString class]
+     returningTransformedValueWithBlock:^id(id value) {
+       if (!value || [value isEqual:[NSNull null]]) {
+         return @(AWFHairColorUnknown);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorAuburnName] == NSOrderedSame) {
+         return @(AWFHairColorAuburn);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorBlackName] == NSOrderedSame) {
+         return @(AWFHairColorBlack);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorBlondName] == NSOrderedSame) {
+         return @(AWFHairColorBlond);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorBrownName] == NSOrderedSame) {
+         return @(AWFHairColorBrown);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorChestnutName] == NSOrderedSame) {
+         return @(AWFHairColorChestnut);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorGrayName] == NSOrderedSame) {
+         return @(AWFHairColorGray);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorRedName] == NSOrderedSame) {
+         return @(AWFHairColorRed);
+       }
+       else if ([value caseInsensitiveCompare:AWFHairColorWhiteName] == NSOrderedSame) {
+         return @(AWFHairColorWhite);
+       }
+       return @(AWFHairColorUnknown);
+     } allowingReverseTransformationWithBlock:^id(id value) {
+       switch ([value unsignedIntegerValue]) {
+         case AWFHairColorAuburn:
+           return AWFHairColorAuburnName;
+         case AWFHairColorBlack:
+           return AWFHairColorBlackName;
+         case AWFHairColorBlond:
+           return AWFHairColorBlondName;
+         case AWFHairColorBrown:
+           return AWFHairColorBrownName;
+         case AWFHairColorChestnut:
+           return AWFHairColorChestnutName;
+         case AWFHairColorGray:
+           return AWFHairColorGrayName;
+         case AWFHairColorRed:
+           return AWFHairColorRedName;
+         case AWFHairColorWhite:
+           return AWFHairColorWhiteName;
          default:
            return nil;
        }

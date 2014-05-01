@@ -18,6 +18,30 @@ typedef NS_ENUM(NSUInteger, AWFBodyBuild) {
   AWFBodyBuildExtraPounds
 };
 
+typedef NS_ENUM(NSUInteger, AWFEyeColor) {
+  AWFEyeColorUnknown,
+  AWFEyeColorAmber,
+  AWFEyeColorBlue,
+  AWFEyeColorBrown,
+  AWFEyeColorGray,
+  AWFEyeColorGreen,
+  AWFEyeColorHazel,
+  AWFEyeColorRed,
+  AWFEyeColorViolet
+};
+
+typedef NS_ENUM(NSUInteger, AWFHairColor) {
+  AWFHairColorUnknown,
+  AWFHairColorAuburn,
+  AWFHairColorBlack,
+  AWFHairColorBlond,
+  AWFHairColorBrown,
+  AWFHairColorChestnut,
+  AWFHairColorGray,
+  AWFHairColorRed,
+  AWFHairColorWhite
+};
+
 typedef NS_ENUM(NSUInteger, AWFHairLength) {
   AWFHairLengthUnknown,
   AWFHairLengthShort,

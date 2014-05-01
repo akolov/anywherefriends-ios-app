@@ -126,9 +126,13 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* eyeColor;
+@property (nonatomic, strong) NSNumber* eyeColor;
 
 
+
+@property int16_t eyeColorValue;
+- (int16_t)eyeColorValue;
+- (void)setEyeColorValue:(int16_t)value_;
 
 //- (BOOL)validateEyeColor:(id*)value_ error:(NSError**)error_;
 
@@ -174,9 +178,13 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* hairColor;
+@property (nonatomic, strong) NSNumber* hairColor;
 
 
+
+@property int16_t hairColorValue;
+- (int16_t)hairColorValue;
+- (void)setHairColorValue:(int16_t)value_;
 
 //- (BOOL)validateHairColor:(id*)value_ error:(NSError**)error_;
 
@@ -373,8 +381,11 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-- (NSString*)primitiveEyeColor;
-- (void)setPrimitiveEyeColor:(NSString*)value;
+- (NSNumber*)primitiveEyeColor;
+- (void)setPrimitiveEyeColor:(NSNumber*)value;
+
+- (int16_t)primitiveEyeColorValue;
+- (void)setPrimitiveEyeColorValue:(int16_t)value_;
 
 
 
@@ -403,8 +414,11 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-- (NSString*)primitiveHairColor;
-- (void)setPrimitiveHairColor:(NSString*)value;
+- (NSNumber*)primitiveHairColor;
+- (void)setPrimitiveHairColor:(NSNumber*)value;
+
+- (int16_t)primitiveHairColorValue;
+- (void)setPrimitiveHairColorValue:(int16_t)value_;
 
 
 

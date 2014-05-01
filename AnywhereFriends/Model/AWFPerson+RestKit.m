@@ -50,6 +50,31 @@
       [mapping addPropertyMapping:bodyBuildMapping];
     }
 
+    // Eye Color
+
+    {
+      RKAttributeMapping *eyeColorMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"eye_color" toKeyPath:@"eyeColor"];
+
+      eyeColorMapping.valueTransformer =
+        [RKBlockValueTransformer
+         valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                   __unsafe_unretained Class outputValueClass) {
+           return ([inputValueClass isSubclassOfClass:[NSString class]] &&
+                   [outputValueClass isSubclassOfClass:[NSNumber class]]);
+         } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                     __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+           RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+           RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
+
+           *outputValue = [[NSValueTransformer valueTransformerForName:AWFEyeColorValueTransformerName]
+                           transformedValue:inputValue];
+           return YES;
+         }];
+
+      [mapping addPropertyMapping:eyeColorMapping];
+    }
+
     // Gender
 
     {
@@ -73,6 +98,31 @@
          }];
 
       [mapping addPropertyMapping:genderMapping];
+    }
+
+    // Hair Color
+
+    {
+      RKAttributeMapping *hairColorMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"hair_color" toKeyPath:@"hairColor"];
+
+      hairColorMapping.valueTransformer =
+        [RKBlockValueTransformer
+         valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                   __unsafe_unretained Class outputValueClass) {
+           return ([inputValueClass isSubclassOfClass:[NSString class]] &&
+                   [outputValueClass isSubclassOfClass:[NSNumber class]]);
+         } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                     __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+           RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+           RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
+
+           *outputValue = [[NSValueTransformer valueTransformerForName:AWFHairColorValueTransformerName]
+                           transformedValue:inputValue];
+           return YES;
+         }];
+
+      [mapping addPropertyMapping:hairColorMapping];
     }
 
     // Hair Length
@@ -149,9 +199,7 @@
 
 + (NSDictionary *)attributeMappingsDictionary {
   return @{@"id"          : @"personID",
-           @"eye_color"   : @"eyeColor",
            @"first_name"  : @"firstName",
-           @"hair_color"  : @"hairColor",
            @"last_name"   : @"lastName",
            @"latitude"    : @"locationLatitude",
            @"longitude"   : @"locationLongitude",

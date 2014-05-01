@@ -14,7 +14,9 @@
 
 #import "AWFPerson.h"
 #import "AWFProfileBodyBuildViewController.h"
+#import "AWFProfileEyeColorViewController.h"
 #import "AWFProfileGenderViewController.h"
+#import "AWFProfileHairColorViewController.h"
 #import "AWFProfileHairLengthViewController.h"
 #import "AWFSession.h"
 
@@ -43,6 +45,14 @@
 
 - (NSString *)personID {
   return [AWFSession sharedSession].currentUserID;
+}
+
+- (NSString *)title {
+  return NSLocalizedString(@"AWF_ME_VIEW_CONTROLLER_TITLE", nil);
+}
+
+- (void)setTitle:(NSString *)title {
+  self.shownTitle = title;
 }
 
 #pragma mark - UITableViewDataSource
@@ -78,10 +88,25 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
           [self.navigationController pushViewController:vc animated:YES];
         }
           break;
+
         case 3: {
           AWFProfileHairLengthViewController *vc = [[AWFProfileHairLengthViewController alloc] init];
           [self.navigationController pushViewController:vc animated:YES];
         }
+          break;
+
+        case 4: {
+          AWFProfileHairColorViewController *vc = [[AWFProfileHairColorViewController alloc] init];
+          [self.navigationController pushViewController:vc animated:YES];
+        }
+          break;
+
+        case 5: {
+          AWFProfileEyeColorViewController *vc = [[AWFProfileEyeColorViewController alloc] init];
+          [self.navigationController pushViewController:vc animated:YES];
+        }
+          break;
+          
         default:
           break;
       }

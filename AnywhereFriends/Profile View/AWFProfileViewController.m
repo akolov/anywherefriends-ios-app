@@ -18,7 +18,9 @@
 #import "AWFAgeFormatter.h"
 #import "AWFAppDelegate.h"
 #import "AWFBodyBuildFormatter.h"
+#import "AWFEyeColorFormatter.h"
 #import "AWFGenderFormatter.h"
+#import "AWFHairColorFormatter.h"
 #import "AWFHairLengthFormatter.h"
 #import "AWFHeightFormatter.h"
 #import "AWFIconButton.h"
@@ -38,7 +40,9 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
 @property (nonatomic, strong) AWFBodyBuildFormatter *bodyBuildFormatter;
+@property (nonatomic, strong) AWFEyeColorFormatter *eyeColorFormatter;
 @property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
+@property (nonatomic, strong) AWFHairColorFormatter *hairColorFormatter;
 @property (nonatomic, strong) AWFHairLengthFormatter *hairLengthFormatter;
 @property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
 @property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
@@ -173,11 +177,25 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
   return _bodyBuildFormatter;
 }
 
+- (AWFEyeColorFormatter *)eyeColorFormatter {
+  if (!_eyeColorFormatter) {
+    _eyeColorFormatter = [[AWFEyeColorFormatter alloc] init];
+  }
+  return _eyeColorFormatter;
+}
+
 - (AWFGenderFormatter *)genderFormatter {
   if (!_genderFormatter) {
     _genderFormatter = [[AWFGenderFormatter alloc] init];
   }
   return _genderFormatter;
+}
+
+- (AWFHairColorFormatter *)hairColorFormatter {
+  if (!_hairColorFormatter) {
+    _hairColorFormatter = [[AWFHairColorFormatter alloc] init];
+  }
+  return _hairColorFormatter;
 }
 
 - (AWFHairLengthFormatter *)hairLengthFormatter {
@@ -369,14 +387,14 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
       case 4:
         text = NSLocalizedString(@"AWF_HAIR_COLOR", nil);
         if (self.person.hairColor) {
-          detail = [self.person.hairColor capitalizedString];
+          detail = [[self.hairColorFormatter stringFromHairColor:self.person.hairColorValue] capitalizedString];
         }
         break;
 
       case 5:
         text = NSLocalizedString(@"AWF_EYE_COLOR", nil);
         if (self.person.eyeColor) {
-          detail = [self.person.eyeColor capitalizedString];
+          detail = [[self.eyeColorFormatter stringFromEyeColor:self.person.eyeColorValue] capitalizedString];
         }
         break;
 

@@ -65,6 +65,11 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"eyeColorValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"eyeColor"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"friendshipValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"friendship"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -72,6 +77,11 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 	}
 	if ([key isEqualToString:@"genderValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"gender"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"hairColorValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"hairColor"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -170,6 +180,25 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 
 
 
+- (int16_t)eyeColorValue {
+	NSNumber *result = [self eyeColor];
+	return [result shortValue];
+}
+
+- (void)setEyeColorValue:(int16_t)value_ {
+	[self setEyeColor:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveEyeColorValue {
+	NSNumber *result = [self primitiveEyeColor];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveEyeColorValue:(int16_t)value_ {
+	[self setPrimitiveEyeColor:[NSNumber numberWithShort:value_]];
+}
+
+
 
 
 
@@ -234,6 +263,25 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 
 @dynamic hairColor;
 
+
+
+- (int16_t)hairColorValue {
+	NSNumber *result = [self hairColor];
+	return [result shortValue];
+}
+
+- (void)setHairColorValue:(int16_t)value_ {
+	[self setHairColor:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveHairColorValue {
+	NSNumber *result = [self primitiveHairColor];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveHairColorValue:(int16_t)value_ {
+	[self setPrimitiveHairColor:[NSNumber numberWithShort:value_]];
+}
 
 
 
