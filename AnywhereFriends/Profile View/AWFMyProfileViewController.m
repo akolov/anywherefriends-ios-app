@@ -25,6 +25,9 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  self.tableView.allowsSelectionDuringEditing = YES;
+
   @weakify(self);
   [[[AWFSession sharedSession] getUserSelf]
    subscribeNext:^(AWFPerson *person) {
@@ -55,11 +58,19 @@
   self.shownTitle = title;
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+  [super setEditing:editing animated:animated];
+  [self.tableView reloadData];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.section != 0 || indexPath.row != 1) {
+  if (!self.isEditing) {
+    cell.accessoryType = UITableViewCellAccessoryNone;
+  }
+  else if (indexPath.section != 0 || indexPath.row != 1) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
 }
@@ -67,6 +78,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (!self.isEditing) {
+    return;
+  }
+
   switch (indexPath.section) {
     case 0: {
       switch (indexPath.row) {
@@ -115,6 +130,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     default:
       break;
   }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  return NO;
 }
 
 @end
