@@ -92,9 +92,13 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* bodyBuild;
+@property (nonatomic, strong) NSNumber* bodyBuild;
 
 
+
+@property int16_t bodyBuildValue;
+- (int16_t)bodyBuildValue;
+- (void)setBodyBuildValue:(int16_t)value_;
 
 //- (BOOL)validateBodyBuild:(id*)value_ error:(NSError**)error_;
 
@@ -344,8 +348,11 @@ extern const struct AWFPersonFetchedProperties {
 
 
 
-- (NSString*)primitiveBodyBuild;
-- (void)setPrimitiveBodyBuild:(NSString*)value;
+- (NSNumber*)primitiveBodyBuild;
+- (void)setPrimitiveBodyBuild:(NSNumber*)value;
+
+- (int16_t)primitiveBodyBuildValue;
+- (void)setPrimitiveBodyBuildValue:(int16_t)value_;
 
 
 

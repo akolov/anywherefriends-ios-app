@@ -17,6 +17,7 @@
 
 #import "AWFAgeFormatter.h"
 #import "AWFAppDelegate.h"
+#import "AWFBodyBuildFormatter.h"
 #import "AWFGenderFormatter.h"
 #import "AWFHeightFormatter.h"
 #import "AWFIconButton.h"
@@ -35,6 +36,7 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
+@property (nonatomic, strong) AWFBodyBuildFormatter *bodyBuildFormatter;
 @property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
 @property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
 @property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
@@ -160,6 +162,13 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
     _ageFormatter = [[AWFAgeFormatter alloc] init];
   }
   return _ageFormatter;
+}
+
+- (AWFBodyBuildFormatter *)bodyBuildFormatter {
+  if (!_bodyBuildFormatter) {
+    _bodyBuildFormatter = [[AWFBodyBuildFormatter alloc] init];
+  }
+  return _bodyBuildFormatter;
 }
 
 - (AWFGenderFormatter *)genderFormatter {
@@ -337,7 +346,7 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
       case 2:
         text = NSLocalizedString(@"AWF_BODY_BUILD", nil);
         if (self.person.bodyBuild) {
-          detail = [self.person.bodyBuild capitalizedString];
+          detail = [[self.bodyBuildFormatter stringFromBodyBuild:self.person.bodyBuildValue ] capitalizedString];
         }
         break;
 

@@ -16,6 +16,14 @@ typedef NS_ENUM(NSUInteger, AWFFriendshipStatus) {
   AWFFriendshipStatusFriend
 };
 
+typedef NS_ENUM(NSUInteger, AWFBodyBuild) {
+  AWFBodyBuildUnknown,
+  AWFBodyBuildSlim,
+  AWFBodyBuildAverage,
+  AWFBodyBuildAthletic,
+  AWFBodyBuildExtraPounds
+};
+
 @interface AWFPerson : _AWFPerson
 
 @property (nonatomic, readonly) NSNumber *age;

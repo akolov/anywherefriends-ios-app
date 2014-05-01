@@ -13,17 +13,20 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "AWFPerson.h"
+#import "AWFProfileBodyBuildViewController.h"
+#import "AWFProfileGenderViewController.h"
 #import "AWFSession.h"
 
 @implementation AWFMyProfileViewController
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidLoad {
+  [super viewDidLoad];
+
   @weakify(self);
   [[[AWFSession sharedSession] getUserSelf]
    subscribeNext:^(AWFPerson *person) {
      @strongify(self);
      self.personID = person.personID;
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
    }
    error:^(NSError *error) {
      ErrorLog(error.localizedDescription);
@@ -39,6 +42,50 @@
 
 - (NSString *)personID {
   return [AWFSession sharedSession].currentUserID;
+}
+
+#pragma mark - UITableViewDataSource
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.section != 0 || indexPath.row != 1) {
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  switch (indexPath.section) {
+    case 0: {
+      switch (indexPath.row) {
+        case 0: {
+          AWFProfileGenderViewController *vc = [[AWFProfileGenderViewController alloc] init];
+          [self.navigationController pushViewController:vc animated:YES];
+        }
+          break;
+
+        default:
+          break;
+      }
+    }
+      break;
+    case 1: {
+      switch (indexPath.row) {
+        case 2: {
+          AWFProfileBodyBuildViewController *vc = [[AWFProfileBodyBuildViewController alloc] init];
+          [self.navigationController pushViewController:vc animated:YES];
+        }
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    default:
+      break;
+  }
 }
 
 @end

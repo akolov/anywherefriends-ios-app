@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AWFActivity" representedClassName="AWFActivity" syncable="YES">
         <attribute name="activityID" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="dateCreated" attributeType="Date" indexed="YES" syncable="YES"/>
@@ -10,7 +10,7 @@
     <entity name="AWFPerson" representedClassName="AWFPerson" syncable="YES">
         <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="bodyBuild" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bodyBuild" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="dateUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eyeColor" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,7 +32,7 @@
         <relationship name="activitiesCreated" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AWFActivity" inverseName="creator" inverseEntity="AWFActivity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AWFPerson" positionX="-63" positionY="-18" width="128" height="373"/>
         <element name="AWFActivity" positionX="-54" positionY="144" width="128" height="118"/>
+        <element name="AWFPerson" positionX="-63" positionY="-18" width="128" height="375"/>
     </elements>
 </model>

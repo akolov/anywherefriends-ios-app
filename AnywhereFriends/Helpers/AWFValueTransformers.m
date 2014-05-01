@@ -15,10 +15,16 @@
 #import "AWFGender.h"
 #import "AWFPerson.h"
 
+NSString *const AWFBodyBuildValueTransformerName = @"AWFBodyBuildValueTransformerName";
 NSString *const AWFGenderValueTransformerName = @"AWFGenderValueTransformerName";
 NSString *const AWFFriendshipStatusTransformerName = @"AWFFriendshipStatusTransformerName";
 NSString *const AWFActivityStatusTransformerName = @"AWFActivityStatusTransformerName";
 NSString *const AWFActivityTypeTransformerName = @"AWFActivityTypeTransformerName";
+
+static NSString *const AWFBodyBuildSlimName        = @"slim";
+static NSString *const AWFBodyBuildAverageName     = @"average";
+static NSString *const AWFBodyBuildAthleticName    = @"athletic";
+static NSString *const AWFBodyBuildExtraPoundsName = @"extra_pounds";
 
 static NSString *const AWFGenderMaleName   = @"male";
 static NSString *const AWFGenderFemaleName = @"female";
@@ -58,8 +64,45 @@ static NSString *const AWFActivityTypeFriendRequestName = @"friend_request";
            return AWFGenderFemaleName;
          case AWFGenderMale:
            return AWFGenderMaleName;
+         default:
+           return nil;
        }
-       return nil;
+     }];
+
+    // Body Build
+
+    [NSValueTransformer
+     registerValueTransformerWithName:AWFBodyBuildValueTransformerName transformedValueClass:[NSString class]
+     returningTransformedValueWithBlock:^id(id value) {
+       if (!value || [value isEqual:[NSNull null]]) {
+         return @(AWFBodyBuildUnknown);
+       }
+       else if ([value caseInsensitiveCompare:AWFBodyBuildSlimName] == NSOrderedSame) {
+         return @(AWFBodyBuildSlim);
+       }
+       else if ([value caseInsensitiveCompare:AWFBodyBuildAverageName] == NSOrderedSame) {
+         return @(AWFBodyBuildAverage);
+       }
+       else if ([value caseInsensitiveCompare:AWFBodyBuildAthleticName] == NSOrderedSame) {
+         return @(AWFBodyBuildAthletic);
+       }
+       else if ([value caseInsensitiveCompare:AWFBodyBuildExtraPoundsName] == NSOrderedSame) {
+         return @(AWFBodyBuildExtraPounds);
+       }
+       return @(AWFBodyBuildUnknown);
+     } allowingReverseTransformationWithBlock:^id(id value) {
+       switch ([value unsignedIntegerValue]) {
+         case AWFBodyBuildSlim:
+           return AWFBodyBuildSlimName;
+         case AWFBodyBuildAverage:
+           return AWFBodyBuildAverageName;
+         case AWFBodyBuildAthletic:
+           return AWFBodyBuildAthleticName;
+         case AWFBodyBuildExtraPounds:
+           return AWFBodyBuildExtraPoundsName;
+         default:
+           return nil;
+       }
      }];
 
     // Friendship
@@ -88,8 +131,9 @@ static NSString *const AWFActivityTypeFriendRequestName = @"friend_request";
            return AWFFriendshipStatusFriendName;
          case AWFFriendshipStatusNone:
            return AWFFriendshipStatusNotFriendName;
+         default:
+           return nil;
        }
-       return nil;
      }];
 
     // Activity Status
@@ -113,8 +157,9 @@ static NSString *const AWFActivityTypeFriendRequestName = @"friend_request";
            return AWFActivityStatusUnreadName;
          case AWFActivityStatusRead:
            return AWFActivityStatusReadName;
+         default:
+           return nil;
        }
-       return nil;
      }];
 
     // Activity Type
@@ -133,8 +178,9 @@ static NSString *const AWFActivityTypeFriendRequestName = @"friend_request";
        switch ([value unsignedIntegerValue]) {
          case AWFActivityTypeFriendRequest:
            return AWFActivityTypeFriendRequestName;
+         default:
+           return nil;
        }
-       return nil;
      }];
   }
 }

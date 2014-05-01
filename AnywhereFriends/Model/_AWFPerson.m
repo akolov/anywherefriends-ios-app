@@ -60,6 +60,11 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"bodyBuildValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"bodyBuild"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"friendshipValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"friendship"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -118,6 +123,25 @@ const struct AWFPersonFetchedProperties AWFPersonFetchedProperties = {
 
 @dynamic bodyBuild;
 
+
+
+- (int16_t)bodyBuildValue {
+	NSNumber *result = [self bodyBuild];
+	return [result shortValue];
+}
+
+- (void)setBodyBuildValue:(int16_t)value_ {
+	[self setBodyBuild:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveBodyBuildValue {
+	NSNumber *result = [self primitiveBodyBuild];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveBodyBuildValue:(int16_t)value_ {
+	[self setPrimitiveBodyBuild:[NSNumber numberWithShort:value_]];
+}
 
 
 

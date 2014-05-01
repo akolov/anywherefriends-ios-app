@@ -47,6 +47,9 @@
 		FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C4D18E84A9F008C5366 /* AWFPerson+RestKit.m */; };
 		FA3D4C5818E89553008C5366 /* _AWFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5718E89553008C5366 /* _AWFActivity.m */; };
 		FA3D4C5B18E89560008C5366 /* AWFActivity+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C5A18E89560008C5366 /* AWFActivity+RestKit.m */; };
+		FA4401841912CE3D00D1CA9A /* AWFProfileGenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401831912CE3D00D1CA9A /* AWFProfileGenderViewController.m */; };
+		FA4401871912D59000D1CA9A /* AWFProfileBodyBuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401861912D59000D1CA9A /* AWFProfileBodyBuildViewController.m */; };
+		FA44018A1912D83900D1CA9A /* AWFBodyBuildFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */; };
 		FA4532E3188B014900A1E242 /* AWFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E2188B014900A1E242 /* AWFObject.m */; };
 		FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */; };
 		FA4532E9188B404C00A1E242 /* AWFValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4532E8188B404C00A1E242 /* AWFValueTransformers.m */; };
@@ -194,6 +197,12 @@
 		FA3D4C5718E89553008C5366 /* _AWFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AWFActivity.m; sourceTree = "<group>"; };
 		FA3D4C5918E89560008C5366 /* AWFActivity+RestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFActivity+RestKit.h"; sourceTree = "<group>"; };
 		FA3D4C5A18E89560008C5366 /* AWFActivity+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AWFActivity+RestKit.m"; sourceTree = "<group>"; };
+		FA4401821912CE3D00D1CA9A /* AWFProfileGenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileGenderViewController.h; sourceTree = "<group>"; };
+		FA4401831912CE3D00D1CA9A /* AWFProfileGenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileGenderViewController.m; sourceTree = "<group>"; };
+		FA4401851912D59000D1CA9A /* AWFProfileBodyBuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFProfileBodyBuildViewController.h; sourceTree = "<group>"; };
+		FA4401861912D59000D1CA9A /* AWFProfileBodyBuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFProfileBodyBuildViewController.m; sourceTree = "<group>"; };
+		FA4401881912D83900D1CA9A /* AWFBodyBuildFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFBodyBuildFormatter.h; sourceTree = "<group>"; };
+		FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFBodyBuildFormatter.m; sourceTree = "<group>"; };
 		FA4532E1188B014900A1E242 /* AWFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFObject.h; sourceTree = "<group>"; };
 		FA4532E2188B014900A1E242 /* AWFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFObject.m; sourceTree = "<group>"; };
 		FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFAgeFormatter.h; sourceTree = "<group>"; };
@@ -424,6 +433,17 @@
 			name = AWFActivity;
 			sourceTree = "<group>";
 		};
+		FA4401811912CE2600D1CA9A /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FA4401821912CE3D00D1CA9A /* AWFProfileGenderViewController.h */,
+				FA4401831912CE3D00D1CA9A /* AWFProfileGenderViewController.m */,
+				FA4401851912D59000D1CA9A /* AWFProfileBodyBuildViewController.h */,
+				FA4401861912D59000D1CA9A /* AWFProfileBodyBuildViewController.m */,
+			);
+			path = "Edit Profile";
+			sourceTree = "<group>";
+		};
 		FA57F9DA18D268AE00E12B5F /* Friends View */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +476,8 @@
 				FA8D71C71868746B00C4B6CC /* AWFLocationManager.m */,
 				FA4532E4188B2ED500A1E242 /* AWFAgeFormatter.h */,
 				FA4532E5188B2ED500A1E242 /* AWFAgeFormatter.m */,
+				FA4401881912D83900D1CA9A /* AWFBodyBuildFormatter.h */,
+				FA4401891912D83900D1CA9A /* AWFBodyBuildFormatter.m */,
 				FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */,
 				FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */,
 				FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */,
@@ -690,6 +712,7 @@
 		FAE475DB17C0EAE6006B2C65 /* Profile View */ = {
 			isa = PBXGroup;
 			children = (
+				FA4401811912CE2600D1CA9A /* Edit Profile */,
 				FAE475E217C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.h */,
 				FAE475E317C0F8A4006B2C65 /* AWFPhotoCollectionViewCell.m */,
 				FAE4760617C112FF006B2C65 /* AWFProfileTableViewCell.h */,
@@ -930,6 +953,7 @@
 			files = (
 				FA11ACD317B138D100028A55 /* AWFShapeView.m in Sources */,
 				FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */,
+				FA44018A1912D83900D1CA9A /* AWFBodyBuildFormatter.m in Sources */,
 				FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */,
 				FA11ACA517B11A7500028A55 /* AWFLoginFormViewCell.m in Sources */,
 				FADBF69D17ADBFDF00325DD1 /* UIColor+CustomColors.m in Sources */,
@@ -957,6 +981,7 @@
 				FA11ACCD17B1389400028A55 /* AWFLabelButton.m in Sources */,
 				FA3D4C5818E89553008C5366 /* _AWFActivity.m in Sources */,
 				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,
+				FA4401871912D59000D1CA9A /* AWFProfileBodyBuildViewController.m in Sources */,
 				FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */,
 				FA3D4C3A18E84634008C5366 /* AWFConstants.m in Sources */,
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
@@ -974,6 +999,7 @@
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
 				FAF0F3D218D49F7D0063BB30 /* MKMapView+AWFCentering.m in Sources */,
 				FA3D4C5B18E89560008C5366 /* AWFActivity+RestKit.m in Sources */,
+				FA4401841912CE3D00D1CA9A /* AWFProfileGenderViewController.m in Sources */,
 				FA11ACB617B1385E00028A55 /* UIBezierPath+FacebookGlyph.m in Sources */,
 				FADBF66D17ADB68E00325DD1 /* AWFAppDelegate.m in Sources */,
 				FA3D4C3D18E8475F008C5366 /* AnywhereFriends.xcdatamodeld in Sources */,

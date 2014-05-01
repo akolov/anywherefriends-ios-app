@@ -25,6 +25,31 @@
   dispatch_once(&onceToken, ^{
     mapping = [super responseMapping];
 
+    // Body Build
+
+    {
+      RKAttributeMapping *bodyBuildMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"build" toKeyPath:@"bodyBuild"];
+
+      bodyBuildMapping.valueTransformer =
+        [RKBlockValueTransformer
+         valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                   __unsafe_unretained Class outputValueClass) {
+           return ([inputValueClass isSubclassOfClass:[NSString class]] &&
+                   [outputValueClass isSubclassOfClass:[NSNumber class]]);
+         } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                     __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+           RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+           RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSNumber class], error);
+
+           *outputValue = [[NSValueTransformer valueTransformerForName:AWFBodyBuildValueTransformerName]
+                           transformedValue:inputValue];
+           return YES;
+         }];
+
+      [mapping addPropertyMapping:bodyBuildMapping];
+    }
+
     // Gender
 
     {
@@ -81,8 +106,8 @@
 
 + (NSArray *)responseDescriptorMatrix {
   return @[@[@(RKRequestMethodGET),    AWFAPIPathUser,        [NSNull null]],
-           @[@(RKRequestMethodPOST),   AWFAPIPathUser,        @"user"],
-           @[@(RKRequestMethodPUT),    AWFAPIPathUser,        @"user"],
+           @[@(RKRequestMethodPOST),   AWFAPIPathUser,        [NSNull null]],
+           @[@(RKRequestMethodPUT),    AWFAPIPathUser,        [NSNull null]],
            @[@(RKRequestMethodGET),    AWFAPIPathUsers,       @"users"],
            @[@(RKRequestMethodGET),    AWFAPIPathUserFriends, @"friends"],
            @[@(RKRequestMethodPOST),   AWFAPIPathUserFriends, @"friends"],
@@ -99,7 +124,6 @@
 
 + (NSDictionary *)attributeMappingsDictionary {
   return @{@"id"          : @"personID",
-           @"build"       : @"bodyBuild",
            @"eye_color"   : @"eyeColor",
            @"first_name"  : @"firstName",
            @"hair_color"  : @"hairColor",
