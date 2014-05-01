@@ -16,11 +16,159 @@
 
 @implementation AWFPerson (RestKit)
 
++ (RKObjectMapping *)requestMapping {
+  static RKObjectMapping *mapping;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    mapping = [super requestMapping];
+
+    // Body Build
+
+    {
+      RKAttributeMapping *bodyBuildMapping =
+        [RKAttributeMapping attributeMappingFromKeyPath:@"bodyBuild" toKeyPath:@"build"];
+
+      bodyBuildMapping.valueTransformer =
+      [RKBlockValueTransformer
+       valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                 __unsafe_unretained Class outputValueClass) {
+         return ([inputValueClass isSubclassOfClass:[NSNumber class]] &&
+                 [outputValueClass isSubclassOfClass:[NSString class]]);
+       } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                   __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSNumber class], error);
+         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
+
+         *outputValue = [[NSValueTransformer valueTransformerForName:AWFBodyBuildValueTransformerName]
+                         reverseTransformedValue:inputValue];
+         return YES;
+       }];
+
+      [mapping addPropertyMapping:bodyBuildMapping];
+    }
+
+    // Eye Color
+
+    {
+      RKAttributeMapping *eyeColorMapping =
+      [RKAttributeMapping attributeMappingFromKeyPath:@"eyeColor" toKeyPath:@"eye_color"];
+
+      eyeColorMapping.valueTransformer =
+      [RKBlockValueTransformer
+       valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                 __unsafe_unretained Class outputValueClass) {
+         return ([inputValueClass isSubclassOfClass:[NSNumber class]] &&
+                 [outputValueClass isSubclassOfClass:[NSString class]]);
+       } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                   __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSNumber class], error);
+         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
+
+         *outputValue = [[NSValueTransformer valueTransformerForName:AWFEyeColorValueTransformerName]
+                         reverseTransformedValue:inputValue];
+         return YES;
+       }];
+
+      [mapping addPropertyMapping:eyeColorMapping];
+    }
+
+    // Gender
+
+    {
+      RKAttributeMapping *genderMapping =
+      [RKAttributeMapping attributeMappingFromKeyPath:@"gender" toKeyPath:@"gender"];
+
+      genderMapping.valueTransformer =
+      [RKBlockValueTransformer
+       valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                 __unsafe_unretained Class outputValueClass) {
+         return ([inputValueClass isSubclassOfClass:[NSNumber class]] &&
+                 [outputValueClass isSubclassOfClass:[NSString class]]);
+       } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                   __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSNumber class], error);
+         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
+
+         *outputValue = [[NSValueTransformer valueTransformerForName:AWFGenderValueTransformerName]
+                         reverseTransformedValue:inputValue];
+         return YES;
+       }];
+
+      [mapping addPropertyMapping:genderMapping];
+    }
+
+    // Hair Color
+
+    {
+      RKAttributeMapping *hairColorMapping =
+      [RKAttributeMapping attributeMappingFromKeyPath:@"hairColor" toKeyPath:@"hair_color"];
+
+      hairColorMapping.valueTransformer =
+      [RKBlockValueTransformer
+       valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                 __unsafe_unretained Class outputValueClass) {
+         return ([inputValueClass isSubclassOfClass:[NSNumber class]] &&
+                 [outputValueClass isSubclassOfClass:[NSString class]]);
+       } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                   __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSNumber class], error);
+         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
+
+         *outputValue = [[NSValueTransformer valueTransformerForName:AWFHairColorValueTransformerName]
+                         reverseTransformedValue:inputValue];
+         return YES;
+       }];
+
+      [mapping addPropertyMapping:hairColorMapping];
+    }
+
+    // Hair Length
+
+    {
+      RKAttributeMapping *hairLengthMapping =
+      [RKAttributeMapping attributeMappingFromKeyPath:@"hairLength" toKeyPath:@"hair_length"];
+
+      hairLengthMapping.valueTransformer =
+      [RKBlockValueTransformer
+       valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass,
+                                                 __unsafe_unretained Class outputValueClass) {
+         return ([inputValueClass isSubclassOfClass:[NSNumber class]] &&
+                 [outputValueClass isSubclassOfClass:[NSString class]]);
+       } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue,
+                                   __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSNumber class], error);
+         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
+
+         *outputValue = [[NSValueTransformer valueTransformerForName:AWFHairLengthValueTransformerName]
+                         reverseTransformedValue:inputValue];
+         return YES;
+       }];
+
+      [mapping addPropertyMapping:hairLengthMapping];
+    }
+  });
+  return mapping;
+}
+
+#pragma mark - Request
+
++ (NSArray *)requestDescriptorMatrix {
+  return @[@[@(RKRequestMethodPUT), [NSNull null]]];
+}
+
++ (NSArray *)requestMappingsArray {
+  return @[@"bio", @"birthday", @"email", @"height", @"weight"];
+}
+
++ (NSDictionary *)requestMappingsDictionary {
+  return @{@"firstName": @"first_name",
+           @"lastName": @"last_name"};
+}
+
 #pragma mark - Response
 
 + (RKEntityMapping *)responseMapping {
   static RKEntityMapping *mapping;
-
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     mapping = [super responseMapping];

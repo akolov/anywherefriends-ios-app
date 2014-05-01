@@ -43,6 +43,8 @@
                          pageNumber:(NSUInteger)pageNumber pageSize:(NSUInteger)pageSize;
 
 - (RACSignal *)updateUserSelfLocation:(CLPlacemark *)placemark;
+- (RACSignal *)updateUserSelf;
+
 - (RACSignal *)friendUser:(AWFPerson *)person;
 - (RACSignal *)unfriendUser:(AWFPerson *)person;
 - (RACSignal *)approveFriendRequestFromUser:(AWFPerson *)person;

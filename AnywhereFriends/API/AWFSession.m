@@ -376,6 +376,10 @@
   return [[RKObjectManager sharedManager] rac_putObject:self.currentUser path:AWFAPIPathUser parameters:parameters];
 }
 
+- (RACSignal *)updateUserSelf {
+  return [[RKObjectManager sharedManager] rac_putObject:self.currentUser path:AWFAPIPathUser parameters:nil];
+}
+
 #pragma mark - Search
 
 - (RACSignal *)getUsersAtCoordinate:(CLLocationCoordinate2D)coordinate withRadius:(CGFloat)radius

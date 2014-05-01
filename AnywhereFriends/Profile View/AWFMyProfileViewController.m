@@ -61,6 +61,12 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
   [super setEditing:editing animated:animated];
   [self.tableView reloadData];
+
+  if (!editing) {
+    [[[AWFSession sharedSession] updateUserSelf] subscribeError:^(NSError *error) {
+      ErrorLog(error.localizedDescription);
+    }];
+  }
 }
 
 #pragma mark - UITableViewDataSource
