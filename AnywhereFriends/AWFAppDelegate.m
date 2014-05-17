@@ -96,9 +96,16 @@
       [self.tabBarController presentViewController:loginNavigation animated:YES completion:NULL];
     };
 
-    if (self.tabBarController.presentedViewController &&
-        ![self.tabBarController.presentedViewController isKindOfClass:[AWFLoginViewController class]]) {
-      [self.tabBarController dismissViewControllerAnimated:NO completion:presentBlock];
+    if (self.tabBarController.presentedViewController) {
+      if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
+        if (![[navigation.viewControllers firstObject] isKindOfClass:[AWFLoginViewController class]]) {
+          [self.tabBarController dismissViewControllerAnimated:NO completion:presentBlock];
+        }
+      }
+      else {
+        [self.tabBarController dismissViewControllerAnimated:NO completion:presentBlock];
+      }
     }
     else {
       presentBlock();
@@ -187,6 +194,18 @@
             }
             
             ErrorLog(error.localizedDescription);
+          } completed:^{
+            if (self.tabBarController.presentedViewController) {
+              if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
+                if ([[navigation.viewControllers firstObject] isKindOfClass:[AWFLoginViewController class]]) {
+                  [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
+                }
+              }
+              else {
+                [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
+              }
+            }
           }];
        }
        else {
@@ -199,7 +218,7 @@
        }
      }];
   }
-  else if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
+  else if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed) {
     // If the session is closed
     NSLog(@"Session closed");
     // Show the user the logged-out UI
