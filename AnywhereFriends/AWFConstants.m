@@ -44,4 +44,5 @@ NSString *const AWFUserDefaultsCurrentUserIDKey = @"AWFUserDefaultsCurrentUserID
 
 // Notifications
 
+NSString *const AWFLoginRequiredNotification = @"AWFLoginRequiredNotification";
 NSString *const AWFUserDidLoginNotification = @"AWFUserDidLoginNotification";

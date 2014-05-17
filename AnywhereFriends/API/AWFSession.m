@@ -20,9 +20,9 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <RestKit/RestKit.h>
 
-#import "AWFActivity.h"
-#import "AWFClient.h"
 #import "AWFActivity+RestKit.h"
+#import "AWFClient.h"
+#import "AWFHTTPRequestOperation.h"
 #import "AWFPerson+RestKit.h"
 #import "NSManagedObject+RestKit.h"
 
@@ -47,6 +47,7 @@
     // Initialize RestKit
 
     RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:[AWFClient sharedClient]];
+    [manager registerRequestOperationClass:[AWFHTTPRequestOperation class]];
     [RKObjectManager setSharedManager:manager];
 
     // Initialize managed object store

@@ -11,6 +11,8 @@
 
 #import <AFNetworking/AFJSONRequestOperation.h>
 
+#import "AWFJSONRequestOperation.h"
+
 @implementation AWFClient
 
 + (instancetype)sharedClient {
@@ -30,7 +32,7 @@
 - (id)initWithBaseURL:(NSURL *)url {
   self = [super initWithBaseURL:url];
   if (self) {
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [self registerHTTPOperationClass:[AWFJSONRequestOperation class]];
     [self setDefaultHeader:@"Accept" value:@"application/json"];
   }
 

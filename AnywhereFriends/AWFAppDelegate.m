@@ -9,8 +9,10 @@
 #import "AWFConfig.h"
 #import "AWFAppDelegate.h"
 
+#import <AXKRACExtensions/NSNotificationCenter+AXKRACExtensions.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
 #import "AWFFriendsViewController.h"
 #import "AWFLocationManager.h"
@@ -66,20 +68,16 @@
   self.window.rootViewController = self.tabBarController;
   [self.window makeKeyAndVisible];
 
+  @weakify(self);
+
   if (!AWFSession.isLoggedIn) {
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-      @weakify(self);
       [FBSession
        openActiveSessionWithReadPermissions:AWF_FACEBOOK_PERMISSIONS
        allowLoginUI:NO completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
          @strongify(self);
          [self sessionStateChanged:session state:state error:error];
        }];
-    }
-    else {
-      AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
-      AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
-      [self.tabBarController presentViewController:loginNavigation animated:NO completion:NULL];
     }
   }
 
@@ -88,6 +86,24 @@
   }];
 
   [AWFLocationManager sharedManager];
+
+  [RACObserveNotificationUntilDealloc(AWFLoginRequiredNotification) subscribeNext:^(NSNotification *note) {
+    @strongify(self);
+
+    void (^presentBlock)(void) = ^{
+      AWFLoginViewController *login = [[AWFLoginViewController alloc] initWithStyle:UITableViewStyleGrouped];
+      AWFNavigationController *loginNavigation = [[AWFNavigationController alloc] initWithRootViewController:login];
+      [self.tabBarController presentViewController:loginNavigation animated:YES completion:NULL];
+    };
+
+    if (self.tabBarController.presentedViewController &&
+        ![self.tabBarController.presentedViewController isKindOfClass:[AWFLoginViewController class]]) {
+      [self.tabBarController dismissViewControllerAnimated:NO completion:presentBlock];
+    }
+    else {
+      presentBlock();
+    }
+  }];
 
   return YES;
 }

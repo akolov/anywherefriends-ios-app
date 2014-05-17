@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) AWFMyProfileHeaderView *customProfileHeaderView;
 
+- (void)didTapLogoutButton:(id)sender;
+
 @end
 
 @implementation AWFMyProfileViewController
@@ -35,6 +37,9 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.navigationItem.leftBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"Log out" style:UIBarButtonItemStylePlain
+                                    target:self action:@selector(didTapLogoutButton:)];
   self.navigationItem.rightBarButtonItem = self.editButtonItem;
   self.tableView.allowsSelectionDuringEditing = YES;
 
@@ -94,6 +99,16 @@
       ErrorLog(error.localizedDescription);
     }];
   }
+}
+
+#pragma mark - Actions
+
+- (void)didTapLogoutButton:(id)sender {
+  [[[AWFSession sharedSession] closeSession] subscribeError:^(NSError *error) {
+    ErrorLog(error.localizedDescription);
+  } completed:^{
+
+  }];
 }
 
 #pragma mark - Public Methods

@@ -50,4 +50,5 @@ OBJC_EXPORT NSString *const AWFUserDefaultsCurrentUserIDKey;
 
 // Notifications
 
+OBJC_EXPORT NSString *const AWFLoginRequiredNotification;
 OBJC_EXPORT NSString *const AWFUserDidLoginNotification;
