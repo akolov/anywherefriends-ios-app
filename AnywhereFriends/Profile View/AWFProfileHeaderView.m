@@ -11,9 +11,9 @@
 
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 
-#import "AWFShapeView.h"
 #import "AWFLabelButton.h"
 #import "AWFPhotoCollectionViewCell.h"
+#import "AWFShapeView.h"
 #import "UIBezierPath+AccessoryArrowGlyph.h"
 
 @interface AWFProfileHeaderView ()

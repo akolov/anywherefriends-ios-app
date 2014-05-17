@@ -33,9 +33,7 @@
 #import "AWFSession.h"
 #import "AWFWeightFormatter.h"
 
-@interface AWFProfileViewController () <
-NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate
->
+@interface AWFProfileViewController () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
@@ -48,14 +46,11 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 @property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
-@property (nonatomic, strong) AWFProfileHeaderView *headerView;
-@property (nonatomic, readonly) AWFPerson *person;
+@property (nonatomic, strong) AWFProfileHeaderView *customProfileHeaderView;
 
 - (void)onFriendButton:(id)sender;
 - (void)onSendMessageButton:(id)sender;
 - (void)onLocationButton:(id)sender;
-
-- (void)reloadHeaderView;
 
 @end
 
@@ -82,24 +77,7 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
   [self.tableView registerClassForCellReuse:[AWFProfileTableViewCell class]];
-
-  // Header View
-
-  self.headerView = [[AWFProfileHeaderView alloc] init];
-  self.headerView.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
-  self.headerView.photoCollectionView.dataSource = self;
-  self.headerView.photoCollectionView.delegate = self;
-
-  [self.headerView.friendButton addTarget:self action:@selector(onFriendButton:)
-                         forControlEvents:UIControlEventTouchUpInside];
-  [self.headerView.messageButton addTarget:self action:@selector(onSendMessageButton:)
-                          forControlEvents:UIControlEventTouchUpInside];
-  [self.headerView.locationButton addTarget:self action:@selector(onLocationButton:)
-                           forControlEvents:UIControlEventTouchUpInside];
-
-  [self reloadHeaderView];
-
-  self.tableView.tableHeaderView = self.headerView;
+  self.tableView.tableHeaderView = [self profileHeaderView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,6 +89,30 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
+}
+
+- (UIView *)profileHeaderView {
+  return self.customProfileHeaderView;
+}
+
+- (AWFProfileHeaderView *)customProfileHeaderView {
+  if (!_customProfileHeaderView) {
+    _customProfileHeaderView = [[AWFProfileHeaderView alloc] init];
+    _customProfileHeaderView.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
+    _customProfileHeaderView.photoCollectionView.dataSource = self;
+    _customProfileHeaderView.photoCollectionView.delegate = self;
+
+    [_customProfileHeaderView.friendButton addTarget:self action:@selector(onFriendButton:)
+                                    forControlEvents:UIControlEventTouchUpInside];
+    [_customProfileHeaderView.messageButton addTarget:self action:@selector(onSendMessageButton:)
+                                     forControlEvents:UIControlEventTouchUpInside];
+    [_customProfileHeaderView.locationButton addTarget:self action:@selector(onLocationButton:)
+                                      forControlEvents:UIControlEventTouchUpInside];
+
+    [self reloadHeaderView];
+  }
+  
+  return _customProfileHeaderView;
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -234,7 +236,7 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
      ErrorLog(error.localizedDescription);
    }
    completed:^{
-     [self.headerView setFriendshipStatus:AWFFriendshipStatusPending];
+     [self.customProfileHeaderView setFriendshipStatus:AWFFriendshipStatusPending];
    }];
 }
 
@@ -276,18 +278,24 @@ NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionView
               self.person.locationName, self.person.locationDistanceValue];
   }
 
-  self.headerView.locationLabel.attributedText = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
-  self.headerView.descriptionLabel.text = self.person.bio;
-  [self.headerView setFriendshipStatus:self.person.friendshipValue];
+  NSError *error;
+  NSAttributedString *string = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
+  if (!string) {
+    ErrorLog(error.localizedDescription);
+  }
+
+  self.customProfileHeaderView.locationLabel.attributedText = string;
+  self.customProfileHeaderView.descriptionLabel.text = self.person.bio;
+  [self.customProfileHeaderView setFriendshipStatus:self.person.friendshipValue];
 
   CGRect bounds;
   bounds.size.width = CGRectGetWidth(self.tableView.bounds);
-  bounds.size.height = [self.headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+  bounds.size.height = [self.customProfileHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 
-  self.headerView.bounds = bounds;
+  self.customProfileHeaderView.bounds = bounds;
 
-  [self.headerView setNeedsLayout];
-  [self.headerView layoutIfNeeded];
+  [self.customProfileHeaderView setNeedsLayout];
+  [self.customProfileHeaderView layoutIfNeeded];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

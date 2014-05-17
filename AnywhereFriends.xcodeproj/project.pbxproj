@@ -34,6 +34,7 @@
 		FA11ACD317B138D100028A55 /* AWFShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11ACD117B138D100028A55 /* AWFShapeView.m */; };
 		FA11ACD517B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD417B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf */; };
 		FA11ACD717B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */; };
+		FA1683431927F60C0059BC0C /* AWFMyProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1683421927F60C0059BC0C /* AWFMyProfileHeaderView.m */; };
 		FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */; };
 		FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1EEC6717B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m */; };
 		FA22D15D1912E7C600B025E3 /* UIViewController+ShownTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22D15C1912E7C600B025E3 /* UIViewController+ShownTitle.m */; };
@@ -179,6 +180,8 @@
 		FA11ACD117B138D100028A55 /* AWFShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFShapeView.m; sourceTree = "<group>"; };
 		FA11ACD417B14B2400028A55 /* HelveticaNeueLTCom-LtCn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLTCom-LtCn.ttf"; sourceTree = "<group>"; };
 		FA11ACD617B14D2500028A55 /* HelveticaNeueLTCom-MdCn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLTCom-MdCn.ttf"; sourceTree = "<group>"; };
+		FA1683411927F60C0059BC0C /* AWFMyProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFMyProfileHeaderView.h; sourceTree = "<group>"; };
+		FA1683421927F60C0059BC0C /* AWFMyProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFMyProfileHeaderView.m; sourceTree = "<group>"; };
 		FA1EEC6317B266A500668A40 /* AWFSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFSignupViewController.h; sourceTree = "<group>"; };
 		FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFSignupViewController.m; sourceTree = "<group>"; };
 		FA1EEC6617B2824B00668A40 /* UIBezierPath+VKontakteGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+VKontakteGlyph.h"; sourceTree = "<group>"; };
@@ -756,6 +759,8 @@
 				FAE475E017C0EC15006B2C65 /* AWFProfileHeaderView.m */,
 				FAE475DC17C0EAF0006B2C65 /* AWFProfileViewController.h */,
 				FAE475DD17C0EAF0006B2C65 /* AWFProfileViewController.m */,
+				FA1683411927F60C0059BC0C /* AWFMyProfileHeaderView.h */,
+				FA1683421927F60C0059BC0C /* AWFMyProfileHeaderView.m */,
 				FAF0F3E518D4CD8B0063BB30 /* AWFMyProfileViewController.h */,
 				FAF0F3E618D4CD8B0063BB30 /* AWFMyProfileViewController.m */,
 			);
@@ -1014,6 +1019,7 @@
 				FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */,
 				FADBF69617ADB7EC00325DD1 /* UIFont+CustomFonts.m in Sources */,
 				FA57837418D4776600F10FD7 /* AWFFriendsViewCell.m in Sources */,
+				FA1683431927F60C0059BC0C /* AWFMyProfileHeaderView.m in Sources */,
 				FA1EEC6817B2824B00668A40 /* UIBezierPath+VKontakteGlyph.m in Sources */,
 				FADE215D17BCDB1700D3A62B /* AWFNearbyViewController.m in Sources */,
 				FA4532E6188B2ED500A1E242 /* AWFAgeFormatter.m in Sources */,

@@ -8,13 +8,16 @@
 
 @import UIKit;
 
+@class AWFPerson;
 @class AWFProfileHeaderView;
 
-@interface AWFProfileViewController : UITableViewController
+@interface AWFProfileViewController : UITableViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong, readonly) AWFProfileHeaderView *headerView;
+@property (nonatomic, readonly) AWFPerson *person;
+@property (nonatomic, readonly) UIView *profileHeaderView;
 @property (nonatomic, strong) NSString *personID;
 
 - (id)initWithPersonID:(NSString *)personID;
+- (void)reloadHeaderView;
 
 @end

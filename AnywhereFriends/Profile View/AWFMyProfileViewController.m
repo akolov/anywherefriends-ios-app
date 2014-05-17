@@ -11,14 +11,24 @@
 
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <Slash/Slash.h>
 
+#import "AWFLabelButton.h"
+#import "AWFMyProfileHeaderView.h"
 #import "AWFPerson.h"
 #import "AWFProfileBodyBuildViewController.h"
 #import "AWFProfileEyeColorViewController.h"
 #import "AWFProfileGenderViewController.h"
 #import "AWFProfileHairColorViewController.h"
 #import "AWFProfileHairLengthViewController.h"
+#import "AWFProfileHeaderView.h"
 #import "AWFSession.h"
+
+@interface AWFMyProfileViewController ()
+
+@property (nonatomic, strong) AWFMyProfileHeaderView *customProfileHeaderView;
+
+@end
 
 @implementation AWFMyProfileViewController
 
@@ -46,6 +56,23 @@
 
 #pragma mark - Accessors 
 
+- (UIView *)profileHeaderView {
+  return self.customProfileHeaderView;
+}
+
+- (AWFMyProfileHeaderView *)customProfileHeaderView {
+  if (!_customProfileHeaderView) {
+    _customProfileHeaderView = [[AWFMyProfileHeaderView alloc] init];
+    _customProfileHeaderView.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
+    _customProfileHeaderView.photoCollectionView.dataSource = self;
+    _customProfileHeaderView.photoCollectionView.delegate = self;
+
+    [self reloadHeaderView];
+  }
+
+  return _customProfileHeaderView;
+}
+
 - (NSString *)personID {
   return [AWFSession sharedSession].currentUserID;
 }
@@ -67,6 +94,50 @@
       ErrorLog(error.localizedDescription);
     }];
   }
+}
+
+#pragma mark - Public Methods
+
+- (void)reloadHeaderView {
+  NSDictionary *style = @{@"$default": @{
+                              NSParagraphStyleAttributeName: ({
+                                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                                paragraphStyle.alignment = NSTextAlignmentLeft;
+                                paragraphStyle;
+                              }),
+                              NSFontAttributeName: [UIFont helveticaNeueFontOfSize:14.0f],
+                              NSForegroundColorAttributeName: [UIColor whiteColor]
+                              },
+                          @"em": @{
+                              NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
+                              NSForegroundColorAttributeName: [UIColor grayColor]}
+                          };
+
+  NSString *lastUpdated, *markup;
+  if (self.person.locationUpdated) {
+    markup = [NSString stringWithFormat:@"%@\n<em>%@</em>", self.person.locationName, lastUpdated];
+  }
+  else {
+    markup = self.person.locationName;
+  }
+
+  NSError *error;
+  NSAttributedString *string = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
+  if (!string) {
+    ErrorLog(error.localizedDescription);
+  }
+
+  self.customProfileHeaderView.locationLabel.attributedText = string;
+  self.customProfileHeaderView.descriptionLabel.text = self.person.bio;
+
+  CGRect bounds;
+  bounds.size.width = CGRectGetWidth(self.tableView.bounds);
+  bounds.size.height = [self.customProfileHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+
+  self.customProfileHeaderView.bounds = bounds;
+
+  [self.customProfileHeaderView setNeedsLayout];
+  [self.customProfileHeaderView layoutIfNeeded];
 }
 
 #pragma mark - UITableViewDataSource
