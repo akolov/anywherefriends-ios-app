@@ -34,6 +34,8 @@
   self = [super initWithFrame:frame];
   if (self) {
 
+    self.backgroundColor = [UIColor clearColor];
+
     // Set up photo collection
 
     UICollectionViewFlowLayout *collectionLayout = [[UICollectionViewFlowLayout alloc] init];

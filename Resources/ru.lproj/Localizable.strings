@@ -124,6 +124,9 @@
 /* Basic info section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_BASIC_INFO" = "Основное";
 
+/* No comment provided by engineer. */
+"AWF_PROFILE_SECTION_HEADER_LOCATION" = "Местоположение";
+
 /* Send message button title */
 "AWF_PROFILE_SEND_MESSAGE_BUTTON_TITLE" = "Написать сообщение";
 

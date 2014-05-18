@@ -15,38 +15,22 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <Slash/Slash.h>
 
-#import "AWFAgeFormatter.h"
 #import "AWFAppDelegate.h"
-#import "AWFBodyBuildFormatter.h"
-#import "AWFEyeColorFormatter.h"
-#import "AWFGenderFormatter.h"
-#import "AWFHairColorFormatter.h"
-#import "AWFHairLengthFormatter.h"
-#import "AWFHeightFormatter.h"
+#import "AWFDatePickerViewCell.h"
 #import "AWFIconButton.h"
 #import "AWFLabelButton.h"
 #import "AWFMapViewController.h"
 #import "AWFPerson.h"
 #import "AWFPhotoCollectionViewCell.h"
-#import "AWFProfileHeaderView.h"
-#import "AWFProfileTableViewCell.h"
+#import "AWFPickerViewCell.h"
+#import "AWFProfileDataSource.h"
 #import "AWFSession.h"
-#import "AWFWeightFormatter.h"
 
 @interface AWFProfileViewController () <NSFetchedResultsControllerDelegate>
 
+@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
-@property (nonatomic, strong) AWFBodyBuildFormatter *bodyBuildFormatter;
-@property (nonatomic, strong) AWFEyeColorFormatter *eyeColorFormatter;
-@property (nonatomic, strong) AWFGenderFormatter *genderFormatter;
-@property (nonatomic, strong) AWFHairColorFormatter *hairColorFormatter;
-@property (nonatomic, strong) AWFHairLengthFormatter *hairLengthFormatter;
-@property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
-@property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
-@property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
-@property (nonatomic, strong) AWFProfileHeaderView *customProfileHeaderView;
 
 - (void)onFriendButton:(id)sender;
 - (void)onSendMessageButton:(id)sender;
@@ -73,11 +57,14 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.dataSource = [[AWFProfileDataSource alloc] init];
+  self.dataSource.person = self.person;
+
   self.tableView.backgroundColor = [UIColor blackColor];
+  self.tableView.dataSource = self.dataSource;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-  [self.tableView registerClassForCellReuse:[AWFProfileTableViewCell class]];
-  self.tableView.tableHeaderView = [self profileHeaderView];
+  self.tableView.tableHeaderView = self.collectionView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,28 +78,27 @@
   return UIStatusBarStyleLightContent;
 }
 
-- (UIView *)profileHeaderView {
-  return self.customProfileHeaderView;
-}
+- (UICollectionView *)collectionView {
+  if (!_collectionView) {
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(159.0f, 159.0f);
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.minimumLineSpacing = 2.0f;
 
-- (AWFProfileHeaderView *)customProfileHeaderView {
-  if (!_customProfileHeaderView) {
-    _customProfileHeaderView = [[AWFProfileHeaderView alloc] init];
-    _customProfileHeaderView.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.tableView.bounds);
-    _customProfileHeaderView.photoCollectionView.dataSource = self;
-    _customProfileHeaderView.photoCollectionView.delegate = self;
+    CGRect frame = self.view.bounds;
+    frame.size.height = layout.itemSize.height;
 
-    [_customProfileHeaderView.friendButton addTarget:self action:@selector(onFriendButton:)
-                                    forControlEvents:UIControlEventTouchUpInside];
-    [_customProfileHeaderView.messageButton addTarget:self action:@selector(onSendMessageButton:)
-                                     forControlEvents:UIControlEventTouchUpInside];
-    [_customProfileHeaderView.locationButton addTarget:self action:@selector(onLocationButton:)
-                                      forControlEvents:UIControlEventTouchUpInside];
+    _collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+    _collectionView.backgroundColor = [UIColor clearColor];
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+    _collectionView.showsHorizontalScrollIndicator = NO;
+    _collectionView.showsVerticalScrollIndicator = NO;
 
-    [self reloadHeaderView];
+    [_collectionView registerClassForCellReuse:[AWFPhotoCollectionViewCell class]];
   }
-  
-  return _customProfileHeaderView;
+
+  return _collectionView;
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -156,71 +142,6 @@
   [self.tableView reloadData];
 }
 
-- (NSDateFormatter *)birthdayFormatter {
-  if (!_birthdayFormatter) {
-    _birthdayFormatter = [[NSDateFormatter alloc] init];
-    _birthdayFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMMd" options:0
-                                                                     locale:[NSLocale currentLocale]];
-  }
-  return _birthdayFormatter;
-}
-
-- (AWFAgeFormatter *)ageFormatter {
-  if (!_ageFormatter) {
-    _ageFormatter = [[AWFAgeFormatter alloc] init];
-  }
-  return _ageFormatter;
-}
-
-- (AWFBodyBuildFormatter *)bodyBuildFormatter {
-  if (!_bodyBuildFormatter) {
-    _bodyBuildFormatter = [[AWFBodyBuildFormatter alloc] init];
-  }
-  return _bodyBuildFormatter;
-}
-
-- (AWFEyeColorFormatter *)eyeColorFormatter {
-  if (!_eyeColorFormatter) {
-    _eyeColorFormatter = [[AWFEyeColorFormatter alloc] init];
-  }
-  return _eyeColorFormatter;
-}
-
-- (AWFGenderFormatter *)genderFormatter {
-  if (!_genderFormatter) {
-    _genderFormatter = [[AWFGenderFormatter alloc] init];
-  }
-  return _genderFormatter;
-}
-
-- (AWFHairColorFormatter *)hairColorFormatter {
-  if (!_hairColorFormatter) {
-    _hairColorFormatter = [[AWFHairColorFormatter alloc] init];
-  }
-  return _hairColorFormatter;
-}
-
-- (AWFHairLengthFormatter *)hairLengthFormatter {
-  if (!_hairLengthFormatter) {
-    _hairLengthFormatter = [[AWFHairLengthFormatter alloc] init];
-  }
-  return _hairLengthFormatter;
-}
-
-- (AWFHeightFormatter *)heightFormatter {
-  if (!_heightFormatter) {
-    _heightFormatter = [[AWFHeightFormatter alloc] init];
-  }
-  return _heightFormatter;
-}
-
-- (AWFWeightFormatter *)weightFormatter {
-  if (!_weightFormatter) {
-    _weightFormatter = [[AWFWeightFormatter alloc] init];
-  }
-  return _weightFormatter;
-}
-
 - (TTTTimeIntervalFormatter *)timeFormatter {
   if (!_timeFormatter) {
     _timeFormatter = [[TTTTimeIntervalFormatter alloc] init];
@@ -231,13 +152,13 @@
 #pragma mark - Actions
 
 - (void)onFriendButton:(id)sender {
-  [[[AWFSession sharedSession] friendUser:self.person]
-   subscribeError:^(NSError *error) {
-     ErrorLog(error.localizedDescription);
-   }
-   completed:^{
-     [self.customProfileHeaderView setFriendshipStatus:AWFFriendshipStatusPending];
-   }];
+//  [[[AWFSession sharedSession] friendUser:self.person]
+//   subscribeError:^(NSError *error) {
+//     ErrorLog(error.localizedDescription);
+//   }
+//   completed:^{
+//     [self.customProfileHeaderView setFriendshipStatus:AWFFriendshipStatusPending];
+//   }];
 }
 
 - (void)onSendMessageButton:(id)sender {
@@ -250,171 +171,12 @@
   [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - Public methods
-
-- (void)reloadHeaderView {
-  NSDictionary *style = @{@"$default": @{
-                              NSParagraphStyleAttributeName: ({
-                                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-                                paragraphStyle.alignment = NSTextAlignmentLeft;
-                                paragraphStyle;
-                              }),
-                              NSFontAttributeName: [UIFont helveticaNeueFontOfSize:14.0f],
-                              NSForegroundColorAttributeName: [UIColor whiteColor]
-                              },
-                          @"em": @{
-                              NSFontAttributeName: [UIFont helveticaNeueFontOfSize:10.0f],
-                              NSForegroundColorAttributeName: [UIColor grayColor]}
-                          };
-
-  NSString *lastUpdated, *markup;
-  if (self.person.locationUpdated) {
-    lastUpdated = [self.timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:self.person.locationUpdated];
-    markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you — %@</em>",
-              self.person.locationName, self.person.locationDistanceValue, lastUpdated];
-  }
-  else {
-    markup = [NSString stringWithFormat:@"%@\n<em>%2.f m from you</em>",
-              self.person.locationName, self.person.locationDistanceValue];
-  }
-
-  NSError *error;
-  NSAttributedString *string = [SLSMarkupParser attributedStringWithMarkup:markup style:style error:NULL];
-  if (!string) {
-    ErrorLog(error.localizedDescription);
-  }
-
-  self.customProfileHeaderView.locationLabel.attributedText = string;
-  self.customProfileHeaderView.descriptionLabel.text = self.person.bio;
-  [self.customProfileHeaderView setFriendshipStatus:self.person.friendshipValue];
-
-  CGRect bounds;
-  bounds.size.width = CGRectGetWidth(self.tableView.bounds);
-  bounds.size.height = [self.customProfileHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-
-  self.customProfileHeaderView.bounds = bounds;
-
-  [self.customProfileHeaderView setNeedsLayout];
-  [self.customProfileHeaderView layoutIfNeeded];
-}
-
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
   self.title = self.person.fullName;
+  self.dataSource.person = self.person;
   [self.tableView reloadData];
-}
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  switch (section) {
-    case 0:
-      return 3;
-    default:
-      return 6;
-  }
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-  if (section == 0) {
-    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_BASIC_INFO", nil);
-  }
-  else {
-    return NSLocalizedString(@"AWF_PROFILE_SECTION_HEADER_APPEARANCE", nil);
-  }
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell =
-    [tableView dequeueReusableCellWithIdentifier:[AWFProfileTableViewCell reuseIdentifier] forIndexPath:indexPath];
-
-  NSString *text, *detail = @"—";
-
-  if (indexPath.section == 0) {
-    switch (indexPath.row) {
-      case 0:
-        text = NSLocalizedString(@"AWF_GENDER", nil);
-        if (self.person.gender != AWFGenderUnknown) {
-          detail = [[self.genderFormatter stringFromGender:self.person.genderValue] capitalizedString];
-        }
-        break;
-
-      case 1:
-        text = NSLocalizedString(@"AWF_AGE", nil);
-        if (self.person.age) {
-          detail = [self.ageFormatter stringFromAge:[self.person.age integerValue]];
-        }
-        break;
-
-      case 2:
-        text = NSLocalizedString(@"AWF_BIRTHDAY", nil);
-        if (self.person.birthday) {
-          detail = [self.birthdayFormatter stringFromDate:self.person.birthday];
-        }
-        break;
-
-      default:
-        break;
-    }
-  }
-  else {
-    switch (indexPath.row) {
-      case 0:
-        text = NSLocalizedString(@"AWF_HEIGHT", nil);
-        if (self.person.height) {
-          detail = [self.heightFormatter stringFromHeight:self.person.height];
-        }
-        break;
-
-      case 1:
-        text = NSLocalizedString(@"AWF_WEIGHT", nil);
-        if (self.person.weight) {
-          detail = [self.weightFormatter stringFromWeight:self.person.weight];
-        }
-        break;
-
-      case 2:
-        text = NSLocalizedString(@"AWF_BODY_BUILD", nil);
-        if (self.person.bodyBuild) {
-          detail = [[self.bodyBuildFormatter stringFromBodyBuild:self.person.bodyBuildValue] capitalizedString];
-        }
-        break;
-
-      case 3:
-        text = NSLocalizedString(@"AWF_HAIR_LENGTH", nil);
-        if (self.person.hairLength) {
-          detail = [[self.hairLengthFormatter stringFromHairLength:self.person.hairLengthValue] capitalizedString];
-        }
-        break;
-
-      case 4:
-        text = NSLocalizedString(@"AWF_HAIR_COLOR", nil);
-        if (self.person.hairColor) {
-          detail = [[self.hairColorFormatter stringFromHairColor:self.person.hairColorValue] capitalizedString];
-        }
-        break;
-
-      case 5:
-        text = NSLocalizedString(@"AWF_EYE_COLOR", nil);
-        if (self.person.eyeColor) {
-          detail = [[self.eyeColorFormatter stringFromEyeColor:self.person.eyeColorValue] capitalizedString];
-        }
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  cell.textLabel.text = text;
-  cell.detailTextLabel.text = detail;
-
-  return cell;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -431,6 +193,47 @@
   AWFPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[AWFPhotoCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
   cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Jasmin_t%ld.jpg", (long)indexPath.row]];
   return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = self.dataSource.currentCells[indexPath.section][indexPath.row];
+  if ([cell isKindOfClass:[AWFDatePickerViewCell class]]) {
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height;
+  }
+
+  return 44.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (self.editing) {
+
+  }
+  else {
+    switch (indexPath.section) {
+      case 0: {
+        switch (indexPath.row) {
+          case 0: {
+            AWFMapViewController *vc = [[AWFMapViewController alloc] initWithPerson:self.person];
+            [self.navigationController pushViewController:vc animated:YES];
+          }
+            break;
+
+          default:
+            break;
+        }
+      }
+        break;
+
+      default:
+        break;
+    }
+  }
 }
 
 @end

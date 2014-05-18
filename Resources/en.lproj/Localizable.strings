@@ -19,6 +19,12 @@
 /* Dismiss */
 "AWF_DISMISS" = "Dismiss";
 
+/* No comment provided by engineer. */
+"AWF_ERROR_FACEBOOK_REQUEST_MESSAGE" = "AWF_ERROR_FACEBOOK_REQUEST_MESSAGE";
+
+/* No comment provided by engineer. */
+"AWF_ERROR_FACEBOOK_REQUEST_TITLE" = "AWF_ERROR_FACEBOOK_REQUEST_TITLE";
+
 /* Eye Color */
 "AWF_EYE_COLOR" = "Eye Color";
 
@@ -135,6 +141,9 @@
 
 /* Basic info section header title of the profile view */
 "AWF_PROFILE_SECTION_HEADER_BASIC_INFO" = "Basic Info";
+
+/* No comment provided by engineer. */
+"AWF_PROFILE_SECTION_HEADER_LOCATION" = "Location";
 
 /* Send message button title */
 "AWF_PROFILE_SEND_MESSAGE_BUTTON_TITLE" = "Send Message";
