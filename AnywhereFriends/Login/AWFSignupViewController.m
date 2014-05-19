@@ -11,6 +11,7 @@
 
 #import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "AWFGenderPicker.h"
@@ -218,6 +219,7 @@
 #pragma mark - Actions
 
 - (void)onSignupButtonTouchUpInside:(id)sender {
+  @weakify(self);
   [[[AWFSession sharedSession] createUserWithEmail:self.emailFieldValue
                                           password:self.passwordFieldValue
                                          firstName:self.firstNameFieldValue
@@ -227,13 +229,12 @@
                                       twitterToken:nil
                                            vkToken:nil]
    subscribeError:^(NSError *error) {
-     [AZNotification showNotificationWithTitle:error.localizedDescription
-                                    controller:self
-                              notificationType:AZNotificationTypeError
-      shouldShowNotificationUnderNavigationBar:YES];
+     @strongify(self);
+     [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
      ErrorLog(error.localizedDescription);
    }
    completed:^{
+     @strongify(self);
      [self dismissViewControllerAnimated:YES completion:NULL];
    }];
 }

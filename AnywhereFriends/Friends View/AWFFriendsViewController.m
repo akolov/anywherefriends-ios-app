@@ -108,10 +108,7 @@ NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
-      [AZNotification showNotificationWithTitle:error.localizedDescription
-                                     controller:self
-                               notificationType:AZNotificationTypeError
-       shouldShowNotificationUnderNavigationBar:YES];
+      [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
       ErrorLog(error.localizedDescription);
     }
   }
@@ -122,12 +119,11 @@ NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
 #pragma mark - Private Methods
 
 - (void)getFriends {
+  @weakify(self);
   [[[AWFSession sharedSession] getUserSelfFriends]
    subscribeError:^(NSError *error) {
-     [AZNotification showNotificationWithTitle:error.localizedDescription
-                                    controller:self
-                              notificationType:AZNotificationTypeError
-      shouldShowNotificationUnderNavigationBar:YES];
+     @strongify(self);
+     [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
      ErrorLog(error.localizedDescription);
    }];
 }

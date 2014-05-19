@@ -19,6 +19,7 @@
 #import "UIColor+ColorTools.h"
 #import "UIColor+CustomColors.h"
 #import "UIFont+CustomFonts.h"
+#import "UIViewController+AWFNotification.h"
 #import "UIViewController+ShownTitle.h"
 
 #ifdef DEBUG

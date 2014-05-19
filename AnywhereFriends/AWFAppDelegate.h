@@ -8,13 +8,11 @@
 
 @import UIKit;
 
-#import <FacebookSDK/FacebookSDK.h>
-
 @interface AWFAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
-- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
++ (instancetype)sharedInstance;
 
 @end

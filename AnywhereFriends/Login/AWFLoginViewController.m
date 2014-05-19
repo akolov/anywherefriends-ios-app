@@ -6,18 +6,23 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
+@import Social;
+
 #import "AWFConfig.h"
 #import "AWFLoginViewController.h"
 
 #import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <Slash/Slash.h>
+#import <VK-ios-sdk/VKSdk.h>
 
-#import "AWFAppDelegate.h"
+#import "AWFAppDelegate+AWFFacebookSDK.h"
 #import "AWFLoginConnectViewCell.h"
 #import "AWFLoginFormViewCell.h"
+#import "AWFNavigationController.h"
 #import "AWFNavigationTitleView.h"
 #import "AWFNearbyViewController.h"
 #import "AWFSession.h"
@@ -97,16 +102,79 @@
     return cell;
   }
   else {
+
+    @weakify(self);
+
     AWFLoginConnectViewCell *cell =
       [tableView dequeueReusableCellWithIdentifier:[AWFLoginConnectViewCell reuseIdentifier]];
     cell.onFacebookButtonAction = ^{
       [FBSession
        openActiveSessionWithReadPermissions:AWF_FACEBOOK_PERMISSIONS
        allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-         AWFAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+         AWFAppDelegate *appDelegate = [AWFAppDelegate sharedInstance];
          [appDelegate sessionStateChanged:session state:state error:error];
        }];
     };
+
+    cell.onTwitterButtonAction = ^{
+      ACAccountStore *account = [[ACAccountStore alloc] init];
+      ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:
+                                    ACAccountTypeIdentifierTwitter];
+
+      [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+        if (granted) {
+          NSArray *accounts = [account accountsWithAccountType:accountType];
+
+          if ([accounts count] > 0) {
+            SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                        requestMethod:SLRequestMethodPOST
+                                                                  URL:nil
+                                                           parameters:nil];
+            postRequest.account = [accounts lastObject];
+            NSDictionary *headers = [[postRequest preparedURLRequest] allHTTPHeaderFields];
+            NSString *header = headers[@"Authorization"];
+            NSArray *authorization = [header componentsSeparatedByString:@","];
+            NSString *accessToken;
+
+            for (NSString *val in authorization) {
+              if ([val rangeOfString:@"oauth_token"].length > 0) {
+                accessToken = [val stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                accessToken = [accessToken stringByReplacingOccurrencesOfString:@"oauth_token=" withString:@""];
+                accessToken = [accessToken stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                break;
+              }
+            }
+
+            [[[AWFSession sharedSession] openSessionWithTwitterToken:accessToken]
+             subscribeError:^(NSError *error) {
+               @strongify(self);
+
+               NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
+                                                              allowLossyConversion:NO];
+               NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:0 error:&error];
+
+               for (NSDictionary *errorDict in dict[@"errors"]) {
+                 if ([[errorDict[@"message"] lowercaseString] isEqualToString:@"user not found"]) {
+                   AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                   [self.navigationController pushViewController:vc animated:YES];
+                   return;
+                 }
+               }
+
+               [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
+             } completed:^{
+               @strongify(self);
+               [self dismissViewControllerAnimated:YES completion:NULL];
+             }];
+          }
+        }
+      }];
+    };
+
+    cell.onVkontakteButtonAction = ^{
+      [VKSdk authorize:AWF_VK_PERMISSIONS];
+    };
+
     return cell;
   }
 
@@ -289,10 +357,7 @@
 - (void)onLoginButtonTouchUpInside:(id)sender {
   [[[AWFSession sharedSession] openSessionWithEmail:self.email password:self.password]
    subscribeError:^(NSError *error) {
-     [AZNotification showNotificationWithTitle:error.localizedDescription
-                                    controller:self
-                              notificationType:AZNotificationTypeError
-      shouldShowNotificationUnderNavigationBar:YES];
+     [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
      ErrorLog(error.localizedDescription);
    }
    completed:^{

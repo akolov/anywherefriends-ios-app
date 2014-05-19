@@ -76,6 +76,11 @@
 		FA9A273B192A30AC00524B64 /* AZNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A2736192A30AC00524B64 /* AZNotification.m */; };
 		FA9A273C192A30AC00524B64 /* AZNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A2738192A30AC00524B64 /* AZNotificationView.m */; };
 		FA9A273D192A30AC00524B64 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A273A192A30AC00524B64 /* UIColor+Additions.m */; };
+		FA9A273F192A364F00524B64 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A273E192A364F00524B64 /* Social.framework */; };
+		FA9A2741192A366300524B64 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A2740192A366300524B64 /* Twitter.framework */; };
+		FA9A2747192A4A8000524B64 /* AWFAppDelegate+AWFVKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A2746192A4A8000524B64 /* AWFAppDelegate+AWFVKSDK.m */; };
+		FA9A274A192A4F3A00524B64 /* AWFAppDelegate+AWFFacebookSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A2749192A4F3A00524B64 /* AWFAppDelegate+AWFFacebookSDK.m */; };
+		FA9A274D192A53CB00524B64 /* UIViewController+AWFNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A274C192A53CB00524B64 /* UIViewController+AWFNotification.m */; };
 		FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */; };
 		FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964718CCB3CA00F65856 /* AWFHeightFormatter.m */; };
 		FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */; };
@@ -265,6 +270,14 @@
 		FA9A2738192A30AC00524B64 /* AZNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZNotificationView.m; sourceTree = "<group>"; };
 		FA9A2739192A30AC00524B64 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
 		FA9A273A192A30AC00524B64 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
+		FA9A273E192A364F00524B64 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		FA9A2740192A366300524B64 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		FA9A2745192A4A8000524B64 /* AWFAppDelegate+AWFVKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFAppDelegate+AWFVKSDK.h"; sourceTree = "<group>"; };
+		FA9A2746192A4A8000524B64 /* AWFAppDelegate+AWFVKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AWFAppDelegate+AWFVKSDK.m"; sourceTree = "<group>"; };
+		FA9A2748192A4F3A00524B64 /* AWFAppDelegate+AWFFacebookSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFAppDelegate+AWFFacebookSDK.h"; sourceTree = "<group>"; };
+		FA9A2749192A4F3A00524B64 /* AWFAppDelegate+AWFFacebookSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AWFAppDelegate+AWFFacebookSDK.m"; sourceTree = "<group>"; };
+		FA9A274B192A53CB00524B64 /* UIViewController+AWFNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AWFNotification.h"; sourceTree = "<group>"; };
+		FA9A274C192A53CB00524B64 /* UIViewController+AWFNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AWFNotification.m"; sourceTree = "<group>"; };
 		FA9A964318CCB2F000F65856 /* AWFWeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFWeightFormatter.h; sourceTree = "<group>"; };
 		FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFWeightFormatter.m; sourceTree = "<group>"; };
 		FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFHeightFormatter.h; sourceTree = "<group>"; };
@@ -369,11 +382,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */,
+				FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */,
 				FADE215A17BCD38D00D3A62B /* MapKit.framework in Frameworks */,
 				FADBF6AA17ADC59E00325DD1 /* QuartzCore.framework in Frameworks */,
-				FADBF65F17ADB68E00325DD1 /* CoreGraphics.framework in Frameworks */,
+				FA9A273F192A364F00524B64 /* Social.framework in Frameworks */,
+				FA9A2741192A366300524B64 /* Twitter.framework in Frameworks */,
 				FADBF66117ADB68E00325DD1 /* UIKit.framework in Frameworks */,
-				FADBF65D17ADB68E00325DD1 /* Foundation.framework in Frameworks */,
 				06DC33336B9B492586CCB402 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,6 +614,8 @@
 		FADBF65B17ADB68E00325DD1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA9A2740192A366300524B64 /* Twitter.framework */,
+				FA9A273E192A364F00524B64 /* Social.framework */,
 				FADE215917BCD38D00D3A62B /* MapKit.framework */,
 				FADBF6A917ADC59E00325DD1 /* QuartzCore.framework */,
 				FADBF65C17ADB68E00325DD1 /* Foundation.framework */,
@@ -629,6 +646,10 @@
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
+				FA9A2745192A4A8000524B64 /* AWFAppDelegate+AWFVKSDK.h */,
+				FA9A2746192A4A8000524B64 /* AWFAppDelegate+AWFVKSDK.m */,
+				FA9A2748192A4F3A00524B64 /* AWFAppDelegate+AWFFacebookSDK.h */,
+				FA9A2749192A4F3A00524B64 /* AWFAppDelegate+AWFFacebookSDK.m */,
 				FAF0F3E418D4C78D0063BB30 /* AWFConfig.h */,
 				FA3D4C3818E84634008C5366 /* AWFConstants.h */,
 				FA3D4C3918E84634008C5366 /* AWFConstants.m */,
@@ -721,6 +742,8 @@
 				FADBF6B217ADCE5400325DD1 /* UIImage+CustomBackgrounds.m */,
 				FA22D15B1912E7C600B025E3 /* UIViewController+ShownTitle.h */,
 				FA22D15C1912E7C600B025E3 /* UIViewController+ShownTitle.m */,
+				FA9A274B192A53CB00524B64 /* UIViewController+AWFNotification.h */,
+				FA9A274C192A53CB00524B64 /* UIViewController+AWFNotification.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1027,6 +1050,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA11ACD317B138D100028A55 /* AWFShapeView.m in Sources */,
+				FA9A274A192A4F3A00524B64 /* AWFAppDelegate+AWFFacebookSDK.m in Sources */,
 				FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */,
 				FA44018A1912D83900D1CA9A /* AWFBodyBuildFormatter.m in Sources */,
 				FA8D71C81868746B00C4B6CC /* AWFLocationManager.m in Sources */,
@@ -1077,6 +1101,7 @@
 				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,
 				FADBF6B317ADCE5400325DD1 /* UIImage+CustomBackgrounds.m in Sources */,
 				FA3D4C3718E84555008C5366 /* AWFClient.m in Sources */,
+				FA9A2747192A4A8000524B64 /* AWFAppDelegate+AWFVKSDK.m in Sources */,
 				FAF0F3E218D4AEBB0063BB30 /* AWFMessagesViewCell.m in Sources */,
 				FA57F9DD18D268C300E12B5F /* AWFFriendsViewController.m in Sources */,
 				FADBF6B917ADD16900325DD1 /* UIColor+ColorTools.m in Sources */,
@@ -1099,6 +1124,7 @@
 				FA24B2EA19293A0600FC485F /* AWFProfileDataSource.m in Sources */,
 				FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */,
 				FA24B2E71929396400FC485F /* AWFProfileHeaderView.m in Sources */,
+				FA9A274D192A53CB00524B64 /* UIViewController+AWFNotification.m in Sources */,
 				FA8D9AF918DB860C00262071 /* AWFActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

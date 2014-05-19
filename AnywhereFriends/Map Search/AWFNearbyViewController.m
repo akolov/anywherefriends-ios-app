@@ -158,10 +158,7 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
-      [AZNotification showNotificationWithTitle:error.localizedDescription
-                                     controller:self
-                               notificationType:AZNotificationTypeError
-       shouldShowNotificationUnderNavigationBar:YES];
+      [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
       ErrorLog(error.localizedDescription);
     }
   }
@@ -195,10 +192,8 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
      [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
    }
    error:^(NSError *error) {
-     [AZNotification showNotificationWithTitle:error.localizedDescription
-                                    controller:self
-                              notificationType:AZNotificationTypeError
-      shouldShowNotificationUnderNavigationBar:YES];
+     @strongify(self);
+     [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
      ErrorLog(error.localizedDescription);
    }];
 }

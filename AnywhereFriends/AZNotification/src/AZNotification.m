@@ -12,7 +12,7 @@
 
 +(void) showNotificationWithTitle:(NSString *)title controller:(UIViewController *)controller notificationType:(AZNotificationType)notificationType shouldShowNotificationUnderNavigationBar:(BOOL)shouldShowNotificationUnderNavigationBar
 {
-    AZNotificationView *notificationView = [[AZNotificationView alloc] initWithTitle:title referenceView:controller.view notificationType:(AZNotificationType) notificationType showNotificationUnderNavigationBar:YES];
+    AZNotificationView *notificationView = [[AZNotificationView alloc] initWithTitle:title referenceView:controller.view notificationType:(AZNotificationType) notificationType showNotificationUnderNavigationBar:shouldShowNotificationUnderNavigationBar];
     
     [controller.view addSubview:notificationView];
     

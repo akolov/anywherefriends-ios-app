@@ -119,10 +119,7 @@
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
-      [AZNotification showNotificationWithTitle:error.localizedDescription
-                                     controller:self
-                               notificationType:AZNotificationTypeError
-       shouldShowNotificationUnderNavigationBar:YES];
+      [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
       ErrorLog(error.localizedDescription);
     }
     else {

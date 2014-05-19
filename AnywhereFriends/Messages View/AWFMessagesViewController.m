@@ -81,10 +81,7 @@ static NSUInteger AWFPageSize = 20;
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
-      [AZNotification showNotificationWithTitle:error.localizedDescription
-                                     controller:self
-                               notificationType:AZNotificationTypeError
-       shouldShowNotificationUnderNavigationBar:YES];
+      [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
       ErrorLog(error.localizedDescription);
     }
   }
@@ -97,10 +94,7 @@ static NSUInteger AWFPageSize = 20;
 - (void)getActivity {
   [[[AWFSession sharedSession] getUserSelfActivity]
    subscribeError:^(NSError *error) {
-     [AZNotification showNotificationWithTitle:error.localizedDescription
-                                    controller:self
-                              notificationType:AZNotificationTypeError
-      shouldShowNotificationUnderNavigationBar:YES];
+     [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
      ErrorLog(error.localizedDescription);
    }];
 }
@@ -136,20 +130,14 @@ static NSUInteger AWFPageSize = 20;
   cell.onAcceptAction = ^{
     [[[AWFSession sharedSession] approveFriendRequestFromUser:activity.creator]
      subscribeError:^(NSError *error) {
-       [AZNotification showNotificationWithTitle:error.localizedDescription
-                                      controller:self
-                                notificationType:AZNotificationTypeError
-        shouldShowNotificationUnderNavigationBar:YES];
+       [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
        ErrorLog(error.localizedDescription);
      }
      completed:^{
        NSError *error;
        [activity.managedObjectContext deleteObject:activity];
        if (![activity.managedObjectContext saveToPersistentStore:&error]) {
-         [AZNotification showNotificationWithTitle:error.localizedDescription
-                                        controller:self
-                                  notificationType:AZNotificationTypeError
-          shouldShowNotificationUnderNavigationBar:YES];
+         [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
          ErrorLog(error.localizedDescription);
        }
      }];
@@ -158,20 +146,14 @@ static NSUInteger AWFPageSize = 20;
   cell.onIgnoreAction = ^{
     [[[AWFSession sharedSession] rejectFriendRequestFromUser:activity.creator]
      subscribeError:^(NSError *error) {
-       [AZNotification showNotificationWithTitle:error.localizedDescription
-                                      controller:self
-                                notificationType:AZNotificationTypeError
-        shouldShowNotificationUnderNavigationBar:YES];
+       [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
        ErrorLog(error.localizedDescription);
      }
      completed:^{
        NSError *error;
        [activity.managedObjectContext deleteObject:activity];
        if (![activity.managedObjectContext saveToPersistentStore:&error]) {
-         [AZNotification showNotificationWithTitle:error.localizedDescription
-                                        controller:self
-                                  notificationType:AZNotificationTypeError
-          shouldShowNotificationUnderNavigationBar:YES];
+         [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
          ErrorLog(error.localizedDescription);
        }
      }];

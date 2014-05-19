@@ -330,6 +330,41 @@
           }];
 }
 
+- (RACSignal *)openSessionWithTwitterToken:(NSString *)twitterToken {
+
+  NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+  [parameters setValue:twitterToken forKey:AWFURLParameterTwitterToken];
+
+  @weakify(self);
+  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]
+           then:^RACSignal *{
+             return [self getUserSelf];
+           }]
+          map:^id(AWFPerson *person) {
+            @strongify(self);
+            self.currentUserID = person.personID;
+            [[NSNotificationCenter defaultCenter] postNotificationName:AWFUserDidLoginNotification object:self.currentUser];
+            return self.currentUser;
+          }];
+}
+
+- (RACSignal *)openSessionWithVKToken:(NSString *)vkToken {
+  NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+  [parameters setValue:vkToken forKey:AWFURLParameterVKToken];
+
+  @weakify(self);
+  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]
+           then:^RACSignal *{
+             return [self getUserSelf];
+           }]
+          map:^id(AWFPerson *person) {
+            @strongify(self);
+            self.currentUserID = person.personID;
+            [[NSNotificationCenter defaultCenter] postNotificationName:AWFUserDidLoginNotification object:self.currentUser];
+            return self.currentUser;
+          }];
+}
+
 - (RACSignal *)closeSession {
   @weakify(self);
   RACSignal *signal = [[AWFClient sharedClient] rac_postPath:AWFAPIPathLogout parameters:nil];

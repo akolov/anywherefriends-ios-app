@@ -48,10 +48,8 @@
      self.personID = person.personID;
    }
    error:^(NSError *error) {
-     [AZNotification showNotificationWithTitle:error.localizedDescription
-                                    controller:self
-                              notificationType:AZNotificationTypeError
-      shouldShowNotificationUnderNavigationBar:YES];
+     @strongify(self);
+     [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
      ErrorLog(error.localizedDescription);
    }];
 }
@@ -79,11 +77,10 @@
   self.dataSource.editing = editing;
 
   if (!editing) {
+    @weakify(self);
     [[[AWFSession sharedSession] updateUserSelf] subscribeError:^(NSError *error) {
-      [AZNotification showNotificationWithTitle:error.localizedDescription
-                                     controller:self
-                               notificationType:AZNotificationTypeError
-       shouldShowNotificationUnderNavigationBar:YES];
+      @strongify(self);
+      [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
       ErrorLog(error.localizedDescription);
     }];
   }
@@ -105,11 +102,10 @@
 #pragma mark - Actions
 
 - (void)didTapLogoutButton:(id)sender {
+  @weakify(self);
   [[[AWFSession sharedSession] closeSession] subscribeError:^(NSError *error) {
-    [AZNotification showNotificationWithTitle:error.localizedDescription
-                                   controller:self
-                             notificationType:AZNotificationTypeError
-     shouldShowNotificationUnderNavigationBar:YES];
+    @strongify(self);
+    [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
     ErrorLog(error.localizedDescription);
   } completed:^{
     [[NSNotificationCenter defaultCenter] postNotificationName:AWFLoginRequiredNotification object:nil];

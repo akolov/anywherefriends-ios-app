@@ -8,6 +8,8 @@
 
 #import "AWFConfig.h"
 #import "AWFAppDelegate.h"
+#import "AWFAppDelegate+AWFFacebookSDK.h"
+#import "AWFAppDelegate+AWFVKSDK.h"
 
 #import "AZNotification.h"
 #import <AXKRACExtensions/NSNotificationCenter+AXKRACExtensions.h>
@@ -23,9 +25,12 @@
 #import "AWFNearbyViewController.h"
 #import "AWFNavigationController.h"
 #import "AWFSession.h"
-#import "AWFSignupViewController.h"
 
 @implementation AWFAppDelegate
+
++ (instancetype)sharedInstance {
+  return (AWFAppDelegate *)[UIApplication sharedApplication].delegate;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
@@ -71,7 +76,9 @@
 
   @weakify(self);
 
-  if (!AWFSession.isLoggedIn) {
+  [VKSdk initializeWithDelegate:self andAppId:@"4370266"];
+
+  if (![AWFSession isLoggedIn]) {
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
       [FBSession
        openActiveSessionWithReadPermissions:AWF_FACEBOOK_PERMISSIONS
@@ -83,10 +90,8 @@
   }
 
   [[[AWFSession sharedSession] getUserSelf] subscribeError:^(NSError *error) {
-    [AZNotification showNotificationWithTitle:error.localizedDescription
-                                   controller:self.tabBarController.selectedViewController
-                             notificationType:AZNotificationTypeError
-     shouldShowNotificationUnderNavigationBar:YES];
+    @strongify(self);
+    [self.tabBarController showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
     ErrorLog(error.localizedDescription);
   }];
 
@@ -123,11 +128,18 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
   [FBSession.activeSession setStateChangeHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-     AWFAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-     [appDelegate sessionStateChanged:session state:state error:error];
-   }];
+    AWFAppDelegate *appDelegate = [AWFAppDelegate sharedInstance];
+    [appDelegate sessionStateChanged:session state:state error:error];
+  }];
 
-  return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+  if ([url.scheme hasPrefix:@"fb"]) {
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+  }
+  else if ([url.scheme hasPrefix:@"vk"]) {
+    return [VKSdk processOpenURL:url fromApplication:sourceApplication];
+  }
+
+  return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -150,114 +162,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-#pragma mark - Facebook Session State
-
-- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error {
-  switch (state) {
-    case FBSessionStateClosed:
-    case FBSessionStateClosedLoginFailed:
-      [FBSession.activeSession closeAndClearTokenInformation];
-      return;
-    default:
-      break;
-  }
-
-  if (error) {
-    if ([FBErrorUtility shouldNotifyUserForError:error]) {
-      [AZNotification showNotificationWithTitle:[FBErrorUtility userMessageForError:error]
-                                     controller:self.tabBarController.selectedViewController
-                               notificationType:AZNotificationTypeError
-       shouldShowNotificationUnderNavigationBar:YES];
-    }
-    else {
-      if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-        // User cancelled log in
-      }
-      else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
-        [AZNotification showNotificationWithTitle:[FBErrorUtility userMessageForError:error]
-                                       controller:self.tabBarController.selectedViewController
-                                 notificationType:AZNotificationTypeError
-         shouldShowNotificationUnderNavigationBar:YES];
-      }
-      else {
-        NSDictionary *errorInformation = error.userInfo[@"com.facebook.sdk:ParsedJSONResponseKey"][@"body"][@"error"];
-        [AZNotification showNotificationWithTitle:errorInformation[@"message"]
-                                       controller:self.tabBarController.selectedViewController
-                                 notificationType:AZNotificationTypeError
-         shouldShowNotificationUnderNavigationBar:YES];
-      }
-    }
-
-    [FBSession.activeSession closeAndClearTokenInformation];
-  }
-  else {
-    [FBRequestConnection
-     startForMeWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser> user, NSError *facebookError) {
-       if (!facebookError) {
-         NSString *email = [user objectForKey:@"email"];
-
-         [[[AWFSession sharedSession] openSessionWithFacebookToken:session.accessTokenData.accessToken]
-          subscribeError:^(NSError *error) {
-            NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
-                                                           allowLossyConversion:NO];
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:0 error:&error];
-
-            for (NSDictionary *errorDict in dict[@"errors"]) {
-              if ([[errorDict[@"message"] lowercaseString] isEqualToString:@"user not found"]) {
-                AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
-
-                vc.email = email;
-                vc.firstName = user.first_name;
-                vc.lastName = user.last_name;
-
-                if ([[user objectForKey:@"gender"] isEqualToString:@"male"]) {
-                  vc.gender = AWFGenderMale;
-                }
-                else {
-                  vc.gender = AWFGenderFemale;
-                }
-
-                if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
-                  UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
-                  [navigation pushViewController:vc animated:NO];
-                }
-                else {
-                  AWFNavigationController *navigation = [[AWFNavigationController alloc] initWithRootViewController:vc];
-                  [self.tabBarController presentViewController:navigation animated:NO completion:NULL];
-                }
-
-                return;
-              }
-            }
-
-            [AZNotification showNotificationWithTitle:error.localizedDescription
-                                           controller:self.tabBarController.selectedViewController
-                                     notificationType:AZNotificationTypeError
-             shouldShowNotificationUnderNavigationBar:YES];
-          } completed:^{
-            if (self.tabBarController.presentedViewController) {
-              if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
-                UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
-                if ([[navigation.viewControllers firstObject] isKindOfClass:[AWFLoginViewController class]]) {
-                  [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
-                }
-              }
-              else {
-                [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
-              }
-            }
-          }];
-       }
-       else {
-         [AZNotification showNotificationWithTitle:[FBErrorUtility userMessageForError:facebookError]
-                                        controller:self.tabBarController.selectedViewController
-                                  notificationType:AZNotificationTypeError
-          shouldShowNotificationUnderNavigationBar:YES];
-       }
-     }];
-  }
 }
 
 @end

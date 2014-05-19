@@ -36,6 +36,10 @@ OBJC_EXPORT NSString *const AWFURLParameterVKToken;
 
 #define AWF_FACEBOOK_PERMISSIONS @[@"email", @"user_birthday", @"user_likes", @"user_location"]
 
+// VK
+
+#define AWF_VK_PERMISSIONS @[@"offline", @"email"]
+
 // CoreData
 
 OBJC_EXPORT NSString *const AWFPersistentStoreName;
