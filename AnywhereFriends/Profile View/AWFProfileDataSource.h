@@ -20,6 +20,7 @@
 
 @class AWFDatePickerViewCell;
 @class AWFPerson;
+@class AWFPickerViewCell;
 @class AWFProfileCell;
 
 @interface AWFProfileDataSource : NSObject <UITableViewDataSource>
@@ -35,7 +36,14 @@
 @property (nonatomic, strong, readonly) UITableViewCell *hairColorCell;
 @property (nonatomic, strong, readonly) UITableViewCell *eyeColorCell;
 
+@property (nonatomic, strong, readonly) AWFPickerViewCell *editingGenderCell;
 @property (nonatomic, strong, readonly) AWFDatePickerViewCell *editingBirthdayCell;
+@property (nonatomic, strong, readonly) AWFPickerViewCell *editingHeightCell;
+@property (nonatomic, strong, readonly) AWFPickerViewCell *editingWeightCell;
+@property (nonatomic, strong, readonly) AWFPickerViewCell *editingBodyBuildCell;
+@property (nonatomic, strong, readonly) AWFPickerViewCell *editingHairLengthCell;
+@property (nonatomic, strong, readonly) AWFPickerViewCell *editingHairColorCell;
+@property (nonatomic, strong, readonly) AWFPickerViewCell *editingEyeColorCell;
 
 @property (nonatomic, strong, readonly) NSArray *currentCells;
 @property (nonatomic, strong, readonly) NSArray *normalCells;

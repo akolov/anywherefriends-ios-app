@@ -21,9 +21,10 @@
 #import "AWFHairColorFormatter.h"
 #import "AWFHairLengthFormatter.h"
 #import "AWFHeightFormatter.h"
+#import "AWFPickerViewCell.h"
 #import "AWFWeightFormatter.h"
 
-@interface AWFProfileDataSource () <NSFetchedResultsControllerDelegate>
+@interface AWFProfileDataSource () <NSFetchedResultsControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, strong) UITableViewCell *locationCell;
 @property (nonatomic, strong) UITableViewCell *genderCell;
@@ -36,7 +37,14 @@
 @property (nonatomic, strong) UITableViewCell *hairColorCell;
 @property (nonatomic, strong) UITableViewCell *eyeColorCell;
 
+@property (nonatomic, strong) AWFPickerViewCell *editingGenderCell;
 @property (nonatomic, strong) AWFDatePickerViewCell *editingBirthdayCell;
+@property (nonatomic, strong) AWFPickerViewCell *editingHeightCell;
+@property (nonatomic, strong) AWFPickerViewCell *editingWeightCell;
+@property (nonatomic, strong) AWFPickerViewCell *editingBodyBuildCell;
+@property (nonatomic, strong) AWFPickerViewCell *editingHairLengthCell;
+@property (nonatomic, strong) AWFPickerViewCell *editingHairColorCell;
+@property (nonatomic, strong) AWFPickerViewCell *editingEyeColorCell;
 
 @property (nonatomic, strong) AWFAgeFormatter *ageFormatter;
 @property (nonatomic, strong) NSDateFormatter *birthdayFormatter;
@@ -48,6 +56,12 @@
 @property (nonatomic, strong) AWFHeightFormatter *heightFormatter;
 @property (nonatomic, strong) AWFWeightFormatter *weightFormatter;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeFormatter;
+
+@property (nonatomic, strong) NSArray *genders;
+@property (nonatomic, strong) NSArray *bodyBuilds;
+@property (nonatomic, strong) NSArray *hairLengths;
+@property (nonatomic, strong) NSArray *hairColors;
+@property (nonatomic, strong) NSArray *eyeColors;
 
 @end
 
@@ -75,6 +89,111 @@
 
   cell.detailTextLabel.font = [UIFont helveticaNeueFontOfSize:18.0f];
   cell.detailTextLabel.textColor = [UIColor blackColor];
+}
+
+#pragma mark - Properties
+
+- (void)setEditing:(BOOL)editing {
+  if (_editing == editing) {
+    return;
+  }
+
+  _editing = editing;
+
+  NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+  BOOL isMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
+
+  if (_editing) {
+    NSInteger genderIndex = [self.genders indexOfObject:self.person.gender];
+    [self.editingGenderCell.pickerView selectRow:(genderIndex == NSNotFound ? 0 : genderIndex) inComponent:0 animated:NO];
+
+    NSDate *date;
+    if (self.person.birthday) {
+      date = self.person.birthday;
+    }
+    else {
+      NSDateComponents *components =
+        [[NSCalendar autoupdatingCurrentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
+                                                    fromDate:[NSDate date]];
+      components.year -= 18;
+      date = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:components];
+    }
+
+    self.editingBirthdayCell.datePicker.date = date;
+
+    if (isMetric) {
+      NSInteger heightFirstIndex = (unsigned int)self.person.heightValue / 100;
+      NSInteger heightSecondIndex = (unsigned int)self.person.heightValue % 100;
+
+      [self.editingHeightCell.pickerView selectRow:heightFirstIndex inComponent:0 animated:NO];
+      [self.editingHeightCell.pickerView selectRow:heightSecondIndex inComponent:1 animated:NO];
+    }
+    else {
+      NSInteger heightFirstIndex = self.person.heightValue / 30.48f;
+      NSInteger heightSecondIndex = fmodf(self.person.heightValue, 30.48f) * 12.0f;
+
+      [self.editingHeightCell.pickerView selectRow:heightFirstIndex inComponent:0 animated:NO];
+      [self.editingHeightCell.pickerView selectRow:heightSecondIndex inComponent:1 animated:NO];
+    }
+
+    if (isMetric) {
+      NSInteger weightIndex = self.person.weightValue == 0 ? 0 : self.person.weightValue - 30.0f;
+      [self.editingWeightCell.pickerView selectRow:weightIndex inComponent:0 animated:NO];
+    }
+    else {
+      NSInteger weightIndex = self.person.weightValue == 0 ? 0 : (self.person.weightValue - 30.0f) / 0.45f;
+      [self.editingWeightCell.pickerView selectRow:weightIndex inComponent:0 animated:NO];
+    }
+
+    NSInteger bodyBuildIndex = [self.bodyBuilds indexOfObject:self.person.bodyBuild];
+    [self.editingBodyBuildCell.pickerView selectRow:(bodyBuildIndex == NSNotFound ? 0 : bodyBuildIndex) inComponent:0 animated:NO];
+
+    NSInteger hairLengthIndex = [self.hairLengths indexOfObject:self.person.hairLength];
+    [self.editingHairLengthCell.pickerView selectRow:(hairLengthIndex == NSNotFound ? 0 : hairLengthIndex) inComponent:0 animated:NO];
+
+    NSInteger hairColorIndex = [self.hairColors indexOfObject:self.hairColors];
+    [self.editingHairColorCell.pickerView selectRow:(hairColorIndex == NSNotFound ? 0 : hairColorIndex) inComponent:0 animated:NO];
+
+    NSInteger eyeColorIndex = [self.eyeColors indexOfObject:self.person.eyeColor];
+    [self.editingEyeColorCell.pickerView selectRow:(eyeColorIndex == NSNotFound ? 0 : eyeColorIndex) inComponent:0 animated:NO];
+  }
+  else {
+    NSInteger genderIndex = [self.editingGenderCell.pickerView selectedRowInComponent:0];
+    self.person.gender = self.genders[genderIndex];
+
+    NSDate *birthday = [self.editingBirthdayCell.datePicker date];
+    self.person.birthday = birthday;
+
+    NSInteger heightFirstIndex = [self.editingHeightCell.pickerView selectedRowInComponent:0];
+    NSInteger heightSecondIndex = [self.editingHeightCell.pickerView selectedRowInComponent:1];
+
+    if (isMetric) {
+      self.person.heightValue = (float)heightFirstIndex + (float)heightSecondIndex / 100.0f;
+    }
+    else {
+      self.person.heightValue = (float)heightFirstIndex * 30.48f + (float)heightSecondIndex * 2.54f;
+    }
+
+    NSInteger weightIndex = [self.editingWeightCell.pickerView selectedRowInComponent:0];
+    if (isMetric) {
+      self.person.weightValue = (float)weightIndex + 30.0f;
+    }
+    else {
+      self.person.weightValue = (float)weightIndex * 0.45f + 30.0f;
+    }
+
+    NSInteger bodyBuildIndex = [self.editingBodyBuildCell.pickerView selectedRowInComponent:0];
+    self.person.bodyBuild = self.bodyBuilds[bodyBuildIndex];
+
+    NSInteger hairLengthIndex = [self.editingHairLengthCell.pickerView selectedRowInComponent:0];
+    self.person.hairLength = self.hairLengths[hairLengthIndex];
+
+    NSInteger hairColorIndex = [self.editingHairColorCell.pickerView selectedRowInComponent:0];
+    self.person.hairColor = self.hairColors[hairColorIndex];
+
+    NSInteger eyeColorIndex = [self.editingEyeColorCell.pickerView selectedRowInComponent:0];
+    self.person.eyeColor = self.eyeColors[eyeColorIndex];
+  }
 }
 
 #pragma mark - Cells
@@ -321,24 +440,19 @@
   return _eyeColorCell;
 }
 
-- (NSArray *)normalCells {
-  return @[@[self.locationCell],
-           @[self.genderCell, self.ageCell, self.birthdayCell],
-           @[self.heightCell, self.weightCell, self.bodyBuildCell, self.hairLengthCell, self.hairColorCell,
-             self.eyeColorCell]];
-}
-
-- (NSArray *)editingCells {
-  return @[@[self.genderCell, self.editingBirthdayCell],
-           @[self.heightCell, self.weightCell, self.bodyBuildCell, self.hairLengthCell, self.hairColorCell,
-             self.eyeColorCell]];
-}
-
-- (NSArray *)currentCells {
-  return self.editing ? self.editingCells : self.normalCells;
-}
-
 #pragma mark - Editing cells
+
+- (AWFPickerViewCell *)editingGenderCell {
+  if (!_editingGenderCell) {
+    _editingGenderCell = [[AWFPickerViewCell alloc] init];
+    _editingGenderCell.pickerView.dataSource = self;
+    _editingGenderCell.pickerView.delegate = self;
+  }
+
+  _editingGenderCell.titleLabel.text = NSLocalizedString(@"AWF_GENDER", nil);
+
+  return _editingGenderCell;
+}
 
 - (AWFDatePickerViewCell *)editingBirthdayCell {
   if (!_editingBirthdayCell) {
@@ -371,6 +485,97 @@
   }
 
   return _editingBirthdayCell;
+}
+
+- (AWFPickerViewCell *)editingHeightCell {
+  if (!_editingHeightCell) {
+    _editingHeightCell = [[AWFPickerViewCell alloc] init];
+    _editingHeightCell.pickerView.dataSource = self;
+    _editingHeightCell.pickerView.delegate = self;
+  }
+
+  _editingHeightCell.titleLabel.text = NSLocalizedString(@"AWF_HEIGHT", nil);
+
+  return _editingHeightCell;
+}
+
+- (AWFPickerViewCell *)editingWeightCell {
+  if (!_editingWeightCell) {
+    _editingWeightCell = [[AWFPickerViewCell alloc] init];
+    _editingWeightCell.pickerView.dataSource = self;
+    _editingWeightCell.pickerView.delegate = self;
+  }
+
+  _editingWeightCell.titleLabel.text = NSLocalizedString(@"AWF_WEIGHT", nil);
+
+  return _editingWeightCell;
+}
+
+- (AWFPickerViewCell *)editingBodyBuildCell {
+  if (!_editingBodyBuildCell) {
+    _editingBodyBuildCell = [[AWFPickerViewCell alloc] init];
+    _editingBodyBuildCell.pickerView.dataSource = self;
+    _editingBodyBuildCell.pickerView.delegate = self;
+  }
+
+  _editingBodyBuildCell.titleLabel.text = NSLocalizedString(@"AWF_BODY_BUILD", nil);
+
+  return _editingBodyBuildCell;
+}
+
+- (AWFPickerViewCell *)editingHairLengthCell {
+  if (!_editingHairLengthCell) {
+    _editingHairLengthCell = [[AWFPickerViewCell alloc] init];
+    _editingHairLengthCell.pickerView.dataSource = self;
+    _editingHairLengthCell.pickerView.delegate = self;
+  }
+
+  _editingHairLengthCell.titleLabel.text = NSLocalizedString(@"AWF_HAIR_LENGTH", nil);
+
+  return _editingHairLengthCell;
+}
+
+- (AWFPickerViewCell *)editingHairColorCell {
+  if (!_editingHairColorCell) {
+    _editingHairColorCell = [[AWFPickerViewCell alloc] init];
+    _editingHairColorCell.pickerView.dataSource = self;
+    _editingHairColorCell.pickerView.delegate = self;
+  }
+
+  _editingHairColorCell.titleLabel.text = NSLocalizedString(@"AWF_HAIR_COLOR", nil);
+
+  return _editingHairColorCell;
+}
+
+- (AWFPickerViewCell *)editingEyeColorCell {
+  if (!_editingEyeColorCell) {
+    _editingEyeColorCell = [[AWFPickerViewCell alloc] init];
+    _editingEyeColorCell.pickerView.dataSource = self;
+    _editingEyeColorCell.pickerView.delegate = self;
+  }
+
+  _editingEyeColorCell.titleLabel.text = NSLocalizedString(@"AWF_EYE_COLOR", nil);
+
+  return _editingEyeColorCell;
+}
+
+#pragma mark - Cell arrays
+
+- (NSArray *)normalCells {
+  return @[@[self.locationCell],
+           @[self.genderCell, self.ageCell, self.birthdayCell],
+           @[self.heightCell, self.weightCell, self.bodyBuildCell,
+             self.hairLengthCell, self.hairColorCell, self.eyeColorCell]];
+}
+
+- (NSArray *)editingCells {
+  return @[@[self.editingGenderCell, self.editingBirthdayCell],
+           @[self.editingHeightCell, self.editingWeightCell, self.editingBodyBuildCell,
+             self.editingHairLengthCell, self.editingHairColorCell, self.editingEyeColorCell]];
+}
+
+- (NSArray *)currentCells {
+  return self.editing ? self.editingCells : self.normalCells;
 }
 
 #pragma mark - Formatters
@@ -448,6 +653,182 @@
     _timeFormatter = [[TTTTimeIntervalFormatter alloc] init];
   }
   return _timeFormatter;
+}
+
+#pragma mark - Data Arrays
+
+- (NSArray *)genders {
+  if (!_genders) {
+    _genders = @[@(AWFGenderUnknown), @(AWFGenderFemale), @(AWFGenderMale)];
+  }
+  return _genders;
+}
+
+- (NSArray *)bodyBuilds {
+  if (!_bodyBuilds) {
+    _bodyBuilds = @[@(AWFBodyBuildUnknown),
+                    @(AWFBodyBuildSlim),
+                    @(AWFBodyBuildAverage),
+                    @(AWFBodyBuildAthletic),
+                    @(AWFBodyBuildExtraPounds)];
+  }
+  return _bodyBuilds;
+}
+
+- (NSArray *)hairLengths {
+  if (!_hairLengths) {
+    _hairLengths = @[@(AWFHairLengthUnknown), @(AWFHairLengthShort), @(AWFHairLengthMedium), @(AWFHairLengthLong)];
+  }
+  return _hairLengths;
+}
+
+- (NSArray *)hairColors {
+  if (!_hairColors) {
+    _hairColors = @[@(AWFHairColorUnknown),
+                    @(AWFHairColorAuburn),
+                    @(AWFHairColorBlack),
+                    @(AWFHairColorBlond),
+                    @(AWFHairColorBrown),
+                    @(AWFHairColorChestnut),
+                    @(AWFHairColorGray),
+                    @(AWFHairColorRed),
+                    @(AWFHairColorWhite)];;
+  }
+  return _hairColors;
+}
+
+- (NSArray *)eyeColors {
+  if (!_eyeColors) {
+    _eyeColors = @[@(AWFEyeColorUnknown),
+                   @(AWFEyeColorAmber),
+                   @(AWFEyeColorBlue),
+                   @(AWFEyeColorBrown),
+                   @(AWFEyeColorGray),
+                   @(AWFEyeColorGreen),
+                   @(AWFEyeColorHazel),
+                   @(AWFEyeColorRed),
+                   @(AWFEyeColorViolet)];
+  }
+  return _eyeColors;
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+  if (pickerView == self.editingGenderCell.pickerView) {
+    return 1;
+  }
+  else if (pickerView == self.editingHeightCell.pickerView) {
+    return 2;
+  }
+  else if (pickerView == self.editingWeightCell.pickerView) {
+    return 1;
+  }
+  else if (pickerView == self.editingBodyBuildCell.pickerView) {
+    return 1;
+  }
+  else if (pickerView == self.editingHairLengthCell.pickerView) {
+    return 1;
+  }
+  else if (pickerView == self.editingHairColorCell.pickerView) {
+    return 1;
+  }
+  else if (pickerView == self.editingEyeColorCell.pickerView) {
+    return 1;
+  }
+
+  return 0;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+  NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+  BOOL isMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
+
+  if (pickerView == self.editingGenderCell.pickerView) {
+    return [self.genders count];
+  }
+  else if (pickerView == self.editingHeightCell.pickerView) {
+    if (isMetric) {
+      if (component == 0) {
+        return 3;
+      }
+      else {
+        return 99;
+      }
+    }
+    else {
+      if (component == 0) {
+        return 4;
+      }
+      else {
+        return 11;
+      }
+    }
+    return 180;
+  }
+  else if (pickerView == self.editingWeightCell.pickerView) {
+    return 200;
+  }
+  else if (pickerView == self.editingBodyBuildCell.pickerView) {
+    return [self.bodyBuilds count];
+  }
+  else if (pickerView == self.editingHairLengthCell.pickerView) {
+    return [self.hairLengths count];
+  }
+  else if (pickerView == self.editingHairColorCell.pickerView) {
+    return [self.hairColors count];
+  }
+  else if (pickerView == self.editingEyeColorCell.pickerView) {
+    return [self.eyeColors count];
+  }
+
+  return 0;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+  NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+  BOOL isMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
+
+  if (pickerView == self.editingGenderCell.pickerView) {
+    return [[self.genderFormatter stringForObjectValue:self.genders[row]] capitalizedString];
+  }
+  else if (pickerView == self.editingHeightCell.pickerView) {
+    if (isMetric) {
+      return [self.heightFormatter stringFromHeight:@(row)];
+    }
+    else {
+      if (component == 0) {
+        return [self.heightFormatter stringFromHeight:@(row * 30.48f)];
+      }
+      else {
+        return [self.heightFormatter stringFromHeight:@(row * 2.54f)];
+      }
+    }
+  }
+  else if (pickerView == self.editingWeightCell.pickerView) {
+    if (isMetric) {
+      return [self.weightFormatter stringFromWeight:@(row + 30.0f)];
+    }
+    else {
+      return [self.weightFormatter stringFromWeight:@(row * 0.45f + 30.0f)];
+    }
+  }
+  else if (pickerView == self.editingBodyBuildCell.pickerView) {
+    return [[self.bodyBuildFormatter stringForObjectValue:self.bodyBuilds[row]] capitalizedString];
+  }
+  else if (pickerView == self.editingHairLengthCell.pickerView) {
+    return [[self.hairLengthFormatter stringForObjectValue:self.hairLengths[row]] capitalizedString];
+  }
+  else if (pickerView == self.editingHairColorCell.pickerView) {
+    return [[self.hairColorFormatter stringForObjectValue:self.hairColors[row]] capitalizedString];
+  }
+  else if (pickerView == self.editingEyeColorCell.pickerView) {
+    return [[self.eyeColorFormatter stringForObjectValue:self.eyeColors[row]] capitalizedString];
+  }
+
+  return nil;
 }
 
 #pragma mark - UITableViewDataSource

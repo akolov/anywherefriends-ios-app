@@ -12,4 +12,6 @@
 
 - (NSString *)stringFromHeight:(NSNumber *)height;
 
++ (float)centimetersWithFeet:(float)feet inches:(float)inches;
+
 @end

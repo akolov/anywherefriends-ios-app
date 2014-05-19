@@ -17,12 +17,7 @@
 #import "AWFLabelButton.h"
 #import "AWFMapViewController.h"
 #import "AWFPerson.h"
-#import "AWFProfileBodyBuildViewController.h"
 #import "AWFProfileDataSource.h"
-#import "AWFProfileEyeColorViewController.h"
-#import "AWFProfileGenderViewController.h"
-#import "AWFProfileHairColorViewController.h"
-#import "AWFProfileHairLengthViewController.h"
 #import "AWFProfileHeaderView.h"
 #import "AWFSession.h"
 
@@ -76,18 +71,15 @@
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+  self.dataSource.editing = editing;
+
   if (!editing) {
-    AWFDatePickerViewCell *cell = [self.dataSource editingBirthdayCell];
-    AWFPerson *me = [[AWFSession sharedSession] currentUser];
-    me.birthday = cell.datePicker.date;
     [[[AWFSession sharedSession] updateUserSelf] subscribeError:^(NSError *error) {
       ErrorLog(error.localizedDescription);
     }];
   }
 
   [super setEditing:editing animated:animated];
-
-  self.dataSource.editing = editing;
 
   if (animated) {
     [UIView animateWithDuration:0.25f animations:^{
@@ -114,72 +106,9 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (!self.isEditing) {
-    return;
-  }
-
-  switch (indexPath.section) {
-    case 0: {
-      switch (indexPath.row) {
-        case 0: {
-          AWFMapViewController *vc = [[AWFMapViewController alloc] initWithPerson:self.person];
-          [self.navigationController pushViewController:vc animated:YES];
-        }
-          break;
-
-        default:
-          break;
-      }
-    }
-      break;
-
-    case 1: {
-      switch (indexPath.row) {
-        case 0: {
-          AWFProfileGenderViewController *vc = [[AWFProfileGenderViewController alloc] init];
-          [self.navigationController pushViewController:vc animated:YES];
-        }
-          break;
-
-        default:
-          break;
-      }
-    }
-      break;
-
-    case 2: {
-      switch (indexPath.row) {
-        case 2: {
-          AWFProfileBodyBuildViewController *vc = [[AWFProfileBodyBuildViewController alloc] init];
-          [self.navigationController pushViewController:vc animated:YES];
-        }
-          break;
-
-        case 3: {
-          AWFProfileHairLengthViewController *vc = [[AWFProfileHairLengthViewController alloc] init];
-          [self.navigationController pushViewController:vc animated:YES];
-        }
-          break;
-
-        case 4: {
-          AWFProfileHairColorViewController *vc = [[AWFProfileHairColorViewController alloc] init];
-          [self.navigationController pushViewController:vc animated:YES];
-        }
-          break;
-
-        case 5: {
-          AWFProfileEyeColorViewController *vc = [[AWFProfileEyeColorViewController alloc] init];
-          [self.navigationController pushViewController:vc animated:YES];
-        }
-          break;
-          
-        default:
-          break;
-      }
-    }
-
-    default:
-      break;
+  if (!self.isEditing && indexPath.section == 0 && indexPath.row == 0) {
+    AWFMapViewController *vc = [[AWFMapViewController alloc] initWithPerson:self.person];
+    [self.navigationController pushViewController:vc animated:YES];
   }
 }
 

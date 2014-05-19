@@ -9,6 +9,12 @@
 #import "AWFConfig.h"
 #import "AWFPickerViewCell.h"
 
+@interface AWFPickerViewCell ()
+
+@property (nonatomic, assign) BOOL didSetupConstraints;
+
+@end
+
 @implementation AWFPickerViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -22,13 +28,30 @@
     [self.contentView addSubview:self.titleLabel];
 
     self.pickerView = [UIPickerView autolayoutView];
+    self.pickerView.backgroundColor = [UIColor colorWithWhite:0.95f alpha:1.0f];
     [self.contentView addSubview:self.pickerView];
-
-    [self pin:@"H:|-15.0-[titleLabel]-(>=0)-|" options:0 owner:self];
-    [self.pickerView pinToFillContainerOnAxis:UILayoutConstraintAxisHorizontal];
-    [self pin:@"V:|-15.0-[titleLabel]-[pickerView]-15.0-|" options:0 owner:self];
   }
   return self;
 }
+
+- (void)updateConstraints {
+  if (!self.didSetupConstraints) {
+    CGRect bounds = self.contentView.bounds;
+    bounds.size.height = 100.0f;
+    self.contentView.bounds = bounds;
+
+    [self.contentView pin:@"H:|-15.0-[titleLabel]-(>=0)-|" options:0 owner:self];
+    [self.pickerView pinToFillContainerOnAxis:UILayoutConstraintAxisHorizontal];
+    [self.contentView pin:@"V:|-15.0-[titleLabel]-[pickerView]-15.0-|" options:0 owner:self];
+
+    self.didSetupConstraints = YES;
+  }
+  [super updateConstraints];
+}
+
+- (UILabel *)textLabel {
+  return self.titleLabel;
+}
+
 
 @end

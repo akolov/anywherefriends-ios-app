@@ -12,6 +12,8 @@
 @interface AWFDatePickerViewCell ()
 
 @property (nonatomic, assign) BOOL didSetupConstraints;
+@property (nonatomic, strong) UIView *separatorTop;
+@property (nonatomic, strong) UIView *separatorBottom;
 
 @end
 
@@ -28,7 +30,7 @@
     [self.contentView addSubview:self.titleLabel];
 
     self.datePicker = [UIDatePicker autolayoutView];
-    self.datePicker.tintColor = [UIColor whiteColor];
+    self.datePicker.backgroundColor = [UIColor colorWithWhite:0.95f alpha:1.0f];
     [self.contentView addSubview:self.datePicker];
   }
   return self;
@@ -52,4 +54,5 @@
 - (UILabel *)textLabel {
   return self.titleLabel;
 }
+
 @end

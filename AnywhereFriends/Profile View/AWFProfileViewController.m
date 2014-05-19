@@ -199,7 +199,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = self.dataSource.currentCells[indexPath.section][indexPath.row];
-  if ([cell isKindOfClass:[AWFDatePickerViewCell class]]) {
+  if ([cell isKindOfClass:[AWFDatePickerViewCell class]] || [cell isKindOfClass:[AWFPickerViewCell class]]) {
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
 

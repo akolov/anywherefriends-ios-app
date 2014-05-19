@@ -9,9 +9,12 @@
 #import "AWFConfig.h"
 #import "AWFWeightFormatter.h"
 
+static float __poundsInKilogram = 2.20462f;
+
 @interface AWFWeightFormatter ()
 
-+ (NSNumber *)metricToImperial:(NSNumber *)metric;
++ (NSString *)metricStringWithKilograms:(NSNumber *)kilograms locale:(NSLocale *)locale;
++ (NSString *)imperialStringWithKilograms:(NSNumber *)kilograms locale:(NSLocale *)locale;
 
 @end
 
@@ -19,45 +22,22 @@
 
 - (NSString *)stringFromWeight:(NSNumber *)weight {
   NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
-  NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
   BOOL isMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
 
-  if ([languageCode isEqualToString:@"en"]) {
-    if (!weight || [weight unsignedIntegerValue] == 0) {
-      return [NSString stringWithFormat:@"—"];
-    }
-    else {
-      if (isMetric) {
-        return [NSString stringWithFormat:@"%lu kg", [weight unsignedLongValue]];
-      }
-      else {
-        return [NSString stringWithFormat:@"%lu lbs", [[AWFWeightFormatter metricToImperial:weight] unsignedLongValue]];
-      }
+  if (!weight) {
+    return [NSString stringWithFormat:@"—"];
+  }
+  else if ([weight isEqualToNumber:@0]) {
+    return @"0";
+  }
+  else {
+    if (isMetric) {
+      return [[self class] metricStringWithKilograms:weight locale:locale];
+    } else {
+      return [[self class] imperialStringWithKilograms:weight locale:locale];
     }
   }
-  else if ([languageCode isEqualToString:@"ru"]) {
-    if (!weight || [weight unsignedIntegerValue] == 0) {
-      return [NSString stringWithFormat:@"—"];
-    }
-    else {
-      if (isMetric) {
-        return [NSString stringWithFormat:@"%lu кг", [weight unsignedLongValue]];
-      }
-      else {
-        unsigned long _weight = [[AWFWeightFormatter metricToImperial:weight] unsignedIntegerValue] % 100;
-        switch (_weight) {
-          case 1:
-            return [NSString stringWithFormat:@"%lu фунт", _weight];
-          case 2:
-          case 3:
-          case 4:
-            return [NSString stringWithFormat:@"%lu фунта", _weight];
-          default:
-            return [NSString stringWithFormat:@"%lu фунтов", _weight];
-        }
-      }
-    }
-  }
+
   return nil;
 }
 
@@ -78,12 +58,59 @@
   return NO;
 }
 
+#pragma mark - Public Methods
+
++ (float)kilogramsWithPounds:(float)pounds {
+  return pounds / __poundsInKilogram;
+}
+
 #pragma mark - Private methods
 
-+ (NSNumber *)metricToImperial:(NSNumber *)metric {
-  CGFloat value = [metric floatValue];
-  NSUInteger number = (NSUInteger)roundf(value / 2.20462f);
-  return [NSNumber numberWithUnsignedInteger:number];
++ (NSString *)metricStringWithKilograms:(NSNumber *)kilograms locale:(NSLocale *)locale {
+  NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+
+  NSString *kilogram, *gram;
+  if ([languageCode isEqualToString:@"ru"]) {
+    kilogram = @"кг";
+    gram = @"г";
+  } else {
+    kilogram = @"kg";
+    gram = @"g";
+  }
+
+  unsigned int grams = [kilograms unsignedIntValue] * 100;
+
+  if (grams < 100) {
+    return [NSString stringWithFormat:@"%u %@", grams, gram];
+  }
+  else if (grams % 100 == 0) {
+    return [NSString stringWithFormat:@"%u %@", grams / 100, kilogram];
+  }
+  else {
+    return [NSString stringWithFormat:@"%u %@ %u %@", grams / 100, kilogram, grams % 100, gram];
+  }
+}
+
++ (NSString *)imperialStringWithKilograms:(NSNumber *)kilograms locale:(NSLocale *)locale {
+  NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+
+  float value = [kilograms floatValue];
+  float pounds = roundf(value * __poundsInKilogram);
+
+  if ([languageCode isEqualToString:@"ru"]) {
+    switch ((unsigned int)pounds % 100) {
+      case 1:
+        return [NSString stringWithFormat:@"%.1f фунт", pounds];
+      case 2:
+      case 3:
+      case 4:
+        return [NSString stringWithFormat:@"%.1f фунта", pounds];
+      default:
+        return [NSString stringWithFormat:@"%.1f фунтов", pounds];
+    }
+  } else {
+    return [NSString stringWithFormat:@"%.1f lbs", pounds];
+  }
 }
 
 @end

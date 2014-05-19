@@ -12,4 +12,6 @@
 
 - (NSString *)stringFromWeight:(NSNumber *)weight;
 
++ (float)kilogramsWithPounds:(float)pounds;
+
 @end

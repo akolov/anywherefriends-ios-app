@@ -9,9 +9,13 @@
 #import "AWFConfig.h"
 #import "AWFHeightFormatter.h"
 
+static float __inchesInFeet = 12.0f;
+static float __centimetersInInch = 2.54f;
+
 @interface AWFHeightFormatter ()
 
-+ (NSString *)metricToImperial:(NSNumber *)metric;
++ (NSString *)metricStringWithCentimetres:(NSNumber *)centimetres locale:(NSLocale *)locale;
++ (NSString *)imperialStringWithCentimetres:(NSNumber *)centimetres;
 
 @end
 
@@ -19,35 +23,23 @@
 
 - (NSString *)stringFromHeight:(NSNumber *)height {
   NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
-  NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
   BOOL isMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
 
-  if ([languageCode isEqualToString:@"en"]) {
-    if (!height || [height unsignedIntegerValue] == 0) {
-      return [NSString stringWithFormat:@"—"];
+  if (!height) {
+    return [NSString stringWithFormat:@"—"];
+  }
+  else if ([height isEqualToNumber:@0]) {
+    return @"0";
+  }
+  else {
+    if (isMetric) {
+      return [[self class] metricStringWithCentimetres:height locale:locale];
     }
     else {
-      if (isMetric) {
-        return [NSString stringWithFormat:@"%lu cm", [height unsignedLongValue]];
-      }
-      else {
-        return [AWFHeightFormatter metricToImperial:height];
-      }
+      return [[self class] imperialStringWithCentimetres:height];
     }
   }
-  else if ([languageCode isEqualToString:@"ru"]) {
-    if (!height || [height unsignedIntegerValue] == 0) {
-      return [NSString stringWithFormat:@"—"];
-    }
-    else {
-      if (isMetric) {
-        return [NSString stringWithFormat:@"%lu см", [height unsignedLongValue]];
-      }
-      else {
-        return [AWFHeightFormatter metricToImperial:height];
-      }
-    }
-  }
+
   return nil;
 }
 
@@ -68,18 +60,53 @@
   return NO;
 }
 
-#pragma mark - Private methods
+#pragma mark - Public Methods
 
-+ (NSString *)metricToImperial:(NSNumber *)metric {
-  CGFloat value = [metric floatValue];
-  CGFloat number = value / 2.54f;
++ (float)centimetersWithFeet:(float)feet inches:(float)inches {
+  return (feet / __inchesInFeet + inches) * __centimetersInInch;
+}
 
-  if (number > 12.0f) {
-    return [NSString stringWithFormat:@"%lu’%lu”", (unsigned long)floor(number / 12.0f), (unsigned long)number % 12];
+#pragma mark - Private Methods
 
++ (NSString *)metricStringWithCentimetres:(NSNumber *)centimetres locale:(NSLocale *)locale {
+  NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+
+  NSString *metre, *centimetre;
+  if ([languageCode isEqualToString:@"ru"]) {
+    metre = @"м";
+    centimetre = @"см";
   }
   else {
-    return [NSString stringWithFormat:@"0’%lu”", (unsigned long)round(number)];
+    metre = @"m";
+    centimetre = @"cm";
+  }
+
+  unsigned int _centimetres = [centimetres unsignedIntValue];
+
+  if (_centimetres < 100) {
+    return [NSString stringWithFormat:@"%u %@", _centimetres, centimetre];
+  }
+  else if (_centimetres % 100 == 0) {
+    return [NSString stringWithFormat:@"%u %@", _centimetres / 100, metre];
+  }
+  else {
+    return [NSString stringWithFormat:@"%u %@ %u %@", _centimetres / 100, metre, _centimetres % 100, centimetre];
+  }
+}
+
++ (NSString *)imperialStringWithCentimetres:(NSNumber *)centimetres {
+  float value = [centimetres floatValue];
+  float inches = value / __centimetersInInch;
+
+  if (inches < __inchesInFeet) {
+    return [NSString stringWithFormat:@"%u”", (unsigned int)round(inches)];
+  }
+  else if (fmod(inches, __inchesInFeet) == 0) {
+    return [NSString stringWithFormat:@"%u’", (unsigned int)floor(inches / __inchesInFeet)];
+  }
+  else {
+    return [NSString stringWithFormat:@"%u’%u”", (unsigned int)floor(inches / __inchesInFeet),
+            (unsigned int)inches % (unsigned int)__inchesInFeet];
   }
 }
 
