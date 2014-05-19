@@ -73,6 +73,9 @@
 		FA8D71CC1868898F00C4B6CC /* Munich, Germany.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FA8D71CB1868898F00C4B6CC /* Munich, Germany.gpx */; };
 		FA8D71CF18688EC000C4B6CC /* AWFNearbyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */; };
 		FA8D9AF918DB860C00262071 /* AWFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D9AF818DB860C00262071 /* AWFActivity.m */; };
+		FA9A273B192A30AC00524B64 /* AZNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A2736192A30AC00524B64 /* AZNotification.m */; };
+		FA9A273C192A30AC00524B64 /* AZNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A2738192A30AC00524B64 /* AZNotificationView.m */; };
+		FA9A273D192A30AC00524B64 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A273A192A30AC00524B64 /* UIColor+Additions.m */; };
 		FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */; };
 		FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9A964718CCB3CA00F65856 /* AWFHeightFormatter.m */; };
 		FAB4BF9E1875AB6C009CC02B /* AWFLayoutGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4BF9D1875AB6C009CC02B /* AWFLayoutGuide.m */; };
@@ -256,6 +259,12 @@
 		FA8D71CE18688EC000C4B6CC /* AWFNearbyViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNearbyViewCell.m; sourceTree = "<group>"; };
 		FA8D9AF718DB860C00262071 /* AWFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFActivity.h; sourceTree = "<group>"; };
 		FA8D9AF818DB860C00262071 /* AWFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFActivity.m; sourceTree = "<group>"; };
+		FA9A2735192A30AC00524B64 /* AZNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZNotification.h; sourceTree = "<group>"; };
+		FA9A2736192A30AC00524B64 /* AZNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZNotification.m; sourceTree = "<group>"; };
+		FA9A2737192A30AC00524B64 /* AZNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZNotificationView.h; sourceTree = "<group>"; };
+		FA9A2738192A30AC00524B64 /* AZNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZNotificationView.m; sourceTree = "<group>"; };
+		FA9A2739192A30AC00524B64 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
+		FA9A273A192A30AC00524B64 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
 		FA9A964318CCB2F000F65856 /* AWFWeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFWeightFormatter.h; sourceTree = "<group>"; };
 		FA9A964418CCB2F000F65856 /* AWFWeightFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFWeightFormatter.m; sourceTree = "<group>"; };
 		FA9A964618CCB3CA00F65856 /* AWFHeightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFHeightFormatter.h; sourceTree = "<group>"; };
@@ -537,6 +546,20 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		FA9A2734192A30AC00524B64 /* AZNotification */ = {
+			isa = PBXGroup;
+			children = (
+				FA9A2735192A30AC00524B64 /* AZNotification.h */,
+				FA9A2736192A30AC00524B64 /* AZNotification.m */,
+				FA9A2737192A30AC00524B64 /* AZNotificationView.h */,
+				FA9A2738192A30AC00524B64 /* AZNotificationView.m */,
+				FA9A2739192A30AC00524B64 /* UIColor+Additions.h */,
+				FA9A273A192A30AC00524B64 /* UIColor+Additions.m */,
+			);
+			name = AZNotification;
+			path = AZNotification/src;
+			sourceTree = "<group>";
+		};
 		FAB866E2180AAB29005FF64B /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +613,7 @@
 		FADBF66217ADB68E00325DD1 /* AnywhereFriends */ = {
 			isa = PBXGroup;
 			children = (
+				FA9A2734192A30AC00524B64 /* AZNotification */,
 				FAB866E2180AAB29005FF64B /* API */,
 				FA8AA2DE188330C6005FC371 /* Model */,
 				FADBF69317ADB7DE00325DD1 /* Categories */,
@@ -1039,12 +1063,15 @@
 				FA22D15D1912E7C600B025E3 /* UIViewController+ShownTitle.m in Sources */,
 				FA3D4C5818E89553008C5366 /* _AWFActivity.m in Sources */,
 				FAE4760B17C121A7006B2C65 /* UIBezierPath+AccessoryArrowGlyph.m in Sources */,
+				FA9A273B192A30AC00524B64 /* AZNotification.m in Sources */,
 				FAB866E5180AAB60005FF64B /* AWFSession.m in Sources */,
 				FA3D4C3A18E84634008C5366 /* AWFConstants.m in Sources */,
+				FA9A273C192A30AC00524B64 /* AZNotificationView.m in Sources */,
 				FADBF69217ADB7AA00325DD1 /* AWFNavigationTitleView.m in Sources */,
 				FA3D4C4B18E84A32008C5366 /* NSManagedObject+RestKit.m in Sources */,
 				FA11ACB717B1385E00028A55 /* UIBezierPath+TwitterGlyph.m in Sources */,
 				FAF0F3CF18D49E920063BB30 /* AWFMapViewController.m in Sources */,
+				FA9A273D192A30AC00524B64 /* UIColor+Additions.m in Sources */,
 				FA7667031814242D0093A4CA /* AWFGenderPicker.m in Sources */,
 				FA1EEC6517B266A500668A40 /* AWFSignupViewController.m in Sources */,
 				FA4532ED188B43E600A1E242 /* AWFGenderFormatter.m in Sources */,

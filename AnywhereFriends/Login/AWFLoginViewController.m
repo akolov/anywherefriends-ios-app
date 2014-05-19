@@ -9,6 +9,7 @@
 #import "AWFConfig.h"
 #import "AWFLoginViewController.h"
 
+#import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -288,6 +289,10 @@
 - (void)onLoginButtonTouchUpInside:(id)sender {
   [[[AWFSession sharedSession] openSessionWithEmail:self.email password:self.password]
    subscribeError:^(NSError *error) {
+     [AZNotification showNotificationWithTitle:error.localizedDescription
+                                    controller:self
+                              notificationType:AZNotificationTypeError
+      shouldShowNotificationUnderNavigationBar:YES];
      ErrorLog(error.localizedDescription);
    }
    completed:^{

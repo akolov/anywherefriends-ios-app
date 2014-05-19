@@ -9,6 +9,7 @@
 #import "AWFConfig.h"
 #import "AWFProfileViewController.h"
 
+#import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <FormatterKit/TTTTimeIntervalFormatter.h>
 #import <ReactiveCocoa/RACEXTScope.h>
@@ -118,6 +119,10 @@
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
+      [AZNotification showNotificationWithTitle:error.localizedDescription
+                                     controller:self
+                               notificationType:AZNotificationTypeError
+       shouldShowNotificationUnderNavigationBar:YES];
       ErrorLog(error.localizedDescription);
     }
     else {

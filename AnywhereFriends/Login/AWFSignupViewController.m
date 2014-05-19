@@ -9,6 +9,7 @@
 #import "AWFConfig.h"
 #import "AWFSignupViewController.h"
 
+#import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -226,6 +227,10 @@
                                       twitterToken:nil
                                            vkToken:nil]
    subscribeError:^(NSError *error) {
+     [AZNotification showNotificationWithTitle:error.localizedDescription
+                                    controller:self
+                              notificationType:AZNotificationTypeError
+      shouldShowNotificationUnderNavigationBar:YES];
      ErrorLog(error.localizedDescription);
    }
    completed:^{

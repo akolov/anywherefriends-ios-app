@@ -11,6 +11,7 @@
 #import "AWFConfig.h"
 #import "AWFNearbyViewController.h"
 
+#import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
@@ -157,6 +158,10 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
+      [AZNotification showNotificationWithTitle:error.localizedDescription
+                                     controller:self
+                               notificationType:AZNotificationTypeError
+       shouldShowNotificationUnderNavigationBar:YES];
       ErrorLog(error.localizedDescription);
     }
   }
@@ -190,6 +195,10 @@ MKMapViewDelegate, NSFetchedResultsControllerDelegate, UITableViewDataSource, UI
      [self.mapView showAnnotations:[self.annotations allValues] animated:YES];
    }
    error:^(NSError *error) {
+     [AZNotification showNotificationWithTitle:error.localizedDescription
+                                    controller:self
+                              notificationType:AZNotificationTypeError
+      shouldShowNotificationUnderNavigationBar:YES];
      ErrorLog(error.localizedDescription);
    }];
 }

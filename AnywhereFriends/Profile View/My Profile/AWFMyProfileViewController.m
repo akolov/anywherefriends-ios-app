@@ -9,6 +9,7 @@
 #import "AWFConfig.h"
 #import "AWFMyProfileViewController.h"
 
+#import "AZNotification.h"
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <Slash/Slash.h>
@@ -47,6 +48,10 @@
      self.personID = person.personID;
    }
    error:^(NSError *error) {
+     [AZNotification showNotificationWithTitle:error.localizedDescription
+                                    controller:self
+                              notificationType:AZNotificationTypeError
+      shouldShowNotificationUnderNavigationBar:YES];
      ErrorLog(error.localizedDescription);
    }];
 }
@@ -75,6 +80,10 @@
 
   if (!editing) {
     [[[AWFSession sharedSession] updateUserSelf] subscribeError:^(NSError *error) {
+      [AZNotification showNotificationWithTitle:error.localizedDescription
+                                     controller:self
+                               notificationType:AZNotificationTypeError
+       shouldShowNotificationUnderNavigationBar:YES];
       ErrorLog(error.localizedDescription);
     }];
   }
@@ -97,9 +106,13 @@
 
 - (void)didTapLogoutButton:(id)sender {
   [[[AWFSession sharedSession] closeSession] subscribeError:^(NSError *error) {
+    [AZNotification showNotificationWithTitle:error.localizedDescription
+                                   controller:self
+                             notificationType:AZNotificationTypeError
+     shouldShowNotificationUnderNavigationBar:YES];
     ErrorLog(error.localizedDescription);
   } completed:^{
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:AWFLoginRequiredNotification object:nil];
   }];
 }
 

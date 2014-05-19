@@ -11,6 +11,7 @@
 
 @import MapKit;
 
+#import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
 #import <Haneke/Haneke.h>
 #import <ReactiveCocoa/RACEXTScope.h>
@@ -107,6 +108,10 @@ NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
 
     NSError *error;
     if (![_fetchedResultsController performFetch:&error]) {
+      [AZNotification showNotificationWithTitle:error.localizedDescription
+                                     controller:self
+                               notificationType:AZNotificationTypeError
+       shouldShowNotificationUnderNavigationBar:YES];
       ErrorLog(error.localizedDescription);
     }
   }
@@ -119,6 +124,10 @@ NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
 - (void)getFriends {
   [[[AWFSession sharedSession] getUserSelfFriends]
    subscribeError:^(NSError *error) {
+     [AZNotification showNotificationWithTitle:error.localizedDescription
+                                    controller:self
+                              notificationType:AZNotificationTypeError
+      shouldShowNotificationUnderNavigationBar:YES];
      ErrorLog(error.localizedDescription);
    }];
 }

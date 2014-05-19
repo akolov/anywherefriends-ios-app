@@ -9,6 +9,7 @@
 #import "AWFConfig.h"
 #import "AWFAppDelegate.h"
 
+#import "AZNotification.h"
 #import <AXKRACExtensions/NSNotificationCenter+AXKRACExtensions.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -82,6 +83,10 @@
   }
 
   [[[AWFSession sharedSession] getUserSelf] subscribeError:^(NSError *error) {
+    [AZNotification showNotificationWithTitle:error.localizedDescription
+                                   controller:self.tabBarController.selectedViewController
+                             notificationType:AZNotificationTypeError
+     shouldShowNotificationUnderNavigationBar:YES];
     ErrorLog(error.localizedDescription);
   }];
 
@@ -150,9 +155,46 @@
 #pragma mark - Facebook Session State
 
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error {
-  if (!error && state == FBSessionStateOpen) {
+  switch (state) {
+    case FBSessionStateClosed:
+    case FBSessionStateClosedLoginFailed:
+      [FBSession.activeSession closeAndClearTokenInformation];
+      return;
+    default:
+      break;
+  }
+
+  if (error) {
+    if ([FBErrorUtility shouldNotifyUserForError:error]) {
+      [AZNotification showNotificationWithTitle:[FBErrorUtility userMessageForError:error]
+                                     controller:self.tabBarController.selectedViewController
+                               notificationType:AZNotificationTypeError
+       shouldShowNotificationUnderNavigationBar:YES];
+    }
+    else {
+      if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
+        // User cancelled log in
+      }
+      else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
+        [AZNotification showNotificationWithTitle:[FBErrorUtility userMessageForError:error]
+                                       controller:self.tabBarController.selectedViewController
+                                 notificationType:AZNotificationTypeError
+         shouldShowNotificationUnderNavigationBar:YES];
+      }
+      else {
+        NSDictionary *errorInformation = error.userInfo[@"com.facebook.sdk:ParsedJSONResponseKey"][@"body"][@"error"];
+        [AZNotification showNotificationWithTitle:errorInformation[@"message"]
+                                       controller:self.tabBarController.selectedViewController
+                                 notificationType:AZNotificationTypeError
+         shouldShowNotificationUnderNavigationBar:YES];
+      }
+    }
+
+    [FBSession.activeSession closeAndClearTokenInformation];
+  }
+  else {
     [FBRequestConnection
-     startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *facebookError) {
+     startForMeWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser> user, NSError *facebookError) {
        if (!facebookError) {
          NSString *email = [user objectForKey:@"email"];
 
@@ -161,9 +203,6 @@
             NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
                                                            allowLossyConversion:NO];
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:0 error:&error];
-            if (!dict) {
-              ErrorLog(error.localizedDescription);
-            }
 
             for (NSDictionary *errorDict in dict[@"errors"]) {
               if ([[errorDict[@"message"] lowercaseString] isEqualToString:@"user not found"]) {
@@ -192,8 +231,11 @@
                 return;
               }
             }
-            
-            ErrorLog(error.localizedDescription);
+
+            [AZNotification showNotificationWithTitle:error.localizedDescription
+                                           controller:self.tabBarController.selectedViewController
+                                     notificationType:AZNotificationTypeError
+             shouldShowNotificationUnderNavigationBar:YES];
           } completed:^{
             if (self.tabBarController.presentedViewController) {
               if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
@@ -209,61 +251,12 @@
           }];
        }
        else {
-         [[[UIAlertView alloc]
-           initWithTitle:NSLocalizedString(@"AWF_ERROR_FACEBOOK_REQUEST_TITLE", nil)
-           message:NSLocalizedString(@"AWF_ERROR_FACEBOOK_REQUEST_MESSAGE", nil)
-           delegate:nil
-           cancelButtonTitle:NSLocalizedString(@"AWF_DISMISS", nil)
-           otherButtonTitles:nil] show];
+         [AZNotification showNotificationWithTitle:[FBErrorUtility userMessageForError:facebookError]
+                                        controller:self.tabBarController.selectedViewController
+                                  notificationType:AZNotificationTypeError
+          shouldShowNotificationUnderNavigationBar:YES];
        }
      }];
-  }
-  else if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed) {
-    // If the session is closed
-    NSLog(@"Session closed");
-    // Show the user the logged-out UI
-  }
-  else if (error) {
-    NSLog(@"Error");
-    NSString *alertText;
-    NSString *alertTitle;
-    // If the error requires people using an app to make an action outside of the app in order to recover
-    if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
-      alertTitle = @"Something went wrong";
-      alertText = [FBErrorUtility userMessageForError:error];
-//      [self showMessage:alertText withTitle:alertTitle];
-    }
-    else {
-
-      // If the user cancelled login, do nothing
-      if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-        NSLog(@"User cancelled login");
-
-        // Handle session closures that happen outside of the app
-      }
-      else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
-        alertTitle = @"Session Error";
-        alertText = @"Your current session is no longer valid. Please log in again.";
-//        [self showMessage:alertText withTitle:alertTitle];
-
-        // Here we will handle all other errors with a generic error message.
-        // We recommend you check our Handling Errors guide for more information
-        // https://developers.facebook.com/docs/ios/errors/
-      }
-      else {
-        //Get more error information from the error
-        NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
-
-        // Show the user an error message
-        alertTitle = @"Something went wrong";
-        alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
-//        [self showMessage:alertText withTitle:alertTitle];
-      }
-    }
-    // Clear this token
-    [FBSession.activeSession closeAndClearTokenInformation];
-    // Show the user the logged-out UI
-//    [self userLoggedOut];
   }
 }
 
