@@ -152,7 +152,7 @@
     NSInteger hairLengthIndex = [self.hairLengths indexOfObject:self.person.hairLength];
     [self.editingHairLengthCell.pickerView selectRow:(hairLengthIndex == NSNotFound ? 0 : hairLengthIndex) inComponent:0 animated:NO];
 
-    NSInteger hairColorIndex = [self.hairColors indexOfObject:self.hairColors];
+    NSInteger hairColorIndex = [self.hairColors indexOfObject:self.person.hairColor];
     [self.editingHairColorCell.pickerView selectRow:(hairColorIndex == NSNotFound ? 0 : hairColorIndex) inComponent:0 animated:NO];
 
     NSInteger eyeColorIndex = [self.eyeColors indexOfObject:self.person.eyeColor];
@@ -169,7 +169,7 @@
     NSInteger heightSecondIndex = [self.editingHeightCell.pickerView selectedRowInComponent:1];
 
     if (isMetric) {
-      self.person.heightValue = (float)heightFirstIndex + (float)heightSecondIndex / 100.0f;
+      self.person.heightValue = heightFirstIndex * 100 + heightSecondIndex;
     }
     else {
       self.person.heightValue = ((float)heightFirstIndex + 3.0f) * 30.48f + (float)heightSecondIndex * 2.54f;
@@ -797,7 +797,12 @@
   }
   else if (pickerView == self.editingHeightCell.pickerView) {
     if (isMetric) {
-      return [self.heightFormatter stringFromHeight:@(row)];
+      if (component == 0) {
+        return [self.heightFormatter stringFromHeight:@(row * 100.0f)];
+      }
+      else {
+        return [self.heightFormatter stringFromHeight:@(row)];
+      }
     }
     else {
       if (component == 0) {
