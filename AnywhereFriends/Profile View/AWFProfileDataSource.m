@@ -129,8 +129,9 @@
       [self.editingHeightCell.pickerView selectRow:heightSecondIndex inComponent:1 animated:NO];
     }
     else {
+      float iptr;
       NSInteger heightFirstIndex = self.person.heightValue / 30.48f;
-      NSInteger heightSecondIndex = fmodf(self.person.heightValue, 30.48f) * 12.0f;
+      NSInteger heightSecondIndex = modff(self.person.heightValue / 30.48f, &iptr) * 12.0f;
 
       [self.editingHeightCell.pickerView selectRow:heightFirstIndex inComponent:0 animated:NO];
       [self.editingHeightCell.pickerView selectRow:heightSecondIndex inComponent:1 animated:NO];
@@ -171,7 +172,7 @@
       self.person.heightValue = (float)heightFirstIndex + (float)heightSecondIndex / 100.0f;
     }
     else {
-      self.person.heightValue = (float)heightFirstIndex * 30.48f + (float)heightSecondIndex * 2.54f;
+      self.person.heightValue = ((float)heightFirstIndex + 3.0f) * 30.48f + (float)heightSecondIndex * 2.54f;
     }
 
     NSInteger weightIndex = [self.editingWeightCell.pickerView selectedRowInComponent:0];
@@ -753,15 +754,15 @@
         return 3;
       }
       else {
-        return 99;
+        return 100;
       }
     }
     else {
       if (component == 0) {
-        return 4;
+        return 5;
       }
       else {
-        return 11;
+        return 12;
       }
     }
     return 180;
@@ -800,7 +801,7 @@
     }
     else {
       if (component == 0) {
-        return [self.heightFormatter stringFromHeight:@(row * 30.48f)];
+        return [self.heightFormatter stringFromHeight:@((row + 3.0f) * 30.48f)];
       }
       else {
         return [self.heightFormatter stringFromHeight:@(row * 2.54f)];

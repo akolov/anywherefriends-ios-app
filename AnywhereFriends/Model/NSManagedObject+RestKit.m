@@ -42,18 +42,14 @@
 }
 
 + (RKObjectMapping *)requestMapping {
-  static RKObjectMapping *mapping;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    mapping = [RKObjectMapping requestMapping];
-    if ([self requestMappingsArray]) {
-      [mapping addAttributeMappingsFromArray:[self requestMappingsArray]];
-    }
+  RKObjectMapping *mapping = [RKObjectMapping requestMapping];
+  if ([self requestMappingsArray]) {
+    [mapping addAttributeMappingsFromArray:[self requestMappingsArray]];
+  }
 
-    if ([self requestMappingsDictionary]) {
-      [mapping addAttributeMappingsFromDictionary:[self requestMappingsDictionary]];
-    }
-  });
+  if ([self requestMappingsDictionary]) {
+    [mapping addAttributeMappingsFromDictionary:[self requestMappingsDictionary]];
+  }
 
   return mapping;
 }

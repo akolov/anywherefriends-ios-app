@@ -95,21 +95,21 @@ static float __poundsInKilogram = 2.20462f;
   NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
 
   float value = [kilograms floatValue];
-  float pounds = roundf(value * __poundsInKilogram);
+  unsigned int pounds = (unsigned int)roundf(value * __poundsInKilogram);
 
   if ([languageCode isEqualToString:@"ru"]) {
-    switch ((unsigned int)pounds % 100) {
+    switch (pounds % 100) {
       case 1:
-        return [NSString stringWithFormat:@"%.1f фунт", pounds];
+        return [NSString stringWithFormat:@"%u фунт", pounds];
       case 2:
       case 3:
       case 4:
-        return [NSString stringWithFormat:@"%.1f фунта", pounds];
+        return [NSString stringWithFormat:@"%u фунта", pounds];
       default:
-        return [NSString stringWithFormat:@"%.1f фунтов", pounds];
+        return [NSString stringWithFormat:@"%u фунтов", pounds];
     }
   } else {
-    return [NSString stringWithFormat:@"%.1f lbs", pounds];
+    return [NSString stringWithFormat:@"%u lbs", pounds];
   }
 }
 
