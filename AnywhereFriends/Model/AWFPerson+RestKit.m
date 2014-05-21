@@ -159,9 +159,7 @@
 }
 
 + (NSArray *)requestMappingsArray {
-  // FIXME: Temporarily disable birthday until API fixes parser
-  // return @[@"bio", @"email", @"birthday", @"height", @"weight"];
-  return @[@"bio", @"email", @"height", @"weight"];
+  return @[@"bio", @"email", @"birthday", @"height", @"weight"];
 }
 
 + (NSDictionary *)requestMappingsDictionary {

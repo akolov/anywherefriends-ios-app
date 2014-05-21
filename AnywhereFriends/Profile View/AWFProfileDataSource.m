@@ -469,7 +469,7 @@
                                                 fromDate:[NSDate date]];
     components.year -= 18;
 
-    _editingBirthdayCell.datePicker.minimumDate = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:components];
+    _editingBirthdayCell.datePicker.maximumDate = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:components];
   }
 
   {
@@ -478,11 +478,7 @@
     components.month = 1;
     components.year = 1900;
 
-    _editingBirthdayCell.datePicker.maximumDate = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:components];
-  }
-
-  if (self.person.birthday) {
-    _editingBirthdayCell.datePicker.date = self.person.birthday;
+    _editingBirthdayCell.datePicker.minimumDate = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:components];
   }
 
   return _editingBirthdayCell;
