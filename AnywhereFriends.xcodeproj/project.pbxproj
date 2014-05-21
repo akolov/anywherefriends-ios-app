@@ -48,6 +48,8 @@
 		FA24B2F3192958CD00FC485F /* AWFLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA24B2F2192958CD00FC485F /* AWFLocationCell.m */; };
 		FA3092F618098A3D001F25F2 /* AWFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F518098A3D001F25F2 /* AWFNavigationController.m */; };
 		FA3092F918098A64001F25F2 /* AWFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3092F818098A64001F25F2 /* AWFNavigationBar.m */; };
+		FA3CBF0C192D4879009695C8 /* NSString+AWFAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3CBF0B192D4879009695C8 /* NSString+AWFAdditions.m */; };
+		FA3CBF0F192D5A4E009695C8 /* AWFTwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3CBF0E192D5A4E009695C8 /* AWFTwitterClient.m */; };
 		FA3D4C3718E84555008C5366 /* AWFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C3618E84555008C5366 /* AWFClient.m */; };
 		FA3D4C3A18E84634008C5366 /* AWFConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C3918E84634008C5366 /* AWFConstants.m */; };
 		FA3D4C3D18E8475F008C5366 /* AnywhereFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA3D4C3B18E8475F008C5366 /* AnywhereFriends.xcdatamodeld */; };
@@ -215,6 +217,10 @@
 		FA3092F518098A3D001F25F2 /* AWFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationController.m; sourceTree = "<group>"; };
 		FA3092F718098A64001F25F2 /* AWFNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFNavigationBar.h; sourceTree = "<group>"; };
 		FA3092F818098A64001F25F2 /* AWFNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFNavigationBar.m; sourceTree = "<group>"; };
+		FA3CBF0A192D4879009695C8 /* NSString+AWFAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AWFAdditions.h"; sourceTree = "<group>"; };
+		FA3CBF0B192D4879009695C8 /* NSString+AWFAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AWFAdditions.m"; sourceTree = "<group>"; };
+		FA3CBF0D192D5A4E009695C8 /* AWFTwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFTwitterClient.h; sourceTree = "<group>"; };
+		FA3CBF0E192D5A4E009695C8 /* AWFTwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFTwitterClient.m; sourceTree = "<group>"; };
 		FA3D4C3518E84555008C5366 /* AWFClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFClient.h; sourceTree = "<group>"; };
 		FA3D4C3618E84555008C5366 /* AWFClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFClient.m; sourceTree = "<group>"; };
 		FA3D4C3818E84634008C5366 /* AWFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFConstants.h; sourceTree = "<group>"; };
@@ -586,6 +592,8 @@
 				FA1683481927FD670059BC0C /* AWFHTTPRequestOperation.m */,
 				FA1683441927FBAA0059BC0C /* AWFJSONRequestOperation.h */,
 				FA1683451927FBAA0059BC0C /* AWFJSONRequestOperation.m */,
+				FA3CBF0D192D5A4E009695C8 /* AWFTwitterClient.h */,
+				FA3CBF0E192D5A4E009695C8 /* AWFTwitterClient.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -732,6 +740,8 @@
 				FADBF6B517ADCE9800325DD1 /* CGContext+Blocks.m */,
 				FAF0F3D018D49F7D0063BB30 /* MKMapView+AWFCentering.h */,
 				FAF0F3D118D49F7D0063BB30 /* MKMapView+AWFCentering.m */,
+				FA3CBF0A192D4879009695C8 /* NSString+AWFAdditions.h */,
+				FA3CBF0B192D4879009695C8 /* NSString+AWFAdditions.m */,
 				FADBF6B717ADCF6600325DD1 /* UIColor+ColorTools.h */,
 				FADBF6B817ADCF6600325DD1 /* UIColor+ColorTools.m */,
 				FADBF69B17ADBFDF00325DD1 /* UIColor+CustomColors.h */,
@@ -1061,6 +1071,7 @@
 				FA44018D1912DCA200D1CA9A /* AWFHairLengthFormatter.m in Sources */,
 				FA24B2ED1929426D00FC485F /* AWFPhotoCollectionViewCell.m in Sources */,
 				FA9A964518CCB2F000F65856 /* AWFWeightFormatter.m in Sources */,
+				FA3CBF0F192D5A4E009695C8 /* AWFTwitterClient.m in Sources */,
 				FADBF6B617ADCE9800325DD1 /* CGContext+Blocks.m in Sources */,
 				FA3D4C4E18E84A9F008C5366 /* AWFPerson+RestKit.m in Sources */,
 				FA11ACC717B1389400028A55 /* AWFButton.m in Sources */,
@@ -1117,6 +1128,7 @@
 				FAE475DE17C0EAF0006B2C65 /* AWFProfileViewController.m in Sources */,
 				FAF0F3E318D4AEBB0063BB30 /* AWFMessagesViewController.m in Sources */,
 				FA24B2E0192938FD00FC485F /* AWFMyProfileViewController.m in Sources */,
+				FA3CBF0C192D4879009695C8 /* NSString+AWFAdditions.m in Sources */,
 				FA57F9D918D24A0900E12B5F /* AWFViewController.m in Sources */,
 				FADE219E17BD15BB00D3A62B /* UIBezierPath+MenuGlyph.m in Sources */,
 				FA9A964818CCB3CA00F65856 /* AWFHeightFormatter.m in Sources */,

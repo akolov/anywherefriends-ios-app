@@ -6,13 +6,12 @@
 //  Copyright (c) 2013 Anywherefriends. All rights reserved.
 //
 
-@import Social;
-
 #import "AWFConfig.h"
 #import "AWFLoginViewController.h"
 
 #import "AZNotification.h"
 #import <AXKCollectionViewTools/AXKCollectionViewTools.h>
+
 #import <FacebookSDK/FacebookSDK.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -26,11 +25,13 @@
 #import "AWFNavigationTitleView.h"
 #import "AWFNearbyViewController.h"
 #import "AWFSession.h"
+#import "AWFTwitterClient.h"
 #import "AWFSignupViewController.h"
 #import "UIImage+CustomBackgrounds.h"
 
 @interface AWFLoginViewController ()
 
+@property (nonatomic, strong) ACAccountStore *accountStore;
 @property (nonatomic, strong) NSArray *fields;
 
 - (void)onForgotPasswordButtonTouchUpInside:(id)sender;
@@ -117,58 +118,32 @@
     };
 
     cell.onTwitterButtonAction = ^{
-      ACAccountStore *account = [[ACAccountStore alloc] init];
-      ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:
-                                    ACAccountTypeIdentifierTwitter];
+      [[[[AWFTwitterClient sharedClient] performReverseAuthorization]
+        flattenMap:^RACStream *(RACTuple *tuple) {
+          RACTupleUnpack(NSString *token, NSString *secret) = tuple;
+          return [[AWFSession sharedSession] openSessionWithTwitterToken:token secret:secret];
+        }]
+       subscribeError:^(NSError *error) {
+         @strongify(self);
 
-      [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
-        if (granted) {
-          NSArray *accounts = [account accountsWithAccountType:accountType];
+         NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
+                                                        allowLossyConversion:NO];
+         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:0 error:&error];
 
-          if ([accounts count] > 0) {
-            SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                        requestMethod:SLRequestMethodPOST
-                                                                  URL:nil
-                                                           parameters:nil];
-            postRequest.account = [accounts lastObject];
-            NSDictionary *headers = [[postRequest preparedURLRequest] allHTTPHeaderFields];
-            NSString *header = headers[@"Authorization"];
-            NSArray *authorization = [header componentsSeparatedByString:@","];
-            NSString *accessToken;
+         for (NSDictionary *errorDict in dict[@"errors"]) {
+           if ([[errorDict[@"message"] lowercaseString] isEqualToString:@"user not found"]) {
+             AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
+             [self.navigationController pushViewController:vc animated:YES];
+             return;
+           }
+         }
 
-            for (NSString *val in authorization) {
-              if ([val rangeOfString:@"oauth_token"].length > 0) {
-                accessToken = [val stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-                accessToken = [accessToken stringByReplacingOccurrencesOfString:@"oauth_token=" withString:@""];
-                accessToken = [accessToken stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                break;
-              }
-            }
-
-            [[[AWFSession sharedSession] openSessionWithTwitterToken:accessToken]
-             subscribeError:^(NSError *error) {
-               @strongify(self);
-
-               NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
-                                                              allowLossyConversion:NO];
-               NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:0 error:&error];
-
-               for (NSDictionary *errorDict in dict[@"errors"]) {
-                 if ([[errorDict[@"message"] lowercaseString] isEqualToString:@"user not found"]) {
-                   AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
-                   [self.navigationController pushViewController:vc animated:YES];
-                   return;
-                 }
-               }
-
-               [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
-             } completed:^{
-               @strongify(self);
-               [self dismissViewControllerAnimated:YES completion:NULL];
-             }];
-          }
-        }
-      }];
+         [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
+       }
+       completed:^{
+         @strongify(self);
+         [self dismissViewControllerAnimated:YES completion:NULL];
+       }];
     };
 
     cell.onVkontakteButtonAction = ^{

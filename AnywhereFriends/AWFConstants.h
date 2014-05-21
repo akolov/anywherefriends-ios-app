@@ -36,6 +36,11 @@ OBJC_EXPORT NSString *const AWFURLParameterVKToken;
 
 #define AWF_FACEBOOK_PERMISSIONS @[@"email", @"user_birthday", @"user_likes", @"user_location"]
 
+// Twitter
+
+OBJC_EXPORT NSString *const AWFTwitterConsumerKey;
+OBJC_EXPORT NSString *const AWFTwitterConsumerSecret;
+
 // VK
 
 #define AWF_VK_PERMISSIONS @[@"offline", @"email"]

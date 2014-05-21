@@ -330,7 +330,7 @@
           }];
 }
 
-- (RACSignal *)openSessionWithTwitterToken:(NSString *)twitterToken {
+- (RACSignal *)openSessionWithTwitterToken:(NSString *)twitterToken secret:(NSString *)secret {
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
   [parameters setValue:twitterToken forKey:AWFURLParameterTwitterToken];

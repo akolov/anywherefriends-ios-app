@@ -30,6 +30,11 @@ NSString *const AWFURLParameterFacebookToken = @"facebook_token";
 NSString *const AWFURLParameterTwitterToken = @"twitter_token";
 NSString *const AWFURLParameterVKToken = @"vk_token";
 
+// Twitter
+
+NSString *const AWFTwitterConsumerKey = @"IJ1DicuT1NAzv0CcK55LoULLj";
+NSString *const AWFTwitterConsumerSecret = @"VclwTngguqHic5lyYgeKYFmNuNpiCCEBQ5TYytMFe6GR6RKF3c";
+
 // CoreData
 
 NSString *const AWFPersistentStoreName = @"AnywhereFriends.sqlite";

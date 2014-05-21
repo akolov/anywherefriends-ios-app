@@ -34,7 +34,7 @@
 
 - (RACSignal *)openSessionWithEmail:(NSString *)email password:(NSString *)password;
 - (RACSignal *)openSessionWithFacebookToken:(NSString *)facebookToken;
-- (RACSignal *)openSessionWithTwitterToken:(NSString *)twitterToken;
+- (RACSignal *)openSessionWithTwitterToken:(NSString *)twitterToken secret:(NSString *)secret;
 - (RACSignal *)openSessionWithVKToken:(NSString *)vkToken;
 
 - (RACSignal *)closeSession;
