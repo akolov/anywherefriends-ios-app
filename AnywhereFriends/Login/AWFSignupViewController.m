@@ -224,10 +224,7 @@
                                           password:self.passwordFieldValue
                                          firstName:self.firstNameFieldValue
                                           lastName:self.lastNameFieldValue
-                                            gender:self.genderFieldValue
-                                     facebookToken:nil
-                                      twitterToken:nil
-                                           vkToken:nil]
+                                            gender:self.genderFieldValue]
    subscribeError:^(NSError *error) {
      @strongify(self);
      [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];

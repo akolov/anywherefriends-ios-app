@@ -10,6 +10,7 @@
 #import "AWFAppDelegate+AWFFacebookSDK.h"
 
 #import "AZNotification.h"
+#import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "AWFLoginViewController.h"
@@ -52,67 +53,27 @@
     [FBSession.activeSession closeAndClearTokenInformation];
   }
   else {
-    [FBRequestConnection
-     startForMeWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser> user, NSError *facebookError) {
-       if (!facebookError) {
-         NSString *email = [user objectForKey:@"email"];
-
-         [[[AWFSession sharedSession] openSessionWithFacebookToken:session.accessTokenData.accessToken]
-          subscribeError:^(NSError *error) {
-            NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
-                                                           allowLossyConversion:NO];
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:0 error:&error];
-
-            for (NSDictionary *errorDict in dict[@"errors"]) {
-              if ([[errorDict[@"message"] lowercaseString] isEqualToString:@"user not found"]) {
-                AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
-
-                vc.email = email;
-                vc.firstName = user.first_name;
-                vc.lastName = user.last_name;
-
-                if ([[user objectForKey:@"gender"] isEqualToString:@"male"]) {
-                  vc.gender = AWFGenderMale;
-                }
-                else {
-                  vc.gender = AWFGenderFemale;
-                }
-
-                if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
-                  UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
-                  [navigation pushViewController:vc animated:NO];
-                }
-                else {
-                  AWFNavigationController *navigation = [[AWFNavigationController alloc] initWithRootViewController:vc];
-                  [self.tabBarController presentViewController:navigation animated:NO completion:NULL];
-                }
-
-                return;
-              }
-            }
-
-            [self.tabBarController showNotificationWithTitle:error.localizedDescription
-                                            notificationType:AZNotificationTypeError];
-          } completed:^{
-            if (self.tabBarController.presentedViewController) {
-              if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
-                UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
-                if ([[navigation.viewControllers firstObject] isKindOfClass:[AWFLoginViewController class]]) {
-                  if (!self.tabBarController.presentedViewController.isBeingPresented &&
-                      !self.tabBarController.presentedViewController.isBeingDismissed) {
-                    [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
-                  }
-                }
-              }
-              else {
-                [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
-              }
-            }
-          }];
-       }
-       else {
-         [self.tabBarController showNotificationWithTitle:[FBErrorUtility userMessageForError:facebookError]
-                                         notificationType:AZNotificationTypeError];
+    @weakify(self);
+    [[[AWFSession sharedSession] openSessionWithFacebookToken:session.accessTokenData.accessToken]
+     subscribeError:^(NSError *error) {
+       @strongify(self);
+       [self.tabBarController showNotificationWithTitle:error.localizedDescription
+                                       notificationType:AZNotificationTypeError];
+     } completed:^{
+       @strongify(self);
+       if (self.tabBarController.presentedViewController) {
+         if ([self.tabBarController.presentedViewController isKindOfClass:[UINavigationController class]]) {
+           UINavigationController *navigation = (UINavigationController *)self.tabBarController.presentedViewController;
+           if ([[navigation.viewControllers firstObject] isKindOfClass:[AWFLoginViewController class]]) {
+             if (!self.tabBarController.presentedViewController.isBeingPresented &&
+                 !self.tabBarController.presentedViewController.isBeingDismissed) {
+               [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
+             }
+           }
+         }
+         else {
+           [self.tabBarController dismissViewControllerAnimated:NO completion:NULL];
+         }
        }
      }];
   }

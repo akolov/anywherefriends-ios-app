@@ -12,6 +12,9 @@
 
 OBJC_EXPORT NSString *const AWFAPIBaseURL;
 OBJC_EXPORT NSString *const AWFAPIPathLogin;
+OBJC_EXPORT NSString *const AWFAPIPathLoginFacebook;
+OBJC_EXPORT NSString *const AWFAPIPathLoginTwitter;
+OBJC_EXPORT NSString *const AWFAPIPathLoginVK;
 OBJC_EXPORT NSString *const AWFAPIPathLogout;
 OBJC_EXPORT NSString *const AWFAPIPathUser;
 OBJC_EXPORT NSString *const AWFAPIPathUserActivity;
@@ -28,9 +31,8 @@ OBJC_EXPORT NSString *const AWFURLParameterIDs;
 OBJC_EXPORT NSString *const AWFURLParameterLastName;
 OBJC_EXPORT NSString *const AWFURLParameterLocation;
 OBJC_EXPORT NSString *const AWFURLParameterGender;
-OBJC_EXPORT NSString *const AWFURLParameterFacebookToken;
-OBJC_EXPORT NSString *const AWFURLParameterTwitterToken;
-OBJC_EXPORT NSString *const AWFURLParameterVKToken;
+OBJC_EXPORT NSString *const AWFURLParameterToken;
+OBJC_EXPORT NSString *const AWFURLParameterTokenSecret;
 
 // Facebook
 

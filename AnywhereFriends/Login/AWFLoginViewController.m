@@ -124,20 +124,6 @@
           return [[AWFSession sharedSession] openSessionWithTwitterToken:token secret:secret];
         }]
        subscribeError:^(NSError *error) {
-         @strongify(self);
-
-         NSData *json = [error.localizedRecoverySuggestion dataUsingEncoding:NSUTF8StringEncoding
-                                                        allowLossyConversion:NO];
-         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:0 error:&error];
-
-         for (NSDictionary *errorDict in dict[@"errors"]) {
-           if ([[errorDict[@"message"] lowercaseString] isEqualToString:@"user not found"]) {
-             AWFSignupViewController *vc = [[AWFSignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
-             [self.navigationController pushViewController:vc animated:YES];
-             return;
-           }
-         }
-
          [self showNotificationWithTitle:error.localizedDescription notificationType:AZNotificationTypeError];
        }
        completed:^{
@@ -303,10 +289,12 @@
     UITextField *email = [self newFormTextField];
     email.autocapitalizationType = UITextAutocapitalizationTypeNone;
     email.keyboardType = UIKeyboardTypeEmailAddress;
+    email.rightViewMode = UITextFieldViewModeWhileEditing;
     [fields addObject:email];
 
     UITextField *password = [self newFormTextField];
     password.secureTextEntry = YES;
+    password.rightViewMode = UITextFieldViewModeWhileEditing;
     [fields addObject:password];
 
     _fields = fields;

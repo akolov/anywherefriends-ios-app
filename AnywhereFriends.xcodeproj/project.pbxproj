@@ -255,7 +255,7 @@
 		FA4532EA188B411400A1E242 /* AWFGender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWFGender.h; sourceTree = "<group>"; };
 		FA4532EB188B43E600A1E242 /* AWFGenderFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFGenderFormatter.h; sourceTree = "<group>"; };
 		FA4532EC188B43E600A1E242 /* AWFGenderFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFGenderFormatter.m; sourceTree = "<group>"; };
-		FA57837218D4776600F10FD7 /* AWFFriendsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFFriendsViewCell.h; sourceTree = "<group>"; };
+		FA57837218D4776600F10FD7 /* AWFFriendsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AWFFriendsViewCell.h; path = "../Friends View/AWFFriendsViewCell.h"; sourceTree = "<group>"; };
 		FA57837318D4776600F10FD7 /* AWFFriendsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFFriendsViewCell.m; sourceTree = "<group>"; };
 		FA57F9D718D24A0900E12B5F /* AWFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFViewController.h; sourceTree = "<group>"; };
 		FA57F9D818D24A0900E12B5F /* AWFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWFViewController.m; sourceTree = "<group>"; };
@@ -518,7 +518,6 @@
 		FA57F9DA18D268AE00E12B5F /* Friends View */ = {
 			isa = PBXGroup;
 			children = (
-				FA57837218D4776600F10FD7 /* AWFFriendsViewCell.h */,
 				FA57837318D4776600F10FD7 /* AWFFriendsViewCell.m */,
 				FA57F9DB18D268C300E12B5F /* AWFFriendsViewController.h */,
 				FA57F9DC18D268C300E12B5F /* AWFFriendsViewController.m */,
@@ -647,10 +646,10 @@
 				FA8D71C51868745A00C4B6CC /* Helpers */,
 				FADBF68B17ADB73500325DD1 /* Login */,
 				FADE215517BCD30800D3A62B /* Map Search */,
-				FA57F9DA18D268AE00E12B5F /* Friends View */,
 				FAF0F3CC18D49E7D0063BB30 /* Map View */,
 				FAF0F3DD18D4AEBB0063BB30 /* Messages View */,
 				FA3092F318098A1F001F25F2 /* Navigation */,
+				FA57F9DA18D268AE00E12B5F /* Friends View */,
 				FAE475DB17C0EAE6006B2C65 /* Profile View */,
 				FADBF66B17ADB68E00325DD1 /* AWFAppDelegate.h */,
 				FADBF66C17ADB68E00325DD1 /* AWFAppDelegate.m */,
@@ -709,6 +708,7 @@
 				FA11ACAF17B136EA00028A55 /* AWFLoginConnectViewCell.m */,
 				FADBF68C17ADB74400325DD1 /* AWFLoginViewController.h */,
 				FADBF68D17ADB74400325DD1 /* AWFLoginViewController.m */,
+				FA57837218D4776600F10FD7 /* AWFFriendsViewCell.h */,
 				FA1EEC6317B266A500668A40 /* AWFSignupViewController.h */,
 				FA1EEC6417B266A500668A40 /* AWFSignupViewController.m */,
 				FA7667011814242D0093A4CA /* AWFGenderPicker.h */,

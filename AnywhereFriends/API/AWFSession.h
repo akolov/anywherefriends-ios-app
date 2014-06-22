@@ -25,12 +25,9 @@
 
 - (RACSignal *)createUserWithEmail:(NSString *)email
                           password:(NSString *)password
-                         firstName:(NSString *)firstname
-                          lastName:(NSString *)lastname
-                            gender:(NSString *)gender
-                     facebookToken:(NSString *)facebookToken
-                      twitterToken:(NSString *)twitterToken
-                           vkToken:(NSString *)vkToken;
+                         firstName:(NSString *)firstName
+                          lastName:(NSString *)lastName
+                            gender:(NSString *)gender;
 
 - (RACSignal *)openSessionWithEmail:(NSString *)email password:(NSString *)password;
 - (RACSignal *)openSessionWithFacebookToken:(NSString *)facebookToken;

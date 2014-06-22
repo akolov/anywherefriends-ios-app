@@ -10,6 +10,9 @@
 
 NSString *const AWFAPIBaseURL = @"http://api.awf.spoofa.info/v1/";
 NSString *const AWFAPIPathLogin = @"login/";
+NSString *const AWFAPIPathLoginFacebook = @"login/fb/";
+NSString *const AWFAPIPathLoginTwitter = @"login/twitter/";
+NSString *const AWFAPIPathLoginVK = @"login/vk/";
 NSString *const AWFAPIPathLogout = @"logout/";
 NSString *const AWFAPIPathUser = @"user/";
 NSString *const AWFAPIPathUserActivity = @"user/activity/";
@@ -26,9 +29,8 @@ NSString *const AWFURLParameterIDs = @"ids";
 NSString *const AWFURLParameterLastName = @"last_name";
 NSString *const AWFURLParameterLocation = @"location";
 NSString *const AWFURLParameterGender = @"gender";
-NSString *const AWFURLParameterFacebookToken = @"facebook_token";
-NSString *const AWFURLParameterTwitterToken = @"twitter_token";
-NSString *const AWFURLParameterVKToken = @"vk_token";
+NSString *const AWFURLParameterToken = @"token";
+NSString *const AWFURLParameterTokenSecret = @"token_secret";
 
 // Twitter
 

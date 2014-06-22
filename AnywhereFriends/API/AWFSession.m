@@ -269,10 +269,7 @@
                           password:(NSString *)password
                          firstName:(NSString *)firstname
                           lastName:(NSString *)lastname
-                            gender:(NSString *)gender
-                     facebookToken:(NSString *)facebookToken
-                      twitterToken:(NSString *)twitterToken
-                           vkToken:(NSString *)vkToken {
+                            gender:(NSString *)gender {
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
   [parameters setValue:email forKey:AWFURLParameterEmail];
@@ -280,9 +277,6 @@
   [parameters setValue:firstname forKey:AWFURLParameterFirstName];
   [parameters setValue:lastname forKey:AWFURLParameterLastName];
   [parameters setValue:gender forKey:AWFURLParameterGender];
-  [parameters setValue:facebookToken forKey:AWFURLParameterFacebookToken];
-  [parameters setValue:twitterToken forKey:AWFURLParameterTwitterToken];
-  [parameters setValue:vkToken forKey:AWFURLParameterVKToken];
 
   @weakify(self);
   return [[[RKObjectManager sharedManager] rac_postObject:nil path:AWFAPIPathUser parameters:parameters]
@@ -315,10 +309,10 @@
 - (RACSignal *)openSessionWithFacebookToken:(NSString *)facebookToken {
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-  [parameters setValue:facebookToken forKey:AWFURLParameterFacebookToken];
+  [parameters setValue:facebookToken forKey:AWFURLParameterToken];
 
   @weakify(self);
-  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]
+  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLoginFacebook parameters:parameters]
            then:^RACSignal *{
              return [self getUserSelf];
            }]
@@ -333,10 +327,11 @@
 - (RACSignal *)openSessionWithTwitterToken:(NSString *)twitterToken secret:(NSString *)secret {
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-  [parameters setValue:twitterToken forKey:AWFURLParameterTwitterToken];
+  [parameters setValue:twitterToken forKey:AWFURLParameterToken];
+  [parameters setValue:secret forKey:AWFURLParameterTokenSecret];
 
   @weakify(self);
-  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]
+  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLoginTwitter parameters:parameters]
            then:^RACSignal *{
              return [self getUserSelf];
            }]
@@ -350,10 +345,10 @@
 
 - (RACSignal *)openSessionWithVKToken:(NSString *)vkToken {
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-  [parameters setValue:vkToken forKey:AWFURLParameterVKToken];
+  [parameters setValue:vkToken forKey:AWFURLParameterToken];
 
   @weakify(self);
-  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLogin parameters:parameters]
+  return [[[[AWFClient sharedClient] rac_postPath:AWFAPIPathLoginVK parameters:parameters]
            then:^RACSignal *{
              return [self getUserSelf];
            }]

@@ -24,6 +24,12 @@
                              notificationType:notificationType
      shouldShowNotificationUnderNavigationBar:NO];
   }
+  else if (self.navigationController) {
+    [AZNotification showNotificationWithTitle:title
+                                   controller:self.navigationController
+                             notificationType:notificationType
+     shouldShowNotificationUnderNavigationBar:NO];
+  }
   else {
     [AZNotification showNotificationWithTitle:title
                                    controller:self
